@@ -17,12 +17,11 @@ if (!app) {
 }
 
 const tabs = navItems;
-const activeTab = tabs[0].id;
 
-const renderDeckRows = (rows: Array<{ qty: string; name: string; tag: string }>, compact = false) => rows
+const renderDeckRows = (rows: Array<{ qty: string; name: string; tag: string }>) => rows
   .map(
     (card) => `
-      <div class="deckrow ${compact ? 'compact' : ''}">
+      <div class="deckrow">
         <span class="q">${card.qty}</span>
         <span class="name">${card.name}</span>
         <span class="tag ${card.tag}">${card.tag}</span>
@@ -41,7 +40,7 @@ const renderMatrix = () => `
           <th>Lands</th>
           <th>Tempo</th>
           <th>Control</th>
-          <th>Prison / Big Mana</th>
+          <th>Prison</th>
           <th>Reanimator</th>
         </tr>
       </thead>
@@ -50,7 +49,7 @@ const renderMatrix = () => `
           .map(
             (row) => `
               <tr>
-                <td class="rowname md">${row.category}</td>
+                <td class="rowname">${row.category}</td>
                 <td class="cell ${row.pox.startsWith('+') ? 'incell' : row.pox.startsWith('-') ? 'outcell' : 'normal'}">${row.pox}</td>
                 <td class="cell ${row.lands.startsWith('+') ? 'incell' : row.lands.startsWith('-') ? 'outcell' : 'normal'}">${row.lands}</td>
                 <td class="cell ${row.tempo.startsWith('+') ? 'incell' : row.tempo.startsWith('-') ? 'outcell' : 'normal'}">${row.tempo}</td>
@@ -66,26 +65,40 @@ const renderMatrix = () => `
   </div>
 `;
 
-const appHTML = `
+const renderLanding = () => `
+  <div class="landing-screen">
+    <div class="landing-card">
+      <div class="landing-badge">Legacy • Speaker Elves</div>
+      <h1>RC51</h1>
+      <p class="landing-subtitle">A guide for the greener side of Legacy.</p>
+      <div class="landing-meta">
+        <span>Current 75</span>
+        <span>Sideboard map</span>
+        <span>Goldfish logic</span>
+      </div>
+      <button class="enter-btn" type="button">Enter guide</button>
+    </div>
+  </div>
+`;
+
+const renderGuide = () => `
   <div class="guide-shell">
     <header class="main-header">
-      <div class="wrap">
+      <div class="shell-wrap">
         <div class="titleline">
-          <div class="miniLogo">E</div>
+          <div class="mini-logo">E</div>
           <div class="header-copy">
             <div class="eyebrow">Legacy • Elves guide</div>
-            <h1>Speaker Elves</h1>
-            <p class="sub">BG shell • 19 lands • 6 dorks • combo / grind</p>
+            <h2>Speaker Elves</h2>
+            <div class="header-meta">BG shell • 19 lands • 6 dorks • combo / grind</div>
           </div>
         </div>
 
-        <nav class="tabs" aria-label="Guide sections">
+        <nav class="guide-tabs" aria-label="Guide sections">
           ${tabs
             .map(
               (tab) => `
-                <button class="tab ${tab.id === activeTab ? 'active' : ''}" data-tab="${tab.id}" type="button">
-                  ${tab.label}
-                </button>
+                <button class="tab-button" data-target="${tab.id}" type="button">${tab.label}</button>
               `
             )
             .join('')}
@@ -93,45 +106,54 @@ const appHTML = `
       </div>
     </header>
 
-    <main class="wrap">
-      <section class="pane active" id="map">
-        <div class="hero-card">
-          <div class="intro-copy">
-            <span class="chip">Core idea</span>
-            <h2>Win by setting up the first credible line, then protecting it.</h2>
-            <p>
-              Speaker Elves is strongest when it turns early mana into an actual plan: a pressure line, a value engine,
-              or a combo finish that survives interaction instead of folding to the first counterspell.
-            </p>
+    <main class="shell-wrap content-area">
+      <section class="guide-section active" id="map">
+        <div class="section-banner">
+          <div>
+            <span class="tiny-label">Core idea</span>
+            <h3>Win by setting up the first credible line, then protecting it.</h3>
           </div>
-
-          <div class="stat-grid">
-            ${deckFacts
-              .map(
-                (fact) => `
-                  <article class="fact-card">
-                    <span>${fact.label}</span>
-                    <strong>${fact.value}</strong>
-                  </article>
-                `
-              )
-              .join('')}
-          </div>
+          <p>
+            Speaker Elves is strongest when it turns early mana into a real plan: pressure, value, or a combo line
+            that survives interaction instead of folding to the first removal spell or counterspell.
+          </p>
         </div>
 
-        <div class="board-grid">
+        <div class="facts-grid">
+          ${deckFacts
+            .map(
+              (fact) => `
+                <article class="fact-card">
+                  <span>${fact.label}</span>
+                  <strong>${fact.value}</strong>
+                </article>
+              `
+            )
+            .join('')}
+        </div>
+
+        <div class="two-col">
           <div class="panel-box">
-            <h3>Plan legend</h3>
+            <h4>Plan legend</h4>
             <div class="legend-grid">
-              <div class="legend-item"><span class="rolepill turbo">Turbo</span><p>Force the combo or lethal line early. Interaction is a window, not a reason to stall.</p></div>
-              <div class="legend-item"><span class="rolepill slow">Slow</span><p>Preserve engine density and maximize value in long games where removal matters.</p></div>
-              <div class="legend-item"><span class="rolepill control">Control</span><p>Find the lock or disruption piece first, then execute the normal plan with less risk.</p></div>
+              <div class="legend-item">
+                <span class="pill turbo">Turbo</span>
+                <p>Force the combo or lethal line early. Interaction is a window, not a reason to stall.</p>
+              </div>
+              <div class="legend-item">
+                <span class="pill slow">Slow</span>
+                <p>Preserve engine density and maximize value in long games where removal matters.</p>
+              </div>
+              <div class="legend-item">
+                <span class="pill control">Control</span>
+                <p>Find the lock or disruption piece first, then execute the normal plan with less risk.</p>
+              </div>
             </div>
           </div>
 
           <div class="panel-box">
-            <h3>Over-sideboarding</h3>
-            <ul class="compact-list">
+            <h4>Over-sideboarding</h4>
+            <ul class="mini-list">
               <li><span class="ok">0–4 changes</span> — normal</li>
               <li><span class="warn">5 changes</span> — review density</li>
               <li><span class="danger">6+</span> — deliberate transformation</li>
@@ -142,27 +164,26 @@ const appHTML = `
         ${renderMatrix()}
       </section>
 
-      <section class="pane" id="deck">
-        <div class="deckgrid">
+      <section class="guide-section" id="deck">
+        <div class="two-col deck-layout">
           <div class="panel-box">
-            <h3>Main deck</h3>
+            <h4>Main deck</h4>
             ${renderDeckRows(deckRows.slice(0, 8))}
           </div>
-
           <div class="panel-box">
-            <h3>Sideboard</h3>
-            ${renderDeckRows(sideboardRows, true)}
+            <h4>Sideboard</h4>
+            ${renderDeckRows(sideboardRows)}
           </div>
         </div>
       </section>
 
-      <section class="pane" id="heur">
-        <div class="heurgrid">
+      <section class="guide-section" id="heur">
+        <div class="heur-grid">
           ${heuristics
             .map(
               (item) => `
-                <article class="heur">
-                  <h3>${item.title}</h3>
+                <article class="heur-card">
+                  <h4>${item.title}</h4>
                   <p>${item.body}</p>
                 </article>
               `
@@ -171,17 +192,17 @@ const appHTML = `
         </div>
       </section>
 
-      <section class="pane" id="goldfish">
-        <div class="combo-grid">
-          <div class="panel-box small-box">
-            <h3>Goldfish sequence</h3>
+      <section class="guide-section" id="goldfish">
+        <div class="two-col">
+          <div class="panel-box">
+            <h4>Goldfish sequence</h4>
             <div class="step-list">
               ${goldfishSteps
                 .map(
                   (step, index) => `
-                    <div class="step">
-                      <div class="num">${index + 1}</div>
-                      <div>${step}</div>
+                    <div class="step-item">
+                      <span class="step-num">${index + 1}</span>
+                      <span>${step}</span>
                     </div>
                   `
                 )
@@ -189,21 +210,21 @@ const appHTML = `
             </div>
           </div>
 
-          <div class="panel-box small-box">
-            <h3>What the guide expects</h3>
-            <div class="result">
-              The deck wants a turn-one play that actually sets up a real line, not just a mana source with no follow-up.
-              The best keeps combine early acceleration with a credible engine or finish.
+          <div class="panel-box">
+            <h4>What the guide expects</h4>
+            <div class="takeaway-box">
+              The deck wants a turn-one play that sets up a real line, not just a mana source with no follow-up.
+              The strongest keeps combine early acceleration with a credible engine or finish.
             </div>
           </div>
         </div>
       </section>
 
-      <section class="pane" id="mana">
-        <div class="card-grid">
+      <section class="guide-section" id="mana">
+        <div class="two-col">
           <div class="panel-box">
-            <h3>Mana math</h3>
-            <table class="data-table">
+            <h4>Mana math</h4>
+            <table class="meta-table">
               <thead>
                 <tr>
                   <th>Check</th>
@@ -220,8 +241,8 @@ const appHTML = `
           </div>
 
           <div class="panel-box">
-            <h3>Core planning notes</h3>
-            <ul class="window-list">
+            <h4>Core planning notes</h4>
+            <ul class="bullet-list">
               <li>Play the first source as if it turns the deck into a genuine clock.</li>
               <li>Prioritize the hand’s plan before forcing a generic value line.</li>
               <li>Use the combo line only when the mana and board state make the follow-up safe.</li>
@@ -231,29 +252,59 @@ const appHTML = `
         </div>
       </section>
 
-      <section class="pane" id="sources">
-        <div class="panel-box">
-          <h3>Sources and notes</h3>
-          <ul class="window-list">
+      <section class="guide-section" id="sources">
+        <div class="panel-box full-panel">
+          <h4>Sources and notes</h4>
+          <ul class="bullet-list">
             ${sources.map((item) => `<li>${item}</li>`).join('')}
           </ul>
         </div>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="shell-wrap footer-inner">
+        <div>
+          <div class="footer-label">Speaker Elves</div>
+          <div class="footer-copy">Legacy guide project</div>
+        </div>
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <a href="#">X</a>
+          <a href="#">Discord</a>
+          <a href="#">YouTube</a>
+        </div>
+      </div>
+    </footer>
   </div>
 `;
 
-app.innerHTML = appHTML;
+let entered = false;
 
-const tabButtons = app.querySelectorAll<HTMLButtonElement>('.tab');
-const panes = app.querySelectorAll<HTMLElement>('.pane');
+const render = () => {
+  app.innerHTML = entered ? renderGuide() : renderLanding();
 
-tabButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const target = button.dataset.tab;
-    if (!target) return;
+  if (!entered) {
+    const button = app.querySelector<HTMLButtonElement>('.enter-btn');
+    button?.addEventListener('click', () => {
+      entered = true;
+      render();
+    });
+    return;
+  }
 
-    tabButtons.forEach((btn) => btn.classList.toggle('active', btn === button));
-    panes.forEach((pane) => pane.classList.toggle('active', pane.id === target));
+  const buttons = app.querySelectorAll<HTMLButtonElement>('.tab-button');
+  const sections = app.querySelectorAll<HTMLElement>('.guide-section');
+
+  buttons.forEach((button) => {
+    const target = button.dataset.target;
+    button.addEventListener('click', () => {
+      buttons.forEach((btn) => btn.classList.toggle('active', btn === button));
+      sections.forEach((section) => {
+        section.classList.toggle('active', section.id === target);
+      });
+    });
   });
-});
+};
+
+render();
