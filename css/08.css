@@ -7,5 +7,3 @@
 .category-totals48 .sort-window48{background:#18362e;border-color:#40886e;color:#b7f5d7}
 .meta-order48{font-size:12px;line-height:1.6;color:#a9b9c9;margin:10px 0}
 @media(max-width:760px){.mobile-category45 .category-summary48{gap:7px;padding:4px 0}.mobile-category45 .category-name48{width:100%;font-size:15px}.mobile-category45 .category-totals48{gap:5px}.mobile-category45 .category-totals48>span{padding:3px 7px}}
-/* Animated notch menu replaces the old .tabs row; keep its spacing under the title. */
-#guide-nav{margin-top:14px}

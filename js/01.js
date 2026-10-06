@@ -573,27 +573,41 @@ setupFloatingMatrixHeader();
 // elements; wip marks sections still being written (their panes are placeholders in index.html).
 const GUIDE_GROUPS=[
  {id:'learn',label:'Learn',icon:'bulb',sections:[
-  {id:'start',label:'Start Here',short:'Start',panes:['start'],wip:true},
-  {id:'construction',label:'Deck Construction',short:'Deck',panes:['deck','mana']},
-  {id:'mulligans',label:'Mulligans',short:'Mulligans',panes:['mulligans'],wip:true},
-  {id:'first-turns',label:'First Turns',short:'First turns',panes:['first-turns'],wip:true}]},
- {id:'play',label:'Play',icon:'play',sections:[
-  {id:'natural-order',label:'Natural Order',short:'Natural Order',panes:['natural-order'],wip:true},
-  {id:'loop',label:'Speaker Loop',short:'Loop',panes:['loop'],wip:true},
-  {id:'goldfish',label:'Goldfish Lab',short:'Goldfish',panes:['goldfish']}]},
+  {id:'start',label:'Start Here',panes:['start'],wip:true},
+  {id:'construction',label:'Deck Construction',panes:['deck','mana']}]},
+ {id:'gameplay',label:'Gameplay',icon:'play',sections:[
+  {id:'mulligans',label:'Mulligans',panes:['mulligans'],wip:true},
+  {id:'first-turns',label:'First Turns',panes:['first-turns'],wip:true},
+  {id:'natural-order',label:'Natural Order',panes:['natural-order'],wip:true},
+  {id:'loop',label:'Speaker Loop',panes:['loop'],wip:true},
+  {id:'goldfish',label:'Goldfish Lab',panes:['goldfish']}]},
  {id:'prepare',label:'Prepare',icon:'shield',sections:[
-  {id:'sideboard',label:'Sideboard',short:'Sideboard',panes:['map','heur']},
-  {id:'matchups',label:'Matchups',short:'Matchups',panes:['matchups'],wip:true},
-  {id:'windows',label:'Interaction Windows',short:'Windows',panes:['windows'],wip:true}]},
+  {id:'sideboard',label:'Sideboard',panes:['map','heur']},
+  {id:'matchups',label:'Matchups',panes:['matchups'],wip:true},
+  {id:'windows',label:'Interaction Windows',panes:['windows'],wip:true}]},
  {id:'about',label:'About',icon:'book',sections:[
-  {id:'origins',label:'Deck Origins',short:'Origins',panes:['origins'],wip:true},
-  {id:'sources',label:'Sources',short:'Sources',panes:['sources']},
-  {id:'credits',label:'Credits',short:'Credits',panes:['credits'],wip:true}]}
+  {id:'origins',label:'Deck Origins',panes:['origins'],wip:true},
+  {id:'sources',label:'Sources',panes:['sources']},
+  {id:'credits',label:'Credits',panes:['credits'],wip:true}]}
 ];
 const GUIDE_SECTIONS=GUIDE_GROUPS.flatMap(g=>g.sections);
-function showSection(id){
+const guideMain=document.querySelector('body > main');
+// Previous / next at the end of the active section.
+const guidePager=document.createElement('nav');
+guidePager.className='guide-pager';guidePager.setAttribute('aria-label','Previous and next section');
+guideMain.append(guidePager);
+function renderPager(id){
+ const i=GUIDE_SECTIONS.findIndex(x=>x.id===id),prev=GUIDE_SECTIONS[i-1],next=GUIDE_SECTIONS[i+1];
+ guidePager.innerHTML=(prev?`<button type="button" class="prev" data-id="${prev.id}"><small>← Previous</small><b>${esc(prev.label)}</b></button>`:'')+
+  (next?`<button type="button" class="next" data-id="${next.id}"><small>Next →</small><b>${esc(next.label)}</b></button>`:'');
+}
+guidePager.addEventListener('click',e=>{const b=e.target.closest('button[data-id]');if(b)guideNav.select(b.dataset.id,true);});
+function showSection(id,index,fromUser){
  const s=GUIDE_SECTIONS.find(x=>x.id===id);
  document.querySelectorAll('.pane').forEach(x=>x.classList.toggle('active',s.panes.includes(x.id)));
+ renderPager(id);
+ // A section chosen further down the page starts from its top.
+ if(fromUser){const top=guideMain.getBoundingClientRect().top+scrollY-8;if(scrollY>top)scrollTo({top});}
  document.dispatchEvent(new CustomEvent('guide:tabchange',{detail:{id}}));
 }
 const guideNav=SpeakerNav.create(document.getElementById('guide-nav'),{

@@ -1,142 +1,166 @@
-/* Speaker Elves — guide menu (two-level rail). Behaviour lives in js/menu.js. */
+/* Speaker Elves — guide menu (collapsible sidebar). Behaviour lives in js/menu.js. */
 
 :root{
-  --gr-mint: #a2ddc0;
-  --gr-mint-hi: #bdf0d6;
-  --gr-leaf: #78de99;
-  --gr-ink: #b9c8d4;          /* inactive label/icon */
-  --gr-ink-active: #0b281c;   /* label/icon on the mint highlight */
-  --gr-well: #0b121a;         /* recessed rail */
-  --gr-line: #223040;
-  --gr-muted: #95a3b1;
-  --gr-wip: #edcc72;          /* cone on sections still being written */
+  --gn-mint: #a2ddc0;
+  --gn-mint-hi: #bdf0d6;
+  --gn-leaf: #78de99;
+  --gn-ink: #0b281c;          /* text on the mint pill */
+  --gn-text: #c9d6e0;
+  --gn-soft: #b9c8d4;
+  --gn-faint: #6f8090;
+  --gn-line: #2d3947;
+  --gn-line-soft: #223040;
+  --gn-panel: #141b24;
+  --gn-wip: #edcc72;          /* cone on sections still being written */
+  --gn-wip-ink: #6e520c;
+  --gn-glow-rest: 0 0 0 0 rgba(120,222,153,0), 0 0 14px 1px rgba(120,222,153,.25);
+  --gn-glow-peak: 0 0 0 3px rgba(120,222,153,.15), 0 0 30px 6px rgba(120,222,153,.45);
+  --gn-glow-still: 0 0 0 3px rgba(120,222,153,.15), 0 0 22px 3px rgba(120,222,153,.35);
 }
 
-.gr{ display: flex; flex-direction: column; align-items: flex-start; gap: 6px; font-family: Roboto, "Segoe UI", system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
-
-.gr-rail{
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(var(--gr-n, 4), auto);
-  gap: 2px;
-  padding: 4px;
-  border-radius: 12px;
-  background: var(--gr-well);
-  border: 1px solid var(--gr-line);
-  box-shadow: inset 0 2px 6px rgba(0,0,0,.53);
+/* ---------- Layout: sidebar beside the content ---------- */
+/* The header only holds the title now; it scrolls away and the sidebar stays. */
+body > header{ position: relative; }
+#guide-nav{ display: contents; }
+@media (min-width: 761px){
+  body > main.wrap{ display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 28px; row-gap: 0; align-items: start; }
+  body > main.wrap > .pane,
+  body > main.wrap > .guide-pager{ grid-column: 2; min-width: 0; }
+  .gn-side{ grid-column: 1; grid-row: 1 / span 40; align-self: start; position: sticky; top: 16px; margin-top: 12px; }
+  .gn-mobile{ display: none; }
 }
 
-/* The highlight: breathes slowly, rings once when it lands. */
-.gr-ind{
-  position: absolute; top: 4px; bottom: 4px; left: 0; width: 0;
-  border-radius: 9px;
-  background: linear-gradient(180deg, var(--gr-mint-hi), var(--gr-mint));
-  box-shadow: 0 0 0 0 rgba(120,222,153,0), 0 0 14px 1px rgba(120,222,153,.25);
-  animation: gr-breathe 2.8s ease-in-out infinite;
-  will-change: transform, width;
+/* ---------- Glow ---------- */
+@keyframes gn-breathe{ 0%,100%{ box-shadow: var(--gn-glow-rest); } 50%{ box-shadow: var(--gn-glow-peak); } }
+@keyframes gn-text-breathe{
+  0%,100%{ text-shadow: 0 0 6px rgba(120,222,153,.35); }
+  50%{ text-shadow: 0 0 12px rgba(120,222,153,.85), 0 0 22px rgba(120,222,153,.35); }
 }
-.gr-ind::after{
-  content: ""; position: absolute; inset: -1px; border-radius: inherit;
-  border: 2px solid var(--gr-leaf); opacity: 0; pointer-events: none;
-}
-.gr-ind.is-ping::after{ animation: gr-ping .9s cubic-bezier(.2,.7,.3,1); }
-@keyframes gr-breathe{
-  0%,100%{ box-shadow: 0 0 0 0 rgba(120,222,153,0), 0 0 14px 1px rgba(120,222,153,.25); }
-  50%{ box-shadow: 0 0 0 3px rgba(120,222,153,.15), 0 0 30px 6px rgba(120,222,153,.45); }
-}
-@keyframes gr-ping{
-  0%{ opacity: .85; transform: scale(1); }
-  100%{ opacity: 0; transform: scale(1.18, 1.45); }
-}
+@keyframes gn-ping{ 0%{ opacity: .85; transform: scale(1); } 100%{ opacity: 0; transform: scale(1.06, 1.5); } }
 
-.gr-tab{
-  all: unset;
-  box-sizing: border-box;
+/* ---------- Sidebar ---------- */
+.sb{
+  position: relative; width: 252px; overflow: hidden;
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 12px 10px 16px;
+  border: 1px solid var(--gn-line-soft); border-radius: 14px;
+  background: rgba(12,19,27,.8);
+  font-family: Roboto, "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+.gn-side .sb{ max-height: calc(100vh - 32px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: #2d3947 transparent; }
+.gn-side .sb.is-collapsed{ overflow: hidden; }
+.sb-top{ display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 34px; padding-left: 12px; }
+.sb-title{ font-size: 12px; font-weight: 700; color: var(--gn-faint); white-space: nowrap; transition: opacity .2s; }
+.sb-toggle{ all: unset; display: grid; place-items: center; width: 34px; height: 34px; flex: none; border-radius: 8px; color: var(--gn-soft); cursor: pointer; }
+.sb-toggle:hover{ background: rgba(255,255,255,.05); color: #edf3f8; }
+.sb-toggle svg{ width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform .35s; }
+.sb.is-collapsed .sb-toggle svg{ transform: rotate(180deg); }
+.sb-body{ position: relative; display: grid; gap: 2px; }
+
+/* The pill: current section only. */
+.sb-pill{
+  position: absolute; left: 0; top: 0; width: 0; height: 0; border-radius: 9px; pointer-events: none;
+  background: linear-gradient(180deg, var(--gn-mint-hi), var(--gn-mint));
+  animation: gn-breathe 2.8s ease-in-out infinite;
+  transition: opacity .2s;
+}
+.sb-pill.is-hidden{ opacity: 0; }
+.sb-pill::after{ content: ""; position: absolute; inset: -1px; border-radius: inherit; border: 2px solid var(--gn-leaf); opacity: 0; }
+.sb-pill.is-ping::after{ animation: gn-ping .9s cubic-bezier(.2,.7,.3,1); }
+
+.sb-head{
+  all: unset; box-sizing: border-box; width: 100%;
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 11px;
+  height: 40px; padding: 0 12px; border-radius: 9px;
+  color: var(--gn-text); font-weight: 700; font-size: 14px; white-space: nowrap;
+  cursor: pointer; transition: color .25s;
+}
+.sb-head:hover{ background: rgba(255,255,255,.03); }
+/* The current part: its own words and icon light up, no pill. */
+.sb-head.is-current{ color: var(--gn-mint); animation: gn-text-breathe 2.8s ease-in-out infinite; }
+.sb-head.is-current .sb-ic{ filter: drop-shadow(0 0 5px rgba(120,222,153,.7)); }
+.sb-head:focus-visible, .sb-item:focus-visible{ outline: 2px solid var(--gn-mint); outline-offset: -2px; }
+.sb-ic{ display: block; width: 20px; height: 20px; flex: none; }
+.sb-ic svg, .sb-chev{ display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.sb-label{ transition: opacity .2s; }
+.sb-chev{ width: 16px; height: 16px; margin-left: auto; flex: none; opacity: .7; transition: transform .35s cubic-bezier(.3,.7,.2,1), opacity .2s; }
+.sb-head[aria-expanded="true"] .sb-chev{ transform: rotate(180deg); }
+
+.sb-items{ overflow: hidden; }
+.sb-items-inner{ display: grid; gap: 1px; margin: 2px 0 8px 21px; padding-left: 9px; border-left: 1px solid var(--gn-line); }
+.sb-item{
+  all: unset; box-sizing: border-box;
   position: relative; z-index: 1;
   display: flex; align-items: center; gap: 8px;
-  padding: 10px 14px;
-  border-radius: 9px;
-  font-size: 13px; font-weight: 500; line-height: 1.2;
-  color: var(--gr-ink);
-  white-space: nowrap;
-  cursor: pointer;
-  transition: color .2s;
+  padding: 7px 10px; border-radius: 8px;
+  font-size: 14px; font-weight: 500; line-height: 1.35; color: var(--gn-soft); white-space: nowrap;
+  cursor: pointer; transition: color .2s;
 }
-.gr-tab:hover{ color: #edf3f8; }
-.gr-tab[aria-selected="true"]{ color: var(--gr-ink-active); font-weight: 700; }
-.gr-tab:focus-visible{ outline: 2px solid var(--gr-mint); outline-offset: 2px; }
+.sb-item:hover{ color: #edf3f8; }
+.sb-item[aria-current="page"]{ color: var(--gn-ink); font-weight: 700; }
+/* Reserve the bold width so selecting never shifts the row. */
+.sb-lb{ display: inline-flex; flex-direction: column; }
+.sb-lb::after{ content: attr(data-text); font-weight: 700; height: 0; overflow: hidden; visibility: hidden; }
+.sb-cone{ display: block; width: 13px; height: 13px; flex: none; margin-left: auto; color: var(--gn-wip); opacity: .85; }
+.sb-item[aria-current="page"] .sb-cone{ color: var(--gn-wip-ink); opacity: 1; }
+.sb-cone svg{ display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sb-sr{ position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-.gr-ic{ display: block; width: 20px; height: 20px; flex: none; }
-.gr-ic svg{
-  display: block; width: 100%; height: 100%;
-  fill: none; stroke: currentColor;
-  stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
-}
-.gr-lb-short{ display: none; }
-/* Reserve the bold width so selecting a tab never resizes the rail. */
-.gr-lb-full, .gr-lb-short{ flex-direction: column; }
-.gr-lb-full{ display: inline-flex; }
-.gr-lb-full::after, .gr-lb-short::after{ content: attr(data-text); font-weight: 700; height: 0; overflow: hidden; visibility: hidden; }
+/* Folded to icons */
+.sb.is-collapsed .sb-title, .sb.is-collapsed .sb-label, .sb.is-collapsed .sb-chev{ opacity: 0; }
+.sb.is-collapsed .sb-items{ display: none; }
+.sb.is-collapsed .sb-top{ padding-left: 0; justify-content: center; }
 
-/* Second row: sections of the active part, with a glowing line under the chosen one. */
-.gr-subs{ max-width: 100%; }
-.gr-sub{
-  position: relative;
-  display: flex; gap: 2px;
-  max-width: 100%;
-  padding: 0 2px 7px;
-  overflow-x: auto;
-  scrollbar-width: none;
+/* Panel beside a folded sidebar */
+.sb-fly{
+  position: absolute; z-index: 60; left: calc(100% + 8px); top: 0; width: 230px;
+  display: grid; gap: 2px; padding: 8px;
+  border-radius: 12px; background: var(--gn-panel); border: 1px solid var(--gn-line);
+  box-shadow: 0 14px 34px rgba(0,0,0,.65);
 }
-.gr-sub::-webkit-scrollbar{ display: none; }
-.gr-sub[hidden]{ display: none; }
-.gr-sub-ind{
-  position: absolute; left: 0; bottom: 2px; width: 0; height: 2px;
-  border-radius: 2px;
-  background: var(--gr-mint);
-  box-shadow: 0 0 8px 1px rgba(120,222,153,.5);
-  transition: transform .34s cubic-bezier(.3,.7,.2,1), width .34s cubic-bezier(.3,.7,.2,1);
-  animation: gr-breathe-line 2.8s ease-in-out infinite;
-}
-.gr-sub-ind.no-anim{ transition: none; }
-@keyframes gr-breathe-line{
-  0%,100%{ box-shadow: 0 0 6px 0 rgba(120,222,153,.35); }
-  50%{ box-shadow: 0 0 12px 2px rgba(120,222,153,.7); }
-}
-.gr-subtab{
-  all: unset;
-  box-sizing: border-box;
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 7px 10px;
-  border-radius: 7px;
-  font-size: 13px; font-weight: 500; line-height: 1.2;
-  color: var(--gr-muted);
-  white-space: nowrap;
-  cursor: pointer;
-  transition: color .2s;
-}
-.gr-subtab:hover{ color: #edf3f8; }
-.gr-subtab[aria-selected="true"]{ color: #edf3f8; font-weight: 700; }
-.gr-subtab:focus-visible{ outline: 2px solid var(--gr-mint); outline-offset: -2px; }
-.gr-sublb .gr-lb-full{ display: inline-flex; }
-.gr-wip{ display: block; width: 13px; height: 13px; flex: none; color: var(--gr-wip); opacity: .85; }
-.gr-wip svg{ display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.gr-sr{ position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.sb-fly[hidden]{ display: none; }
+.sb-fly-title{ margin: 2px 10px 6px; font-size: 12px; font-weight: 700; color: var(--gn-faint); }
+.sb-fly-items{ display: grid; gap: 2px; }
+.sb-fly .sb-item[aria-current="page"]{ background: linear-gradient(180deg, var(--gn-mint-hi), var(--gn-mint)); animation: gn-breathe 2.8s ease-in-out infinite; }
 
-/* Phones: equal columns, icon above a short label; the second row scrolls. */
-@media (max-width: 640px){
-  .gr{ display: flex; align-items: stretch; }
-  .gr-rail{ grid-template-columns: repeat(var(--gr-n, 4), 1fr); }
-  .gr-sub{ -webkit-mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); padding-inline: 10px; }
-  .gr-subtab{ font-size: 12px; padding: 7px 8px; }
-  .gr-tab{ flex-direction: column; justify-content: center; gap: 4px; padding: 8px 2px; font-size: 10px; min-height: 52px; }
-  .gr-lb-full, .gr-sublb .gr-lb-full{ display: none; }
-  .gr-lb-short{ display: inline-flex; }
+/* ---------- Phones: sticky chapter bar + sheet ---------- */
+@media (max-width: 760px){
+  .gn-side{ display: none; }
+  .gn-mobile{
+    position: sticky; top: 0; z-index: 40;
+    margin: -16px -12px 12px; padding: 10px 12px;
+    background: #0b1118; border-bottom: 1px solid var(--gn-line-soft); box-shadow: 0 8px 18px rgba(0,0,0,.35);
+  }
+  .gn-chapter{
+    all: unset; box-sizing: border-box; width: 100%;
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border-radius: 12px; cursor: pointer;
+    color: var(--gn-ink); font-weight: 700; font-size: 14px;
+    background: linear-gradient(180deg, var(--gn-mint-hi), var(--gn-mint));
+    animation: gn-breathe 2.8s ease-in-out infinite;
+  }
+  .gn-chapter small{ font-weight: 500; opacity: .7; }
+  .gn-chev{ margin-left: auto; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s; }
+  .gn-chapter[aria-expanded="true"] .gn-chev{ transform: rotate(180deg); }
+  .gn-chapter:focus-visible{ outline: 2px solid #edf3f8; outline-offset: 3px; }
+  .gn-sheet{ overflow: hidden; height: 0; }
+  .gn-sheet .sb{ width: auto; border: 0; background: #0b1118; padding: 12px 0 4px; max-height: 70vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #2d3947 transparent; }
 }
 
+/* ---------- Previous / next at the end of a section ---------- */
+.guide-pager{ display: flex; justify-content: space-between; gap: 12px; margin: 36px 0 12px; padding-top: 18px; border-top: 1px solid var(--gn-line-soft); }
+.guide-pager button{ all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 2px; padding: 10px 14px; border: 1px solid var(--gn-line); border-radius: 10px; max-width: 48%; min-width: 0; font-family: Roboto, "Segoe UI", system-ui, sans-serif; }
+.guide-pager button:hover{ border-color: var(--gn-mint); }
+.guide-pager button:focus-visible{ outline: 2px solid var(--gn-mint); outline-offset: 2px; }
+.guide-pager small{ font-size: 12px; color: var(--gn-faint); }
+.guide-pager b{ font-size: 14px; color: #edf3f8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.guide-pager .next{ margin-left: auto; text-align: right; }
+
+/* Reduced motion: nothing moves, but every highlight keeps a steady glow. */
 @media (prefers-reduced-motion: reduce){
-  .gr-ind{ animation: none; box-shadow: 0 0 0 3px rgba(120,222,153,.15), 0 0 22px 3px rgba(120,222,153,.35); }
-  .gr-ind.is-ping::after{ animation: none; }
-  .gr-tab, .gr-subtab{ transition: none; }
-  .gr-sub-ind{ transition: none; animation: none; }
+  .sb-pill, .gn-chapter, .sb-fly .sb-item[aria-current="page"]{ animation: none; box-shadow: var(--gn-glow-still); }
+  .sb-head.is-current{ animation: none; text-shadow: 0 0 10px rgba(120,222,153,.7); }
+  .sb-pill.is-ping::after{ animation: none; }
+  .sb-toggle svg, .sb-chev, .gn-chev, .sb-head, .sb-item{ transition: none; }
 }
