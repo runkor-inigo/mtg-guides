@@ -569,22 +569,46 @@ function setupFloatingMatrixHeader(){
 }
 setupFloatingMatrixHeader();
 
-// Animated notch menu (js/menu.js). Each tab id matches its .pane id.
-const GUIDE_TABS=[
- {id:'map',label:'Compact SB Map',short:'SB Map',icon:'map',controls:'map'},
- {id:'deck',label:'Current 75',short:'Current 75',icon:'deck',controls:'deck'},
- {id:'heur',label:'Heuristics',short:'Heuristics',icon:'bulb',controls:'heur'},
- {id:'goldfish',label:'Goldfish',short:'Goldfish',icon:'play',controls:'goldfish'},
- {id:'mana',label:'Mana Math',short:'Mana Math',icon:'calc',controls:'mana'},
- {id:'sources',label:'Sources',short:'Sources',icon:'book',controls:'sources'}
+// Guide menu (js/menu.js): four parts, each with its sections. A section shows one or more .pane
+// elements; wip marks sections still being written (their panes are placeholders in index.html).
+const GUIDE_GROUPS=[
+ {id:'learn',label:'Learn',icon:'bulb',sections:[
+  {id:'start',label:'Start Here',short:'Start',panes:['start'],wip:true},
+  {id:'construction',label:'Deck Construction',short:'Deck',panes:['deck','mana']},
+  {id:'mulligans',label:'Mulligans',short:'Mulligans',panes:['mulligans'],wip:true},
+  {id:'first-turns',label:'First Turns',short:'First turns',panes:['first-turns'],wip:true}]},
+ {id:'play',label:'Play',icon:'play',sections:[
+  {id:'natural-order',label:'Natural Order',short:'Natural Order',panes:['natural-order'],wip:true},
+  {id:'loop',label:'Speaker Loop',short:'Loop',panes:['loop'],wip:true},
+  {id:'goldfish',label:'Goldfish Lab',short:'Goldfish',panes:['goldfish']}]},
+ {id:'prepare',label:'Prepare',icon:'shield',sections:[
+  {id:'sideboard',label:'Sideboard',short:'Sideboard',panes:['map','heur']},
+  {id:'matchups',label:'Matchups',short:'Matchups',panes:['matchups'],wip:true},
+  {id:'windows',label:'Interaction Windows',short:'Windows',panes:['windows'],wip:true}]},
+ {id:'about',label:'About',icon:'book',sections:[
+  {id:'origins',label:'Deck Origins',short:'Origins',panes:['origins'],wip:true},
+  {id:'sources',label:'Sources',short:'Sources',panes:['sources']},
+  {id:'credits',label:'Credits',short:'Credits',panes:['credits'],wip:true}]}
 ];
-function showPane(id){
- document.querySelectorAll('.pane').forEach(x=>x.classList.toggle('active',x.id===id));
+const GUIDE_SECTIONS=GUIDE_GROUPS.flatMap(g=>g.sections);
+function showSection(id){
+ const s=GUIDE_SECTIONS.find(x=>x.id===id);
+ document.querySelectorAll('.pane').forEach(x=>x.classList.toggle('active',s.panes.includes(x.id)));
  document.dispatchEvent(new CustomEvent('guide:tabchange',{detail:{id}}));
 }
-const guideNav=SpeakerNav.create(document.getElementById('guide-nav'),{tabs:GUIDE_TABS,active:'map',onChange:showPane});
-GUIDE_TABS.forEach((t,i)=>{const pane=document.getElementById(t.id);pane.setAttribute('role','tabpanel');pane.setAttribute('aria-labelledby',guideNav.tabs[i].id);});
-function showGuideTab(id){guideNav.select(id);}
+const guideNav=SpeakerNav.create(document.getElementById('guide-nav'),{
+ groups:GUIDE_GROUPS.map(g=>({...g,sections:g.sections.map(s=>({...s,controls:s.panes.join(' ')}))})),
+ active:'sideboard',onChange:showSection
+});
+showSection(guideNav.active);
+GUIDE_SECTIONS.forEach(s=>s.panes.forEach(id=>{const pane=document.getElementById(id);pane.setAttribute('role','tabpanel');pane.setAttribute('aria-labelledby',guideNav.tabFor(s.id).id);}));
+// Takes a section id, or the id of a pane inside one (in-page links); a pane id also scrolls to that pane.
+function showGuideTab(id){
+ const s=GUIDE_SECTIONS.find(x=>x.id===id)||GUIDE_SECTIONS.find(x=>x.panes.includes(id));
+ if(!s)return;
+ guideNav.select(s.id);
+ if(s.id!==id)document.getElementById(id).scrollIntoView({block:'start'});
+}
 
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function listMap(obj){

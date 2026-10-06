@@ -1,4 +1,4 @@
-/* Speaker Elves — guide menu (rail). Behaviour lives in js/menu.js. */
+/* Speaker Elves — guide menu (two-level rail). Behaviour lives in js/menu.js. */
 
 :root{
   --gr-mint: #a2ddc0;
@@ -8,14 +8,16 @@
   --gr-ink-active: #0b281c;   /* label/icon on the mint highlight */
   --gr-well: #0b121a;         /* recessed rail */
   --gr-line: #223040;
+  --gr-muted: #95a3b1;
+  --gr-wip: #edcc72;          /* cone on sections still being written */
 }
 
-.gr{ display: flex; font-family: Roboto, "Segoe UI", system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
+.gr{ display: flex; flex-direction: column; align-items: flex-start; gap: 6px; font-family: Roboto, "Segoe UI", system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
 
 .gr-rail{
   position: relative;
   display: grid;
-  grid-template-columns: repeat(6, auto);
+  grid-template-columns: repeat(var(--gr-n, 4), auto);
   gap: 2px;
   padding: 4px;
   border-radius: 12px;
@@ -76,17 +78,65 @@
 .gr-lb-full{ display: inline-flex; }
 .gr-lb-full::after, .gr-lb-short::after{ content: attr(data-text); font-weight: 700; height: 0; overflow: hidden; visibility: hidden; }
 
-/* Phones: six equal columns, icon above a short label. */
+/* Second row: sections of the active part, with a glowing line under the chosen one. */
+.gr-subs{ max-width: 100%; }
+.gr-sub{
+  position: relative;
+  display: flex; gap: 2px;
+  max-width: 100%;
+  padding: 0 2px 7px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.gr-sub::-webkit-scrollbar{ display: none; }
+.gr-sub[hidden]{ display: none; }
+.gr-sub-ind{
+  position: absolute; left: 0; bottom: 2px; width: 0; height: 2px;
+  border-radius: 2px;
+  background: var(--gr-mint);
+  box-shadow: 0 0 8px 1px rgba(120,222,153,.5);
+  transition: transform .34s cubic-bezier(.3,.7,.2,1), width .34s cubic-bezier(.3,.7,.2,1);
+  animation: gr-breathe-line 2.8s ease-in-out infinite;
+}
+.gr-sub-ind.no-anim{ transition: none; }
+@keyframes gr-breathe-line{
+  0%,100%{ box-shadow: 0 0 6px 0 rgba(120,222,153,.35); }
+  50%{ box-shadow: 0 0 12px 2px rgba(120,222,153,.7); }
+}
+.gr-subtab{
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-size: 13px; font-weight: 500; line-height: 1.2;
+  color: var(--gr-muted);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color .2s;
+}
+.gr-subtab:hover{ color: #edf3f8; }
+.gr-subtab[aria-selected="true"]{ color: #edf3f8; font-weight: 700; }
+.gr-subtab:focus-visible{ outline: 2px solid var(--gr-mint); outline-offset: -2px; }
+.gr-sublb .gr-lb-full{ display: inline-flex; }
+.gr-wip{ display: block; width: 13px; height: 13px; flex: none; color: var(--gr-wip); opacity: .85; }
+.gr-wip svg{ display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.gr-sr{ position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Phones: equal columns, icon above a short label; the second row scrolls. */
 @media (max-width: 640px){
-  .gr{ display: block; }
-  .gr-rail{ grid-template-columns: repeat(6, 1fr); }
+  .gr{ display: flex; align-items: stretch; }
+  .gr-rail{ grid-template-columns: repeat(var(--gr-n, 4), 1fr); }
+  .gr-sub{ -webkit-mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); padding-inline: 10px; }
+  .gr-subtab{ font-size: 12px; padding: 7px 8px; }
   .gr-tab{ flex-direction: column; justify-content: center; gap: 4px; padding: 8px 2px; font-size: 10px; min-height: 52px; }
-  .gr-lb-full{ display: none; }
+  .gr-lb-full, .gr-sublb .gr-lb-full{ display: none; }
   .gr-lb-short{ display: inline-flex; }
 }
 
 @media (prefers-reduced-motion: reduce){
   .gr-ind{ animation: none; box-shadow: 0 0 0 3px rgba(120,222,153,.15), 0 0 22px 3px rgba(120,222,153,.35); }
   .gr-ind.is-ping::after{ animation: none; }
-  .gr-tab{ transition: none; }
+  .gr-tab, .gr-subtab{ transition: none; }
+  .gr-sub-ind{ transition: none; animation: none; }
 }
