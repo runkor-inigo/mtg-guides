@@ -11,6 +11,7 @@ Legacy MTG guide for "Speaker Elves" (BG Elves, RC51 test list). See README.md f
 
 - Static HTML, CSS and JS only: `index.html`, `css/`, `js/`, `assets/`.
 - No Node, no Vite, no npm packages, no build step.
+- `js/meta-live.js` is generated nightly by `scripts/update_meta.py` (GitHub Actions); never edit it by hand. The site itself stays static; the refresh script is the only Python in the repo.
 - GSAP is self-hosted at `js/vendor/gsap.min.js` (no CDN) and loads before `js/menu.js` and the numbered scripts.
 
 ## Rules

@@ -3,7 +3,8 @@
  * Desktop: a sidebar beside the content. Each part (Learn, Gameplay, ...)
  * unfolds its sections. The current section carries the mint pill, which
  * moves like an inchworm (the edge facing the move leads, the other follows),
- * breathes with a soft green glow and rings once when it lands. The current
+ * breathes with a soft green glow that warms to gold at its right edge, sends
+ * a light pulse from that edge across it, and rings once when it lands. The current
  * part lights up its own text and icon instead of getting a pill. The arrows
  * at the top fold the sidebar down to icons; an icon then opens its sections
  * in a small panel beside it.
@@ -29,10 +30,17 @@
     shield: '<path d="M12 3.5 5 6v5.6c0 4.2 2.8 7.4 7 8.9 4.2-1.5 7-4.7 7-8.9V6l-7-2.5Z"/><path d="m9.2 12.2 2 2 3.8-4"/>',
     book:   '<path d="M5 4.5h10.5A2.5 2.5 0 0 1 18 7v13H7.5A2.5 2.5 0 0 1 5 17.5V4.5Z"/><path d="M5 17.5A2.5 2.5 0 0 1 7.5 15H18"/>'
   };
-  var CONE = '<span class="sb-cone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5 7.2 19h9.6L12 3.5Z"/><path d="M4.5 19.5h15M9.6 11.2h4.8M8.4 15.2h7.2"/></svg></span><span class="sb-sr"> (under construction)</span>';
   var CHEV = '<svg class="sb-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
   var FOLD = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 17-5-5 5-5M18 17l-5-5 5-5"/></svg>';
   var STORE = 'speakerNav.collapsed';
+  var MOTION = 'speakerNav.motion';   // 'on' | 'off'; unset follows the system setting
+  var root = document.documentElement;
+  function readMotion() { try { return global.localStorage.getItem(MOTION); } catch (e) { return null; } }
+  function applyMotion(pref) {
+    root.classList.toggle('motion-on', pref === 'on');
+    root.classList.toggle('motion-off', pref === 'off');
+  }
+  applyMotion(readMotion());
   var uid = 0;
 
   function el(tag, attrs, html) {
@@ -46,7 +54,11 @@
     var groups = opts.groups;
     var gsap = global.gsap;
     var reduce = global.matchMedia && global.matchMedia('(prefers-reduced-motion: reduce)');
-    var still = function () { return !gsap || (reduce && reduce.matches); };
+    var still = function () {
+      if (!gsap || root.classList.contains('motion-off')) return true;
+      if (root.classList.contains('motion-on')) return false;
+      return !!(reduce && reduce.matches);
+    };
 
     var sections = [];
     groups.forEach(function (g, gi) {
@@ -58,7 +70,7 @@
     function itemHTML(i) {
       var d = sections[i].def;
       return '<button type="button" class="sb-item" data-i="' + i + '"' + (d.controls ? ' aria-controls="' + d.controls + '"' : '') + '>' +
-        '<span class="sb-lb" data-text="' + d.label + '">' + d.label + '</span>' + (d.wip ? CONE : '') + '</button>';
+        '<span class="sb-lb" data-text="' + d.label + '">' + d.label + '</span></button>';
     }
     function sidebarHTML(withTop) {
       var id = 'sb' + (++uid);
@@ -69,7 +81,8 @@
             '<span class="sb-ic"><svg viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[g.icon] || ICONS.book) + '</svg></span><span class="sb-label">' + g.label + '</span>' + CHEV + '</button>' +
             '<div class="sb-items" id="' + id + '-g' + gi + '"><div class="sb-items-inner">' +
             sections.map(function (s, i) { return s.g === gi ? itemHTML(i) : ''; }).join('') + '</div></div></div>';
-        }).join('') + '</div>';
+        }).join('') + '</div>' +
+        (withTop ? '<button type="button" class="sb-motion" aria-pressed="false"><span class="sb-motion-switch" aria-hidden="true"></span><span class="sb-motion-label">Animations</span></button>' : '');
     }
 
     /* ---------- DOM ---------- */
@@ -143,11 +156,13 @@
         var w = wraps[g], inner = w.firstElementChild, mine = sections[cur].g === g;
         if (still()) { w.style.height = want ? 'auto' : '0px'; place(true); return; }
         gsap.killTweensOf(w);
-        if (mine && !want) place(false);             // the pill fades as its part folds away
+        // Its own part folding away hides the pill; unfolding it sends the pill to the section,
+        // whose position is already final because the part grows downwards from its heading.
+        if (mine) place(false);
         gsap.fromTo(w, { height: w.getBoundingClientRect().height }, {
           height: want ? inner.offsetHeight : 0, duration: 0.38, ease: 'power3.inOut',
           onUpdate: function () { if (!mine) follow(); },
-          onComplete: function () { if (want) w.style.height = 'auto'; if (mine && want) place(false); else follow(); }
+          onComplete: function () { if (want) w.style.height = 'auto'; follow(); }
         });
       }
       function setCollapsed(c, instant) {
@@ -199,6 +214,23 @@
     }
 
     var sideBar = Sidebar(sideNav, fly), sheetBar = Sidebar(sheetNav, null);
+
+    /* ---------- animations switch ---------- */
+    // Follows the system's reduced-motion setting until the visitor chooses; the choice is remembered.
+    var motionBtn = sideNav.querySelector('.sb-motion');
+    function syncMotion() {
+      var on = !still();
+      motionBtn.setAttribute('aria-pressed', String(on));
+      motionBtn.title = on ? 'Turn animations off' : 'Turn animations on';
+    }
+    motionBtn.addEventListener('click', function () {
+      var pref = still() ? 'on' : 'off';
+      applyMotion(pref);
+      try { global.localStorage.setItem(MOTION, pref); } catch (e) {}
+      syncMotion();
+    });
+    if (reduce && reduce.addEventListener) reduce.addEventListener('change', syncMotion);
+    syncMotion();
     instances.push(sideBar, sheetBar);
     try { if (global.localStorage.getItem(STORE) === '1') sideBar.setCollapsed(true, true); } catch (e) {}
 

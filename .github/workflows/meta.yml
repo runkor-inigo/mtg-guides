@@ -1,0 +1,37 @@
+# Nightly metagame refresh: 7/14/30-day MTGGoldfish shares and the most common MTGO sideboard
+# cards for the tracked archetypes. Writes js/meta-live.js and pushes it, which redeploys the site.
+name: Nightly metagame refresh
+
+on:
+  schedule:
+    # Just after midnight in Madrid: 22:05 UTC in summer (CEST), 23:05 UTC in winter (CET).
+    - cron: '5 22 * * *'
+    - cron: '5 23 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: meta-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read MTGGoldfish
+        run: python scripts/update_meta.py ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
+      - name: Commit if anything changed
+        run: |
+          if git diff --quiet -- js/meta-live.js; then echo "No change."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add js/meta-live.js
+          git commit -m "Nightly metagame refresh"
+          git push

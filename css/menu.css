@@ -11,11 +11,12 @@
   --gn-line: #2d3947;
   --gn-line-soft: #223040;
   --gn-panel: #141b24;
-  --gn-wip: #edcc72;          /* cone on sections still being written */
-  --gn-wip-ink: #6e520c;
-  --gn-glow-rest: 0 0 0 0 rgba(120,222,153,0), 0 0 14px 1px rgba(120,222,153,.25);
-  --gn-glow-peak: 0 0 0 3px rgba(120,222,153,.15), 0 0 30px 6px rgba(120,222,153,.45);
-  --gn-glow-still: 0 0 0 3px rgba(120,222,153,.15), 0 0 22px 3px rgba(120,222,153,.35);
+  --gn-gold: #f0d77a;         /* the right edge of every mint highlight */
+  /* Mint body that warms to almost-gold at its right edge. */
+  --gn-fill: linear-gradient(90deg, #bdf0d6 0%, #a2ddc0 52%, #cfe6a8 82%, #f0d77a 100%);
+  --gn-glow-rest: -4px 0 14px 0 rgba(120,222,153,.22), 6px 0 14px 0 rgba(240,215,122,.22);
+  --gn-glow-peak: -6px 0 26px 3px rgba(120,222,153,.42), 9px 0 28px 4px rgba(240,215,122,.5), 0 0 0 3px rgba(162,221,192,.12);
+  --gn-glow-still: -5px 0 20px 2px rgba(120,222,153,.32), 8px 0 20px 2px rgba(240,215,122,.36), 0 0 0 3px rgba(162,221,192,.12);
 }
 
 /* ---------- Layout: sidebar beside the content ---------- */
@@ -35,6 +36,18 @@ body > header{ position: relative; }
 @keyframes gn-text-breathe{
   0%,100%{ text-shadow: 0 0 6px rgba(120,222,153,.35); }
   50%{ text-shadow: 0 0 12px rgba(120,222,153,.85), 0 0 22px rgba(120,222,153,.35); }
+}
+/* A pulse of light starts gold at the right edge and travels left as it fades. */
+@keyframes gn-sweep{
+  0%{ background-position: 25% 0; opacity: .95; }
+  55%{ background-position: 75% 0; opacity: 0; }
+  100%{ background-position: 75% 0; opacity: 0; }
+}
+.sb-pill::before, .gn-chapter::before, .sb-fly .sb-item[aria-current="page"]::before{
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, transparent 38%, rgba(255,244,196,.85) 50%, rgba(240,215,122,0) 62%, transparent 100%);
+  background-size: 300% 100%; background-position: 25% 0; opacity: 0;
+  animation: gn-sweep 2.8s ease-out infinite;
 }
 @keyframes gn-ping{ 0%{ opacity: .85; transform: scale(1); } 100%{ opacity: 0; transform: scale(1.06, 1.5); } }
 
@@ -60,7 +73,7 @@ body > header{ position: relative; }
 /* The pill: current section only. */
 .sb-pill{
   position: absolute; left: 0; top: 0; width: 0; height: 0; border-radius: 9px; pointer-events: none;
-  background: linear-gradient(180deg, var(--gn-mint-hi), var(--gn-mint));
+  background: var(--gn-fill);
   animation: gn-breathe 2.8s ease-in-out infinite;
   transition: opacity .2s;
 }
@@ -102,9 +115,6 @@ body > header{ position: relative; }
 /* Reserve the bold width so selecting never shifts the row. */
 .sb-lb{ display: inline-flex; flex-direction: column; }
 .sb-lb::after{ content: attr(data-text); font-weight: 700; height: 0; overflow: hidden; visibility: hidden; }
-.sb-cone{ display: block; width: 13px; height: 13px; flex: none; margin-left: auto; color: var(--gn-wip); opacity: .85; }
-.sb-item[aria-current="page"] .sb-cone{ color: var(--gn-wip-ink); opacity: 1; }
-.sb-cone svg{ display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .sb-sr{ position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Folded to icons */
@@ -122,7 +132,8 @@ body > header{ position: relative; }
 .sb-fly[hidden]{ display: none; }
 .sb-fly-title{ margin: 2px 10px 6px; font-size: 12px; font-weight: 700; color: var(--gn-faint); }
 .sb-fly-items{ display: grid; gap: 2px; }
-.sb-fly .sb-item[aria-current="page"]{ background: linear-gradient(180deg, var(--gn-mint-hi), var(--gn-mint)); animation: gn-breathe 2.8s ease-in-out infinite; }
+.sb-fly .sb-item[aria-current="page"]{ background: var(--gn-fill); animation: gn-breathe 2.8s ease-in-out infinite; }
+.sb-fly .sb-item > *{ position: relative; z-index: 1; }
 
 /* ---------- Phones: sticky chapter bar + sheet ---------- */
 @media (max-width: 760px){
@@ -137,9 +148,11 @@ body > header{ position: relative; }
     display: flex; align-items: center; gap: 10px;
     padding: 10px 14px; border-radius: 12px; cursor: pointer;
     color: var(--gn-ink); font-weight: 700; font-size: 14px;
-    background: linear-gradient(180deg, var(--gn-mint-hi), var(--gn-mint));
+    position: relative;
+    background: var(--gn-fill);
     animation: gn-breathe 2.8s ease-in-out infinite;
   }
+  .gn-chapter > *{ position: relative; z-index: 1; }
   .gn-chapter small{ font-weight: 500; opacity: .7; }
   .gn-chev{ margin-left: auto; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s; }
   .gn-chapter[aria-expanded="true"] .gn-chev{ transform: rotate(180deg); }
@@ -157,10 +170,27 @@ body > header{ position: relative; }
 .guide-pager b{ font-size: 14px; color: #edf3f8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .guide-pager .next{ margin-left: auto; text-align: right; }
 
-/* Reduced motion: nothing moves, but every highlight keeps a steady glow. */
+/* Animations switch at the foot of the sidebar */
+.sb-motion{ all: unset; box-sizing: border-box; display: flex; align-items: center; gap: 10px; margin-top: 4px; padding: 8px 12px; border-radius: 9px; font-size: 12px; font-weight: 500; color: var(--gn-faint); cursor: pointer; white-space: nowrap; }
+.sb-motion:hover{ color: var(--gn-soft); background: rgba(255,255,255,.03); }
+.sb-motion:focus-visible{ outline: 2px solid var(--gn-mint); outline-offset: -2px; }
+.sb-motion-switch{ position: relative; width: 26px; height: 15px; flex: none; border-radius: 999px; background: var(--gn-line); transition: background .2s; }
+.sb-motion-switch::after{ content: ""; position: absolute; top: 2px; left: 2px; width: 11px; height: 11px; border-radius: 50%; background: var(--gn-soft); transition: transform .2s; }
+.sb-motion[aria-pressed="true"] .sb-motion-switch{ background: var(--gn-mint); }
+.sb-motion[aria-pressed="true"] .sb-motion-switch::after{ transform: translateX(11px); background: var(--gn-ink); }
+.sb.is-collapsed .sb-motion-label{ opacity: 0; }
+
+/* Reduced motion (system setting, unless the visitor switched animations on, or the visitor
+   switched them off): nothing moves, but every highlight keeps a steady glow. */
 @media (prefers-reduced-motion: reduce){
-  .sb-pill, .gn-chapter, .sb-fly .sb-item[aria-current="page"]{ animation: none; box-shadow: var(--gn-glow-still); }
-  .sb-head.is-current{ animation: none; text-shadow: 0 0 10px rgba(120,222,153,.7); }
-  .sb-pill.is-ping::after{ animation: none; }
-  .sb-toggle svg, .sb-chev, .gn-chev, .sb-head, .sb-item{ transition: none; }
+  :root:not(.motion-on) .sb-pill, :root:not(.motion-on) .gn-chapter, :root:not(.motion-on) .sb-fly .sb-item[aria-current="page"]{ animation: none; box-shadow: var(--gn-glow-still); }
+  :root:not(.motion-on) .sb-head.is-current{ animation: none; text-shadow: 0 0 10px rgba(120,222,153,.7); }
+  :root:not(.motion-on) .sb-pill.is-ping::after{ animation: none; }
+  :root:not(.motion-on) .sb-pill::before, :root:not(.motion-on) .gn-chapter::before, :root:not(.motion-on) .sb-fly .sb-item[aria-current="page"]::before{ animation: none; opacity: 0; }
+  :root:not(.motion-on) .sb-toggle svg, :root:not(.motion-on) .sb-chev, :root:not(.motion-on) .gn-chev, :root:not(.motion-on) .sb-head, :root:not(.motion-on) .sb-item{ transition: none; }
 }
+:root.motion-off .sb-pill, :root.motion-off .gn-chapter, :root.motion-off .sb-fly .sb-item[aria-current="page"]{ animation: none; box-shadow: var(--gn-glow-still); }
+:root.motion-off .sb-head.is-current{ animation: none; text-shadow: 0 0 10px rgba(120,222,153,.7); }
+:root.motion-off .sb-pill.is-ping::after{ animation: none; }
+:root.motion-off .sb-pill::before, :root.motion-off .gn-chapter::before, :root.motion-off .sb-fly .sb-item[aria-current="page"]::before{ animation: none; opacity: 0; }
+:root.motion-off .sb-toggle svg, :root.motion-off .sb-chev, :root.motion-off .gn-chev, :root.motion-off .sb-head, :root.motion-off .sb-item{ transition: none; }
