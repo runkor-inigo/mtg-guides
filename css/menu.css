@@ -1,132 +1,92 @@
-/* Speaker Elves — animated top menu (notch bar)
-   Motion reference: menu_bar_animation_design.mp4 (upper treatment).
-   The shape itself is drawn by js/menu.js; this file only styles the layers. */
+/* Speaker Elves — guide menu (rail). Behaviour lives in js/menu.js. */
 
 :root{
-  --sn-h: 84px;            /* bar height */
-  --sn-strip: 9px;         /* gradient strip left under the notch */
-  --sn-icon: 23px;
-  --sn-font: 11.5px;
-  --sn-ink: #ecfff5;       /* label/icon colour on the green bar */
-  --sn-ink-active: #a9f5c8;/* label/icon colour inside the notch */
-  --sn-ring: #a9f5c8;
+  --gr-mint: #a2ddc0;
+  --gr-mint-hi: #bdf0d6;
+  --gr-leaf: #78de99;
+  --gr-ink: #b9c8d4;          /* inactive label/icon */
+  --gr-ink-active: #0b281c;   /* label/icon on the mint highlight */
+  --gr-well: #0b121a;         /* recessed rail */
+  --gr-line: #223040;
 }
 
-.sn{
+.gr{ display: flex; font-family: Roboto, "Segoe UI", system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
+
+.gr-rail{
   position: relative;
-  height: var(--sn-h);
-  width: 100%;
-  max-width: 980px;
-  margin: 0 auto;
-  font-family: Roboto, "Segoe UI", system-ui, -apple-system, sans-serif;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
-
-/* Background shape (gradient bar with the notch cut out) */
-.sn-bg{
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  overflow: visible;
-  pointer-events: none;
-  filter: drop-shadow(0 16px 24px rgba(52, 211, 153, .17));
-}
-
-/* Two identical rows of tabs:
-   A = inactive look, clipped to the bar
-   B = active look, clipped to the notch (cross-fades by geometry, not opacity) */
-.sn-layer{
-  position: absolute; inset: 0;
   display: grid;
-  grid-template-columns: repeat(var(--sn-n, 6), 1fr);
-  margin: 0; padding: 0 var(--sn-pad, 28px) var(--sn-strip);
-  list-style: none;
+  grid-template-columns: repeat(6, auto);
+  gap: 2px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--gr-well);
+  border: 1px solid var(--gr-line);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,.53);
 }
-.sn-layer > li{ display: flex; min-width: 0; }
 
-.sn-tab{
+/* The highlight: breathes slowly, rings once when it lands. */
+.gr-ind{
+  position: absolute; top: 4px; bottom: 4px; left: 0; width: 0;
+  border-radius: 9px;
+  background: linear-gradient(180deg, var(--gr-mint-hi), var(--gr-mint));
+  box-shadow: 0 0 0 0 rgba(120,222,153,0), 0 0 14px 1px rgba(120,222,153,.25);
+  animation: gr-breathe 2.8s ease-in-out infinite;
+  will-change: transform, width;
+}
+.gr-ind::after{
+  content: ""; position: absolute; inset: -1px; border-radius: inherit;
+  border: 2px solid var(--gr-leaf); opacity: 0; pointer-events: none;
+}
+.gr-ind.is-ping::after{ animation: gr-ping .9s cubic-bezier(.2,.7,.3,1); }
+@keyframes gr-breathe{
+  0%,100%{ box-shadow: 0 0 0 0 rgba(120,222,153,0), 0 0 14px 1px rgba(120,222,153,.25); }
+  50%{ box-shadow: 0 0 0 3px rgba(120,222,153,.15), 0 0 30px 6px rgba(120,222,153,.45); }
+}
+@keyframes gr-ping{
+  0%{ opacity: .85; transform: scale(1); }
+  100%{ opacity: 0; transform: scale(1.18, 1.45); }
+}
+
+.gr-tab{
   all: unset;
   box-sizing: border-box;
-  flex: 1;
-  min-width: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 5px;
-  color: var(--sn-ink);
-  font-size: var(--sn-font);
-  font-weight: 500;
-  letter-spacing: .01em;
-  line-height: 1;
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  border-radius: 9px;
+  font-size: 13px; font-weight: 500; line-height: 1.2;
+  color: var(--gr-ink);
   white-space: nowrap;
   cursor: pointer;
+  transition: color .2s;
 }
-.sn-b .sn-tab{ color: var(--sn-ink-active); font-weight: 700; cursor: default; }
-.sn-b{ pointer-events: none; }
+.gr-tab:hover{ color: #edf3f8; }
+.gr-tab[aria-selected="true"]{ color: var(--gr-ink-active); font-weight: 700; }
+.gr-tab:focus-visible{ outline: 2px solid var(--gr-mint); outline-offset: 2px; }
 
-.sn-ic{
-  display: block;
-  width: var(--sn-icon); height: var(--sn-icon);
-  transform-origin: 50% 70%;
-  will-change: transform;
-}
-.sn-ic svg{
+.gr-ic{ display: block; width: 20px; height: 20px; flex: none; }
+.gr-ic svg{
   display: block; width: 100%; height: 100%;
   fill: none; stroke: currentColor;
   stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
 }
-.sn-lb-short{ display: none; }
+.gr-lb-short{ display: none; }
+/* Reserve the bold width so selecting a tab never resizes the rail. */
+.gr-lb-full, .gr-lb-short{ flex-direction: column; }
+.gr-lb-full{ display: inline-flex; }
+.gr-lb-full::after, .gr-lb-short::after{ content: attr(data-text); font-weight: 700; height: 0; overflow: hidden; visibility: hidden; }
 
-/* Soft glow that follows the notch (no hard outline).
-   Always faintly visible; stronger on keyboard focus so focus stays perceivable. */
-.sn-ring{
-  position: absolute; left: 0; top: 0;
-  box-sizing: border-box;
-  border: 0;
-  border-radius: 20px;
-  pointer-events: none;
-  background: radial-gradient(120% 90% at 50% 0%, rgba(120,222,153,.10), rgba(120,222,153,0) 70%);
-  box-shadow:
-    inset 0 0 22px rgba(169,245,200,.16),
-    0 0 26px rgba(52,211,153,.22);
-  opacity: .8;
-  animation: sn-breathe 3.6s ease-in-out infinite;
-  transition: box-shadow .2s;
-}
-.sn.is-kbd .sn-ring{
-  box-shadow:
-    inset 0 0 30px rgba(169,245,200,.34),
-    0 0 34px rgba(110,231,170,.5);
-}
-@keyframes sn-breathe{
-  0%,100%{ opacity:.65; }
-  50%{ opacity:1; }
-}
-
-/* Hover hint on inactive tabs (layer A only) */
-@media (hover: hover){
-  .sn-a .sn-tab:hover{ color: #fff; }
-}
-
+/* Phones: six equal columns, icon above a short label. */
 @media (max-width: 640px){
-  :root{
-    --sn-h: 72px;
-    --sn-strip: 7px;
-    --sn-icon: 20px;
-    --sn-font: 10px;
-  }
-  .sn-tab{ gap: 4px; }
-  .sn-lb-full{ display: none; }
-  .sn-lb-short{ display: inline; }
-  .sn-ring{ border-radius: 16px; }
-  /* Narrow screens: inactive tabs show icon only; the active tab shows its label
-     inside the notch. The label stays in the accessibility tree (aria-label). */
-  .sn-a .sn-lb{
-    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
-    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-  }
-  .sn-a .sn-tab{ padding-top: 2px; }
+  .gr{ display: block; }
+  .gr-rail{ grid-template-columns: repeat(6, 1fr); }
+  .gr-tab{ flex-direction: column; justify-content: center; gap: 4px; padding: 8px 2px; font-size: 10px; min-height: 52px; }
+  .gr-lb-full{ display: none; }
+  .gr-lb-short{ display: inline-flex; }
 }
 
 @media (prefers-reduced-motion: reduce){
-  .sn-ring{ transition: none; animation: none; opacity: .85; }
+  .gr-ind{ animation: none; box-shadow: 0 0 0 3px rgba(120,222,153,.15), 0 0 22px 3px rgba(120,222,153,.35); }
+  .gr-ind.is-ping::after{ animation: none; }
+  .gr-tab{ transition: none; }
 }

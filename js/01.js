@@ -583,7 +583,7 @@ function showPane(id){
  document.dispatchEvent(new CustomEvent('guide:tabchange',{detail:{id}}));
 }
 const guideNav=SpeakerNav.create(document.getElementById('guide-nav'),{tabs:GUIDE_TABS,active:'map',onChange:showPane});
-GUIDE_TABS.forEach((t,i)=>{const pane=document.getElementById(t.id);pane.setAttribute('role','tabpanel');pane.setAttribute('aria-labelledby',document.querySelectorAll('#guide-nav .sn-a .sn-tab')[i].id);});
+GUIDE_TABS.forEach((t,i)=>{const pane=document.getElementById(t.id);pane.setAttribute('role','tabpanel');pane.setAttribute('aria-labelledby',guideNav.tabs[i].id);});
 function showGuideTab(id){guideNav.select(id);}
 
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
