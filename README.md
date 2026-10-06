@@ -1,16 +1,30 @@
 # Speaker Elves Guide
 
-This project is a modular Vite + TypeScript guide based on the project brief loaded in the workspace.
+Legacy (Magic: The Gathering) guide for BG Speaker Elves, RC51 test list: sideboard map, current 75, heuristics, an interactive goldfish demo, mana math and sources.
+
+It is a static website in plain HTML, CSS and JavaScript. There is no Node, no build step and no bundler.
+
+## Structure
+
+```
+index.html   Page markup and most of the guide content
+css/         Stylesheets, loaded in order (01.css is the base, 02–08 are layered refinements)
+js/          Scripts, loaded in order (01.js holds matchup data and core UI; later files depend on it)
+assets/      Card images, mana symbols and logos
+```
+
+Load order matters: `css/` and `js/` files are linked in numeric order from `index.html`, and later scripts use globals defined in earlier ones.
 
 ## Run locally
 
-```bash
-npm install
-npm run dev
-```
-
-## Build
+Serve the folder with any static server, for example:
 
 ```bash
-npm run build
+python -m http.server 8000
 ```
+
+Then open http://localhost:8000. Opening `index.html` directly from disk mostly works, but a local server matches production behavior.
+
+## Deploy
+
+Deploy the repository root as a static site. No build command or output directory is needed.

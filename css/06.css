@@ -1,0 +1,44 @@
+/* RC50: readable mobile plans, with the full matrix available on demand. */
+.mobile-map45{display:none}
+@media(max-width:760px){
+ body>header{position:relative;backdrop-filter:none}.wrap{padding:16px 12px}
+ header h1{font-size:23px;line-height:1.25}.sub{font-size:12px;line-height:1.6}
+ .tabs{display:flex;flex-wrap:nowrap;overflow-x:auto;padding:4px 0 10px;scrollbar-width:thin}
+ .tabs .tab{flex:0 0 auto;min-height:44px;font-size:13px;padding:10px 14px}
+ #all-guides{min-height:44px}.mobile-map45{display:block;margin:14px 0}
+ #map:not(.show-matrix45)>.matrixwrap{display:none}
+ body>.floatingMatrixHead{display:none!important}
+ .mobile-map-toolbar45{display:flex;gap:8px;margin-bottom:12px;align-items:center}
+ .mobile-map-toolbar45 input{min-width:0;flex:1;min-height:46px;font-size:16px;padding:10px 12px;border:1px solid #405465;border-radius:8px;background:#101c26;color:#edf3f8}
+ .mobile-map-toolbar45 button,.mobile-plan45 button{min-height:44px;padding:10px 12px;font-size:13px;background:#20333f;color:#cbe7da;border:1px solid #486153;border-radius:8px}
+ .mobile-category45{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#a8c9df;margin:24px 0 10px}
+ .mobile-plan45{border:1px solid #364c5a;background:#14232e;border-radius:10px;margin:9px 0;overflow:hidden}
+ .mobile-plan45>summary{padding:15px 12px;cursor:pointer;font-size:16px;font-weight:700;line-height:1.5}
+ .mobile-plan45>summary .mana-symbol,.mobile-plan45>summary img{width:17px;height:17px;vertical-align:-3px}
+ .mobile-plan-body45{padding:0 12px 16px}.mobile-meta45{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 12px}
+ .mobile-meta45>div{background:#0e1b24;border:1px solid #314854;border-radius:7px;padding:10px;text-align:center}
+ .mobile-meta45 small{display:block;font-size:11px;color:#adc1cc;margin-bottom:5px}.mobile-meta45 a{font-size:15px}
+ .mobile-role45{font-size:13px;line-height:1.6;color:#b5ced9;margin:12px 0}
+ .mobile-plan-body45 h4{font-size:14px;letter-spacing:.03em;margin:20px 0 9px;color:#a4dfbd}
+ .mobile-plan-body45 h4.mobile-outs45{color:#ffb3b3}
+ .mobile-plan-body45 ul{list-style:none;padding:0;margin:0}
+ .mobile-plan-body45 li{display:flex;align-items:center;gap:8px;min-height:40px;border-bottom:1px solid #2a3d49;padding:7px 0;font-size:14px;line-height:1.5}
+ .mobile-plan-body45 li b{display:inline-flex;align-items:center;justify-content:center;flex:0 0 28px;height:28px;border-radius:5px;background:#253c45}
+ .mobile-plan-body45 li .mobile-card-name45{flex:1;min-width:0}
+ .mobile-plan-body45 li img{width:16px;height:16px}.mobile-plan-body45 button{width:100%;margin-top:16px}
+ .mobile-out-group45{font-size:11px;color:#a8bfce;text-transform:uppercase;margin:14px 0 4px}
+ .mobile-empty45{color:#b5ced9;font-size:14px;padding:16px 0}
+ #map.show-matrix45 .mobile-plans45{display:none}
+ .drawer{width:100vw;padding:16px;right:-105vw;height:100dvh}.drawerclose{width:44px;height:44px}
+ .planmini{grid-template-columns:1fr}.drawer p,.drawer li{font-size:14px;line-height:1.65}
+ #deck p,#heur p,#sources p{font-size:14px;line-height:1.7}
+ .h39-grid,.deckgrid{grid-template-columns:1fr!important}
+ #deck .deckrow{font-size:14px;min-height:36px}
+ .gf-layout{gap:12px}.gf-toolbar{align-items:stretch}.gf-toolbar button{min-height:44px;font-size:13px;padding:10px}
+ .gf-coach{grid-template-rows:116px 210px 90px 48px 56px 84px;gap:12px}
+ .gf-action h3{font-size:19px}.gf-coach .gf-action p{font-size:15px;line-height:1.6}.gf-stack p{font-size:13px}
+ .gf-coach .gf-controls,.gf-controls button{height:48px;min-height:48px}.gf-controls button{font-size:13px}
+ .gf-log{font-size:12px}.gf-footnote{font-size:12px}.gf-zone-heading,.gf-hand-heading{font-size:13px}
+ .gf-card-caption,.gf-badges{font-size:10px}.gf-card{min-height:156px}.gf-hand .gf-card{min-height:148px}
+ summary{touch-action:manipulation}button,a{touch-action:manipulation}
+}

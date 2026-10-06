@@ -1,0 +1,5 @@
+/* RC50: lowercase brand and recognizable social destinations. */
+.brand-name{text-transform:none;letter-spacing:.04em}
+.footer .social-icon{display:block;flex:0 0 18px;width:18px;height:18px;color:#bdd9ce}
+.footer .socials a .social-label{color:inherit}
+.footer .socials a:hover .social-icon{color:#e9fff3}
