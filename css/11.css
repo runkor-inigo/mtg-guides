@@ -77,3 +77,29 @@
 .mu-unplanned .mu-art img{filter:saturate(.6)}
 .mu-opp small{color:#93a8b8;font-weight:600;margin-left:2px}
 .mu-watch{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+
+/* Current 75: published results archive */
+.res-archive{margin:26px 0 8px;display:grid;gap:12px}
+.res-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.res-head h2{margin:0;font-size:22px}
+.res-head p{margin:4px 0 0;color:#b6c4cf;font-size:14px;max-width:70ch;line-height:1.6}
+.res-filter{display:flex;gap:4px;padding:4px;background:#0e1922;border:1px solid #3c5260;border-radius:10px}
+.res-filter button{min-height:36px;padding:7px 14px;border:0;border-radius:7px;color:#c1d3df;background:transparent;cursor:pointer;font:500 13px Roboto,sans-serif}
+.res-filter button[aria-pressed=true]{background:#a2ddc0;color:#0b281c;font-weight:700}
+.res-table td{font-variant-numeric:tabular-nums;white-space:nowrap}
+.res-table td:nth-child(3){white-space:normal}
+.res-table a{font-size:13px}
+.res-finish{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:700;background:#1b2833;border:1px solid #2c3f4c;color:#d3dee7}
+.res-finish small{font-weight:500;color:#93a8b8}
+.res-finish.trophy{background:#2a2412;border-color:#5a4a22;color:var(--gold)}
+.res-finish.top8{background:#163c25;border-color:#2c6a43;color:#bcf2ca}
+.res-own td{background:#a2ddc00d}
+.res-own td:nth-child(4){color:#a2ddc0;font-weight:700}
+.res-more{justify-self:start;font:600 13px Roboto,sans-serif;min-height:36px;padding:7px 14px;border-radius:8px;background:#20333f;color:#cbe7da;border:1px solid #486153;cursor:pointer}
+.res-note{margin:0;font-size:12px;color:#8fa2b1;line-height:1.6;max-width:90ch}
+
+/* Official symbols inside running text (js/11.js) */
+.sym{display:inline-block;width:1.05em;height:1.05em;vertical-align:-.17em;margin:0 1px}
+.res-archive .table-scroll{overflow-x:auto;max-width:100%}
+.res-archive{min-width:0;max-width:100%}
+@media(max-width:600px){.res-table td{white-space:normal}.res-table td:first-child{white-space:nowrap}}

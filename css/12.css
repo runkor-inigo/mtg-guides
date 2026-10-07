@@ -1,0 +1,34 @@
+/* Guide library: the cover card glows like the menu highlight (mint warming to gold at the right edge).
+   Hover breathes and sends the light pulse across; a click lights it up and rings once. */
+@keyframes gn-card-breathe{
+ 0%,100%{box-shadow:0 12px 40px #0003,-6px 0 18px rgba(120,222,153,.2),8px 0 18px rgba(240,215,122,.2)}
+ 50%{box-shadow:0 12px 40px #0003,-8px 0 34px 4px rgba(120,222,153,.4),10px 0 34px 5px rgba(240,215,122,.48),0 0 0 3px rgba(162,221,192,.12)}
+}
+@keyframes gn-card-ring{
+ 0%{outline-color:rgba(162,221,192,.9);outline-offset:0}
+ 100%{outline-color:rgba(162,221,192,0);outline-offset:16px}
+}
+.guide-entry{transition:border-color .2s,background-color .2s,box-shadow .25s}
+.guide-entry::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;
+ background:linear-gradient(90deg,transparent 0%,transparent 38%,rgba(255,244,196,.26) 50%,rgba(240,215,122,0) 62%,transparent 100%);
+ background-size:300% 100%;background-position:25% 0;opacity:0}
+.guide-entry:hover,.guide-entry:focus-visible{border-color:#cfe6a8;background:#182b35;animation:gn-card-breathe 2.8s ease-in-out infinite}
+.guide-entry:hover::after,.guide-entry:focus-visible::after{animation:gn-sweep 2.8s ease-out infinite}
+.guide-entry:hover .guide-entry-cta,.guide-entry:focus-visible .guide-entry-cta{color:#f0d77a}
+.guide-entry:active,.guide-entry.is-pressed{border-color:#f0d77a;animation:none;
+ box-shadow:0 12px 40px #0003,-8px 0 30px 5px rgba(120,222,153,.55),12px 0 36px 7px rgba(240,215,122,.62)}
+.guide-entry.is-pressed{outline:2px solid transparent;animation:gn-card-ring .5s cubic-bezier(.2,.7,.3,1)}
+
+/* Reduced motion (unless the visitor switched animations on), or animations switched off:
+   no breathing or pulse, but the glow stays. */
+@media (prefers-reduced-motion:reduce){
+ :root:not(.motion-on) .guide-entry:hover,:root:not(.motion-on) .guide-entry:focus-visible{animation:none;box-shadow:0 12px 40px #0003,-6px 0 26px 3px rgba(120,222,153,.34),9px 0 26px 4px rgba(240,215,122,.38)}
+ :root:not(.motion-on) .guide-entry::after,:root:not(.motion-on) .guide-entry.is-pressed{animation:none}
+}
+:root.motion-off .guide-entry:hover,:root.motion-off .guide-entry:focus-visible{animation:none;box-shadow:0 12px 40px #0003,-6px 0 26px 3px rgba(120,222,153,.34),9px 0 26px 4px rgba(240,215,122,.38)}
+:root.motion-off .guide-entry::after,:root.motion-off .guide-entry.is-pressed{animation:none}
+
+/* Goldfish Lab: chosen modes and the Next button share the menu's mint-to-gold highlight. */
+#goldfish .gf-toolbar button[aria-pressed=true],#goldfish #gf-next{background:var(--gn-fill);border-color:#cfe6a8;color:#0b281c;box-shadow:-3px 0 10px rgba(120,222,153,.22),5px 0 12px rgba(240,215,122,.24)}
+#goldfish #gf-next:hover:not(:disabled){box-shadow:-5px 0 16px 2px rgba(120,222,153,.38),8px 0 18px 3px rgba(240,215,122,.42)}
+#goldfish .gf-card{will-change:transform}

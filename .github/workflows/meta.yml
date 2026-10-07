@@ -1,5 +1,6 @@
-# Nightly metagame refresh: 7/14/30-day MTGGoldfish shares and the most common MTGO sideboard
-# cards for the tracked archetypes. Writes js/meta-live.js and pushes it, which redeploys the site.
+# Nightly refresh: 7/14/30-day MTGGoldfish shares, the most common MTGO sideboard cards for the
+# tracked archetypes, and the archive of published Speaker Elves results. Writes js/meta-live.js and
+# js/results-archive.js and pushes them, which redeploys the site.
 name: Nightly metagame refresh
 
 on:
@@ -27,11 +28,16 @@ jobs:
           python-version: '3.12'
       - name: Read MTGGoldfish
         run: python scripts/update_meta.py ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
+      - name: Refresh the published results archive
+        # Only on the run that refreshed the metagame, so the archive is read once a night.
+        run: |
+          if git diff --quiet -- js/meta-live.js; then echo "Metagame unchanged; skipping results."; exit 0; fi
+          python scripts/update_results.py
       - name: Commit if anything changed
         run: |
-          if git diff --quiet -- js/meta-live.js; then echo "No change."; exit 0; fi
+          if git diff --quiet -- js/meta-live.js js/results-archive.js; then echo "No change."; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add js/meta-live.js
+          git add js/meta-live.js js/results-archive.js
           git commit -m "Nightly metagame refresh"
           git push

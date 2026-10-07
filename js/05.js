@@ -16,6 +16,13 @@
  }
  document.querySelector('header').setAttribute('aria-hidden','true');
  document.querySelector('main').setAttribute('aria-hidden','true');
- entry.addEventListener('click',()=>showGuide(true));
+ // Light the card up and let its ring play before the guide opens (instant without motion).
+ entry.addEventListener('click',()=>{
+  const root=document.documentElement,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const still=root.classList.contains('motion-off')||(reduce&&!root.classList.contains('motion-on'));
+  if(still)return showGuide(true);
+  entry.classList.add('is-pressed');
+  setTimeout(()=>{entry.classList.remove('is-pressed');showGuide(true);},280);
+ });
  back.addEventListener('click',()=>showGuide(false));
 })();

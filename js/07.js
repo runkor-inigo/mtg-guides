@@ -1,6 +1,6 @@
 (function visualDeck(){
  const root=document.getElementById('deck'),compact=root.querySelector('.deckgrid'),tip=root.querySelector('.deck38-tip');
- const toolbar=document.createElement('div');toolbar.className='deck-view47';toolbar.innerHTML='<div><h2>Current 75</h2><p>60 main · 15 sideboard</p></div><div role="group" aria-label="Deck display"><button type="button" data-view="compact" aria-pressed="true">Compact</button><button type="button" data-view="visual" aria-pressed="false">Visual</button></div>';
+ const toolbar=document.createElement('div');toolbar.className='deck-view47';toolbar.innerHTML='<div><h2>Current 75</h2><p>5 Oct 2026 list · 60 main · 15 sideboard</p></div><div role="group" aria-label="Deck display"><button type="button" data-view="compact" aria-pressed="true">Compact</button><button type="button" data-view="visual" aria-pressed="false">Visual</button></div>';
  compact.before(toolbar);const gallery=document.createElement('div');gallery.className='deck-gallery47';gallery.hidden=true;
  for(const box of compact.querySelectorAll(':scope > .box')){
   const section=document.createElement('section'),heading=document.createElement('h3'),grid=document.createElement('div');grid.className='deck-gallery-grid47';let total=0;
