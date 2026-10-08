@@ -1,30 +1,38 @@
-// Current 75: published Speaker Elves results on MTGO (js/results-archive.js, written by
-// scripts/update_results.py). League lists are 5-0 trophies; challenges show their final place.
+// Current 75: published Speaker Elves results (js/results-archive.js, written every night by
+// scripts/update_results.py). MTGO: league lists are 5-0 trophies; challenges show their final place.
+// Paper: events from mtgtop8 (Hareruya and other Japanese events included), with their top-N bracket.
 (function resultsArchive(){
  const data=window.SPEAKER_RESULTS;const deck=document.getElementById('deck');
  if(!data||!deck||!data.results?.length)return;
  const SHOWN=12;
  const ord=n=>n+(['th','st','nd','rd'][(n%100-20)%10]||['th','st','nd','rd'][n%100]||'th');
  const fmtDate=d=>new Date(d+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+ const paper=r=>r.kind==='Paper';
+ // Paper ranks come as "1", "2", "3-4", "5-8", "9-16": a bracket reads as "Top 4", "Top 8"...
+ const paperFinish=f=>{const m=String(f||'').match(/^(\d+)(?:-(\d+))?$/);if(!m)return f||'—';return m[2]?'Top '+m[2]:ord(+m[1]);};
+ const paperTop=f=>{const m=String(f||'').match(/^(\d+)(?:-(\d+))?$/);return m?+(m[2]||m[1]):99;};
  const finish=r=>r.kind==='Trophy'
   ?'<span class="res-finish trophy">5-0 trophy</span>'
+  :paper(r)?`<span class="res-finish ${paperTop(r.finish)<=8?'top8':''}">${esc(paperFinish(r.finish))}</span>`
   :`<span class="res-finish ${r.finish&&r.finish<=8?'top8':''}">${r.finish?ord(r.finish):'—'}${r.players?` <small>of ${r.players}</small>`:''}</span>`;
- const trophies=data.results.filter(r=>r.kind==='Trophy').length,challenges=data.results.length-trophies;
- const best=data.results.filter(r=>r.kind!=='Trophy'&&r.finish).sort((a,b)=>a.finish-b.finish)[0];
-
+ const mtgo=data.results.filter(r=>!paper(r)),trophies=mtgo.filter(r=>r.kind==='Trophy').length,challenges=mtgo.length-trophies,papers=data.results.length-mtgo.length;
+ const best=mtgo.filter(r=>r.kind!=='Trophy'&&r.finish).sort((a,b)=>a.finish-b.finish)[0];
+ const FILTERS={mtgo:r=>!paper(r),trophy:r=>r.kind==='Trophy',challenge:r=>!paper(r)&&r.kind!=='Trophy',paper};
  const box=document.createElement('section');box.className='res-archive';box.setAttribute('aria-labelledby','res-title');
  box.innerHTML=`<div class="res-head"><div><h2 id="res-title">Published results</h2>
-  <p>${data.results.length} Speaker Elves finishes on MTGO since ${fmtDate(data.since)}: ${trophies} league 5-0 trophies and ${challenges} challenge finishes${best?`, best ${ord(best.finish)} of ${best.players||'?'}`:''}. Updated ${fmtDate(data.updated)}.</p></div>
-  <div class="res-filter" role="group" aria-label="Show results"><button type="button" data-f="all" aria-pressed="true">All</button><button type="button" data-f="Trophy" aria-pressed="false">Trophies</button><button type="button" data-f="Challenge" aria-pressed="false">Challenges</button></div></div>
+  <p>Since ${fmtDate(data.since)}: on MTGO, ${trophies} league 5-0 trophies and ${challenges} challenge finishes${best?` (best ${ord(best.finish)} of ${best.players||'?'})`:''}; on paper, ${papers} top finishes. Updated ${fmtDate(data.updated)}.</p></div>
+  <div class="res-filter seg" role="group" aria-label="Show results"><button type="button" data-f="mtgo" aria-pressed="true">All MTGO</button><button type="button" data-f="trophy" aria-pressed="false">MTGO trophies</button><button type="button" data-f="challenge" aria-pressed="false">MTGO challenges</button><button type="button" data-f="paper" aria-pressed="false">Paper events</button></div></div>
   <div class="table-scroll"><table class="data res-table"><thead><tr><th>Date</th><th>Finish</th><th>Event</th><th>Pilot</th><th>List</th></tr></thead><tbody></tbody></table></div>
   <button type="button" class="res-more" hidden></button>
-  <p class="res-note">Results from the MTGGoldfish deck search (Legacy, Formidable Speaker in the main deck, MTGO leagues and challenges; other archetypes that play Speaker are left out). Challenge places come from the official mtgo.com standings. Each list opens on MTGGoldfish.</p>`;
+  <p class="res-note">MTGO: the MTGGoldfish deck search (Legacy, Formidable Speaker in the main deck, leagues and challenges; other archetypes that play Speaker are left out), with challenge places from the official mtgo.com standings. Paper: mtgtop8 (Legacy, Speaker in the main deck, Elves and Cradle Control lists at non-MTGO events), which also lists the Hareruya and other Japanese events. Refreshed every night.</p>`;
  const tbody=box.querySelector('tbody'),more=box.querySelector('.res-more');
- let filter='all',expanded=false;
+ let filter='mtgo',expanded=false;
+ const eventCell=r=>paper(r)?`${esc(r.event)} <a href="${esc(r.source)}" target="_blank" rel="noopener" title="Event on mtgtop8">top 8</a>`
+  :`${esc(r.kind==='Trophy'?'Legacy League':r.kind.replace('Challenge','Legacy Challenge'))}${r.source?` <a href="${esc(r.source)}" target="_blank" rel="noopener" title="Official standings">standings</a>`:''}`;
  function render(){
-  const rows=data.results.filter(r=>filter==='all'||(filter==='Trophy'?r.kind==='Trophy':r.kind!=='Trophy'));
+  const rows=data.results.filter(FILTERS[filter]);
   const shown=expanded?rows:rows.slice(0,SHOWN);
-  tbody.innerHTML=shown.map(r=>`<tr class="${r.player==='runkor'?'res-own':''}"><td>${esc(fmtDate(r.date))}</td><td>${finish(r)}</td><td>${esc(r.kind==='Trophy'?'Legacy League':r.kind.replace('Challenge','Legacy Challenge'))}${r.source?` <a href="${esc(r.source)}" target="_blank" rel="noopener" title="Official standings">standings</a>`:''}</td><td>${esc(r.player)}</td><td><a href="${esc(r.deck)}" target="_blank" rel="noopener">Open list</a></td></tr>`).join('');
+  tbody.innerHTML=shown.map(r=>`<tr class="${r.player==='runkor'?'res-own':''}"><td>${esc(fmtDate(r.date))}</td><td>${finish(r)}</td><td>${eventCell(r)}</td><td>${esc(r.player)}</td><td><a href="${esc(r.deck)}" target="_blank" rel="noopener">Open list</a></td></tr>`).join('')||'<tr><td colspan="5" class="muted">No results in this view yet.</td></tr>';
   more.hidden=rows.length<=SHOWN;
   more.textContent=expanded?'Show fewer':`Show all ${rows.length}`;
  }
@@ -40,7 +48,7 @@
   const who=p=>NAMES[p]?`${esc(NAMES[p])} <small>(MTGO: ${esc(p)})</small>`:esc(p);
   const end=new Date(data.updated+'T12:00:00Z'),start=new Date(end.getTime()-13*864e5),day=r=>new Date(r.date+'T12:00:00Z');
   const by=new Map();
-  data.results.filter(r=>day(r)>=start&&day(r)<=end).forEach(r=>{
+  data.results.filter(r=>r.kind!=='Paper'&&day(r)>=start&&day(r)<=end).forEach(r=>{
    const p=by.get(r.player)||{player:r.player,n:0,trophies:0,place:Infinity,last:null};
    p.n++;if(r.kind==='Trophy')p.trophies++;else if(r.finish)p.place=Math.min(p.place,r.finish);
    if(!p.last||r.date>p.last.date)p.last=r;by.set(r.player,p);});
@@ -51,7 +59,7 @@
   const card=(tag,title,body,cls)=>`<article class="prom-card ${cls}"><span class="prom-tag">${tag}</span><h3>${title}</h3>${body}</article>`;
   const box=document.createElement('section');box.className='prominent';box.setAttribute('aria-labelledby','prom-title');
   box.innerHTML=`<h2 id="prom-title">Prominent decklists</h2>
-   <p class="prom-intro">runkor’s list is the 75 on this page. The best performer is recalculated from the published results every time the page loads: most finishes in the last 14 days (${esc(fmtDate(start.toISOString().slice(0,10)))} to ${esc(fmtDate(data.updated))}), then the best challenge place, then the most recent finish.</p>
+   <p class="prom-intro">runkor’s list is the 75 on this page. The best performer is recalculated from the published results every time the page loads: most MTGO finishes in the last 14 days (${esc(fmtDate(start.toISOString().slice(0,10)))} to ${esc(fmtDate(data.updated))}), then the best challenge place, then the most recent finish.</p>
    <div class="prom-grid">
    ${card('runkor’s list','5 Oct 2026 · '+who('runkor'),`<p>The 75 shown below.${own?' '+latest(own):''}</p>`,'own')}
    ${top?card(top.player==='runkor'?'Best performing now · runkor’s own list':'Best performing now',who(top.player),`<p>${summary(top)}.</p><p>${latest(top.last)}</p>`,'best'):card('Best performing now','No finishes in the last 14 days','<p>The nightly data has no published Speaker Elves finish in this window.</p>','best')}

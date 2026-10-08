@@ -282,7 +282,15 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 - **Julian Knab en Deck Origins y Credits:** ganó el Bazaar of Moxen 8 en París con Elves (695 jugadores, 3 Nov 2013), MKM Series Milán 2016 y Hamburgo 2018, top 8 en el Legacy European Championship 2017; doce resultados destacados con Elves de 2013 a 2018 (mtgtop8). Resuelve la duda "Knab o Knapp": es Knab.
 - **Game Plans · Slower board:** con Elvish Visionary el juego largo puede ser más grindy (Symbiote lo devuelve y cada recast roba; con Sabertooth roba toda la biblioteca); no todas las listas lo juegan.
 
-### Deck Origins como timeline (8 Oct 2026, chat principal, sin subir)
+### Resultados en papel, refresco nocturno y selectores (8 Oct 2026, chat principal, sin subir)
+
+- El archivo de resultados no se refrescaba si el metajuego no cambiaba (condición del workflow). Ahora `update_results.py` corre cada noche con su propio control de "una vez al día de Madrid" (`--force` para repetir), y el workflow ya no depende del metajuego.
+- Resultados en papel: mtgtop8 (sin robots.txt ni comprobación anti-bots), búsqueda Legacy con Formidable Speaker en el main, eventos no MTGO, arquetipos Elves / Cradle Control. Incluye las Cup y Super DX de Hareruya, KMC y Tokai. hareruyamtg.com prohíbe en su robots.txt leer `/deck/result?*`, así que no se lee directamente. Primera ejecución: 103 resultados (44 trofeos, 11 de Challenge, 48 en papel).
+- Current 75: filtros All MTGO / MTGO trophies / MTGO challenges / Paper events; en papel el puesto se muestra como Top 4, Top 8… con enlace al evento en mtgtop8. "Prominent decklists" sigue contando solo MTGO (los puestos en papel son tramos); con los datos nuevos el mejor ahora es Beñat Garay.
+- Selectores: un solo estilo segmentado (cápsula oscura, opción activa con el degradado menta → oro) para Compact / Visual, el filtro de resultados, los modos y play/draw del Goldfish y las vistas del Sideboard map. Compact / Visual y el filtro de resultados tenían el estilo antiguo (menta plano).
+- Verificado en local: 0 errores de consola; los cuatro filtros devuelven filas; 390 px sin scroll horizontal.
+
+### Deck Origins como timeline (8 Oct 2026, chat principal, publicado en 04cf99f)
 
 - Petición del usuario: menos scroll en Deck Origins. `js/14.js` y `css/14.css` (nuevos) convierten la lista de eras en un timeline: una línea con los 10 hitos (año y título) y una ficha debajo con el texto, los resultados y las fuentes del hito elegido, más botones anterior / siguiente. El hito activo late con un pulso menta → oro (sin pulso si las animaciones están apagadas); la línea se ilumina hasta él; flechas del teclado para moverse. Abre en 2026 (Speaker Elves).
 - La lista `<ol class="timeline">` sigue en el HTML como única fuente del texto y versión sin JavaScript; el script solo la lee.
