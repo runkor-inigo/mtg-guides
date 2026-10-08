@@ -282,7 +282,13 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 - **Julian Knab en Deck Origins y Credits:** ganó el Bazaar of Moxen 8 en París con Elves (695 jugadores, 3 Nov 2013), MKM Series Milán 2016 y Hamburgo 2018, top 8 en el Legacy European Championship 2017; doce resultados destacados con Elves de 2013 a 2018 (mtgtop8). Resuelve la duda "Knab o Knapp": es Knab.
 - **Game Plans · Slower board:** con Elvish Visionary el juego largo puede ser más grindy (Symbiote lo devuelve y cada recast roba; con Sabertooth roba toda la biblioteca); no todas las listas lo juegan.
 
-### Ajustes del Sideboard map y del Maybeboard (8 Oct 2026, chat principal, sin subir)
+### Deck Origins como timeline (8 Oct 2026, chat principal, sin subir)
+
+- Petición del usuario: menos scroll en Deck Origins. `js/14.js` y `css/14.css` (nuevos) convierten la lista de eras en un timeline: una línea con los 10 hitos (año y título) y una ficha debajo con el texto, los resultados y las fuentes del hito elegido, más botones anterior / siguiente. El hito activo late con un pulso menta → oro (sin pulso si las animaciones están apagadas); la línea se ilumina hasta él; flechas del teclado para moverse. Abre en 2026 (Speaker Elves).
+- La lista `<ol class="timeline">` sigue en el HTML como única fuente del texto y versión sin JavaScript; el script solo la lee.
+- Verificado en local: 0 errores de consola; a 1440 px caben los 10 hitos; a 390 px el carril se desliza y mantiene visible el hito activo; sin scroll horizontal de la página.
+
+### Ajustes del Sideboard map y del Maybeboard (8 Oct 2026, chat principal, publicado en f1ab0fc)
 
 - Maybeboard: el carrusel en movimiento no dejaba elegir carta. Lo sustituye una bandeja fija bajo la mesa, agrupada por cuándo salió cada carta; al elegir una en el móvil, la página sube a la mesa. Savannah tiene imagen: primera impresión, Limited Edition Alpha · 280 (Rob Alexander), en `assets/savannah.webp` y en `COMBO_CARD_ART` (js/02.js).
 - Once Upon a Time nunca se saca (decisión del usuario). Venía de los planes RC51 del 3 Oct (código original, commit 7602930) en Eldrazi, Sneak & Show y Cephalid Breakfast:

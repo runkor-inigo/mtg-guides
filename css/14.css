@@ -1,0 +1,43 @@
+/* Deck Origins timeline (js/14.js). The plain list stays in the HTML for no-JS readers. */
+#origins.otl-on ol.timeline{display:none}
+.otl{display:grid;gap:16px;margin:14px 0 26px;min-width:0;max-width:100%;--otl-ease:cubic-bezier(.23,1,.32,1)}
+.otl-rail{position:relative;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(78px,1fr);gap:2px;overflow-x:auto;padding:6px 4px 8px;scrollbar-width:thin;scrollbar-color:#2d3947 transparent;--otl-l:0px;--otl-w:0px;--otl-f:0px;--otl-y:28px}
+/* The line runs through the dots (positions measured in js/14.js); the part up to the active milestone is lit. */
+.otl-rail::before,.otl-rail::after{content:"";position:absolute;left:var(--otl-l);top:var(--otl-y);height:2px;border-radius:2px;pointer-events:none}
+.otl-rail::before{width:var(--otl-w);background:#24323f}
+.otl-rail::after{width:var(--otl-f);background:linear-gradient(90deg,#78de99,#a2ddc0 70%,#f0d77a);transition:width 380ms var(--otl-ease)}
+.otl-node{all:unset;box-sizing:border-box;position:relative;z-index:1;cursor:pointer;display:grid;justify-items:center;align-content:start;gap:8px;padding:4px 4px 6px;border-radius:10px;text-align:center;transition:transform 160ms var(--otl-ease),background-color 150ms ease}
+.otl-when{font:900 12px Roboto,sans-serif;color:#8496a3;font-variant-numeric:tabular-nums;white-space:nowrap;transition:color 150ms ease}
+.otl-dot{position:relative;width:14px;height:14px;border-radius:50%;background:#0b1118;border:2px solid #3b5865;transition:background-color 200ms ease,border-color 200ms ease,transform 200ms var(--otl-ease)}
+.otl-title{font-size:11px;line-height:1.3;color:#8fa3b0;max-width:96px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.otl-node.past .otl-dot{background:#2c6a43;border-color:#78de99}
+.otl-node[aria-selected="true"] .otl-when{color:#f0d77a}
+.otl-node[aria-selected="true"] .otl-title{color:#edf3f8;font-weight:700}
+.otl-node[aria-selected="true"] .otl-dot{background:#f0d77a;border-color:#fff3c4;transform:scale(1.25);box-shadow:-3px 0 10px rgba(120,222,153,.6),4px 0 12px rgba(240,215,122,.7)}
+/* Pulse: a ring leaves the active dot, mint warming to gold, the way the menu pill glows. */
+.otl-node[aria-selected="true"] .otl-dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid #a2ddc0;animation:otl-pulse 1.8s ease-out infinite}
+@keyframes otl-pulse{0%{transform:scale(.9);opacity:.85;border-color:#a2ddc0}70%{border-color:#f0d77a}100%{transform:scale(2.4);opacity:0;border-color:#f0d77a}}
+@media (hover:hover) and (pointer:fine){.otl-node:not([aria-selected="true"]):hover{background:#121d26}.otl-node:not([aria-selected="true"]):hover .otl-dot{border-color:#a2ddc0;transform:scale(1.15)}.otl-node:hover .otl-when{color:#cfe6dc}}
+.otl-node:active{transform:scale(.97)}
+.otl-node:focus-visible{outline:2px solid #a2ddc0;outline-offset:2px}
+.otl-panel{min-width:0;padding:18px 20px;border-radius:16px;border:1px solid #2c6a43;background:radial-gradient(600px 220px at 10% 0%,#173322 0%,transparent 70%),linear-gradient(180deg,#11261b,#0f1720)}
+.otl-head{display:grid;gap:2px;margin-bottom:10px}
+.otl-step{font:500 11px "Roboto Mono",ui-monospace,monospace;color:#7d8f9c}
+.otl-pwhen{font:900 13px Roboto,sans-serif;color:#f0d77a;letter-spacing:.04em}
+.otl-head h3{margin:0!important;font-size:22px!important}
+.otl-body{max-width:78ch}
+.otl-body>p{margin:0 0 10px}
+.otl-body .evidence{margin-top:8px!important;padding-left:10px;border-left:2px solid #2c6a43;font-size:13px;color:#a9c8b6!important}
+.otl-body .pilots{margin-top:8px!important;font-size:13px;color:#c6d2dc!important}
+.otl-nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid #23392d}
+.otl-step-btn{all:unset;box-sizing:border-box;cursor:pointer;max-width:100%;padding:8px 12px;border-radius:9px;border:1px solid #2f4452;background:#0f1a22;color:#b9c8d4;font:600 12px Roboto,sans-serif;transition:transform 160ms var(--otl-ease),color 150ms ease,border-color 150ms ease}
+.otl-step-btn.next{margin-left:auto}
+@media (hover:hover) and (pointer:fine){.otl-step-btn:hover{color:#edf3f8;border-color:#4a6576}}
+.otl-step-btn:active{transform:scale(.97)}
+.otl-step-btn:focus-visible{outline:2px solid #a2ddc0;outline-offset:2px}
+.otl-in .otl-head,.otl-in .otl-body{animation:otl-in 260ms var(--otl-ease)}
+@keyframes otl-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* No motion: no pulse, no slide; the active dot keeps its static glow. */
+@media (prefers-reduced-motion:reduce){:root:not(.motion-on) .otl-node[aria-selected="true"] .otl-dot::after{animation:none;opacity:0}:root:not(.motion-on) .otl-in .otl-head,:root:not(.motion-on) .otl-in .otl-body{animation:none}:root:not(.motion-on) .otl-rail::after{transition:none}}
+:root.motion-off .otl-node[aria-selected="true"] .otl-dot::after{animation:none;opacity:0}:root.motion-off .otl-in .otl-head,:root.motion-off .otl-in .otl-body{animation:none}:root.motion-off .otl-rail::after{transition:none}
+@media (max-width:600px){.otl-panel{padding:14px}.otl-head h3{font-size:19px!important}}
