@@ -642,7 +642,8 @@ const GUIDE_GROUPS=[
  {id:'foundations',label:'Deck Foundations',icon:'cards',sections:[
   {id:'start',label:'Start Here',panes:['start']},
   {id:'origins',label:'Deck Origins',panes:['origins']},
-  {id:'construction',label:'Deck Construction',panes:['construction','deck','mana']}]},
+  {id:'construction',label:'Deck Construction',panes:['construction','mana']},
+  {id:'current-75',label:'Current 75',panes:['deck']}]},
  {id:'theory',label:'Game Theory',icon:'tree',sections:[
   {id:'mulligans',label:'Mulligans',panes:['mulligans']},
   {id:'first-turns',label:'First Turns',panes:['first-turns']},
@@ -651,7 +652,8 @@ const GUIDE_GROUPS=[
   {id:'loop',label:'Speaker Loop',panes:['loop']},
   {id:'goldfish',label:'Goldfish Lab',panes:['goldfish']}]},
  {id:'gameplay',label:'Gameplay',icon:'swords',sections:[
-  {id:'sideboard',label:'Sideboard',panes:['map','heur']},
+  {id:'sideboard',label:'Sideboard map',panes:['map','heur']},
+  {id:'maybeboard',label:'Maybeboard',panes:['maybeboard']},
   {id:'matchups',label:'Matchups',panes:['matchups']},
   {id:'windows',label:'Interaction Windows',panes:['windows']}]},
  {id:'about',label:'About',icon:'book',sections:[

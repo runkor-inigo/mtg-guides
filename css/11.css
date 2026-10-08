@@ -209,3 +209,21 @@
 .credits-line{display:grid;gap:10px;padding-left:20px!important}
 .credits-line li{line-height:1.6!important}
 .credits-line b{color:#dff3e8}
+
+/* Maybeboard */
+.maybe-cards .maybe-meta{margin:0 0 8px!important;font-size:11px!important;letter-spacing:.06em;text-transform:uppercase;color:#8fb3a2!important}
+.maybe-cards p{margin:0 0 8px}
+
+/* Current 75: prominent decklists (js/10.js) */
+.prominent{margin:0 0 22px}
+.prominent h2{margin:0 0 6px}
+.prom-intro{margin:0 0 12px;color:#a8bac8;font-size:13px;line-height:1.55;max-width:820px}
+.prom-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.prom-card{padding:14px 16px;border-radius:12px;border:1px solid #2f4452;background:#0f1a22}
+.prom-card.best{border-color:#2c6a43;background:linear-gradient(180deg,#11261b,#0f1a22)}
+.prom-tag{display:inline-block;margin-bottom:6px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#a2ddc0}
+.prom-card.own .prom-tag{color:#a9caff}
+.prom-card h3{margin:0 0 6px;font-size:17px;color:#edf3f8}
+.prom-card h3 small{font-weight:500;color:#8496a3;font-size:12px}
+.prom-card p{margin:0 0 6px;font-size:13px;line-height:1.55;color:#c9d6e0}
+.prom-rank{margin:10px 0 0;font-size:12px;color:#8fa3b0}

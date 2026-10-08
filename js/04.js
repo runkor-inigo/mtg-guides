@@ -11,7 +11,9 @@ const GF_VARIANTS={
   lines:[{cradle:1,cub:1,dork:1},{cradle:1,cub:1,gsz:1},{cradle:1,cub:1,dork:1,q:1},{cradle:1,cub:1,gsz:1,q:1},{cradle:1,dork:1,q:1},{cradle:1,gsz:1,q:1},{cradle:1,cub:1,q:1}],
   refuse:{cradle:'No turn-2 Natural Order without Gaea’s Cradle: Forest, a second land and one dork make 3 mana, and Natural Order needs 4. Quirion Ranger gives back only the mana it costs.'},
   start:{cradle:1,cub:1,dork:1,gsz:0,q:0,target:'atraxa'}},
- sab:{switches:[['q','Quirion Ranger']],lines:[{q:1},{q:0}],start:{q:1}},
+ // A line with `side` works only on that side; changing play/draw or the switch moves the other one.
+ sab:{switches:[['q','Quirion Ranger']],lines:[{q:1},{q:0,side:'draw'}],start:{q:1},
+  need:{draw:'Without Quirion Ranger the line needs one more card, and the extra draw gives it.'}},
  loop:{switches:[['vision','Elvish Visionary · draw cards']],lines:[{vision:0},{vision:1}],start:{vision:0}},
  setup:{switches:[],lines:[{}],start:{}}
 };
@@ -54,12 +56,12 @@ function buildGoldfish(mode,side,v={}){
   step('Attack with Cradle + Hoof','Cradle has haste from earthbend, is untapped and has both Hoof boosts: '+cradle+'/'+cradle+'. Hoof has haste and is '+hoof+'/'+hoof+'. Attack for '+(cradle+hoof)+' trampling power on an unobstructed board. The returned dork stays in hand.',()=>{card('cradle').tapped=true;card('hoof').tapped=true;st.board.forEach(c=>c.attacking=['cradle','hoof'].includes(c.id));},'attack');return states;
  }
  if(mode==='loop'){
-  // The board where "Turn-2 Sabertooth" on the play ends (entry state in #loop and #combo-loop).
+  // The board where the "Turn-2 Sabertooth kill" on the play ends (entry state in #loop and #combo-loop).
   st.turn='Loop';st.deck=49;st.mana=3;
   const ids=['land','dork','cradle','cub','q','s1','s2','speaker','saber'];if(v.vision)ids.push('vision');
   st.board=ids.map(newcard);
   st.board.forEach(c=>{c.tapped=['land','dork','cradle'].includes(c.id);c.sick=!['land','dork'].includes(c.id);c.used=['q','s1','s2'].includes(c.id);});card('cradle').animated=true;
-  step(v.vision?'Ready board + Elvish Visionary':'Ready board · three green floating','The end state of the Turn-2 Sabertooth line on the play: '+creatures()+' creatures including earthbent Cradle'+(v.vision?', Speaker and Elvish Visionary. Visionary is a flex card, not in the 5 Oct main deck.':' and Speaker.')+' Cradle is tapped, Quirion and both Symbiotes are used, and three green are floating. This is scenario setup, not a free casting action.');
+  step(v.vision?'Ready board + Elvish Visionary':'Ready board · three green floating','The end state of the Turn-2 Sabertooth kill on the play: '+creatures()+' creatures including earthbent Cradle'+(v.vision?', Speaker and Elvish Visionary. Visionary is a flex card, not in the 5 Oct main deck.':' and Speaker.')+' Cradle is tapped, Quirion and both Symbiotes are used, and three green are floating. This is scenario setup, not a free casting action.');
   if(v.vision){
    let gain=0;
    for(let i=1;i<=2;i++){const m0=st.mana;saberBounce('s1');cast('s1',1);sym('s1','vision');tapCradle();cast('vision',2,'Visionary ETB: draw a card.');
@@ -201,17 +203,23 @@ function buildGoldfish(mode,side,v={}){
   gsap.fromTo(root.querySelector('.gf-action'),{opacity:.35},{opacity:1,duration:.3,ease:'power1.out',clearProps:'opacity'});
  }
  function renderNow(){const st=states[index];const visible=new Set([...st.hand,...st.board.map(c=>c.id),...st.grave]);nodes.forEach((n,id)=>{if(!visible.has(id))n.remove();});st.board.forEach(c=>displayCard(c.id,c,(GF_LANDS.includes(c.id)||(c.id==='cradle'&&!c.animated))?'lands':'creatures'));st.hand.forEach(id=>displayCard(id,null,'hand'));st.grave.forEach(id=>displayCard(id,null,'grave'));root.querySelector('#gf-empty').hidden=!!st.board.length;root.querySelector('#gf-hand-count').textContent=st.hand.length;root.querySelector('#gf-deck-count').textContent=st.deck;root.querySelector('#gf-gy-count').textContent=st.grave.length;root.querySelector('#gf-turn').textContent=typeof st.turn==='number'?'Turn '+st.turn:st.turn;root.querySelector('#gf-mana').textContent=st.mana;root.querySelector('#gf-delta').textContent=st.gain>0?'+'+st.gain+' this step':st.gain<0?st.gain+' this step':'No mana change';root.querySelector('#gf-title').textContent=st.title;root.querySelector('#gf-text').innerHTML=esc(st.text).replace(/\{([0-9WUBRGX]+)\}/g,(m,k)=>'<img class="gf-inline-mana" alt="'+m+'" src="'+(MANA_ICONS[k]||COMBO_CARD_ART[k]?.src)+'">');root.querySelector('#gf-pending').textContent=st.pending||'Stack empty';root.querySelector('#gf-step').textContent=index+' / '+(states.length-1);root.querySelector('#gf-progress').max=states.length-1;root.querySelector('#gf-progress').value=index;root.querySelector('#gf-prev').disabled=index===0;root.querySelector('#gf-next').disabled=index===states.length-1;root.querySelector('#gf-log').innerHTML=states.slice(Math.max(0,index-3),index+1).map((x,i)=>'<li>'+esc(x.title)+'</li>').join('');root.dataset.step=index;root.dataset.mode=mode;root.dataset.side=side;
- root.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===mode));root.querySelectorAll('[data-side]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.side===side));root.querySelector('#gf-context').textContent=mode==='loop'?'Ready board · end of Turn-2 Sabertooth on the play · play/draw does not change this setup':'Fixed '+(side==='play'?'on-the-play':'on-the-draw')+' hand · no mulligan · no opponent'+(mode==='setup'?' · the opponent gets one turn before the kill':'');
+ root.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===mode));root.querySelectorAll('[data-side]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.side===side));root.querySelector('.gf-side').hidden=!sided();root.querySelector('#gf-context').textContent=mode==='loop'?'Ready board · end of the Turn-2 Sabertooth kill on the play · play/draw does not change this setup':mode==='no'?'Works on the play and on the draw; shown on the play · no mulligan · no opponent':'Fixed '+(side==='play'?'on-the-play':'on-the-draw')+' hand · no mulligan · no opponent'+(mode==='setup'?' · the opponent gets one turn before the kill':'');
  }
  // Variant switches. They move together: a change jumps to the closest legal line (see GF_VARIANTS).
  const varBox=document.createElement('div');varBox.className='gf-variants';varBox.setAttribute('role','group');varBox.setAttribute('aria-label','Variant');
  const varNote=document.createElement('p');varNote.className='gf-variant-note';varNote.setAttribute('aria-live','polite');
- root.querySelector('#gf-context').before(varBox,varNote);
+ const varNeed=document.createElement('p');varNeed.className='gf-variant-need';
+ root.querySelector('#gf-context').before(varBox,varNote,varNeed);
+ // Play/draw only matters where the line changes with it.
+ const sided=()=>mode==='sab'||mode==='setup';
+ const lineOf=()=>{const def=GF_VARIANTS[mode],cur=variant[mode];return def.lines.find(l=>def.switches.every(([k])=>(l[k]||0)===(cur[k]||0)));};
  function drawVariants(flash=[]){
   const def=GF_VARIANTS[mode],cur=variant[mode];
   varBox.hidden=!def.switches.length&&!def.pick;
   varBox.innerHTML=def.switches.map(([id,label])=>'<button type="button" role="switch" class="gf-switch'+(flash.includes(id)?' is-magnet':'')+'" data-var="'+id+'" aria-checked="'+!!cur[id]+'"><span class="gf-switch-track" aria-hidden="true"></span>'+esc(label)+'</button>').join('')+
-   (def.pick?'<span class="gf-pick" role="radiogroup" aria-label="'+esc(def.pick.label)+'"><span class="gf-pick-label">'+esc(def.pick.label)+'</span>'+def.pick.options.map(([val,label])=>'<button type="button" role="radio" data-pick="'+val+'" aria-checked="'+(cur[def.pick.id]===val)+'">'+esc(label)+'</button>').join('')+'</span>':'');
+   '';
+  const l=lineOf();varNeed.innerHTML=l&&l.side?'<span class="gf-need-tag">Only on the '+l.side+'</span> '+esc(def.need[l.side]):'';varNeed.hidden=!(l&&l.side);
+  varBox.innerHTML+=(def.pick?'<span class="gf-pick" role="radiogroup" aria-label="'+esc(def.pick.label)+'"><span class="gf-pick-label">'+esc(def.pick.label)+'</span>'+def.pick.options.map(([val,label])=>'<button type="button" role="radio" data-pick="'+val+'" aria-checked="'+(cur[def.pick.id]===val)+'">'+esc(label)+'</button>').join('')+'</span>':'');
  }
  function flip(id){
   const def=GF_VARIANTS[mode],cur=variant[mode],want=cur[id]?0:1;
@@ -221,12 +229,26 @@ function buildGoldfish(mode,side,v={}){
   if(!fits.length){varNote.textContent=def.refuse?.[id]||'No legal line '+(want?'with ':'without ')+label(id)+' in this mode.';drawVariants([id]);return;}
   const line=fits[0],moved=keys.filter(k=>k!==id&&(line[k]||0)!==(cur[k]||0));
   keys.forEach(k=>cur[k]=line[k]||0);
-  varNote.textContent=moved.length?'To keep a legal line: '+moved.map(k=>label(k)+(cur[k]?' on':' off')).join(', ')+'.':'';
+  const parts=moved.map(k=>label(k)+(cur[k]?' on':' off'));
+  if(line.side&&line.side!==side){side=line.side;moved.push('side');parts.push('switched to on the '+side);}
+  varNote.textContent=parts.length?'To keep a legal line: '+parts.join(', ')+'.':'';
   reset(true,moved);
  }
  varBox.addEventListener('click',e=>{const sw=e.target.closest('[data-var]');if(sw)return flip(sw.dataset.var);const pk=e.target.closest('[data-pick]');if(pk){variant[mode][GF_VARIANTS[mode].pick.id]=pk.dataset.pick;varNote.textContent='';drawVariants();reset(true);}});
- function reset(keepNote,flash=[]){if(!keepNote)varNote.textContent='';drawVariants(flash);states=buildGoldfish(mode,side,variant[mode]);index=0;render();}
- root.querySelectorAll('button[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;reset();});root.querySelectorAll('button[data-side]').forEach(b=>b.onclick=()=>{side=b.dataset.side;reset();});root.querySelector('#gf-restart').onclick=()=>{index=0;render();};root.querySelector('#gf-prev').onclick=()=>{index=Math.max(0,index-1);render();};root.querySelector('#gf-next').onclick=()=>{index=Math.min(states.length-1,index+1);render();};
+ // Choosing play or draw keeps the switches only if their line works on that side; otherwise the closest one that does.
+ function fitSide(){
+  const def=GF_VARIANTS[mode],cur=variant[mode],l=lineOf();
+  if(!l||!l.side||l.side===side)return [];
+  const keys=def.switches.map(s=>s[0]),dist=x=>keys.filter(k=>(x[k]||0)!==(cur[k]||0)).length;
+  const line=def.lines.filter(x=>!x.side||x.side===side).sort((a,b)=>dist(a)-dist(b))[0];
+  const moved=keys.filter(k=>(line[k]||0)!==(cur[k]||0));keys.forEach(k=>cur[k]=line[k]||0);
+  varNote.textContent='On the '+side+': '+moved.map(k=>def.switches.find(s=>s[0]===k)[1]+(cur[k]?' on':' off')).join(', ')+'.';
+  return moved;
+ }
+ function reset(keepNote,flash=[]){if(!keepNote)varNote.textContent='';const l=lineOf();if(sided()&&l&&l.side&&l.side!==side){side=l.side;flash=[...flash,'side'];}
+  drawVariants(flash);states=buildGoldfish(mode,sided()?side:'play',variant[mode]);index=0;render();
+  root.querySelectorAll('.gf-side button').forEach(b=>b.classList.toggle('is-magnet',flash.includes('side')&&b.dataset.side===side));}
+ root.querySelectorAll('button[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;reset();});root.querySelectorAll('button[data-side]').forEach(b=>b.onclick=()=>{side=b.dataset.side;varNote.textContent='';reset(true,fitSide());});root.querySelector('#gf-restart').onclick=()=>{index=0;render();};root.querySelector('#gf-prev').onclick=()=>{index=Math.max(0,index-1);render();};root.querySelector('#gf-next').onclick=()=>{index=Math.min(states.length-1,index+1);render();};
  root.querySelector('#gf-progress').oninput=e=>{index=Number(e.target.value);render();};reset();
 })();
 

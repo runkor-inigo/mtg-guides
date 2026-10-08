@@ -117,3 +117,10 @@
 :root.motion-off #goldfish .gf-switch.is-magnet{animation:none;border-color:#f0d77a}
 #goldfish .gf-variant-note{min-height:0;margin:4px 0 0;font-size:12px;color:#f0d77a}
 #goldfish .gf-variant-note:empty{display:none}
+#goldfish .gf-side[hidden]{display:none}
+#goldfish .gf-side button.is-magnet{animation:gf-magnet 900ms cubic-bezier(.23,1,.32,1)}
+:root.motion-off #goldfish .gf-side button.is-magnet{animation:none;outline:2px solid #f0d77a}
+@media (prefers-reduced-motion:reduce){:root:not(.motion-on) #goldfish .gf-side button.is-magnet{animation:none;outline:2px solid #f0d77a}}
+#goldfish .gf-variant-need{margin:6px 0 0;font-size:12px;color:#c9d6e0}
+#goldfish .gf-variant-need[hidden]{display:none}
+#goldfish .gf-need-tag{display:inline-block;margin-right:6px;padding:2px 8px;border-radius:999px;border:1px solid #7a5d1f;background:#2a2210;color:#f0d77a;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
