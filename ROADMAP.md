@@ -270,7 +270,7 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
   - Quitadas las cuentas alternativas de Newton Hang (petición del usuario: no revelar cuentas).
   - Pendiente de confirmar con el usuario: un nombre que no se entendió en el dictado ("que gustes"). No se encontraron más resultados con fuente; se pueden añadir jugadores si el usuario da nombres o resultados.
 
-### Deck Origins, Current 75 y Maybeboard (8 Oct 2026, chat principal, sin subir)
+### Deck Origins, Current 75 y Maybeboard (8 Oct 2026, chat principal, publicado en 5457fee)
 
 - **Deck Origins con resultados y nombres** (petición del usuario): cada era antigua gana un párrafo "Results and people" con fuentes: Brad Herwy (Aggro Elves, top 4 GenCon 2008 Legacy Championship, mtgtop8); Chris Andersen (Ross Merriam, SCG); Reid Duke gana el SCG Legacy Open Philadelphia 2013 (SCG); Andrew Cuneo y Ross Merriam; Juan Félix Flury (top 8 GP París 2014, mtgtop8); Lukas Müller (8-0 día 1 GP Birmingham 2018, Wizards); 2020: Elves 4.º mejor mazo del año, Challenge del 5 Dic 2020 (Comeback 1.º, EronRelentless 2.º) y Newton Hang y Julian Knab citados como pilotos (Joe Dyer, MTGGoldfish); 2022: Testacular 2.º y EronRelentless 3.º en Challengers de julio (TCDecks), JHK 3.º y Testacular 6.º en la Challenge del 30 Oct (MTGGoldfish), final de Reid Duke en diciembre (Ultimate Guard). Credits enlaza la cita de 2020.
 - **Current 75 es su propia sección** (`current-75`, pane `#deck`); Deck Construction queda con `#construction` y `#mana`. Los enlaces "Current 75" apuntan a la sección nueva.
