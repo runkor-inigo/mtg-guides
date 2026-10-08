@@ -73,3 +73,43 @@ La versión publicada para los lectores está en la sección Heuristics de la gu
 
 - Underground Mortuary: el surveil ayuda, pero entra girada y retrasa el dork de turno 1 o el Speaker de turno 2. Caller of the Claw: candidata. Elvish Visionary: carta flex para un juego más grindy; no todas las listas la juegan.
 - Las ideas de sideboard de Curran (arriba, **Under test**) se deciden en la revisión del sideboard (tarea C).
+
+---
+
+## 10. Guías de sideboard de referencia
+
+Material de consulta para hacer y revisar el mapa del sideboard (tarea C). No son nuestros planes: se comparan con ellos y con nuestra lista antes de copiar nada.
+
+### "Sabertooth Elves aka Badger Ball Z · Sideboard Guide", de j-off (PDF aportado por runkor, 8 Oct 2026)
+
+- **Fecha:** "10/02/2026". Probablemente formato de EE. UU., es decir 2 Oct 2026: la lista todavía juega Eladamri, Endurance, Elvish Visionary, Grist y Force of Vigor, como nuestra lista del 29 Sep (antes de los cambios del 3 y el 5 Oct). **Autor:** j-off (del Discord), según runkor.
+- **Su pool de sideboard:** 4 Thoughtseize, 3 Leyline of the Void, 3 Force of Vigor, Snuff Out (hasta 2), Grist, the Hunger Tide, Assassin's Trophy, Choke. **Cartas del main que saca:** Quirion Ranger, Wirewood Symbiote, Allosaurus Shepherd, Collector Ouphe, Eladamri, Endurance, Formidable Speaker, Elvish Visionary, Temur Sabertooth, Badgermole Cub, Natural Order, Atraxa.
+
+| Matchup | Entra | Sale |
+|---|---|---|
+| UB Tempo (Moonshadow) | +3 Leyline of the Void, +1 Grist, +1 Assassin's Trophy, +1 Choke | −2 Formidable Speaker, −1 Collector Ouphe, −1 Elvish Visionary, −1 Temur Sabertooth, −1 Quirion Ranger |
+| Eldrazi | +2 Snuff Out, +1 Grist, +1 Assassin's Trophy | −1 Endurance, −1 Collector Ouphe, −1 Quirion Ranger, −1 Wirewood Symbiote |
+| Energy | +2 Snuff Out, +1 Grist, +1 Assassin's Trophy | −2 Allosaurus Shepherd, −1 Endurance, −1 Collector Ouphe |
+| Death & Taxes | +2 Snuff Out, +1 Grist, +1 Assassin's Trophy | −2 Allosaurus Shepherd, −1 Endurance, −1 Eladamri |
+| Doomsday | +4 Thoughtseize, +1 Choke, +1 Assassin's Trophy | −2 Quirion Ranger, −2 Wirewood Symbiote |
+| Tron | +1 Assassin's Trophy, +1 Grist | −1 Eladamri, −1 Wirewood Symbiote |
+| UR Delver | +2 Snuff Out, +1 Assassin's Trophy | −1 Collector Ouphe, −1 Eladamri, −1 Formidable Speaker |
+| Welder-Cam Combo | +3 Leyline of the Void, +2 Snuff Out, +1 Assassin's Trophy | −2 Allosaurus Shepherd, −2 Quirion Ranger, −1 Wirewood Symbiote, −1 Eladamri |
+| AlurenTell | +4 Thoughtseize, +3 Force of Vigor, +1 Choke, +1 Grist | −3 Quirion Ranger, −2 Wirewood Symbiote, −1 Endurance, −1 Eladamri, −1 Collector Ouphe, −1 Badgermole Cub |
+| Beanstalk Control | +4 Thoughtseize, +1 Choke | −2 Quirion Ranger, −1 Endurance, −1 Collector Ouphe, −1 Badgermole Cub |
+| Lands | +3 Force of Vigor, +3 Leyline of the Void, +1 Assassin's Trophy | −3 Allosaurus Shepherd, −2 Wirewood Symbiote, −1 Eladamri, −1 Formidable Speaker |
+| Reanimator | +4 Thoughtseize, +3 Leyline of the Void, +1 Grist | −2 Quirion Ranger, −2 Wirewood Symbiote, −2 Allosaurus Shepherd, −1 Collector Ouphe, −1 Eladamri |
+| UW Phelia | +4 Thoughtseize, +2 Snuff Out, +1 Assassin's Trophy, +1 Choke, +1 Grist | −3 Natural Order, −1 Collector Ouphe, −1 Quirion Ranger, −1 Badgermole Cub, −1 Eladamri, −1 Endurance, −1 Atraxa |
+
+**Qué se deduce, para usarlo al mapear** (todo **Under test** hasta la tarea C):
+
+- **Once Upon a Time no sale nunca**, igual que nuestra regla.
+- **Natural Order solo sale contra UW Phelia** (−3 Natural Order, −1 Atraxa). Contra UB Tempo y UR Delver se queda; Curran, en cambio, lo saca contra mazos con counters. Dos criterios distintos que hay que decidir.
+- **Quirion Ranger y Wirewood Symbiote son los primeros recortes contra combo y control** (Doomsday, AlurenTell, Beanstalk, Reanimator, Welder-Cam): el loop pierde valor cuando el rival no interactúa con criaturas o va más rápido.
+- **Allosaurus Shepherd sale contra mazos justos de criaturas** sin counters relevantes (Energy, Death & Taxes, Lands, Welder-Cam, Reanimator).
+- **Collector Ouphe sale casi siempre** salvo donde para algo concreto (Tron, Lands, Doomsday no lo sacan).
+- **Formidable Speaker solo sale contra tempo y Lands** (UB Tempo −2, UR Delver −1, Lands −1).
+- **Grist y Assassin's Trophy son los comodines** contra casi todo lo justo; Choke contra azul; Force of Vigor contra Lands y AlurenTell.
+- **Traducción a nuestra lista del 5 Oct:** no tenemos Eladamri, Endurance, Elvish Visionary, Grist ni Force of Vigor. Donde la guía saca Eladamri, Endurance o Visionary hay que elegir otro recorte; donde mete Grist o Force of Vigor, nuestro equivalente es Assassin's Trophy, Primaris Eliminator o Snuff Out según el objetivo. Se decide en la tarea C, igual que la capa de conversión de `js/01.js`.
+- **Ya aplicado:** Sneak & Show usa la fila AlurenTell traducida (+4 Thoughtseize, +2 Choke, +1 Assassin's Trophy / −3 Quirion Ranger, −2 Wirewood Symbiote, −1 Collector Ouphe, −1 Badgermole Cub).
+- **Matchups que la guía cubre y nuestro mapa no:** UW Phelia, AlurenTell (nuestro mapa tiene Aluren), Tron (genérico), UR Delver (nuestro UR Cutter / Izzet Tempo).

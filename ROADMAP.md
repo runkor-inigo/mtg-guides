@@ -65,6 +65,8 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Decisión previa: el nombre nuevo.
 
 **C. `revision-sideboard`**
+- Sneak & Show vuelve al mapa (8 Oct 2026, petición del usuario) con la fila AlurenTell de la guía de j-off traducida a la lista del 5 Oct: +4 Thoughtseize, +2 Choke, +1 Assassin's Trophy / −3 Quirion Ranger, −2 Wirewood Symbiote, −1 Collector Ouphe, −1 Badgermole Cub. Matchups vuelve a tener plan para Sneak and Show.
+- Material de referencia (8 Oct 2026): LEGACY.md, sección 10, transcribe la guía "Sabertooth Elves aka Badger Ball Z" (2 Oct 2026 probablemente, 13 matchups) con lo que se deduce para mapear; LEGACY.md, secciones 4 y 5, recoge las ideas de sideboard de Curran Delahanty. Revisar ambos antes de cambiar planes.
 - Objetivo: revisar contigo los planes de sideboard convertidos a la lista del 5 Oct (capa de conversión "5 Oct 2026 list") y corregir lo que digas.
 - Archivos: `js/01.js` (capa de conversión, DETAILS, SB_COSTS), `js/09.js`, y la tabla de `#map` / `#heur` en `index.html`.
 - Dependencias: A recomendable. Va antes de D.

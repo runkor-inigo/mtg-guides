@@ -485,10 +485,13 @@ DETAILS['key-ring'].name='Colorless Tron / Forge';
 DETAILS['initiative'].macro='Tempo / Aggro';
 
 /* runkor's review, 8 Oct 2026. Once Upon a Time is never a cut: the RC51 plans that cut it are fixed here.
-   Eldrazi becomes a three-card plan; Sneak & Show and Cephalid Breakfast leave the map until the full sideboard review. */
+   Eldrazi becomes a three-card plan; Cephalid Breakfast leaves the map until the full sideboard review. */
 applySideboardPlan('eldrazi',{ins:{'Snuff Out':3},outs:{'Collector Ouphe':1,'Vibrance':1,'Formidable Speaker':1},inCount:3,outCount:3,over:'Normal',
  notes:(DETAILS.eldrazi?.notes||'')+' 8 Oct 2026 (runkor): +3 Snuff Out for Ouphe, Vibrance and one Speaker; Once Upon a Time stays.'});
-removeMatchup('sneak','Sneak & Show');
+// Sneak & Show (8 Oct 2026): from j-off's sideboard guide (AlurenTell row, 2 Oct 2026), translated to the 5 Oct list.
+applySideboardPlan('sneak',{ins:{'Thoughtseize':4,'Choke':2,"Assassin's Trophy":1},outs:{'Quirion Ranger':3,'Wirewood Symbiote':2,'Collector Ouphe':1,'Badgermole Cub':1},
+ inCount:7,outCount:7,over:'Deliberate transformation',
+ notes:'Plan from j-off’s sideboard guide (AlurenTell row, 2 October 2026), translated to the 5 Oct list: four Thoughtseize, and two Choke plus one Assassin’s Trophy (Sneak Attack is an enchantment) in place of Force of Vigor and Grist, which this sideboard does not play. Quirion Ranger and Wirewood Symbiote go first: the loop matters less against a deck that does not interact with creatures. Once Upon a Time and Natural Order stay.'});
 removeMatchup('cephalid','Cephalid Breakfast');
 upgradeMatrix();
 // RC34: retain category separators, reclaim Macro column for meta trend.
