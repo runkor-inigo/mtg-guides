@@ -36,7 +36,7 @@
  // 14 days up to the last update; ties go to the best challenge place, then to the most recent finish.
  // Lists are linked, not copied (MTGGoldfish deck pages are protected from automated reading).
  (function prominent(){
-  const NAMES={Benat:'Beñat',runkor:'Iñigo Villamor',Testacular:'Curran Delahanty',hellonewton:'Newton Hang',EronRelentless:'Jörg Heinrich',dssit:'David Schittinger'};
+  const NAMES={Benat:'Beñat Garay',deimus:'David Melchor',SamwiseGeeGee:'Jarvis Yu',runkor:'Iñigo Villamor',Testacular:'Curran Delahanty',hellonewton:'Newton Hang',EronRelentless:'Jörg Heinrich',dssit:'David Schittinger',Julian23:'Julian Knab',reiderrabbit:'Reid Duke'};
   const who=p=>NAMES[p]?`${esc(NAMES[p])} <small>(MTGO: ${esc(p)})</small>`:esc(p);
   const end=new Date(data.updated+'T12:00:00Z'),start=new Date(end.getTime()-13*864e5),day=r=>new Date(r.date+'T12:00:00Z');
   const by=new Map();

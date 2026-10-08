@@ -282,6 +282,23 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 - **Julian Knab en Deck Origins y Credits:** ganó el Bazaar of Moxen 8 en París con Elves (695 jugadores, 3 Nov 2013), MKM Series Milán 2016 y Hamburgo 2018, top 8 en el Legacy European Championship 2017; doce resultados destacados con Elves de 2013 a 2018 (mtgtop8). Resuelve la duda "Knab o Knapp": es Knab.
 - **Game Plans · Slower board:** con Elvish Visionary el juego largo puede ser más grindy (Symbiote lo devuelve y cada recast roba; con Sabertooth roba toda la biblioteca); no todas las listas lo juegan.
 
+### Sideboard map y Maybeboard nuevos (8 Oct 2026, chat principal, sin subir)
+
+- Decisión del usuario tras la página de opciones (https://claude.ai/artifact/PDz974TvcHyS73KUXSP1jv): Plan rows y Matrix como dos vistas, más Presence (cobertura del meta) y modo de impresión. Sin Bubble matrix. Card strips y By card no entran por ahora.
+- `js/13.js` y `css/13.css` (nuevos). Vistas Plan rows (por defecto), Matrix y Presence; buscador; el nombre de un matchup abre su plan; botón "Print / Save as PDF" con una hoja A4 en blanco y negro de una cara (comprobado con un PDF real: una página, 29 matchups). La matriz antigua sigue en el DOM, oculta.
+- Maybeboard como mesa de estudio: carta grande con "Why it was chosen", "Where it helped" (calculado de los planes antiguos de `js/01.js`, guardado en `data-served` de cada ficha) y, en pequeño, "Why it is not in the list now"; debajo, un carrusel que se mueve despacio y se para con el ratón. Criterio del usuario: el Maybeboard es el archivo de todas las cartas consideradas, y lo importante es por qué se eligieron.
+- Verificado en local: 0 errores de consola; a 390 px ninguna vista desborda (la matriz hace scroll dentro de su marco).
+- Pendiente: el texto "Reading the sideboard map: Read-only transposed map…" de Sources describe la matriz antigua; actualizarlo junto con el resto de Sources.
+
+### Credits y Deck Origins sin duplicados (8 Oct 2026, chat principal, sin subir)
+
+- Regla del usuario: la historia del mazo vive solo en Deck Origins; Credits y About no la repiten y enlazan a Deck Origins.
+- Credits: quitadas "The people who found the deck" y "Elves through the years"; queda "The players behind the deck" con enlace interno a Deck Origins. "Writers and sources" enlaza a la lista de fuentes de Deck Origins. Se mantienen autor, colaboradores, datos y herramientas, testing y Fan Content.
+- Deck Origins recibe lo que solo estaba en Credits: pilotos japoneses (Okuto Shinya, Tozuka Kouta, Maegawa Naoya, Yanagisawa Yuta), pilotos de MTGO (DB_ThrabenU, Beñat y el resto, a 7 Oct) y Everyday Eternal. Su lista de fuentes añade Joe Dyer (MTGGoldfish), el SCG Open de Philadelphia, mtgtop8, TCDecks y la cobertura del GP Birmingham. Comprobado: cada nombre que estaba en Credits aparece en Deck Origins.
+- Perfiles nuevos (datos del usuario): Julian Knab (MTGO: Julian23; @itsJulian23) y Reid Duke (MTGO: reiderrabbit; @ReidDuke) en Deck Origins; SamwiseGeeGee (@jkyu06), "que conoce todas las versiones del mazo", en los agradecimientos de Credits. Prominent decklists muestra Julian23 y reiderrabbit con su nombre real.
+- Colaboradores (datos del usuario): Jonathan Caballero, Serafín Gómez, Beñat Garay (MTGO: Benat), David Melchor (MTGO: deimus), Shimoizumi Ryoichi y Takagi Yuki, vegecookies, j-off (Discord) y Jarvis Yu (MTGO: SamwiseGeeGee; @jkyu06: ganó el GP Seattle-Tacoma 2015 con Lands, según mtgtop8; no tiene resultados con Elves; el usuario lo confirma. Aparece aparte como persona de referencia para contrastar ideas), más un agradecimiento al canal #elves. "Beñat Garay" con nombre completo también en Deck Origins y en Prominent decklists.
+- **Pendiente: Sources (`#sources`) tiene datos antiguos** que no cuadran con la guía: "Nightly refresh at 00:00" (ahora es la primera ejecución del día), "28 Sep 2026 snapshot" (ahora se refresca cada noche) y "Marwyn and Chomping Changeling load online from Scryfall" (ya son locales desde la tarea P). Revisarlo en un chat aparte o con la tarea O.
+
 ### Próximo paso de diseño (propuesto, 8 Oct 2026)
 
 - **V. `pasada-impeccable`** — pendiente de confirmar por el usuario. Auditoría y crítica de toda la guía con la skill Impeccable (`audit`, `critique`): lista priorizada de problemas de tipografía, jerarquía, espaciado y contraste. Después se aplica solo lo que el usuario apruebe, respetando las reglas de CLAUDE.md (sin build step, paleta verde oscura, mint → oro). Hasta ahora solo se ha usado emil-design-eng, para detalles de interacción (botón de volver, interruptores).
