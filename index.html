@@ -57,7 +57,7 @@
 <tr><td><b>Mana base</b></td><td>19 lands: 13 sources of green on turn one, 4 Gaea’s Cradle, 2 Dryad Arbor. The fetch, Bayou, Forest and Boseiju split varies inside that frame.</td><td><span class="ev settled">Settled</span> frame</td><td>19 lands</td></tr>
 <tr><td><b>Turn-one acceleration</b></td><td>One-mana dorks, plus Green Sun’s Zenith for zero to fetch Dryad Arbor in the right hands.</td><td><span class="ev range">Working range</span> 5–6 dorks, leaning 6</td><td>6 dorks</td></tr>
 <tr><td><b>Search and selection</b></td><td>Green Sun’s Zenith, Once Upon a Time and Formidable Speaker turn spare resources into the card or plan the game needs.</td><td><span class="ev settled">Settled</span> role</td><td>4 GSZ · 3 OUaT · 4 Speaker</td></tr>
-<tr><td><b>Speakers and Untappers</b></td><td>Formidable Speaker, Quirion Ranger and Wirewood Symbiote underpin search, reuse and the loop.</td><td><span class="ev range">Working range</span> Speaker 3–4, Quirion 3–4; Symbiote <span class="ev unverified">to confirm</span></td><td>4 · 4 · 4</td></tr>
+<tr><td><b>Speakers and Untappers</b></td><td>Formidable Speaker, Quirion Ranger and Wirewood Symbiote underpin search, reuse and the loop.</td><td><span class="ev range">Working range</span> Speaker 3–4, Quirion 3–4, Symbiote 3–4</td><td>4 · 4 · 4</td></tr>
 <tr><td><b>Mana and board engine</b></td><td>Badgermole Cub, Cradle, creatures and untap effects create the explosive turns.</td><td><span class="ev settled">Settled</span> role</td><td>4 Cub</td></tr>
 <tr><td><b>Natural Order package</b></td><td>Natural Order and its two targets.</td><td><span class="ev range">Working range</span> 3–4 NO, 1–2 Craterhoof, 1 Atraxa</td><td>3 · 1 · 1</td></tr>
 <tr><td><b>Loop and finish</b></td><td>Temur Sabertooth, Speaker, untappers and Cradle make a repeatable line; Craterhoof finishes.</td><td><span class="ev settled">Settled</span> role; line <span class="ev unverified">being checked</span></td><td>1 Sabertooth</td></tr>
@@ -112,7 +112,7 @@
 <div class="gf-toolbar"><div class="gf-mode" role="group" aria-label="Combo to demonstrate"><button type="button" data-mode="no" aria-pressed="true">Turn-2 Natural Order</button><button type="button" data-mode="sab" aria-pressed="false">Turn-2 Sabertooth</button><button type="button" data-mode="loop" aria-pressed="false">Visionary loop (older lists)</button></div><div class="gf-side" role="group" aria-label="Play or draw"><button type="button" data-side="play" aria-pressed="true">On the play</button><button type="button" data-side="draw" aria-pressed="false">On the draw</button></div></div>
 <p id="gf-context" class="muted"></p>
 <div class="gf-layout"><div class="gf-tabletop">
-<div class="gf-zone-heading"><span>Battlefield</span><span id="gf-turn">Turn 1</span></div><div class="gf-board" data-zone="board"></div><p id="gf-empty">Your battlefield is empty. Start with the seven cards below.</p>
+<div class="gf-zone-heading"><span>Battlefield</span><span id="gf-turn">Turn 1</span></div><div class="gf-board"><div class="gf-row" data-zone="creatures" data-label="Creatures"></div><div class="gf-row gf-lands" data-zone="lands" data-label="Lands"></div></div><p id="gf-empty">Your battlefield is empty. Start with the seven cards below.</p>
 <div class="gf-hand-heading"><span>Your hand <b id="gf-hand-count">7</b></span><small>Face up = required · Magic back = unspecified</small></div><div class="gf-hand" data-zone="hand"></div>
 <div class="gf-bottom"><span>Library <b id="gf-deck-count">53</b></span><details><summary>Graveyard <b id="gf-gy-count">0</b></summary><div class="gf-grave" data-zone="grave"></div></details></div>
 </div><aside class="gf-coach">
@@ -121,7 +121,7 @@
 <div class="gf-controls"><button type="button" id="gf-restart">↺ Restart</button><button type="button" id="gf-prev">← Previous</button><button type="button" id="gf-next">Next →</button></div>
 <div class="gf-timeline"><label for="gf-progress">Step <b id="gf-step">0</b></label><input id="gf-progress" type="range" min="0" value="0" aria-label="Jump to a demonstration step"></div><ol id="gf-log" class="gf-log"></ol>
 </aside></div>
-<p class="gf-footnote">Card backs are placeholders, not face-down permanents. “New” marks summoning sickness; “Used” marks a once-per-turn ability already activated. All mana shown is green. Click any face-up card to inspect it.</p>
+<p class="gf-footnote">Card backs are placeholders, not face-down permanents. Icons on a card: tapped, haste, summoning sickness (zZ), ability used this turn, and trample with Craterhoof’s bonus. Hover an icon for its meaning. A glow marks the cards that acted in the current step. All mana shown is green. Click any face-up card to inspect it.</p>
 <details class="gf-reference-details"><summary>Written references · alternative lines and rules notes</summary><section id="combo-no" class="gf-reference combo37-pane"><h2>Turn-2 Natural Order</h2><div class="combo-grid">
 <div class="box"><h3>A — Dork/Arbor + Cub + Cradle</h3><div class="hand">IMS + dork/GSZ + Cradle + Badgermole Cub + Natural Order</div>
 <div class="step"><span class="num">1</span><div>T1 IMS → dork, or GSZ X=0 → Dryad Arbor.</div></div>
@@ -226,7 +226,7 @@
 <article><h4>Natural Order</h4><p>{2}{G}{G} and a green creature to sacrifice put Craterhoof Behemoth or Atraxa onto the battlefield. Fast, but it relies on one spell resolving. <button type="button" class="goto" data-goto="natural-order">Read more</button></p></article>
 <article><h4>Speaker selection</h4><p>Each Formidable Speaker trigger turns a discard into the exact creature the turn needs: another untapper, Sabertooth, a bullet or Craterhoof.</p></article>
 <article><h4>Sabertooth loop</h4><p>With enough creatures, Cradle, Symbiotes and Temur Sabertooth, each cycle nets {G}{G} and ends with Craterhoof. <button type="button" class="goto" data-goto="loop">Read more</button></p></article>
-<article><h4>Atraxa</h4><p>A Natural Order target that refills the hand instead of ending the game: a better choice when lethal is not available.</p></article>
+<article><h4>Setup turn</h4><p>Pass turn two with Cradle, Cub, Speaker and Symbiote on the battlefield. On turn three Speaker untaps {Q} Cradle, Symbiote returns it, and the recast Speaker finds Craterhoof. Fewer cards than the loop, one turn of exposure. <button type="button" class="goto" data-goto="loop">Read more</button></p></article><article><h4>Atraxa</h4><p>A Natural Order target that refills the hand instead of ending the game: a better choice when lethal is not available.</p></article>
 <article><h4>Dinobash (alpha strike)</h4><p>Allosaurus Shepherd’s {4}{G}{G}: until end of turn every Elf you control has base power and toughness 5/5 and becomes a Dinosaur. With Cradle mana it turns a wide board of small Elves into lethal without Natural Order or the loop. </p></article><article><h4>Slower board</h4><p>When the explosive routes are blocked, develop creatures, protect the mana and win a longer game.</p></article>
 </div>
 
@@ -390,12 +390,14 @@
 </div></section>
 <section class="pane" id="loop"><div class="article"><p class="draft-note"><b>First draft</b> Written from the project notes of 5–6 October 2026. Ranges, lines and examples marked below are still being confirmed.</p>
 <h2>Speaker Loop</h2>
-<p class="lead">With Gaea’s Cradle, Badgermole Cub, Wirewood Symbiotes, Formidable Speaker and Temur Sabertooth on the battlefield, each cycle nets <strong>{G}{G}</strong>. Repeat it a chosen number of times, then finish with Craterhoof.</p>
+<p class="lead">The Speaker engine wins in two ways. The <strong>turn-two kill</strong> starts an infinite loop on turn two and ends with Craterhoof. The <strong>setup turn</strong> passes with Gaea’s Cradle and the engine on the battlefield, then untaps and kills on turn three. In both, what matters most is <em>what each Speaker trigger searches for, and when</em>.</p>
 
-<h3>Entry state</h3>
+<h3>Route 1 · Turn-two kill: the infinite loop</h3>
+<p>With Gaea’s Cradle, Badgermole Cub, Wirewood Symbiotes, Formidable Speaker and Temur Sabertooth on the battlefield, each cycle nets <strong>{G}{G}</strong>. Repeat it a chosen number of times, then finish with Craterhoof.</p>
+<h4>Entry state</h4>
 <p>Eight creatures including Speaker, Cradle tapped, the Symbiotes already used, and {G}{G}{G} floating. This is where either turn-two Sabertooth route ends.</p>
 
-<h3>One cycle</h3>
+<h4>One cycle</h4>
 <div class="table-scroll"><table class="data"><thead><tr><th>Step</th><th>Mana</th></tr></thead><tbody>
 <tr><td>Pay {1}{G} to Sabertooth to return a Symbiote, then recast it for {G}. As a new object it can activate again.</td><td>−3</td></tr>
 <tr><td>The new Symbiote returns Speaker and untaps {Q} Cradle. Seven creatures remain: Cradle taps {T} for seven {G}, plus one {G} from Cub.</td><td>+8</td></tr>
@@ -404,7 +406,7 @@
 </tbody></table></div>
 <p class="muted">8 produced − 3 Speaker − 2 bounce − 1 Symbiote = +2, so {G}{G} more each cycle. No extra cards are needed to keep looping.</p>
 
-<h3>The finish</h3>
+<h4>The finish</h4>
 <ol>
 <li>Cast Speaker one last time and leave its trigger on the stack.</li>
 <li>In response, pay {1}{G} to Sabertooth and return Speaker to your hand.</li>
@@ -412,11 +414,32 @@
 <li>Cast Craterhoof. With enough mana, return and recast it: each new Craterhoof is a new object and its bonus stacks on the creatures that stay. Then untap {Q} Cradle and attack.</li>
 </ol>
 
+
+<h3>Route 2 · Setup turn: kill on turn three</h3>
+<p>Instead of looping on turn two, you pass the turn with the engine in place. On turn three Speaker is no longer summoning sick, so its {1}, {T} ability untaps {Q} Cradle once more, and Symbiote returns it for another trigger that finds Craterhoof. It needs fewer cards than the loop, but gives the opponent one turn.</p>
+<p><strong>Board when you pass turn two:</strong> a Forest, a mana dork, Gaea’s Cradle made a creature by earthbend, Badgermole Cub, Formidable Speaker and Wirewood Symbiote: five creatures. You need one card in hand to discard.</p>
+<div class="table-scroll"><table class="data"><thead><tr><th>Turn three</th><th>Pool</th></tr></thead><tbody>
+<tr><td>Untap. Play your land for the turn.</td><td>0</td></tr>
+<tr><td>Tap {T} Cradle: five creatures, plus Cub’s extra {G}.</td><td>6</td></tr>
+<tr><td>Speaker: pay {1}, tap {T} it, untap {Q} Cradle.</td><td>5</td></tr>
+<tr><td>Tap {T} Cradle again. Speaker is tapped but still counts: five creatures plus Cub.</td><td>11</td></tr>
+<tr><td>Symbiote returns Speaker to your hand and untaps {Q} Cradle.</td><td>11</td></tr>
+<tr><td>Tap {T} Cradle: four creatures plus Cub.</td><td>16</td></tr>
+<tr><td>Recast Speaker for {2}{G}. Discard any card and find Craterhoof Behemoth.</td><td>13</td></tr>
+<tr><td>Cast Craterhoof for {5}{G}{G}{G}. Your lands and the dork are still untapped if you need more.</td><td>5</td></tr>
+</tbody></table></div>
+<p><strong>The attack:</strong> Craterhoof sees six creatures, so each gets +6/+6 and trample. Craterhoof (haste), Cub, Symbiote and the dork attack; Cradle is tapped and the recast Speaker is summoning sick. Damage = 9 base power + 4 × 6 = <strong>33 trample</strong>. See <button type="button" class="goto" data-goto="natural-order">How much damage does Craterhoof deal?</button></p>
+
+<h3>Which route?</h3>
+<div class="cards2">
+<article><h4>Turn-two kill</h4><p>Wins before the opponent untaps. Needs more cards: on the play, Quirion Ranger already in hand and three discards; on the draw, three Symbiotes and four discards. Every Speaker trigger must find the next piece in order.</p></article>
+<article><h4>Setup turn</h4><p>Needs only the turn-two setup and one discard, because Craterhoof is searched on turn three. The engine sits on the battlefield for one opposing turn: weigh their sweepers, removal and land destruction first. Marwyn protects Cradle from Wasteland.</p></article>
+</div>
 <h3>Common mistakes</h3>
 <ul>
 <li>Counting Speaker for Cradle while it is in your hand after a bounce.</li>
 <li>Discarding to Speaker during the loop: decline the discard until the finish.</li>
-<li>Using Speaker’s {1}, {T} untap ability in the turn-two lines: it has summoning sickness.</li>
+<li>Using Speaker’s {1}, {T} untap ability in the turn-two lines: it has summoning sickness. On the setup turn it is ready.</li><li>Tapping Cradle for mana before the setup turn’s untaps: count the creatures still on the battlefield each time.</li>
 <li>Expecting a recast Craterhoof to keep its own earlier boosts: it is a new object.</li>
 <li>Stopping the loop without a chosen number of repetitions.</li>
 </ul>
@@ -435,11 +458,13 @@
 <li><span class="when">2008</span><div><h4>Pro Tour Berlin: the Elves engine</h4><p>The archetype was born in Extended. Heritage Druid and Nettle Sentinel combined with Glimpse of Nature so that every Elf cast added mana and drew a card. Six copies of the deck reached the top 8, and Luis Scott-Vargas won the event. Some versions could win as early as turn two.</p></div></li>
 <li><span class="when">2008–12</span><div><h4>Glimpse Elves in Legacy</h4><p>The engine was quickly ported to Legacy, where it gained Gaea’s Cradle, Quirion Ranger and Natural Order. Mirror Entity became the usual kill. It stayed on the fringe of the metagame: it leaned heavily on Glimpse of Nature and struggled once it was short of resources.</p></div></li>
 <li><span class="when">2013</span><div><h4>Natural Order for Craterhoof</h4><p>Craterhoof Behemoth (Avacyn Restored, 2012) gave Natural Order a one-card finish. Matt Nass reached the top 8 of Grand Prix Denver in the first week of 2013 with a Natural Order and Craterhoof list, and Deathrite Shaman (since banned in Legacy) added extra one-mana acceleration. By 2014 Elves was one of the most played and successful decks on the StarCityGames Open Series.</p></div></li>
-<li><span class="when">2019</span><div><h4>Reclaimer Elves</h4><p>Elvish Reclaimer (Core Set 2020) gave lists a creature that sacrifices a land to fetch any land, including Gaea’s Cradle, and Once Upon a Time (Throne of Eldraine) added free early selection. Finding Cradle became more consistent, and the deck could also reach utility lands.</p></div></li>
-<li><span class="when">Era 1</span><div><h4>Cradle Control: Glimpse for value</h4><p>A Golgari shell kept Gaea’s Cradle but played a longer game. Glimpse of Nature was used as a value engine rather than a combo kill, alongside Elvish Reclaimer to find Cradle and utility lands.</p></div></li>
-<li><span class="when">Era 2</span><div><h4>Cradle Control without Glimpse</h4><p>Glimpse of Nature was cut. Elvish Reclaimer stayed, together with Crop Rotation, as the way to reach Cradle and the utility lands, and the deck leaned further into grinding.</p></div></li>
-<li><span class="when">Era 3</span><div><h4>Cradle Control with Wight of the Reliquary</h4><p>Glimpse and Elvish Reclaimer were cut completely. Wight of the Reliquary (Modern Horizons 3, June 2024) took over: it sacrifices another creature to fetch any land, Cradle included, and grows with every creature card in the graveyard. Finishers such as Atraxa, Grand Unifier close the game.</p></div></li>
-<li><span class="when">2026</span><div><h4>Speaker Elves, rediscovered</h4><p>Japanese players rediscovered the archetype in 2026 around two new cards. Badgermole Cub (Avatar: The Last Airbender, November 2025) adds green whenever a creature taps for mana and can turn Cradle into a hasty creature. Formidable Speaker (Lorwyn Eclipsed, January 2026) turns a discard into a creature tutor that Wirewood Symbiote and Temur Sabertooth can reuse. Together they make selection and mana, rather than long draw chains, the centre of the deck.</p></div></li>
+<li><span class="when">2019–22</span><div><h4>Combo Elves with Glimpse and Reclaimer</h4><p>Elvish Reclaimer (Core Set 2020, July 2019) gave Glimpse Elves a creature that fetches Gaea’s Cradle or a utility land, and Once Upon a Time (October 2019) added free selection. This was combo Elves at its most played.</p><p class="evidence">Published results: Glimpse of Nature in at least 274 Elves lists a year in 2021 and 2022; Reclaimer in 58–82 Elves lists every quarter of 2022.</p></div></li>
+<li><span class="when">2022–23</span><div><h4>Fiend Artisan Elves</h4><p>Fiend Artisan (Ikoria, 2020) sacrifices a creature to put any creature with the right mana value from the library onto the battlefield, so Elves gained another tutor for Craterhoof and its bullets. Some lists were called Artisan Elves.</p><p class="evidence">Published results: 29 Elves lists with Fiend Artisan in Q3 2022 and 57 in Q4 2022, falling to 14 in Q1 2023.</p></div></li>
+<li><span class="when">Jun 2023</span><div><h4>Orcish Bowmasters</h4><p>Orcish Bowmasters (The Lord of the Rings, 23 June 2023) deals damage whenever an opponent draws extra cards, which is exactly what Glimpse of Nature does. Combo Elves never recovered. Specialists kept Glimpse at large paper events, but it stopped being popular.</p><p class="evidence">Published results: Glimpse Elves on MTGO fell from 30 lists in Q2 2023 to 3 in Q3 2023; all Glimpse results fell from 176 in 2023 to 22 in 2024. Since July 2023, 66 of its 98 finishes came from paper events, including six lists at Eternal Weekend Europe 2023, NA Legacy Champs 2023 and the Asia Legacy Championships of 2023–2025.</p></div></li>
+<li><span class="when">2023–24</span><div><h4>Cradle Control: the Reclaimer era</h4><p>Golgari Cradle Control kept Gaea’s Cradle but played a longer, grinding game. Elvish Reclaimer and Crop Rotation found Cradle and utility lands, and Fiend Artisan tutored threats. Glimpse of Nature was never part of it.</p><p class="evidence">Published results: Cradle Control appears in Q4 2023, with Fiend Artisan in 84 lists and Elvish Reclaimer in 64 that quarter.</p><p class="pilots">Pilots who shaped Cradle Control: hellonewton, Testacular, dssit and eronrelentless.</p></div></li>
+<li><span class="when">2024–26</span><div><h4>Cradle Control with Wight of the Reliquary</h4><p>Wight of the Reliquary (Modern Horizons 3, June 2024) sacrifices another creature to fetch any land, Cradle included, and grows with creature cards in the graveyard. It gradually replaced Elvish Reclaimer. Finishers such as Atraxa, Grand Unifier close the game.</p><p class="evidence">Published results: at least 134 Cradle Control lists with Wight in the second half of 2024. From May to October 2026, 69 Cradle Control lists play Wight and only 9 still play Reclaimer.</p></div></li>
+<li><span class="when">Nov 2025</span><div><h4>Badgermole Cub: two answers</h4><p>Badgermole Cub (Avatar: The Last Airbender, 21 November 2025) adds green whenever a creature taps for mana and can turn Cradle into a hasty creature. Cradle Control adopted it at once. Elves tried the spiritual successor of the combo approach: mana dorks, Cub and Fiend Artisan racing to a fast Craterhoof. Those lists did not succeed.</p><p class="evidence">Published results: 108 Cradle Control lists with Cub in November and December 2025. The dorks, Cub and Fiend Artisan Elves lists appear at Eternal Weekend Europe 2025 (two lists) and only once more afterwards.</p></div></li>
+<li><span class="when">2026</span><div><h4>Speaker Elves</h4><p>Formidable Speaker (Lorwyn Eclipsed, January 2026) turns a discard into a creature tutor that Wirewood Symbiote and Temur Sabertooth can reuse. Rediscovered by the Japanese players <a href="https://x.com/taka87" target="_blank" rel="noopener">taka87</a> and <a href="https://x.com/ryo_sll" target="_blank" rel="noopener">ryo_sll</a> <span class="ev unverified">Unverified</span>, Speaker Elves is the natural heir to the combo approach: selection and mana instead of Glimpse’s draw chains, so Bowmasters punishes it far less.</p><p class="evidence">Published results: the first MTGO 5-0 is on 30 June 2026; the full list of finishes is under <button type="button" class="goto" data-goto="construction">Current 75</button>.</p></div></li>
 </ol>
 
 <h3>What every Cradle deck shares</h3>
@@ -455,9 +480,10 @@
 <li>Ross Merriam, <a href="https://articles.starcitygames.com/articles/the-ultimate-guide-to-elves/" target="_blank" rel="noopener">The Ultimate Guide to Elves</a>, StarCityGames, 12 November 2014.</li>
 <li>Reid Duke, <a href="https://ultimateguard.com/en/blog/reid-duke-legacy-elves" target="_blank" rel="noopener">Legacy Elves</a>, Ultimate Guard, 16 January 2023.</li>
 <li><a href="https://www.mtgsalvation.com/forums/the-game/legacy-type-1-5/established-legacy/combo/535483-primer-combo-elves" target="_blank" rel="noopener">[Primer] Combo Elves</a>, MTG Salvation forums.</li>
+<li>Published results by era: <a href="https://www.mtggoldfish.com/deck_searches/new" target="_blank" rel="noopener">MTGGoldfish deck search</a> (Legacy, tournament decks, searched 7 October 2026).</li>
 <li>Cradle Control lists: <a href="https://www.mtgdecks.net/Legacy/cradle-control-decklist-by-rodney-bedell-2016395" target="_blank" rel="noopener">MTG Decks</a>; card text and release dates: <a href="https://scryfall.com/" target="_blank" rel="noopener">Scryfall</a>.</li>
 </ul>
-<p class="muted">The history is condensed. The three Cradle Control eras and the 2026 rediscovery follow runkor’s account and still need dated sources (event results or articles). Credit and quote the original authors before publishing a longer version.</p>
+<p class="muted">How the eras were checked: the MTGGoldfish deck search for Legacy tournament decks that play each era’s key card in the main deck (Glimpse of Nature, Elvish Reclaimer, Fiend Artisan, Wight of the Reliquary, Badgermole Cub), counted by period and archetype name (Elves, Cradle Control, Golgari). The search returns at most 288 decks per query, so capped counts read “at least”. The Japanese rediscovery of Speaker Elves (taka87 and ryo_sll) follows runkor’s account; their posts on X are not publicly readable without an account, so it is not linked to a dated list yet. Credit and quote the original authors before publishing a longer version.</p>
 </div></section>
 <section class="pane" id="credits"><div class="wip"><div class="wip-sign" aria-hidden="true"><span class="wip-lamp"></span><span class="wip-lamp"></span></div><div class="wip-copy"><span class="wip-badge">Under construction</span><h2>Credits</h2><p>Thanks to the people who debated and tested ideas for this guide.</p></div></div></section>
 </main>

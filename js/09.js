@@ -45,11 +45,26 @@
  }
 
  const pct=(slug,w)=>{const r=live?.windows?.[w]?.[slug];return r?r.share.toFixed(1)+'%':'—';};
- const chips=obj=>Object.entries(obj||{}).sort((a,b)=>b[1]-a[1]).map(([name,n])=>`<span class="mu-chip">${n}× ${esc(name)}</span>`).join('');
- const theirBoard=slug=>{
-  const cards=(live?.sideboards?.[slug]||[]).slice(0,5);
-  return cards.length?`<p class="mu-watch"><b>Their sideboard</b> ${cards.map(c=>`<span class="mu-chip mu-opp" title="${esc(c.avg)} copies on average">${esc(c.card)} <small>${Math.round(c.pct)}%</small></span>`).join('')}</p>`:'';
- };
+ const list=obj=>Object.entries(obj||{}).sort((a,b)=>b[1]-a[1]).map(([name,n])=>`<li><b>${n}</b> ${esc(name)}</li>`).join('');
+ const theirList=slug=>(live?.sideboards?.[slug]||[]).slice(0,6).map(c=>`<li title="${esc(c.avg)} copies on average"><b>${Math.round(c.pct)}%</b> ${esc(c.card)}</li>`).join('');
+
+ // Traffic-light alarms. red = yes, amber = sometimes / only after sideboarding, green = no, grey = no data.
+ const COUNTERS=/Force of Will|Force of Negation|Daze|Counterspell|Mana Drain|Flusterstorm|Spell Pierce|Stern Scolding|Mindbreak Trap|Mystical Dispute|Memory Lapse|Warping Wail|Consign to Memory|Stifle|Spell Snare|Miscalculation|Swan Song|Veil of Summer/i;
+ const SWEEPERS=/Massacre|Wrath of the Skies|Toxic Deluge|Fury|Terminus|Supreme Verdict|Engineered Explosives|Pyroclasm|Anger of the Gods|Kozilek's Return|Eldrazi Confluence|Brotherhood's End|Sheoldred's Edict|Hyperfrag|Holy Light|Echoing Truth/i;
+ // Decks without a plan: colours from the guild or shard in their MTGGoldfish name.
+ const NAME_COLORS={Azorius:'WU',Dimir:'UB',Rakdos:'BR',Gruul:'RG',Selesnya:'GW',Orzhov:'WB',Izzet:'UR',Golgari:'BG',Boros:'RW',Simic:'GU',
+  Esper:'WUB',Grixis:'UBR',Jund:'BRG',Naya:'RGW',Bant:'GWU',Abzan:'WBG',Jeskai:'URW',Sultai:'BGU',Mardu:'RWB',Temur:'GUR','Mono-Blue':'U','Mono-Red':'R','Mono-Black':'B','Mono-Green':'G','Mono-White':'W'};
+ const nameColors=slug=>{const n=(live?.windows?.['14']?.[slug]?.name||shortSlug(slug)).toLowerCase();const k=Object.keys(NAME_COLORS).find(k=>n.includes(k.toLowerCase()));return k?NAME_COLORS[k]:'';};
+ const colorsOf=(planId,slug)=>planId?(MATCH_COLORS[planId]||''):nameColors(slug);
+ const textOf=(planId,slug)=>[...(planId?(DETAILS[planId].opp||[]):[]),planId?(DETAILS[planId].notes||''):'',...(live?.sideboards?.[slug]||[]).map(c=>c.card)].join(' | ');
+ function alarms(planId,slug){
+  const p=planId?DETAILS[planId]:null,known=!!p||!!live?.sideboards?.[slug],txt=textOf(planId,slug),blue=colorsOf(planId,slug).includes('U');
+  const waste=!p?['grey','?','No plan yet']:p.wasteland==='YES'?['red','Yes','They play Wasteland']:p.wasteland==='NO'?['green','No','No Wasteland']:['amber','Mixed','Depends on the list'];
+  const counter=!known&&!colorsOf(planId,slug)?['grey','?','No data']:blue?['red','Yes','Blue deck: expect Force of Will and other counters in the main deck']:COUNTERS.test(txt)?['amber','Side','Counters only after sideboarding']:['green','No','No counter magic recorded'];
+  const sweep=p?.sweep?.length?['red','Yes','Sweepers: '+p.sweep.join(', ')]:SWEEPERS.test(txt)?['amber','Side','Sweepers in their sideboard']:known?['green','No','No sweepers recorded']:['grey','?','No data'];
+  const light=(name,[tone,val,tip])=>`<li class="mu-alarm ${tone}" title="${esc(tip)}"><span class="mu-dot" aria-hidden="true"></span><span>${name}</span><b>${val}</b></li>`;
+  return `<ul class="mu-alarms" aria-label="Alarms">${light('Wasteland',waste)}${light('Counters',counter)}${light('Sweepers',sweep)}</ul>`;
+ }
  const artFor=(planId,slug)=>{const key=ART[planId]?planId:shortSlug(slug);const a=ART[key];return a?{...a,src:`assets/matchups/${key}.jpg`}:null;};
 
  function card(rank,slug,archName,planId){
@@ -64,17 +79,20 @@
     <div class="mu-head"><h3>${esc(p?p.name:archName)}</h3>${p?`<span class="rolepill ${esc(p.role.toLowerCase())}">${esc(p.role)}</span>`:'<span class="mu-noplan">Plan not written yet</span>'}</div>
     <p class="mu-arch">${esc(archName)}${p?.macro?' · '+esc(p.macro):''}</p>
     <dl class="mu-meta"><div><dt>7d</dt><dd>${val('7')}</dd></div><div><dt>14d</dt><dd>${val('14')}</dd></div><div><dt>30d</dt><dd>${val('30')}</dd></div><div title="${esc(trend.title)}"><dt>Trend</dt><dd class="trend-${trend.state}">${esc(trend.text)}</dd></div></dl>
-    ${p?`<div class="mu-plan"><p><b class="mu-in">IN ${p.inCount}</b>${chips(p.ins)}</p><p><b class="mu-out">OUT ${p.outCount}</b>${chips(p.outs)}</p></div>`:''}
-    ${theirBoard(slug)}
-    ${!live&&watch?`<p class="mu-watch"><b>Watch for</b> ${watch}</p>`:''}
-    ${p?`<div class="mu-foot"><span>Wasteland ${esc(p.wasteland||'MIX')}${p.sweep?.length?' · <span class="mu-sweep">Sweepers</span>':''}</span><button type="button" class="mu-open" data-id="${esc(planId)}">Full plan</button></div>`:''}
+    <div class="mu-cols">
+     <div class="mu-col"><h4 class="mu-in">IN${p?' '+p.inCount:''}</h4>${p?`<ul>${list(p.ins)}</ul>`:'<p class="mu-empty">No plan yet</p>'}</div>
+     <div class="mu-col"><h4 class="mu-out">OUT${p?' '+p.outCount:''}</h4>${p?`<ul>${list(p.outs)}</ul>`:'<p class="mu-empty">No plan yet</p>'}</div>
+     <div class="mu-col"><h4 class="mu-opp">Their SB</h4>${live?.sideboards?.[slug]?.length?`<ul>${theirList(slug)}</ul>`:(!live&&watch?`<p class="mu-empty">${watch}</p>`:'<p class="mu-empty">No data</p>')}</div>
+    </div>
+    ${alarms(planId,slug)}
+    ${p?`<div class="mu-foot"><button type="button" class="mu-open" data-id="${esc(planId)}">Full plan</button></div>`:''}
     ${art?`<p class="mu-credit">Art: ${esc(art.card)} by ${esc(art.artist)}</p>`:''}
    </div></article>`;
  }
 
  const cards=[];
  top.forEach((t,i)=>{const plans=plansBySlug[t.slug]||[];if(plans.length)plans.forEach(id=>cards.push(card(i+1,t.slug,t.name,id)));else cards.push(card(i+1,t.slug,t.name,null));});
- host.innerHTML=`<p class="mu-source">MTGGoldfish · MTGO · ${live?'updated '+esc(live.updatedLabel):'snapshot '+esc(GOLDFISH_META_DATE)} · top ${TRACKED} archetypes by 14-day share.${live?' “Their sideboard” lists the cards most often found in their published MTGO 75s (share of decks), not what they side in against Elves.':''}</p>
+ host.innerHTML=`<p class="mu-source">MTGGoldfish · MTGO · ${live?'updated '+esc(live.updatedLabel):'snapshot '+esc(GOLDFISH_META_DATE)} · top ${TRACKED} archetypes by 14-day share.${live?' “Their SB” lists the cards most often found in their published MTGO 75s (share of decks), not what they side in against Elves.':''}</p>
  <div class="mu-grid">${cards.join('')}</div>`;
  host.addEventListener('click',e=>{const b=e.target.closest('.mu-open');if(b)openMatch(b.dataset.id);});
 })();

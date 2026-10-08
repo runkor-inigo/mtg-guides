@@ -70,12 +70,43 @@ function buildGoldfish(mode,side){
  const nodes=new Map();
  const cardName=id=>GF_NAMES[id]||'Unspecified card';
  function cardNode(id){if(nodes.has(id))return nodes.get(id);const n=document.createElement('button');n.type='button';n.className='gf-card';n.dataset.id=id;n.innerHTML='<img class="gf-face" alt=""><span class="gf-card-caption"></span><span class="gf-badges"></span>';n.addEventListener('click',()=>{const name=cardName(id),data=COMBO_CARD_ART[name];if(!data)return;const dlg=document.querySelector('.combo37-dialog');dlg.querySelector('img').src=data.src;dlg.querySelector('img').alt=name;dlg.querySelector('.combo37-credit').textContent=name+' · Art: '+data.artist+' · © Wizards of the Coast';dlg.querySelector('a').href=data.url;dlg.showModal();});nodes.set(id,n);return n;}
- function displayCard(id,c,zone){const n=cardNode(id),known=GF_NAMES[id],img=n.querySelector('img');img.src=known?COMBO_CARD_ART[known].src:GF_BACK;img.alt=known||'Magic card back — unspecified card';n.classList.toggle('tapped',!!c?.tapped);n.classList.toggle('attacking',!!c?.attacking);n.classList.toggle('gf-unknown',!known);n.querySelector('.gf-card-caption').textContent=known||'Any card';const tags=[];if(c?.tapped)tags.push('Tapped');if(c?.animated)tags.push('Earthbent · haste');if(c?.sick&&zone==='board'&&id!=='land'&&id!=='cradle')tags.push('New');if(c?.used)tags.push('Used');if(c?.pump)tags.push('+'+c.pump+'/+'+c.pump);n.querySelector('.gf-badges').textContent=tags.join(' · ');n.setAttribute('aria-label',(known||'Unspecified card')+(tags.length?' · '+tags.join(', '):''));const dest=root.querySelector('[data-zone="'+zone+'"]');if(n.parentElement!==dest)dest.append(n);}
+ // Keyword and state icons on a card (title text explains each one).
+ const ICON_SVG={
+  haste:'<svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>',
+  trample:'<svg viewBox="0 0 24 24"><path d="M4 6l7 6-7 6M12 6l7 6-7 6"/></svg>',
+  sick:'<svg viewBox="0 0 24 24"><path d="M5 7h6l-6 7h6M13 12h5l-5 6h5"/></svg>'
+ };
+ const icon=(kind,title,html)=>'<span class="gf-ico gf-ico-'+kind+'" title="'+title+'" aria-hidden="true">'+html+'</span>';
+ function badgesFor(id,c,zone){
+  const out=[],creature=zone==='creatures';
+  if(!c||zone==='hand'||zone==='grave')return {html:'',words:[]};
+  const haste=id==='hoof'||c.animated,words=[];
+  if(c.tapped){out.push(icon('tap','Tapped','<img src="'+COMBO_CARD_ART.T.src+'" alt="">'));words.push('tapped');}
+  if(creature&&haste){out.push(icon('haste','Haste: can attack and tap the turn it arrives',ICON_SVG.haste));words.push('haste');}
+  if(creature&&c.sick&&!haste){out.push(icon('sick','Summoning sickness: cannot attack or use {T} abilities this turn',ICON_SVG.sick));words.push('summoning sick');}
+  if(c.used){out.push(icon('used','Used: its once-per-turn untap is spent','<img src="'+COMBO_CARD_ART.Q.src+'" alt="">'));words.push('ability used this turn');}
+  if(c.pump){out.push(icon('trample','Trample (Craterhoof)',ICON_SVG.trample));out.push('<span class="gf-pump" title="Craterhoof bonus">+'+c.pump+'/+'+c.pump+'</span>');words.push('trample','+'+c.pump+'/+'+c.pump);}
+  if(c.animated&&id==='cradle'){words.push('earthbent: a creature that is still a land');}
+  return {html:out.join(''),words};
+ }
+ function displayCard(id,c,zone){const n=cardNode(id),known=GF_NAMES[id],img=n.querySelector('img');img.src=known?COMBO_CARD_ART[known].src:GF_BACK;img.alt=known||'Magic card back — unspecified card';n.classList.toggle('tapped',!!c?.tapped);n.classList.toggle('attacking',!!c?.attacking);n.classList.toggle('used',!!c?.used);n.classList.toggle('gf-unknown',!known);n.querySelector('.gf-card-caption').textContent=known||'Any card';const b=badgesFor(id,c,zone);n.querySelector('.gf-badges').innerHTML=b.html;n.setAttribute('aria-label',(known||'Unspecified card')+(b.words.length?' · '+b.words.join(', '):''));const dest=root.querySelector('[data-zone="'+zone+'"]');if(n.parentElement!==dest)dest.append(n);}
  // Motion follows the guide's Animations switch (js/menu.js) and the system setting.
  const moving=()=>{const r=document.documentElement;if(!window.gsap||r.classList.contains('motion-off'))return false;return r.classList.contains('motion-on')||!matchMedia('(prefers-reduced-motion: reduce)').matches;};
  let shownMana=0;
  // FLIP: remember where every card was, let render move it, then animate it from the old place.
- function render(){const before=new Map();if(moving())nodes.forEach((n,id)=>{if(n.isConnected)before.set(id,n.getBoundingClientRect());});renderNow();if(!moving()){shownMana=states[index].mana;return;}
+ let shownIndex=-1;
+ // Cards whose zone or state changed between the previous step and this one.
+ function actedIds(prev,cur){
+  const where=st=>{const m=new Map();st.hand.forEach(id=>m.set(id,'hand:'));st.grave.forEach(id=>m.set(id,'grave:'));st.board.forEach(c=>m.set(c.id,'board:'+[c.tapped,c.animated,c.used,c.pump||0,c.attacking].join(',')));return m;};
+  const a=where(prev),b=where(cur),ids=[];b.forEach((v,id)=>{if(a.get(id)!==v)ids.push(id);});return ids;
+ }
+ function markActed(){
+  const forward=index===shownIndex+1&&index>0;shownIndex=index;
+  nodes.forEach(n=>n.classList.remove('gf-acted'));
+  if(!forward)return;
+  for(const id of actedIds(states[index-1],states[index])){const n=nodes.get(id);if(n&&n.isConnected){void n.offsetWidth;n.classList.add('gf-acted');}}
+ }
+ function render(){const before=new Map();if(moving())nodes.forEach((n,id)=>{if(n.isConnected)before.set(id,n.getBoundingClientRect());});renderNow();markActed();if(!moving()){shownMana=states[index].mana;return;}
   nodes.forEach((n,id)=>{if(!n.isConnected)return;const a=before.get(id),b=n.getBoundingClientRect();
    if(a){const dx=a.left-b.left,dy=a.top-b.top;if(Math.abs(dx)>1||Math.abs(dy)>1)gsap.fromTo(n,{x:dx,y:dy},{x:0,y:0,duration:.5,ease:'power3.out',clearProps:'transform'});}
    else gsap.fromTo(n,{opacity:0,y:-10,scale:.92},{opacity:1,y:0,scale:1,duration:.35,ease:'power2.out',clearProps:'opacity,transform'});});
@@ -84,7 +115,7 @@ function buildGoldfish(mode,side){
   if(counter.v!==target)gsap.to(counter,{v:target,duration:.45,ease:'power2.out',onUpdate:()=>{manaEl.textContent=Math.round(counter.v);}});
   gsap.fromTo(root.querySelector('.gf-action'),{opacity:.35},{opacity:1,duration:.3,ease:'power1.out',clearProps:'opacity'});
  }
- function renderNow(){const st=states[index];const visible=new Set([...st.hand,...st.board.map(c=>c.id),...st.grave]);nodes.forEach((n,id)=>{if(!visible.has(id))n.remove();});st.board.forEach(c=>displayCard(c.id,c,'board'));st.hand.forEach(id=>displayCard(id,null,'hand'));st.grave.forEach(id=>displayCard(id,null,'grave'));root.querySelector('#gf-empty').hidden=!!st.board.length;root.querySelector('#gf-hand-count').textContent=st.hand.length;root.querySelector('#gf-deck-count').textContent=st.deck;root.querySelector('#gf-gy-count').textContent=st.grave.length;root.querySelector('#gf-turn').textContent=typeof st.turn==='number'?'Turn '+st.turn:st.turn;root.querySelector('#gf-mana').textContent=st.mana;root.querySelector('#gf-delta').textContent=st.gain>0?'+'+st.gain+' this step':st.gain<0?st.gain+' this step':'No mana change';root.querySelector('#gf-title').textContent=st.title;root.querySelector('#gf-text').innerHTML=esc(st.text).replace(/\{([0-9WUBRGX]+)\}/g,(m,k)=>'<img class="gf-inline-mana" alt="'+m+'" src="'+(MANA_ICONS[k]||COMBO_CARD_ART[k]?.src)+'">');root.querySelector('#gf-pending').textContent=st.pending||'Stack empty';root.querySelector('#gf-step').textContent=index+' / '+(states.length-1);root.querySelector('#gf-progress').max=states.length-1;root.querySelector('#gf-progress').value=index;root.querySelector('#gf-prev').disabled=index===0;root.querySelector('#gf-next').disabled=index===states.length-1;root.querySelector('#gf-log').innerHTML=states.slice(Math.max(0,index-3),index+1).map((x,i)=>'<li>'+esc(x.title)+'</li>').join('');root.dataset.step=index;root.dataset.mode=mode;root.dataset.side=side;
+ function renderNow(){const st=states[index];const visible=new Set([...st.hand,...st.board.map(c=>c.id),...st.grave]);nodes.forEach((n,id)=>{if(!visible.has(id))n.remove();});st.board.forEach(c=>displayCard(c.id,c,(c.id==='land'||(c.id==='cradle'&&!c.animated))?'lands':'creatures'));st.hand.forEach(id=>displayCard(id,null,'hand'));st.grave.forEach(id=>displayCard(id,null,'grave'));root.querySelector('#gf-empty').hidden=!!st.board.length;root.querySelector('#gf-hand-count').textContent=st.hand.length;root.querySelector('#gf-deck-count').textContent=st.deck;root.querySelector('#gf-gy-count').textContent=st.grave.length;root.querySelector('#gf-turn').textContent=typeof st.turn==='number'?'Turn '+st.turn:st.turn;root.querySelector('#gf-mana').textContent=st.mana;root.querySelector('#gf-delta').textContent=st.gain>0?'+'+st.gain+' this step':st.gain<0?st.gain+' this step':'No mana change';root.querySelector('#gf-title').textContent=st.title;root.querySelector('#gf-text').innerHTML=esc(st.text).replace(/\{([0-9WUBRGX]+)\}/g,(m,k)=>'<img class="gf-inline-mana" alt="'+m+'" src="'+(MANA_ICONS[k]||COMBO_CARD_ART[k]?.src)+'">');root.querySelector('#gf-pending').textContent=st.pending||'Stack empty';root.querySelector('#gf-step').textContent=index+' / '+(states.length-1);root.querySelector('#gf-progress').max=states.length-1;root.querySelector('#gf-progress').value=index;root.querySelector('#gf-prev').disabled=index===0;root.querySelector('#gf-next').disabled=index===states.length-1;root.querySelector('#gf-log').innerHTML=states.slice(Math.max(0,index-3),index+1).map((x,i)=>'<li>'+esc(x.title)+'</li>').join('');root.dataset.step=index;root.dataset.mode=mode;root.dataset.side=side;
  root.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===mode));root.querySelectorAll('[data-side]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.side===side));root.querySelector('#gf-context').textContent=mode==='loop'?'Older lists · Visionary draw loop from an established board · play/draw does not change this setup':'Fixed '+(side==='play'?'on-the-play':'on-the-draw')+' hand · no mulligan · no opponent';
  }
  function reset(){states=buildGoldfish(mode,side);index=0;render();}
