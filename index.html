@@ -5,9 +5,9 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="#0a0f15" name="theme-color"/>
-<meta content="Legacy Elves — BGw Sideboard Guide" property="og:title"/>
+<meta content="Speaker Elves · Legacy BG Elves guide" property="og:title"/>
 <meta content="Read-only Legacy Elves sideboard map, matchup roles, opponent post-board warnings and combo reference." property="og:description"/>
-<title>Legacy Elves — BG Sideboard Guide RC51</title>
+<title>Speaker Elves · Legacy BG Elves guide</title>
 <link rel="stylesheet" href="css/01.css">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/><link rel="stylesheet" href="css/02.css"><link rel="stylesheet" href="css/03.css"><link rel="stylesheet" href="css/04.css"><link rel="stylesheet" href="css/05.css"><link rel="stylesheet" href="css/06.css"><link rel="stylesheet" href="css/07.css"><link rel="stylesheet" href="css/08.css"><link rel="stylesheet" href="css/menu.css"><link rel="stylesheet" href="css/10.css"><link rel="stylesheet" href="css/11.css"><link rel="stylesheet" href="css/12.css">
 </head>
@@ -26,7 +26,7 @@
 <div class="wrap">
 <button type="button" id="all-guides">← All guides</button>
 <div class="titleline">
-<div><h1>Legacy Elves — BG Sideboard Guide <span class="badge">5 OCT 2026 LIST</span></h1>
+<div><p class="library-eyebrow guide-kicker">Legacy · BG Elves guide</p><h1>Speaker Elves <span class="badge">5 OCT 2026 LIST</span></h1>
 <p class="sub">19 lands · 6 fetchlands · 6 dorks · Speaker/Cub engine</p></div>
 </div>
 </div>
@@ -53,7 +53,7 @@
 <p class="lead">Explain the deck by <strong>function and range</strong>, not as a frozen 75. This page separates the structural core, the counts that can move, the main-deck flex slots and the maybeboard. The exact current list follows below.</p>
 
 <h3>Packages</h3>
-<div class="table-scroll"><table class="data"><thead><tr><th>Package</th><th>What it does</th><th>Range</th><th>5 Oct list</th></tr></thead><tbody>
+<div class="table-scroll"><table class="data pkg-table"><thead><tr><th>Package</th><th>What it does</th><th>Range</th><th>5 Oct list</th></tr></thead><tbody>
 <tr><td><b>Mana base</b></td><td>19 lands: 13 sources of green on turn one, 4 Gaea’s Cradle, 2 Dryad Arbor. The fetch, Bayou, Forest and Boseiju split varies inside that frame.</td><td><span class="ev settled">Settled</span> frame</td><td>19 lands</td></tr>
 <tr><td><b>Turn-one acceleration</b></td><td>One-mana dorks, plus Green Sun’s Zenith for zero to fetch Dryad Arbor in the right hands.</td><td><span class="ev range">Working range</span> 5–6 dorks, leaning 6</td><td>6 dorks</td></tr>
 <tr><td><b>Search and selection</b></td><td>Green Sun’s Zenith, Once Upon a Time and Formidable Speaker turn spare resources into the card or plan the game needs.</td><td><span class="ev settled">Settled</span> role</td><td>4 GSZ · 3 OUaT · 4 Speaker</td></tr>
@@ -209,9 +209,9 @@
 <p class="muted">Rules references: <a href="https://mtg.wtf/card/ecl/176/Formidable-Speaker">Formidable Speaker</a> · <a href="https://mtg.wtf/card/mh3/288/Wirewood-Symbiote">Wirewood Symbiote</a> · <a href="https://mtg.wtf/card/frf/141/Temur-Sabertooth">Temur Sabertooth</a>.</p></section></details></section>
 <section class="pane" id="mana"><h2>Mana Math</h2><p>Current-list counts and exact raw-draw probabilities are shown in <button type="button" class="jump-metrics" onclick="showGuideTab('deck')">Current 75</button>.</p><details class="m39-method" open><summary>Archived comparative simulations · earlier configuration</summary>
 <div class="note">These are the earlier comparative model outputs. They are model estimates, not tournament win rates. Current list: 19 lands / 6 one-mana dorks, now with seven fetchlands and two Boseiju. These historical simulations have not been rerun for the RC35 land swap; they do not model its exact fetch, Quirion or legendary-land effects.</div>
-<div class="box"><h3>Raw opener / IMS comparison</h3><table class="data"><thead><tr><th>Config</th><th>Lands</th><th>IMS</th><th>Dorks</th><th>≥1 IMS in 7</th><th>≥1 IMS w/ OUAT</th><th>T1 ramp setup</th><th>4+ lands</th></tr></thead><tbody><tr><td>20 lands / 4 dorks</td><td>20</td><td>14</td><td>4</td><td>86.14%</td><td>90.55%</td><td>61.60%</td><td>15.95%</td></tr><tr><td>19 lands / 4 dorks</td><td>19</td><td>13</td><td>4</td><td>83.72%</td><td>88.62%</td><td>60.11%</td><td>13.47%</td></tr><tr><td>18 lands / 5 dorks</td><td>18</td><td>12</td><td>5</td><td>80.94%</td><td>86.34%</td><td>62.67%</td><td>11.22%</td></tr><tr><td>19 lands / 5 dorks</td><td>19</td><td>13</td><td>5</td><td>83.72%</td><td>88.62%</td><td>64.52%</td><td>13.47%</td></tr><tr><td>20 lands / 5 dorks</td><td>20</td><td>14</td><td>5</td><td>86.14%</td><td>90.55%</td><td>66.11%</td><td>15.95%</td></tr><tr><td>19 lands / 6 dorks</td><td>19</td><td>13</td><td>6</td><td>83.72%</td><td>88.62%</td><td>68.31%</td><td>13.47%</td></tr></tbody></table></div>
-<div class="box" style="margin-top:12px"><h3>London Mulligan — T1 ramp</h3><table class="data"><thead><tr><th>Config</th><th>T1 ramp after London</th></tr></thead><tbody><tr><td>19 / 4</td><td>67.42%</td></tr><tr><td>18 / 5</td><td>72.06%</td></tr><tr><td>19 / 5</td><td>72.40%</td></tr><tr><td>20 / 5</td><td>72.68%</td></tr><tr><td>19 / 6</td><td>76.68%</td></tr></tbody></table></div>
-<div class="box" style="margin-top:12px"><h3>T2/T3 engine model</h3><table class="data"><thead><tr><th>Config</th><th>Cub T2</th><th>NO T3</th><th>≥4 mana T3</th><th>≥8 mana T3</th><th>Avg max mana T3</th></tr></thead><tbody><tr><td>18 / 5</td><td>60.95%</td><td>38.45%</td><td>87.90%</td><td>35.15%</td><td>7.03</td></tr><tr><td>19 / 5</td><td>59.55%</td><td>38.50%</td><td>88.70%</td><td>36.25%</td><td>7.11</td></tr><tr><td>19 / 6</td><td>63.35%</td><td>41.25%</td><td>91.45%</td><td>38.50%</td><td>7.37</td></tr><tr><td>20 / 5</td><td>62.50%</td><td>39.60%</td><td>89.30%</td><td>38.55%</td><td>7.24</td></tr></tbody></table></div>
+<div class="box"><h3>Raw opener / IMS comparison</h3><div class="table-scroll"><table class="data"><thead><tr><th>Config</th><th>Lands</th><th>IMS</th><th>Dorks</th><th>≥1 IMS in 7</th><th>≥1 IMS w/ OUAT</th><th>T1 ramp setup</th><th>4+ lands</th></tr></thead><tbody><tr><td>20 lands / 4 dorks</td><td>20</td><td>14</td><td>4</td><td>86.14%</td><td>90.55%</td><td>61.60%</td><td>15.95%</td></tr><tr><td>19 lands / 4 dorks</td><td>19</td><td>13</td><td>4</td><td>83.72%</td><td>88.62%</td><td>60.11%</td><td>13.47%</td></tr><tr><td>18 lands / 5 dorks</td><td>18</td><td>12</td><td>5</td><td>80.94%</td><td>86.34%</td><td>62.67%</td><td>11.22%</td></tr><tr><td>19 lands / 5 dorks</td><td>19</td><td>13</td><td>5</td><td>83.72%</td><td>88.62%</td><td>64.52%</td><td>13.47%</td></tr><tr><td>20 lands / 5 dorks</td><td>20</td><td>14</td><td>5</td><td>86.14%</td><td>90.55%</td><td>66.11%</td><td>15.95%</td></tr><tr><td>19 lands / 6 dorks</td><td>19</td><td>13</td><td>6</td><td>83.72%</td><td>88.62%</td><td>68.31%</td><td>13.47%</td></tr></tbody></table></div></div>
+<div class="box" style="margin-top:12px"><h3>London Mulligan — T1 ramp</h3><div class="table-scroll"><table class="data"><thead><tr><th>Config</th><th>T1 ramp after London</th></tr></thead><tbody><tr><td>19 / 4</td><td>67.42%</td></tr><tr><td>18 / 5</td><td>72.06%</td></tr><tr><td>19 / 5</td><td>72.40%</td></tr><tr><td>20 / 5</td><td>72.68%</td></tr><tr><td>19 / 6</td><td>76.68%</td></tr></tbody></table></div></div>
+<div class="box" style="margin-top:12px"><h3>T2/T3 engine model</h3><div class="table-scroll"><table class="data"><thead><tr><th>Config</th><th>Cub T2</th><th>NO T3</th><th>≥4 mana T3</th><th>≥8 mana T3</th><th>Avg max mana T3</th></tr></thead><tbody><tr><td>18 / 5</td><td>60.95%</td><td>38.45%</td><td>87.90%</td><td>35.15%</td><td>7.03</td></tr><tr><td>19 / 5</td><td>59.55%</td><td>38.50%</td><td>88.70%</td><td>36.25%</td><td>7.11</td></tr><tr><td>19 / 6</td><td>63.35%</td><td>41.25%</td><td>91.45%</td><td>38.50%</td><td>7.37</td></tr><tr><td>20 / 5</td><td>62.50%</td><td>39.60%</td><td>89.30%</td><td>38.55%</td><td>7.24</td></tr></tbody></table></div></div>
 </details></section>
 <section class="pane" id="sources"><h2>Sources &amp; methodology</h2><details class="guide-notes44" open><summary>Guide notes</summary><div class="guide-notes-grid44"><article><h3>Reading the sideboard map</h3><div class="note"><b>Read-only transposed map.</b> Matchups are now rows and card changes are columns. Rows are grouped by a proposed macro-archetype taxonomy. Click a matchup name for the full plan, opponent post-board cards, sweepers, Caller relevance and source notes.</div></article><article id="meta-method44"><h3>Metagame data &amp; symbols</h3></article></div></details>
 <details class="guide-notes44"><summary>Metagame refresh · setup status</summary><p><b>Nightly refresh at 00:00 Europe/Madrid</b>, including daylight-saving changes. A scheduled job reads the MTGGoldfish MTGO metagame for the 7-, 14- and 30-day windows, recomputes the trend (7d − 30d) and lists the most common sideboard cards of each tracked archetype from its published MTGO decklists. Those lists show what opponents register, not what they side in against Elves. If a night fails, the last verified data stays; without any refresh the guide falls back to the dated 28 Sep 2026 snapshot.</p><p>Unclear archetypes must be checked against MyMTGO or another identified MTGO source. Each fallback must retain its source, date range and sample definition. Different sources are not pooled or treated as directly comparable. Missing or unverified data stays unavailable, never zero; failed updates preserve the last verified snapshot.</p></details><div class="note"><b>Provenance audit · RC39.</b> The guide separates sources actually used, inherited links awaiting rechecking, and optional research tools. Historical material is not labeled as a verified current opposing 75.</div><div class="h39-grid">
@@ -231,11 +231,11 @@
 </div>
 
 <h3>Dinobash math</h3>
-<p>Only <strong>Elves</strong> grow. In this deck that is the one-mana dorks, Quirion Ranger, Allosaurus Shepherd, Formidable Speaker and Marwyn. Wirewood Symbiote, Badgermole Cub, Temur Sabertooth, Dryad Arbor and Craterhoof are not Elves.</p>
+<p>Only <strong>Elves</strong> grow. In this deck that is the one-mana dorks, Quirion Ranger, Allosaurus Shepherd, Formidable Speaker and Marwyn. Wirewood Symbiote, Badgermole Cub, Temur Sabertooth, Collector Ouphe, Dryad Arbor and Craterhoof are not Elves.</p>
 <ul>
 <li><strong>Damage = 5 × attacking Elves + the power of your other attackers.</strong> Elves that entered this turn cannot attack, so count only the ones that can.</li>
 <li>It sets <em>base</em> power and toughness, so a second activation adds nothing. Counters and other bonuses still apply on top.</li>
-<li>Activate it before Craterhoof’s trigger resolves and the two stack: each Elf is a 5/5 that also gets Craterhoof’s +X/+X.</li>
+<li>It stacks with Craterhoof in either order: the new base 5/5 always applies first, then Craterhoof’s +X/+X on top. Activating it after Craterhoof’s trigger has resolved still gives each Elf 5/5 plus X.</li>
 </ul>
 <p class="muted">Example: four Elves that can attack and nothing else: 5 × 4 = 20 damage, before blockers.</p>
 <h3>Choosing a route</h3>
@@ -348,7 +348,7 @@
 <h3>Turn one</h3>
 <ul>
 <li>Play the land that can cast your accelerator now and still supports the turn-two plan. Quirion Ranger needs a Forest to return later, and Boseiju is not a Forest.</li>
-<li>Green Sun’s Zenith for zero fetches Dryad Arbor, which has summoning sickness: it counts for Cradle on turn two but cannot tap {T} for mana the turn it arrives.</li>
+<li>Green Sun’s Zenith with X = 0 costs {G} and fetches Dryad Arbor, which has summoning sickness: it counts for Cradle on turn two but cannot tap {T} for mana the turn it arrives.</li>
 <li>Count how many creatures Cradle will see next turn, not just how much mana you have now.</li>
 </ul>
 
@@ -367,7 +367,7 @@
 <p>Before each early play, run the dependency test: <strong>if they kill the dork, counter the key spell or discard Natural Order, can I still execute a plan?</strong> Sometimes the right play keeps a creature or a land back instead of maximising mana this turn.</p>
 <p>Practise the exact turn-two lines in the <button type="button" class="goto" data-goto="goldfish">Goldfish Lab</button>.</p>
 </div></section>
-<section class="pane" id="natural-order"><div class="article"><p class="draft-note"><b>First draft</b> Written from the project notes of 5–6 October 2026. Ranges, lines and examples marked below are still being confirmed.</p>
+<section class="pane" id="natural-order"><div class="article"><p class="draft-note"><b>Reviewed</b> 8 October 2026: card rules checked against Oracle text. Items labelled below are still being confirmed.</p>
 <h2>Natural Order</h2>
 <p class="lead">Natural Order costs {2}{G}{G} and a green creature, and puts any green creature from your library onto the battlefield. It is the deck’s fastest way to turn a small board into a win.</p>
 
@@ -389,7 +389,7 @@
 
 
 <h3>Setup</h3>
-<p>Turn-two Natural Order needs four mana, {2}{G}{G}, by turn two. The guide’s notes show three routes, all in the <button type="button" class="goto" data-goto="goldfish">Goldfish Lab</button> references:</p>
+<p>Turn-two Natural Order needs four mana, {2}{G}{G}, by turn two. The guide’s notes show three routes. The first is the <button type="button" class="goto" data-goto="goldfish">Goldfish Lab</button>’s “Turn-2 Natural Order” mode, step by step:</p>
 <ul>
 <li><strong>Dork or Arbor, Cub and Cradle:</strong> Cradle sees three creatures and taps {T} for {G}{G}{G}; Cub adds one more {G}.</li>
 <li><strong>Dork or Arbor, Quirion Ranger and Cradle:</strong> Quirion returns the Forest to untap {Q} the dork for a second activation.</li>
@@ -402,11 +402,11 @@
 <li><strong>Counters:</strong> Allosaurus Shepherd makes your green spells impossible to counter, Natural Order included.</li>
 <li><strong>Discard:</strong> a hand built only around Natural Order loses everything to one discard spell. Keep a second route.</li>
 <li><strong>Karakas and exile:</strong> Atraxa is legendary, and exile effects answer whichever creature arrives. Revisit Natural Order and Atraxa against heavy exile and control <span class="ev test">Under test</span>.</li>
-<li><strong>Hardcast Craterhoof is not always lethal.</strong> If the line leaves your creatures tapped or summoning sick, only some of them can attack.</li>
+<li><strong>Craterhoof is not always lethal.</strong> If the line leaves your creatures tapped or summoning sick, only some of them can attack. A turn-two Natural Order off Cub and Cradle sees three creatures, and only the hasty Craterhoof can attack: 8 damage.</li>
 </ul>
 <p>When Natural Order is unsafe, Speaker selection and the loop offer slower routes to the same Craterhoof. The <button type="button" class="goto" data-goto="sideboard">Sideboard</button> map shows the matchups where Natural Order comes out after sideboarding.</p>
 </div></section>
-<section class="pane" id="loop"><div class="article"><p class="draft-note"><b>First draft</b> Written from the project notes of 5–6 October 2026. Ranges, lines and examples marked below are still being confirmed.</p>
+<section class="pane" id="loop"><div class="article"><p class="draft-note"><b>Reviewed</b> 8 October 2026: card rules checked against Oracle text. Items labelled below are still being confirmed.</p>
 <h2>Speaker Loop</h2>
 <p class="lead">The Speaker engine wins in two ways. The <strong>turn-two kill</strong> starts an infinite loop on turn two and ends with Craterhoof. The <strong>setup turn</strong> passes with Gaea’s Cradle and the engine on the battlefield, then untaps and kills on turn three. In both, what matters most is <em>what each Speaker trigger searches for, and when</em>.</p>
 
@@ -423,6 +423,20 @@
 <tr><td><b>Net per cycle</b></td><td><b>+2</b></td></tr>
 </tbody></table></div>
 <p class="muted">8 produced − 3 Speaker − 2 bounce − 1 Symbiote = +2, so {G}{G} more each cycle. No extra cards are needed to keep looping.</p>
+
+<h4>Why Symbiote returns Speaker</h4>
+<p>Before Sabertooth arrives, each recast Speaker is one more trigger: discard a card that no longer helps and search the next piece, usually another Symbiote. Every piece you find and cast is one more creature on the battlefield, so Cradle taps for more the next time. Speaker is how the board, and the mana, keep growing.</p>
+<h4>An unused Quirion Ranger</h4>
+<p>If Quirion has not used its ability this turn, use it, and always on Cradle: return your Forest (a basic Forest or Bayou, played or fetched, but not Boseiju) and untap {Q} Cradle at the moment it would tap for the most creatures. The land drop is already made, so that land adds nothing more this turn. Back in your hand it becomes a card to discard to Speaker.</p>
+<p class="muted">Quirion and Symbiote untap only creatures, so this needs Cradle earthbent by Cub. Without Cub, as in some turn-two Natural Order lines, untap the dork instead.</p>
+
+<h4>Build the board, or just make mana?</h4>
+<p>Each time a Symbiote returns an Elf, choose by what the turn still needs.</p>
+<div class="cards2">
+<article><h4>You still need pieces: return Speaker</h4><p>Speaker, Symbiote, return Speaker; Speaker, Symbiote, return Speaker… until Speaker finds Sabertooth. Then loop and kill. Every trigger finds a creature that stays on the battlefield, so the board and Cradle’s mana grow each time.</p></article>
+<article><h4>You already have the kill: return a cheap Elf</h4><p>When the finish is already in hand, for example Craterhoof itself ({5}{G}{G}{G}) or a Green Sun’s Zenith for it ({8}{G}), you only need mana. Return a one-mana Elf (a dork or Quirion) instead of Speaker: it costs {G} to recast instead of {2}{G}. Seven creatures still untap Cradle for eight mana, so the cycle nets {G}{G}{G}{G} instead of {G}{G}.</p></article>
+</div>
+<p class="muted">With unlimited loops both reach the same result, but looping a one-mana Elf gets to the critical amount of mana in fewer steps. Pilots do this in real games.</p>
 
 <h4>The finish</h4>
 <ol>
@@ -444,7 +458,7 @@
 <tr><td>Symbiote returns Speaker to your hand and untaps {Q} Cradle.</td><td>11</td></tr>
 <tr><td>Tap {T} Cradle: four creatures plus Cub.</td><td>16</td></tr>
 <tr><td>Recast Speaker for {2}{G}. Discard any card and find Craterhoof Behemoth.</td><td>13</td></tr>
-<tr><td>Cast Craterhoof for {5}{G}{G}{G}. Your lands and the dork are still untapped if you need more.</td><td>5</td></tr>
+<tr><td>Cast Craterhoof for {5}{G}{G}{G}. Your two lands are still untapped if you need more. The dork is too, but tapping it for mana takes it out of the attack.</td><td>5</td></tr>
 </tbody></table></div>
 <p><strong>The attack:</strong> Craterhoof sees six creatures, so each gets +6/+6 and trample. Craterhoof (haste), Cub, Symbiote and the dork attack; Cradle is tapped and the recast Speaker is summoning sick. Damage = 9 base power + 4 × 6 = <strong>33 trample</strong>. See <button type="button" class="goto" data-goto="natural-order">How much damage does Craterhoof deal?</button></p>
 
@@ -456,7 +470,7 @@
 <h3>When the last piece is missing</h3>
 <p>Sometimes the mana or the discards run out before the last piece of the loop, for example Temur Sabertooth. The turn is not wasted: the mana and the Speaker triggers you already made still pay for spells. Turn it into a setup turn and spend what is left on one of two plans.</p>
 <div class="cards2">
-<article><h4>Protect the next turn</h4><p>Use a Speaker trigger on a piece against the opponent’s plan instead of the missing combo piece: <strong>Collector Ouphe</strong> against artifacts, <strong>Marwyn</strong> to protect Cradle from Wasteland, <strong>Allosaurus Shepherd</strong> against counters, or <strong>Vibrance</strong> to find Boseiju: evoked for {G}{G}, it puts the land into your hand. Channel <strong>Boseiju</strong> ({1}{G}, discard it) on an artifact, enchantment or nonbasic land. Breaking a Tron land or Planar Nexus on turn two this way is a very strong play. Then kill on turn three as in Route 2: once their key piece is gone, that return turn usually wins.</p></article>
+<article><h4>Protect the next turn</h4><p>Use a Speaker trigger on a piece against the opponent’s plan instead of the missing combo piece: <strong>Collector Ouphe</strong> against artifacts, <strong>Marwyn</strong> to protect Cradle from Wasteland, <strong>Allosaurus Shepherd</strong> against counters, or <strong>Vibrance</strong> to find Boseiju: evoked for {G}{G}, it puts the land into your hand. Channel <strong>Boseiju</strong> ({1}{G}, discard it; only {G} with Marwyn out, since she is legendary) on an artifact, enchantment or nonbasic land. The opponent may then fetch a land with a basic land type. Breaking a Tron land or Planar Nexus on turn two this way is a very strong play. Then kill on turn three as in Route 2: once their key piece is gone, that return turn usually wins.</p></article>
 <article><h4>Do the most damage</h4><p>When no kill is possible this turn or the next, use all the mana for damage now, for example Allosaurus Shepherd’s {4}{G}{G} on a wide board of Elves (see Dinobash in <button type="button" class="goto" data-goto="game-plans">Game Plans</button>).</p></article>
 </div>
 <p class="muted">Which plan to choose depends on two things: the most mana you can reach this turn, and the deck across the table. See <button type="button" class="goto" data-goto="matchups">Matchups</button>.</p>
@@ -468,7 +482,9 @@
 <li>Expecting a recast Craterhoof to keep its own earlier boosts: it is a new object.</li>
 <li>Stopping the loop without a chosen number of repetitions.</li>
 </ul>
-<p>The full routes, including the different hand budgets on the play and on the draw, are in the <button type="button" class="goto" data-goto="goldfish">Goldfish Lab</button>. Its “Turn-2 Sabertooth” mode continues into this loop and the Craterhoof finish, one card and one mana payment at a time. Exact rules and mana for each line are <span class="ev unverified">being re-checked</span> before publication.</p>
+<p>The full routes, including the different hand budgets on the play and on the draw, are in the <button type="button" class="goto" data-goto="goldfish">Goldfish Lab</button>. Its “Turn-2 Sabertooth” mode continues into this loop and the Craterhoof finish, one card and one mana payment at a time.</p>
+<p class="muted">The Goldfish Lab shows one general line for each route, not every possible sequence. Real hands change the numbers: an extra Quirion Ranger, for example, is one more untap and one more card to discard, and that makes every step easier. Learn the general lines, then adjust them to the pieces you actually have.</p>
+<p>Card rules on this page were checked against the Oracle text on Scryfall on 8 October 2026.</p>
 </div></section>
 <section class="pane" id="matchups"><div class="article"><h2>Matchups</h2>
 <p class="lead">The decks this guide tracks: the most played Legacy archetypes on MTGO according to MTGGoldfish, each with its sideboard plan.</p>
@@ -688,7 +704,7 @@
 <li><span class="when">2023–24</span><div><h4>Cradle Control: the Reclaimer era</h4><p>Golgari Cradle Control kept Gaea’s Cradle but played a longer, grinding game. Elvish Reclaimer and Crop Rotation found Cradle and utility lands, and Fiend Artisan tutored threats. Glimpse of Nature was never part of it.</p><p class="evidence">Published results: Cradle Control appears in Q4 2023, with Fiend Artisan in 84 lists and Elvish Reclaimer in 64 that quarter.</p><p class="pilots">Pilots who shaped Cradle Control: hellonewton, Testacular, dssit and eronrelentless.</p></div></li>
 <li><span class="when">2024–26</span><div><h4>Cradle Control with Wight of the Reliquary</h4><p>Wight of the Reliquary (Modern Horizons 3, June 2024) sacrifices another creature to fetch any land, Cradle included, and grows with creature cards in the graveyard. It gradually replaced Elvish Reclaimer. Finishers such as Atraxa, Grand Unifier close the game.</p><p class="evidence">Published results: at least 134 Cradle Control lists with Wight in the second half of 2024. From May to October 2026, 69 Cradle Control lists play Wight and only 9 still play Reclaimer.</p></div></li>
 <li><span class="when">Nov 2025</span><div><h4>Badgermole Cub: two answers</h4><p>Badgermole Cub (Avatar: The Last Airbender, 21 November 2025) adds green whenever a creature taps for mana and can turn Cradle into a hasty creature. Cradle Control adopted it at once. Elves tried the spiritual successor of the combo approach: mana dorks, Cub and Fiend Artisan racing to a fast Craterhoof. Those lists did not succeed.</p><p class="evidence">Published results: 108 Cradle Control lists with Cub in November and December 2025. The dorks, Cub and Fiend Artisan Elves lists appear at Eternal Weekend Europe 2025 (two lists) and only once more afterwards.</p></div></li>
-<li><span class="when">2026</span><div><h4>Speaker Elves</h4><p>Formidable Speaker (Lorwyn Eclipsed, January 2026) turns a discard into a creature tutor that Wirewood Symbiote and Temur Sabertooth can reuse. Rediscovered by the Japanese players <a href="https://x.com/taka87" target="_blank" rel="noopener">taka87</a> and <a href="https://x.com/ryo_sll" target="_blank" rel="noopener">ryo_sll</a> <span class="ev unverified">Unverified</span>, Speaker Elves is the natural heir to the combo approach: selection and mana instead of Glimpse’s draw chains, so Bowmasters punishes it far less.</p><p class="evidence">Published results: the first MTGO 5-0 is on 30 June 2026; the full list of finishes is under <button type="button" class="goto" data-goto="construction">Current 75</button>.</p></div></li>
+<li><span class="when">2026</span><div><h4>Speaker Elves</h4><p>Formidable Speaker (Lorwyn Eclipsed, January 2026) turns a discard into a creature tutor that Wirewood Symbiote and Temur Sabertooth can reuse. Rediscovered by the Japanese players <a href="https://x.com/taka87z3" target="_blank" rel="noopener">taka87</a> and <a href="https://x.com/ryo_sll" target="_blank" rel="noopener">ryo_sll</a> <span class="ev unverified">Unverified</span>, Speaker Elves is the natural heir to the combo approach: selection and mana instead of Glimpse’s draw chains, so Bowmasters punishes it far less.</p><p class="evidence">Published results: the first MTGO 5-0 is on 30 June 2026; the full list of finishes is under <button type="button" class="goto" data-goto="construction">Current 75</button>.</p></div></li>
 </ol>
 
 <h3>What every Cradle deck shares</h3>
@@ -709,13 +725,45 @@
 </ul>
 <p class="muted">How the eras were checked: the MTGGoldfish deck search for Legacy tournament decks that play each era’s key card in the main deck (Glimpse of Nature, Elvish Reclaimer, Fiend Artisan, Wight of the Reliquary, Badgermole Cub), counted by period and archetype name (Elves, Cradle Control, Golgari). The search returns at most 288 decks per query, so capped counts read “at least”. The Japanese rediscovery of Speaker Elves (taka87 and ryo_sll) follows runkor’s account; their posts on X are not publicly readable without an account, so it is not linked to a dated list yet. Credit and quote the original authors before publishing a longer version.</p>
 </div></section>
-<section class="pane" id="credits"><div class="wip"><div class="wip-sign" aria-hidden="true"><span class="wip-lamp"></span><span class="wip-lamp"></span></div><div class="wip-copy"><span class="wip-badge">Under construction</span><h2>Credits</h2><p>Thanks to the people who debated and tested ideas for this guide.</p></div></div></section>
+<section class="pane" id="credits"><div class="article">
+<h2>Credits</h2>
+<p class="lead">This guide is written by runkor. It stands on the work of the players who found, played and refined Speaker Elves, on the Cradle decks that came before it, and on the writers and public data it cites. Thank you all.</p>
+
+<h3>The people who found the deck</h3>
+<div class="cards2">
+<article><h4>The rediscovery</h4><p>The Japanese players <a href="https://x.com/taka87z3" target="_blank" rel="noopener">taka87</a> and <a href="https://x.com/ryo_sll" target="_blank" rel="noopener">ryo_sll</a> rediscovered the archetype in 2026, according to runkor. <span class="ev unverified">Unverified</span> Their posts on X are not publicly readable, and no dated list ties them to the deck yet.</p></article>
+<article><h4>The MTGO pilots</h4><p>DB_ThrabenU posted the first MTGO 5-0 on 30 June 2026. Benat has the most finishes since then (18 league 5-0s), followed by vegecookies, LarthPursenas, urzatheplaneswalker, INnoVationLB, o0oHyperiono0o and Testacular, among others. Counts as of 7 October 2026; the full list is under <button type="button" class="goto" data-goto="construction">Current 75</button>.</p></article>
+</div>
+
+<h3>The Cradle decks before it</h3>
+<p>Speaker Elves borrows its shape from earlier Gaea’s Cradle decks (see <button type="button" class="goto" data-goto="origins">Deck Origins</button>). Thanks to the pilots who shaped Cradle Control: hellonewton, Testacular, dssit and eronrelentless, and to everyone who kept combo Elves alive at paper events after Orcish Bowmasters.</p>
+
+<h3>Writers and sources</h3>
+<ul>
+<li>Ross Merriam, <a href="https://articles.starcitygames.com/articles/the-ultimate-guide-to-elves/" target="_blank" rel="noopener">The Ultimate Guide to Elves</a>, StarCityGames, 12 November 2014.</li>
+<li>Reid Duke, <a href="https://ultimateguard.com/en/blog/reid-duke-legacy-elves" target="_blank" rel="noopener">Legacy Elves</a>, Ultimate Guard, 16 January 2023.</li>
+<li>The authors of the <a href="https://www.mtgsalvation.com/forums/the-game/legacy-type-1-5/established-legacy/combo/535483-primer-combo-elves" target="_blank" rel="noopener">[Primer] Combo Elves</a> thread on the MTG Salvation forums.</li>
+</ul>
+
+<h3>Data and tools</h3>
+<div class="cards2">
+<article><h4>MTGGoldfish and mtgo.com</h4><p>Metagame shares, opponents’ sideboards and the results archive come from <a href="https://www.mtggoldfish.com/" target="_blank" rel="noopener">MTGGoldfish</a> public listings and the official <a href="https://www.mtgo.com/decklists" target="_blank" rel="noopener">mtgo.com</a> decklists.</p></article>
+<article><h4>Scryfall</h4><p>Card text, release dates and card images come from <a href="https://scryfall.com/" target="_blank" rel="noopener">Scryfall</a>.</p></article>
+<article><h4>GSAP</h4><p>Animations use <a href="https://gsap.com/" target="_blank" rel="noopener">GSAP</a> by GreenSock, under its standard license.</p></article>
+</div>
+
+<h3>Testing and debate</h3>
+<p>Thanks to the #elves channel on runkor’s Discord, where the lines in this guide were debated and tested.</p>
+
+<h3>Fan content</h3>
+<p class="footnote">Speaker Elves Guide is unofficial Fan Content permitted under the <a href="https://company.wizards.com/en/legal/fancontentpolicy" target="_blank" rel="noopener">Fan Content Policy</a>. Not approved or endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.</p>
+</div></section>
 </main>
 <div class="drawerback" id="backdrop"></div>
 <aside class="drawer" id="drawer"><button class="drawerclose" id="closeDrawer">×</button><div id="drawerBody"></div></aside>
 <footer class="footer" aria-label="runkor and social links">
 <div class="footerinner">
-<div class="footer-top"><div class="footerbrand"><img alt="runkor logo" class="footerLogo" src="assets/99c9968e0172.png"/><div><b>runkor</b><span class="footer-handle">@vllmr · Legacy guides</span></div></div>
+<div class="footer-top"><div class="footerbrand"><img alt="runkor logo" class="footerLogo" src="assets/99c9968e0172.webp" width="58" height="58" loading="lazy" decoding="async"/><div><b>runkor</b><span class="footer-handle">@vllmr · Legacy guides</span></div></div>
 <nav class="socials" aria-label="Follow runkor"><a href="https://www.youtube.com/@runkor" rel="noopener" target="_blank"><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true" focusable="false"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg><span class="social-label">YouTube</span> <span aria-hidden="true">↗</span></a><a href="https://x.com/vllmr" rel="noopener" target="_blank"><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true" focusable="false"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.5 22H2.3l7.3-8.5L.8 2h6.5l4.4 6.7L18.9 2ZM17.8 20h1.7L6.3 3.9H4.5L17.8 20Z"/></svg><span class="social-label">X / Twitter</span> <span aria-hidden="true">↗</span></a><a href="https://www.twitch.tv/runkor" rel="noopener" target="_blank"><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4.3 0 0 4.3V20h5.7v4l4-4h3.4L21 12.1V0H4.3Zm15 11.3-3.4 3.4h-4L8.6 18v-3.3H4.3V1.7h15v9.6ZM16 4.7h-1.7v5H16v-5Zm-4.7 0H9.6v5h1.7v-5Z"/></svg><span class="social-label">Twitch</span> <span aria-hidden="true">↗</span></a><a href="https://www.instagram.com/vllmr/" rel="noopener" target="_blank"><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.5" cy="6.5" r="1.2"/></svg><span class="social-label">Instagram</span> <span aria-hidden="true">↗</span></a></nav></div>
 <div class="footer-bottom"><p class="footnote">Independent Magic: The Gathering guides by runkor. Opponent deck data and sideboard observations are cross-checked against MyMTGO and are snapshots, not guarantees of an opponent’s 75. Card names, artwork and marks belong to Wizards of the Coast.</p><span class="readonly">READ-ONLY GUIDES</span></div>
 </div></footer>

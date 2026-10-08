@@ -2,7 +2,11 @@
 
 Reads the public MTGGoldfish Legacy metagame for the 7-, 14- and 30-day windows and,
 for every archetype the guide tracks, the most common sideboard cards from its card
-breakdown. Writes js/meta-live.js, which the page loads before js/01.js.
+breakdown. Then reads the same archetypes on MyMTGO (public archetype pages, 30 days of
+reported matches): how often each sideboard card is brought in after game 1, the main deck
+of its reference list, and the cards sided in against Elves. The metagame shares come from
+MTGGoldfish only; MyMTGO adds what the opponents actually side in.
+Writes js/meta-live.js, which the page loads before js/01.js.
 
 Runs with the Python standard library only (no site build step). The GitHub Actions
 workflow in .github/workflows/meta.yml calls it every night (scheduled for 00:05 Europe/Madrid; GitHub often starts it hours late).
@@ -30,6 +34,18 @@ FORMAT = 'legacy'
 WINDOWS = (7, 14, 30)
 UA = 'SpeakerElvesGuide/1.0 (+https://github.com/runkor-inigo/mtg-guides)'
 PAUSE = 2.0  # seconds between requests: be gentle with the site
+
+MYMTGO = 'https://mymtgo.com'
+MYMTGO_OURS = 'elves'  # the MyMTGO archetype the "against Elves" figures are read for
+# MTGGoldfish archetype -> MyMTGO archetype where the names differ (checked against their key cards,
+# 8 Oct 2026). Others are matched when the short slug is the same on both sites; no match = no MyMTGO data.
+MYMTGO_SLUGS = {
+    'boros-energy': 'energy',
+    'death-and-taxes-yorion-black-white': 'death-taxes',
+    'sneak-and-show': 'show-and-tell',
+    'sewer-cam-combo': 'welder-combo',
+    'the-epic-storm': 'tes',
+}
 
 # MTGGoldfish archetype slugs the guide maps to its matchups (see GOLDFISH_META in js/01.js).
 TRACKED_SLUGS = None  # None = every archetype on the first metagame page
@@ -106,6 +122,53 @@ def sideboard(op, slug):
     return sorted(cards, key=lambda c: -c['pct'])[:12]
 
 
+def short_slug(slug):
+    return re.sub(r'-[0-9a-f]{8}-[0-9a-f-]{27,}$', '', re.sub(r'^legacy-', '', slug))
+
+
+def mymtgo_page(op, path):
+    """The JSON props behind a MyMTGO page (Inertia app). Fails loudly if the layout or access changes."""
+    page = fetch(op, MYMTGO + path)
+    m = re.search(r'<script data-page="app" type="application/json">(.*?)</script>', page, re.S)
+    if not m:
+        raise RuntimeError(f'MyMTGO {path}: no page data (layout changed or access blocked)')
+    return json.loads(m.group(1))['props']
+
+
+def mymtgo_index(op):
+    """Every Legacy archetype slug MyMTGO lists (30 days)."""
+    slugs, page, last = set(), 1, 1
+    while page <= last and page <= 5:
+        props = mymtgo_page(op, f'/metagame/{FORMAT}?page={page}')
+        slugs.update(d['slug'] for d in props.get('decksData') or [])
+        last = (props.get('pagination') or {}).get('lastPage', 1)
+        page += 1
+        time.sleep(PAUSE)
+    return slugs
+
+
+def mymtgo_archetype(op, slug):
+    """Sideboard use (all matchups and against Elves) and the 75 of the reference list.
+    sidedIn = share of post-board games in which a sideboard card was brought in."""
+    props = mymtgo_page(op, f'/metagame/{FORMAT}/{slug}?vs={MYMTGO_OURS}')
+    deck = props.get('deck') or {}
+    def rows(cards):
+        out = [{'card': c['name'], 'sidedIn': c.get('sidedIn') or 0, 'used': c.get('used') or 0}
+               for c in cards or [] if c.get('zone') == 'side']
+        return sorted(out, key=lambda c: -c['sidedIn'])
+    vs = props.get('matchupCards') or {}
+    return {
+        'slug': slug, 'name': deck.get('name') or slug, 'matches': deck.get('matches'),
+        'refreshed': (deck.get('refreshedAt') or '')[:10],
+        'side': rows(deck.get('side')),
+        # One real 75 (their most-seen list), not the union of every variant: feeds the guide's alarms.
+        'main': sorted({c['name'] for c in (deck.get('decklist') or {}).get('main') or []}),
+        'listSide': sorted({c['name'] for c in (deck.get('decklist') or {}).get('side') or []}),
+        'vsElves': {'games': vs.get('games') or 0,
+                    'side': [c for c in rows(vs.get('side')) if c['sidedIn'] > 0]} if vs else None,
+    }
+
+
 def madrid_now():
     if MADRID:
         return dt.datetime.now(MADRID)
@@ -157,19 +220,37 @@ def main():
             print(f'warning: sideboard for {t["slug"]} failed: {e}', file=sys.stderr)
         time.sleep(PAUSE)
 
+    # MyMTGO: optional. A failure here keeps the MTGGoldfish refresh.
+    mymtgo = {}
+    try:
+        known = mymtgo_index(op)
+        for t in by14:
+            short = short_slug(t['slug'])
+            slug = MYMTGO_SLUGS.get(short) or (short if short in known else None)
+            if not slug:
+                continue
+            try:
+                mymtgo[t['slug']] = mymtgo_archetype(op, slug)
+            except Exception as e:
+                print(f'warning: MyMTGO {slug} failed: {e}', file=sys.stderr)
+            time.sleep(PAUSE)
+    except Exception as e:
+        print(f'warning: MyMTGO skipped: {e}', file=sys.stderr)
+
     data = {
-        'source': 'MTGGoldfish Legacy metagame',
+        'source': 'MTGGoldfish Legacy metagame; sideboard use from MyMTGO',
         'updated': now.strftime('%Y-%m-%d %H:%M %Z'),
         'updatedLabel': now.strftime('%-d %b %Y') if sys.platform != 'win32' else now.strftime('%#d %b %Y'),
         'windows': {d: {t['slug']: {'name': t['name'], 'share': t['share'], 'decks': t['decks'], 'card': t['card']}
                         for t in tiles} for d, tiles in windows.items()},
         'sideboards': boards,
+        'mymtgo': mymtgo,
     }
     js = ('// Generated by scripts/update_meta.py. Do not edit by hand.\n'
           'window.GOLDFISH_LIVE=' + json.dumps(data, ensure_ascii=False, separators=(',', ':')) + ';\n')
     with open(args.out, 'w', encoding='utf-8', newline='\n') as f:
         f.write(js)
-    print(f'Wrote {args.out}: {sum(len(v) for v in data["windows"].values())} window rows, {len(boards)} sideboards.')
+    print(f'Wrote {args.out}: {sum(len(v) for v in data["windows"].values())} window rows, {len(boards)} sideboards, {len(mymtgo)} MyMTGO archetypes.')
     return 0
 
 

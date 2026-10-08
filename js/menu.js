@@ -1,6 +1,6 @@
 /* Speaker Elves — guide menu (collapsible sidebar).
  *
- * Desktop: a sidebar beside the content. Each part (Learn, Gameplay, ...)
+ * Desktop: a sidebar beside the content. Each part (Deck Foundations, Game Theory, ...)
  * unfolds its sections. The current section carries the mint pill, which
  * moves like an inchworm (the edge facing the move leads, the other follows),
  * breathes with a soft green glow that warms to gold at its right edge, sends
@@ -15,7 +15,7 @@
  *
  * Usage:
  *   SpeakerNav.create(document.getElementById('guide-nav'), {
- *     groups: [{ id:'learn', label:'Learn', icon:'bulb', sections: [
+ *     groups: [{ id:'learn', label:'Deck Foundations', icon:'cards', sections: [
  *       { id:'start', label:'Start Here', controls:'start', wip:true }, ...] }, ...],
  *     active: 'sideboard',
  *     onChange: function (sectionId, index, fromUser) { ... }
@@ -28,6 +28,10 @@
     bulb:   '<path d="M9 18h6M10.2 21h3.6"/><path d="M12 3.5a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3.5Z"/>',
     play:   '<circle cx="12" cy="12" r="8.5"/><path d="M10.3 8.9v6.2l5.1-3.1-5.1-3.1Z"/>',
     shield: '<path d="M12 3.5 5 6v5.6c0 4.2 2.8 7.4 7 8.9 4.2-1.5 7-4.7 7-8.9V6l-7-2.5Z"/><path d="m9.2 12.2 2 2 3.8-4"/>',
+    // Card stack (Deck Foundations), decision tree (Game Theory), crossed swords (Gameplay).
+    cards:  '<rect x="8.5" y="3.5" width="10.5" height="14.5" rx="2"/><path d="M5.5 7v11.5a2 2 0 0 0 2 2H15"/>',
+    tree:   '<circle cx="12" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/><path d="M12 7v4M6 17v-6h12v6"/>',
+    swords: '<path d="M14.5 17.5 3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2"/><path d="M14.5 6.5 18 3h3v3l-3.5 3.5M5 14l4 4M7 17l-3 3M3 19l2 2"/>',
     book:   '<path d="M5 4.5h10.5A2.5 2.5 0 0 1 18 7v13H7.5A2.5 2.5 0 0 1 5 17.5V4.5Z"/><path d="M5 17.5A2.5 2.5 0 0 1 7.5 15H18"/>'
   };
   var CHEV = '<svg class="sb-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';

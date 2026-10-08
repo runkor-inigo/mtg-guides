@@ -1,4 +1,4 @@
-const GF_BACK='assets/7605997900cd.png';
+const GF_BACK='assets/7605997900cd.webp';
 // RC50: deterministic, reversible demonstrations. This is not a random game simulator.
 const GF_NAMES={land:'Forest',dork:'Llanowar Elves',cradle:"Gaea's Cradle",cub:'Badgermole Cub',speaker:'Formidable Speaker',q:'Quirion Ranger',s1:'Wirewood Symbiote',s2:'Wirewood Symbiote',s3:'Wirewood Symbiote',saber:'Temur Sabertooth',no:'Natural Order',hoof:'Craterhoof Behemoth',land2:'Forest'};
 const GF_LANDS=['land','land2'];
