@@ -5,7 +5,7 @@ for every archetype the guide tracks, the most common sideboard cards from its c
 breakdown. Writes js/meta-live.js, which the page loads before js/01.js.
 
 Runs with the Python standard library only (no site build step). The GitHub Actions
-workflow in .github/workflows/meta.yml calls it every night at 00:00 Europe/Madrid.
+workflow in .github/workflows/meta.yml calls it every night (scheduled for 00:05 Europe/Madrid; GitHub often starts it hours late).
 
 Usage: python scripts/update_meta.py [--out js/meta-live.js] [--force]
 """
@@ -120,17 +120,15 @@ def madrid_now():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default='js/meta-live.js')
-    ap.add_argument('--force', action='store_true', help='run even if it is not midnight in Madrid')
+    ap.add_argument('--force', action='store_true', help='run even if it already refreshed today')
     ap.add_argument('--top', type=int, default=20, help='archetypes (by 14-day share) whose sideboards are read')
     args = ap.parse_args()
 
     now = madrid_now()
-    # The workflow fires at 22:05 and 23:05 UTC, which is just after midnight in Madrid in summer or
-    # in winter. Scheduled runs can start late, so accept 00:00-02:59 and refresh at most once a day.
+    # The workflow is scheduled for 22:05 and 23:05 UTC, but GitHub starts scheduled runs hours late
+    # (03:25-04:38 Madrid in the first runs). So there is no time window: the first run of each Madrid
+    # day refreshes and later runs that day skip.
     if not args.force:
-        if now.hour > 2:
-            print(f'Skipping: it is {now:%H:%M} in Madrid, outside the nightly window.')
-            return 0
         try:
             with open(args.out, encoding='utf-8') as f:
                 if f'"updated":"{now:%Y-%m-%d}' in f.read():

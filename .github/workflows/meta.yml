@@ -5,7 +5,8 @@ name: Nightly metagame refresh
 
 on:
   schedule:
-    # Just after midnight in Madrid: 22:05 UTC in summer (CEST), 23:05 UTC in winter (CET).
+    # Meant for just after midnight in Madrid; GitHub usually starts scheduled runs hours late, and
+    # update_meta.py refreshes on the first run of each Madrid day whenever it arrives.
     - cron: '5 22 * * *'
     - cron: '5 23 * * *'
   workflow_dispatch: {}

@@ -21,20 +21,24 @@ Legacy MTG guide for "Speaker Elves" (BG Elves). Current list: 5 Oct 2026 (runko
 - Matchups (js/09.js): top 13 MTGGoldfish archetypes, cards with IN / OUT / their sideboard and Wasteland / Counters / Sweepers lights.
 - Results archive under Current 75 (js/10.js). Official mana symbols in text via `{G}`, `{T}`, `{Q}` codes (js/11.js).
 - Goldfish Lab (js/04.js): card movement (FLIP), creature and land rows, keyword icons, glow on cards that act.
-- Generated data, never edit by hand: `js/meta-live.js` (scripts/update_meta.py) and `js/results-archive.js` (scripts/update_results.py). The nightly GitHub Actions workflow is committed but has never run.
-- Local uncommitted work at the time of writing: Deck Origins eras, Speaker Loop routes, matchup card v2, Goldfish icons, credits, Symbiote 3–4.
+- Generated data, never edit by hand: `js/meta-live.js` (scripts/update_meta.py) and `js/results-archive.js` (scripts/update_results.py). The nightly GitHub Actions workflow runs, but GitHub starts it hours late, so `update_meta.py` has no time window: it refreshes on the first run of each Madrid day. The bot pushes to `main`, so `git pull` before starting work.
+- Deck Origins eras, Speaker Loop routes (turn-two kill and setup turn), matchup card v2 and Goldfish icons are committed (dbc7cc9, 8 Oct 2026) but not yet pushed. The task A fix (no time window in `scripts/update_meta.py`, cron comment in `meta.yml`, `.claude/` in `.gitignore`) is uncommitted; the user commits and pushes both together.
+- Weight: index.html is ~124 KB; the site is ~7.5 MB, of which `assets/` is ~6.8 MB (one 1.1 MB PNG, many 130–170 KB card JPGs, no lazy loading or srcset).
+- README.md still describes the old "RC51 test list", css layers 02–08 and a refresh "at 00:00 Europe/Madrid"; it needs a refresh (task O).
 
 ## Rules
 
 - Never commit or push unless the user explicitly asks.
 - Do not change card data, the sideboard plan, decklist or list logic (matchup data, IN/OUT counts, combo lines, probabilities) without telling the user first.
-- Before calling any change done, serve the site locally (`py -m http.server 8765`), open it in a browser and confirm it loads with no console errors. Run one server only.
+- Before calling any change done, serve the site locally (`py -m http.server 8765`), open it in a browser and confirm it loads with no console errors. Run one server only. Headless check that works on this machine: `chrome.exe --headless=new --enable-logging=stderr --v=0 --virtual-time-budget=8000 --dump-dom http://localhost:8765/` and look for `CONSOLE` lines in stderr. Headless Chrome lays out at least 500 px wide, so for phone width load the site in a 390 px `<iframe>` from a temporary page.
+- Pushing to `main` deploys production: the user always does the push.
+- `.claude/` is gitignored and must never be committed (Vercel would serve it).
 - Claims without a verifiable source are marked "Unverified" on the page and in ROADMAP.md.
 
 ## Next steps
 
-1. Activate the nightly workflow on GitHub (ROADMAP.md, pending decision 1).
-2. User review of the converted 5 Oct sideboard plans.
-3. Plans for Boros Energy, Azorius Tempo and Rakdos Reanimator.
-4. Interaction Windows and Credits content.
-5. Open points from the project notes: keep-or-mull studies, pivot sequences after interaction.
+The work is split into independent chats in ROADMAP.md, section "Plan de chats" (task names, files, dependencies, recommended order). Start each chat by naming its task. First steps:
+
+1. User commits the task A changes and pushes them with dbc7cc9.
+2. The day after the push, confirm a "Nightly metagame refresh" bot commit on `main`, then `git pull`.
+3. Next task: C `revision-sideboard` (user review of the converted 5 Oct sideboard plans).
