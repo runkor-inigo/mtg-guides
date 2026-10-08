@@ -61,6 +61,7 @@ The work is split into independent chats in ROADMAP.md, section "Plan de chats" 
 - When committing, never add the 16 replaced WebPs (task U) or `_*.html` test pages: `git add -u` plus only new files that are in use.
 - Ready now (recommended order in ROADMAP.md): C `revision-sideboard` (blocks D, M), G `estudios-mulligan`, J `pivotes-interaccion`, L `fuente-testacular`, O `readme-docs`, Q `rendimiento-carga`, U `repo-cleanup` (when the user decides). D is optional now: Azorius Tempo and Rakdos Reanimator left the top 10.
 - A chat reads CLAUDE.md only when it starts: after changing a rule here, chats already open will not see it unless they re-read this file.
+- Proposed next design step (user to confirm): an Impeccable pass over the whole guide, `audit` and `critique` first for a prioritised list (type, hierarchy, spacing), then apply only what the user approves. So far only emil-design-eng has been used (interaction details).
 - On 9 Oct 2026, confirm a "Nightly metagame refresh" bot commit on `main` (its `js/meta-live.js` should now include `mymtgo`), then `git pull`.
 - Task P is live. For task D: any new matchup or card art follows "Card art" above and goes in as `.webp`; `js/09.js` already builds `assets/matchups/<key>.webp`, so a new matchup key needs that file.
 - Task U `repo-cleanup` holds every pending deletion; run it only when the user decides.

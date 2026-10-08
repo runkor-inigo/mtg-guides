@@ -249,12 +249,14 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 
 ### Diseño (8 Oct 2026, chat principal)
 
-- **Cabecera retirada.** Decisión del usuario: "All guides" y el nombre de la guía pasan a la parte de arriba del menú lateral; en el móvil, una flecha de volver a la izquierda de la barra de capítulos. La línea "19 lands · 6 fetchlands…" se quita (ya está en Deck Construction y Current 75). Archivos: `index.html` (sin `<header>`, `h1` oculto), `js/menu.js` (opción `brand`), `js/01.js`, `js/05.js`, `css/menu.css`, y limpieza de reglas de cabecera en `css/01.css`, `02.css`, `06.css` y `12.css`. Verificado en local: 0 errores de consola; escritorio, menú plegado y 390 px sin scroll horizontal; los dos botones de volver llevan a la portada y al reabrir la guía el foco va al botón de volver. Sin subir.
+- **Cabecera retirada.** Decisión del usuario: "All guides" y el nombre de la guía pasan a la parte de arriba del menú lateral; en el móvil, una flecha de volver a la izquierda de la barra de capítulos. La línea "19 lands · 6 fetchlands…" se quita (ya está en Deck Construction y Current 75). Archivos: `index.html` (sin `<header>`, `h1` oculto), `js/menu.js` (opción `brand`), `js/01.js`, `js/05.js`, `css/menu.css`, y limpieza de reglas de cabecera en `css/01.css`, `02.css`, `06.css` y `12.css`. Verificado en local: 0 errores de consola; escritorio, menú plegado y 390 px sin scroll horizontal; los dos botones de volver llevan a la portada y al reabrir la guía el foco va al botón de volver. Publicado en cad80d3.
 - **Skills de diseño instaladas** en `.claude/skills/` (solo local): emil-design-eng, impeccable (sin hooks), design-taste-frontend y redesign-existing-projects.
 - **Pendiente del usuario: Playwright MCP.** El sistema de permisos no deja a Claude añadir un servidor MCP. Para activarlo: en una terminal, `claude mcp add playwright -- npx -y @playwright/mcp@0.0.83 --browser chrome` (o crear `.mcp.json` en la raíz y añadir `/.mcp.json` a `.vercelignore`), y reiniciar la sesión.
 - **Opcional: hooks de Impeccable.** Ejecutarían su binario (que se descarga la primera vez) tras cada edición y al final de cada turno. Desactivados hasta que el usuario decida.
 
 ### Goldfish, zoom y Credits (8 Oct 2026, chat principal)
+
+Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, sin `<header>`, 0 errores de consola en escritorio y a 390 px, interruptores del Goldfish visibles, `ROADMAP.md` da 404.
 
 - **Zoom de cartas:** la imagen ampliada mantiene las esquinas redondeadas (`border-radius: 4.75%/3.4%`, 3 mm sobre 63×88 mm) y su caja ya coincide con la carta (`css/01.css`, `.combo37-large`).
 - **Variantes del Goldfish** (petición del usuario): interruptores de carta enlazados en cada modo (`GF_VARIANTS` y `buildGoldfish(mode, side, v)` en `js/04.js`; estilos en `css/12.css`).
@@ -267,6 +269,13 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
   - dssit = David Schittinger (@Dsitt7), según el usuario; enlazado en Credits y Deck Origins.
   - Quitadas las cuentas alternativas de Newton Hang (petición del usuario: no revelar cuentas).
   - Pendiente de confirmar con el usuario: el apellido "Knab" (el usuario dijo "Knapp"; la fuente encontrada escribe Knab) y un nombre que no se entendió en el dictado ("que gustes"). No se encontraron más resultados con fuente; se pueden añadir jugadores si el usuario da nombres o resultados.
+
+### Próximo paso de diseño (propuesto, 8 Oct 2026)
+
+- **V. `pasada-impeccable`** — pendiente de confirmar por el usuario. Auditoría y crítica de toda la guía con la skill Impeccable (`audit`, `critique`): lista priorizada de problemas de tipografía, jerarquía, espaciado y contraste. Después se aplica solo lo que el usuario apruebe, respetando las reglas de CLAUDE.md (sin build step, paleta verde oscura, mint → oro). Hasta ahora solo se ha usado emil-design-eng, para detalles de interacción (botón de volver, interruptores).
+- Archivos: los CSS (`css/01.css`, `css/11.css`, `css/12.css`, `css/menu.css`) y, si hace falta, marcado puntual en `index.html`.
+- Tamaño: media (auditoría) + lo que se apruebe.
+- Preguntas abiertas de Credits: "Knab" o "Knapp"; el nombre "que gustes" del dictado; confirmar que dssit es David Schittinger.
 
 ### Estado (8 Oct 2026, tras el commit 83c5f2c)
 
