@@ -15,9 +15,9 @@
  *
  * Usage:
  *   SpeakerNav.create(document.getElementById('guide-nav'), {
- *     groups: [{ id:'learn', label:'Deck Foundations', icon:'cards', sections: [
+ *     groups: [{ id:'foundations', label:'Deck Foundations', icon:'cards', sections: [
  *       { id:'start', label:'Start Here', controls:'start', wip:true }, ...] }, ...],
- *     active: 'sideboard',
+ *     active: 'start',
  *     onChange: function (sectionId, index, fromUser) { ... }
  *   });
  */

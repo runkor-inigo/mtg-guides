@@ -640,18 +640,18 @@ setupFloatingMatrixHeader();
 // Guide menu (js/menu.js): four parts, each with its sections. A section shows one or more .pane
 // elements; wip marks sections still being written (their panes are placeholders in index.html).
 const GUIDE_GROUPS=[
- {id:'learn',label:'Deck Foundations',icon:'cards',sections:[
+ {id:'foundations',label:'Deck Foundations',icon:'cards',sections:[
   {id:'start',label:'Start Here',panes:['start']},
   {id:'origins',label:'Deck Origins',panes:['origins']},
   {id:'construction',label:'Deck Construction',panes:['construction','deck','mana']}]},
- {id:'gameplay',label:'Game Theory',icon:'tree',sections:[
+ {id:'theory',label:'Game Theory',icon:'tree',sections:[
   {id:'mulligans',label:'Mulligans',panes:['mulligans']},
   {id:'first-turns',label:'First Turns',panes:['first-turns']},
   {id:'game-plans',label:'Game Plans',panes:['game-plans']},
   {id:'natural-order',label:'Natural Order',panes:['natural-order']},
   {id:'loop',label:'Speaker Loop',panes:['loop']},
   {id:'goldfish',label:'Goldfish Lab',panes:['goldfish']}]},
- {id:'prepare',label:'Gameplay',icon:'swords',sections:[
+ {id:'gameplay',label:'Gameplay',icon:'swords',sections:[
   {id:'sideboard',label:'Sideboard',panes:['map','heur']},
   {id:'matchups',label:'Matchups',panes:['matchups']},
   {id:'windows',label:'Interaction Windows',panes:['windows']}]},
@@ -673,17 +673,32 @@ function renderPager(id){
 guidePager.addEventListener('click',e=>{const b=e.target.closest('button[data-id]');if(b)guideNav.select(b.dataset.id,true);});
 // In-text links between sections: <button class="goto" data-goto="section-id">.
 document.addEventListener('click',e=>{const b=e.target.closest('[data-goto]');if(b)guideNav.select(b.dataset.goto,true);});
+// The URL hash names the open section (#matchups), so a section can be linked and survives a reload.
+// It can also name any element inside a pane (#windows-opponent); other hashes return null.
+function guideTarget(hash){
+ const id=decodeURIComponent((hash||'').slice(1));
+ if(!id)return null;
+ if(GUIDE_SECTIONS.some(x=>x.id===id))return {section:id};
+ const pane=document.getElementById(id)?.closest('.pane');
+ const s=pane&&GUIDE_SECTIONS.find(x=>x.panes.includes(pane.id));
+ return s?{section:s.id,el:document.getElementById(id)}:null;
+}
+// Writes the open section to the hash unless the hash already points inside it (no history entry).
+function syncGuideHash(id){
+ if(guideTarget(location.hash)?.section!==id)history.replaceState(null,'','#'+id);
+}
 function showSection(id,index,fromUser){
  const s=GUIDE_SECTIONS.find(x=>x.id===id);
  document.querySelectorAll('.pane').forEach(x=>x.classList.toggle('active',s.panes.includes(x.id)));
  renderPager(id);
+ if(!document.body.classList.contains('guide-home'))syncGuideHash(id);
  // A section chosen further down the page starts from its top.
  if(fromUser){const top=guideMain.getBoundingClientRect().top+scrollY-8;if(scrollY>top)scrollTo({top});}
  document.dispatchEvent(new CustomEvent('guide:tabchange',{detail:{id}}));
 }
 const guideNav=SpeakerNav.create(document.getElementById('guide-nav'),{
  groups:GUIDE_GROUPS.map(g=>({...g,sections:g.sections.map(s=>({...s,controls:s.panes.join(' ')}))})),
- active:'sideboard',onChange:showSection
+ active:guideTarget(location.hash)?.section||'start',onChange:showSection
 });
 showSection(guideNav.active);
 GUIDE_SECTIONS.forEach(s=>s.panes.forEach(id=>{const pane=document.getElementById(id);pane.setAttribute('role','tabpanel');pane.setAttribute('aria-labelledby',guideNav.tabFor(s.id).id);}));

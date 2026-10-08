@@ -3,10 +3,10 @@
 ## Decisiones pendientes
 
 1. **Resuelta (8 Oct 2026): workflow nocturno.**
-   El usuario acepta las condiciones de uso de MTGGoldfish para la lectura automática de los listados públicos. El workflow ya estaba activo (4 ejecuciones programadas en verde, 7 y 8 Oct), pero ninguna actualizó nada: GitHub las arrancó entre las 03:25 y las 04:38 de Madrid, y `update_meta.py` solo actualizaba de 00:00 a 02:59. Se quitó esa franja: ahora refresca en la primera ejecución de cada día de Madrid. El arreglo funciona cuando se suba (ver la tarea A).
+   El usuario acepta las condiciones de uso de MTGGoldfish para la lectura automática de los listados públicos. El workflow ya estaba activo (4 ejecuciones programadas en verde, 7 y 8 Oct), pero ninguna actualizó nada: GitHub las arrancó entre las 03:25 y las 04:38 de Madrid, y `update_meta.py` solo actualizaba de 00:00 a 02:59. Se quitó esa franja (commit 1b23972): ahora refresca en la primera ejecución de cada día de Madrid.
 
 2. **Resuelta (8 Oct 2026): nombre de la sección "Prepare".**
-   Ahora se llama "Metagame" (menú lateral y barra de capítulos del móvil). Cubre Sideboard, Matchups e Interaction Windows y no repite el nombre de ninguna sección. El `id` interno sigue siendo `prepare`, así que los enlaces no cambian.
+   Ahora se llama "Metagame" (menú lateral y barra de capítulos del móvil). Cubre Sideboard, Matchups e Interaction Windows y no repite el nombre de ninguna sección. Sustituida por la decisión 9: la parte se llama ahora "Gameplay" (id `gameplay`).
 
 3. **Resuelta (8 Oct 2026): nuevos modos del Goldfish Lab.**
    Entran los dos. (a) "Setup turn · T3 kill": la ruta 2 del Speaker Loop paso a paso; en el turno 2 el disparo de Speaker descarta una carta y busca a Wirewood Symbiote (elección del usuario). (b) "Speaker loop · ready board" sustituye a "Visionary loop (older lists)": parte del tablero final de "Turn-2 Sabertooth" en el play. Ver la tarea E.
@@ -27,20 +27,21 @@
 
 8. **Resuelta (8 Oct 2026): lectura de MyMTGO.** El usuario dio el visto bueno al push (commit 83c5f2c) sabiendo que la página `/terms` no se pudo leer de forma automática. El script nocturno lee ahora las páginas públicas de arquetipo de MyMTGO (`/metagame/legacy/<arquetipo>?vs=elves`, unas 17 lecturas con 2 s de pausa). `robots.txt` solo prohíbe `/api/`, `/admin/` y `/daily/next`, y no hay comprobación anti-bots, pero la página `/terms` se carga con JavaScript y no se ha podido leer.
 
-9. **Hecho en parte (8 Oct 2026): nombres de las partes del menú.** Publicados en el commit 83c5f2c: Learn → "Deck Foundations" (icono `cards`), Gameplay → "Game Theory" (`tree`), Metagame → "Gameplay" (`swords`), en `js/01.js` (`GUIDE_GROUPS`) y `js/menu.js` (`ICONS`). Sustituye al nombre "Metagame" del punto 2. **Pendiente, cuando no haya otros chats abiertos** (tocan `js/01.js` e `index.html`, que comparten todos):
-   - Sección de inicio: hoy se entra siempre en Sideboard (`active:'sideboard'` en `js/01.js` y `class="pane active"` en `#map` de `index.html`), un resto de cuando la guía era solo de sideboard. Pasarla a Start Here (`'start'`, y la clase `active` a `#start`). Opcional: leer y escribir el `#hash` de la URL para enlazar a una sección y volver a ella al recargar.
-   - Ids internos: alinearlos con los nombres nuevos (hoy "Game Theory" es `gameplay` y "Gameplay" es `prepare`). Revisar antes cualquier uso de esos ids en `js/` y `css/`.
+9. **Resuelta (8 Oct 2026): partes del menú y sección de inicio.** Nombres publicados en el commit 83c5f2c: Learn → "Deck Foundations" (icono `cards`), Gameplay → "Game Theory" (`tree`), Metagame → "Gameplay" (`swords`). Sustituye al nombre "Metagame" del punto 2. Después, sin commit todavía:
+   - Ids internos alineados con los nombres: `foundations`, `theory`, `gameplay`, `about` (antes `learn`, `gameplay`, `prepare`). Solo los usaba `GUIDE_GROUPS`.
+   - La guía se abre en Start Here, no en Sideboard (`js/01.js` y la clase `active` pasa de `#map` a `#start` en `index.html`). Era un resto de cuando la guía era solo de sideboard.
+   - El `#hash` de la URL guarda la sección abierta (`/#matchups`), sin añadir entradas al historial. Un enlace con hash abre la guía directamente en esa sección, sin pasar por la portada; también vale el id de un elemento dentro de una sección (`#windows-opponent`). Un hash desconocido muestra la portada y "All guides" borra el hash. Código: `guideTarget` y `syncGuideHash` en `js/01.js`, `openFromHash` en `js/05.js`.
+   - Comprobado en local: portada, `#matchups`, `#windows-opponent`, `#bogus`, menú, "Next", "All guides" y hash editado a mano, a 390 px; 0 errores de consola.
 
 ## No verificado
 
-- **Créditos de Speaker Elves (taka87 y ryo_sll).** Cuentas de X confirmadas por el usuario (8 Oct 2026): https://x.com/taka87z3 y https://x.com/ryo_sll; la página enlaza a las dos. Coincidencia sin comprobar: el piloto de MTGO Halle87z3 (3.º en la Legacy Challenge 32 del 29 Ago 2026, en el archivo de resultados) comparte el sufijo "87z3". La página dice que estos jugadores japoneses redescubrieron el arquetipo en 2026, según runkor. **No verificado:** sus publicaciones en X no se pueden leer sin cuenta y no aparecen en artículos ni resultados publicados. Hace falta una lista o publicación con fecha.
-  - Pista (8 Oct 2026, sin confirmar): según el resumen de un buscador, Shimoizumi Ryoichi jugó Elves con 4 Formidable Speaker en la Hareruya Legacy Cup Deluxe del 5 Abr 2026 (antes del primer 5-0 de MTGO, 30 Jun). Falta: (1) ver la lista en la fuente primaria (Hareruya o mtgdecks; las dos bloquean la lectura automática, así que hay que abrirlas a mano); (2) confirmar la fecha (otros resultados citan 20 Jul y 15 Ago 2026); (3) comprobar que es Speaker Elves (Symbiote, Sabertooth, Cradle) y no otra lista con Speaker; (4) algo que una a ese jugador con ryo_sll. Nada de esto está en la página.
+- Ninguna afirmación pendiente por ahora. (Resuelto el 8 Oct 2026: el usuario confirmó que ryo_sll es Shimoizumi Ryoichi y taka87z3 es Takagi Yuki; los resultados en papel de metagame.info muestran a Shimoizumi con Speaker + Sabertooth desde el 21 Mar 2026. Deck Origins y Credits ya no llevan "Unverified" en ellos y cada mención enlaza a su X.)
 
 ## Plan de chats
 
 Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.md y ROADMAP.md; haz la tarea <nombre>". Al terminar, el chat actualiza esta sección (marca la tarea como hecha) y CLAUDE.md si cambia el estado.
 
-**Nota sobre el peso:** `index.html` pesa ~124 KB, no 7,8 MB. El sitio completo pesa ~7,5 MB y casi todo es `assets/` (~6,8 MB): un PNG de 1,1 MB, otro de 330 KB y decenas de JPG de cartas de 130–170 KB, sin `loading="lazy"` ni tamaños ajustados. Por eso el rendimiento se centra en las imágenes.
+**Nota sobre el peso:** `index.html` pesa ~160 KB. Desde la tarea P las imágenes en uso son WebP (~4 MB en total); los originales `.jpg`/`.png` sin uso siguen en `assets/` hasta la tarea U.
 
 **Archivos compartidos:** casi todo el contenido vive en `index.html` (cada sección es un `<section class="pane" id="…">`) y el registro de secciones en `GUIDE_GROUPS` (`js/01.js`). Dos tareas que editan secciones distintas de `index.html` no chocan en el contenido, pero no conviene tenerlas abiertas a la vez sobre el mismo árbol de trabajo: termina una antes de empezar la siguiente.
 
@@ -136,8 +137,10 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Decisión previa: ninguna.
 
 **K. `creditos`** — hecha y publicada (8 Oct 2026, commit 83c5f2c).
-- Resultado: el pane `#credits` pasa de cartel a artículo: quién encontró el deck (taka87 y ryo_sll con "Unverified"; pilotos de MTGO del archivo de resultados, con fecha 7 Oct 2026 y enlace a Current 75), el linaje de Cradle Control (los pilotos ya citados en Deck Origins), autores y fuentes (mismos enlaces que Origins), datos y herramientas (MTGGoldfish, mtgo.com, Scryfall, GSAP) y el aviso de la Fan Content Policy de Wizards. Quitado `wip:true` de credits en `js/01.js`. Verificación de taka87 y ryo_sll: sin resultado (ver "No verificado"). Comprobado sobre una copia limpia de HEAD con solo este cambio: 0 errores de consola; a 1280 px y a 390 px sin scroll horizontal.
+- Resultado: el pane `#credits` pasa de cartel a artículo: quién encontró el deck (taka87 y ryo_sll, primero con "Unverified" y después verificados, ver abajo; pilotos de MTGO del archivo de resultados, con fecha 7 Oct 2026 y enlace a Current 75), el linaje de Cradle Control (los pilotos ya citados en Deck Origins), autores y fuentes (mismos enlaces que Origins), datos y herramientas (MTGGoldfish, mtgo.com, Scryfall, GSAP) y el aviso de la Fan Content Policy de Wizards. Quitado `wip:true` de credits en `js/01.js`. Verificación de taka87 y ryo_sll: sin resultado (ver "No verificado"). Comprobado sobre una copia limpia de HEAD con solo este cambio: 0 errores de consola; a 1280 px y a 390 px sin scroll horizontal.
 - Testing y debate: se agradece al canal #elves del Discord de runkor (sin enlace: no hay invitación en el proyecto).
+- Verificación hecha: ryo_sll = Shimoizumi Ryoichi y taka87z3 = Takagi Yuki (confirmado por el usuario). Origins y Credits citan sus resultados de Hareruya con fecha y enlace a metagame.info, cada mención lleva su perfil de X, y la nota de método de Origins explica la fuente (182 torneos japoneses revisados; cobertura desde marzo de 2026). 0 errores de consola; Origins y Credits sin scroll horizontal a 390 px.
+- Añadidos con nombre, usuario de MTGO y X (datos del usuario, 8 Oct 2026): Beñat (Benat, @Benatmtg), Newton Hang (hellonewton, 10drills, delighted halfing; @hello_newton), Jörg Heinrich (EronRelentless, @Eron_Relentless) y Curran Delahanty (Testacular, sin X: cuenta borrada). Formato en la página: "Nombre (MTGO: usuario; @X)". Autor: Iñigo Villamor (MTGO: runkor; @vllmr) en la entrada de Credits; en el resto de la página "runkor" se queda como firma. Sin datos aún: dssit, DB_ThrabenU, vegecookies, LarthPursenas, urzatheplaneswalker, INnoVationLB, o0oHyperiono0o y los pilotos japoneses salvo Shimoizumi y Takagi.
 - Objetivo: escribir Credits y quitar la marca `wip`; intentar verificar a taka87 y ryo_sll (sección "No verificado").
 - Archivos: el pane `#credits` en `index.html`, `js/01.js` (quitar `wip:true`), y `#origins` si cambia la verificación.
 - Dependencias: ninguna. Cualquier orden.
@@ -250,7 +253,7 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - **Matchups (chat de Matchups, publicado en 83c5f2c):** top 10 de MTGGoldfish en filas desplegables; tabla "Their sideboard" con MTGGoldfish y MyMTGO; semáforos que leen también la lista de referencia de MyMTGO; plan de Boros Energy (parte de D).
 - **Se pueden empezar ya:** C `revision-sideboard` ★, G `estudios-mulligan` ★, J `pivotes-interaccion`, L `fuente-testacular`, O `readme-docs`, Q `rendimiento-carga`, U `repo-cleanup` (cuando decidas borrar). ★ = necesita una decisión del usuario antes de empezar.
 - **Bloqueadas:** D (Azorius Tempo y Rakdos Reanimator, opcionales porque ya no están en el top 10; por C), M (por C y L), N parte 1 (`revision-gameplay-1`, por J), T (todas).
-- **Decisión 9 (menú):** los nombres nuevos ya están publicados; quedan la sección de inicio y los ids internos.
+- **Decisión 9 (menú):** resuelta. Ids internos alineados, la guía abre en Start Here y el `#hash` de la URL guarda la sección (publicado en el commit que sigue a ede2026).
 - **Pregunta de H (Quirion en la ruta 1):** resuelta el 8 Oct 2026; ver la tarea N.
 
 ### Deploy del 8 Oct 2026 (commit 83c5f2c)
@@ -265,30 +268,26 @@ Publicado: K `creditos`, N parte 2, P `rendimiento-imagenes` (58 `.webp`), R y S
 
 ### En cualquier orden o en secuencia
 
-- **Cualquier orden** (no dependen de nada ni chocan entre sí): G `estudios-mulligan`, J `pivotes-interaccion`, K `creditos`, L `fuente-testacular`, O `readme-docs`. C también se puede empezar ya.
+- **Cualquier orden** (no dependen de nada ni chocan entre sí): C `revision-sideboard`, G `estudios-mulligan`, J `pivotes-interaccion`, L `fuente-testacular`, O `readme-docs`, Q `rendimiento-carga`.
 - **En secuencia:**
-  - C → D → P → Q (sideboard, luego matchups nuevos, luego imágenes y carga).
-  - K y L → M (Origins; M también necesita C).
-  - J → N (Gameplay).
-  - Contenido terminado → R → S (móvil).
+  - C → D (opcional: Azorius Tempo y Rakdos Reanimator) → U (por si D cambia arte).
+  - C y L → M (Construction y Origins).
+  - J → N parte 1 (First Turns y Game Plans).
+  - Si D, M o N añaden tablas o tarjetas, repetir el recorrido móvil de R.
   - Todo → T (verificación final).
 
 ### Orden recomendado (lo que queda)
 
-1. C `revision-sideboard` — bloquea D, M y P
-2. D `matchups-sin-plan`
+1. C `revision-sideboard` — bloquea D y M
+2. J `pivotes-interaccion` — bloquea N parte 1
 3. G `estudios-mulligan`
-4. J `pivotes-interaccion`
-5. K `creditos`
-6. L `fuente-testacular`
-7. M `revision-learn`
-8. N `revision-gameplay-1` (First Turns y Game Plans; la parte 2 ya está hecha)
-9. P `rendimiento-imagenes`
-10. Q `rendimiento-carga`
-11. R `movil-auditoria`
-12. S `movil-arreglos`
-13. O `readme-docs`
-14. U `repo-cleanup` — cuando decidas borrar; mejor después de D
-15. T `verificacion-final`
+4. L `fuente-testacular`
+5. M `revision-learn`
+6. N `revision-gameplay-1` (First Turns y Game Plans)
+7. D `matchups-sin-plan` — opcional (Azorius Tempo y Rakdos Reanimator fuera del top 10)
+8. Q `rendimiento-carga`
+9. U `repo-cleanup` — cuando decidas borrar; mejor después de D
+10. O `readme-docs`
+11. T `verificacion-final`
 
-Hechas: A `push-y-workflow`, B `nombre-prepare`, E `goldfish-modos`, F `mulligan-probabilidades`, H `windows-propias`, I `windows-rival`, K `creditos`, P `rendimiento-imagenes`, R `movil-auditoria`, S `movil-arreglos` y N parte 2 `revision-gameplay-2` (publicadas en 83c5f2c).
+Hechas: A `push-y-workflow`, B `nombre-prepare`, E `goldfish-modos`, F `mulligan-probabilidades`, H `windows-propias`, I `windows-rival` (55ac39b); K `creditos`, N parte 2 `revision-gameplay-2`, P `rendimiento-imagenes`, R `movil-auditoria`, S `movil-arreglos` (83c5f2c); decisión 9 y nombres reales en Credits y Origins (commit que sigue a ede2026).
