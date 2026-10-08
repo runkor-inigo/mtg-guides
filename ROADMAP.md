@@ -65,7 +65,7 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Decisión previa: el nombre nuevo.
 
 **C. `revision-sideboard`**
-- Sneak & Show vuelve al mapa (8 Oct 2026, petición del usuario) con la fila AlurenTell de la guía de j-off traducida a la lista del 5 Oct: +4 Thoughtseize, +2 Choke, +1 Assassin's Trophy / −3 Quirion Ranger, −2 Wirewood Symbiote, −1 Collector Ouphe, −1 Badgermole Cub. Matchups vuelve a tener plan para Sneak and Show.
+- Sneak & Show vuelve al mapa (8 Oct 2026, petición del usuario) con la fila AlurenTell de la guía de j-off traducida a la lista del 5 Oct: +4 Thoughtseize, +2 Choke, +1 Assassin's Trophy / −3 Quirion Ranger, −2 Wirewood Symbiote, −1 Collector Ouphe, −1 Badgermole Cub. Matchups vuelve a tener plan para Sneak and Show. Publicado en c790520.
 - Material de referencia (8 Oct 2026): LEGACY.md, sección 10, transcribe la guía "Sabertooth Elves aka Badger Ball Z" (2 Oct 2026 probablemente, 13 matchups) con lo que se deduce para mapear; LEGACY.md, secciones 4 y 5, recoge las ideas de sideboard de Curran Delahanty. Revisar ambos antes de cambiar planes.
 - Objetivo: revisar contigo los planes de sideboard convertidos a la lista del 5 Oct (capa de conversión "5 Oct 2026 list") y corregir lo que digas.
 - Archivos: `js/01.js` (capa de conversión, DETAILS, SB_COSTS), `js/09.js`, y la tabla de `#map` / `#heur` en `index.html`.
@@ -149,9 +149,9 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Tamaño: pequeña.
 - Decisión previa: a quién se agradece y con qué enlaces.
 
-**Heurísticas en LEGACY.md (8 Oct 2026, chat principal, sin subir).** Archivo interno nuevo con las heurísticas de Legacy de la guía (fuente, estado y cuándo no aplican), enlazado desde CLAUDE.md y fuera de la web (`.vercelignore`). Idea del usuario: no son incuestionables y cada mazo juega distinto; Speaker Elves hace más maná y más rápido (intenta más el Natural Order de turno 2) y su plan midrange es peor que el de Cradle Control. Añadido también a Deck Origins ("Where they differ") y como tarjeta nueva en Heuristics ("Faster than Cradle Control"). Credits: Newton Hang como quien más ha empujado el arquetipo Cradle, del que deriva Speaker Elves; Jarvis Yu se queda.
+**Heurísticas en LEGACY.md (8 Oct 2026, chat principal, publicado en d5abbdc).** Archivo interno nuevo con las heurísticas de Legacy de la guía (fuente, estado y cuándo no aplican), enlazado desde CLAUDE.md y fuera de la web (`.vercelignore`). Idea del usuario: no son incuestionables y cada mazo juega distinto; Speaker Elves hace más maná y más rápido (intenta más el Natural Order de turno 2) y su plan midrange es peor que el de Cradle Control. Añadido también a Deck Origins ("Where they differ") y como tarjeta nueva en Heuristics ("Faster than Cradle Control"). Credits: Newton Hang como quien más ha empujado el arquetipo Cradle, del que deriva Speaker Elves; Jarvis Yu se queda.
 
-**L. `fuente-testacular`** — HECHA (8 Oct 2026, sin subir): la guía existe. El usuario pasó el documento: Curran Delahanty, "Cradle Control: An Overview" (Google Docs, de 2024 a diciembre de 2025).
+**L. `fuente-testacular`** — HECHA (8 Oct 2026, publicada en d5abbdc): la guía existe. El usuario pasó el documento: Curran Delahanty, "Cradle Control: An Overview" (Google Docs, de 2024 a diciembre de 2025).
 - Añadido a Deck Origins como fuente (primera de la lista) y citado en cinco eras: origen de Cradle Control (Newton Hang cuestiona Nettle Sentinel y propone Elvish Reclaimer; su propio Discord); top 8 del Eternal Weekend 2021 de Jörg Heinrich, Newton (xWhale) y Peter van der Ham (Maraxus_of_NL); el lema "cartas que no necesiten otras para ser buenas" y Fiend Artisan (Curran gana una Challenge en noviembre de 2022); Hierarchs y Endurance hasta abril de 2024; MH3 (Talon Gates, Springheart), Sylvan Safekeeper, Scythecat Cub, Keen-Eyed Curator; baneos de Troll of Khazad-dûm, Sowing Mycospawn, Entomb y Nadu; y la lista de Badgermole Cub de runkor con Quirion Ranger, que Curran destaca.
 - Corregido: "Glimpse of Nature was never part of it" (Cradle Control) pasa a "se cortó antes de que el mazo tomara el nombre; su antecesor era la lista Reclaimer Glimpse".
 - Heuristics: quitadas las dos menciones al plan de vegecookies, que ya no existe.
@@ -180,7 +180,7 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Tamaño: media. Si hay muchos cambios, sepárala en `revision-gameplay-1` (First Turns y Game Plans) y `revision-gameplay-2` (Natural Order y Speaker Loop).
 - Decisión previa: ninguna, salvo líneas de combo.
 
-**O. `readme-docs`**
+**O. `readme-docs`** — hecha (8 Oct 2026, sin commit): README.md reescrito con la estructura actual. Quedan fuera el panel Sources (`#sources`, ver más abajo) y el comentario de `.github/workflows/meta.yml` que aún dice que el papel viene de mtgtop8.
 - Objetivo: actualizar README.md, que aún habla de la "RC51 test list" y de las capas css 02–08, para que coincida con la estructura actual.
 - Archivos: `README.md`.
 - Dependencias: ninguna. Cualquier orden. Si se hace al final, recoge también los cambios de P y Q.
@@ -260,7 +260,7 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 
 - **Cabecera retirada.** Decisión del usuario: "All guides" y el nombre de la guía pasan a la parte de arriba del menú lateral; en el móvil, una flecha de volver a la izquierda de la barra de capítulos. La línea "19 lands · 6 fetchlands…" se quita (ya está en Deck Construction y Current 75). Archivos: `index.html` (sin `<header>`, `h1` oculto), `js/menu.js` (opción `brand`), `js/01.js`, `js/05.js`, `css/menu.css`, y limpieza de reglas de cabecera en `css/01.css`, `02.css`, `06.css` y `12.css`. Verificado en local: 0 errores de consola; escritorio, menú plegado y 390 px sin scroll horizontal; los dos botones de volver llevan a la portada y al reabrir la guía el foco va al botón de volver. Publicado en cad80d3.
 - **Skills de diseño instaladas** en `.claude/skills/` (solo local): emil-design-eng, impeccable (sin hooks), design-taste-frontend y redesign-existing-projects.
-- **Pendiente del usuario: Playwright MCP.** El sistema de permisos no deja a Claude añadir un servidor MCP. Para activarlo: en una terminal, `claude mcp add playwright -- npx -y @playwright/mcp@0.0.83 --browser chrome` (o crear `.mcp.json` en la raíz y añadir `/.mcp.json` a `.vercelignore`), y reiniciar la sesión.
+- **Playwright MCP: añadido el 8 Oct 2026** (`claude mcp add playwright -- npx -y @playwright/mcp@0.0.83 --browser chrome`, con `-s user`, config de usuario en `C:\Users\Ini\.claude.json`, no en el repo; con el ámbito local no aparecía porque VS Code abre la carpeta como `c:` y la config estaba guardada bajo `C:`). El chequeo de salud falla dentro del sandbox de Claude (no ve `cmd.exe`); confirmar tras reiniciar la sesión que aparecen las herramientas `mcp__playwright__*`. El CLI `claude` no está en el PATH: el binario está en la extensión de VS Code (`resources\native-binary\claude.exe`).
 - **Opcional: hooks de Impeccable.** Ejecutarían su binario (que se descarga la primera vez) tras cada edición y al final de cada turno. Desactivados hasta que el usuario decida.
 
 ### Goldfish, zoom y Credits (8 Oct 2026, chat principal)
@@ -291,7 +291,7 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 - **Julian Knab en Deck Origins y Credits:** ganó el Bazaar of Moxen 8 en París con Elves (695 jugadores, 3 Nov 2013), MKM Series Milán 2016 y Hamburgo 2018, top 8 en el Legacy European Championship 2017; doce resultados destacados con Elves de 2013 a 2018 (mtgtop8). Resuelve la duda "Knab o Knapp": es Knab.
 - **Game Plans · Slower board:** con Elvish Visionary el juego largo puede ser más grindy (Symbiote lo devuelve y cada recast roba; con Sabertooth roba toda la biblioteca); no todas las listas lo juegan.
 
-### Resultados en papel, refresco nocturno y selectores (8 Oct 2026, chat principal, sin subir)
+### Resultados en papel, refresco nocturno y selectores (8 Oct 2026, chat principal, publicado en 25fd194)
 
 - El archivo de resultados no se refrescaba si el metajuego no cambiaba (condición del workflow). Ahora `update_results.py` corre cada noche con su propio control de "una vez al día de Madrid" (`--force` para repetir), y el workflow ya no depende del metajuego.
 - Resultados en papel: mtgtop8 (sin robots.txt ni comprobación anti-bots), búsqueda Legacy con Formidable Speaker en el main, eventos no MTGO, arquetipos Elves / Cradle Control. Incluye las Cup y Super DX de Hareruya, KMC y Tokai. hareruyamtg.com prohíbe en su robots.txt leer `/deck/result?*`, así que no se lee directamente. Primera ejecución: 103 resultados (44 trofeos, 11 de Challenge, 48 en papel).
@@ -321,7 +321,7 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 - `js/13.js` y `css/13.css` (nuevos). Vistas Plan rows (por defecto), Matrix y Presence; buscador; el nombre de un matchup abre su plan; botón "Print / Save as PDF" con una hoja A4 en blanco y negro de una cara (comprobado con un PDF real: una página, 29 matchups). La matriz antigua sigue en el DOM, oculta.
 - Maybeboard como mesa de estudio: carta grande con "Why it was chosen", "Where it helped" (calculado de los planes antiguos de `js/01.js`, guardado en `data-served` de cada ficha) y, en pequeño, "Why it is not in the list now"; debajo, un carrusel que se mueve despacio y se para con el ratón. Criterio del usuario: el Maybeboard es el archivo de todas las cartas consideradas, y lo importante es por qué se eligieron.
 - Verificado en local: 0 errores de consola; a 390 px ninguna vista desborda (la matriz hace scroll dentro de su marco).
-- Pendiente: el texto "Reading the sideboard map: Read-only transposed map…" de Sources describe la matriz antigua; actualizarlo junto con el resto de Sources.
+- Hecho: "Reading the sideboard map" en Sources describe ya las tres vistas (8 Oct 2026, chat `sources`).
 
 ### Credits y Deck Origins sin duplicados (8 Oct 2026, chat principal, publicado en 226a7f6)
 
@@ -330,7 +330,7 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 - Deck Origins recibe lo que solo estaba en Credits: pilotos japoneses (Okuto Shinya, Tozuka Kouta, Maegawa Naoya, Yanagisawa Yuta), pilotos de MTGO (DB_ThrabenU, Beñat y el resto, a 7 Oct) y Everyday Eternal. Su lista de fuentes añade Joe Dyer (MTGGoldfish), el SCG Open de Philadelphia, mtgtop8, TCDecks y la cobertura del GP Birmingham. Comprobado: cada nombre que estaba en Credits aparece en Deck Origins.
 - Perfiles nuevos (datos del usuario): Julian Knab (MTGO: Julian23; @itsJulian23) y Reid Duke (MTGO: reiderrabbit; @ReidDuke) en Deck Origins; SamwiseGeeGee (@jkyu06), "que conoce todas las versiones del mazo", en los agradecimientos de Credits. Prominent decklists muestra Julian23 y reiderrabbit con su nombre real.
 - Colaboradores (datos del usuario): Jonathan Caballero, Serafín Gómez, Beñat Garay (MTGO: Benat), David Melchor (MTGO: deimus), Shimoizumi Ryoichi y Takagi Yuki, vegecookies, j-off (Discord) y Jarvis Yu (MTGO: SamwiseGeeGee; @jkyu06: ganó el GP Seattle-Tacoma 2015 con Lands, según mtgtop8; no tiene resultados con Elves; el usuario lo confirma. Aparece aparte como persona de referencia para contrastar ideas), más un agradecimiento al canal #elves. "Beñat Garay" con nombre completo también en Deck Origins y en Prominent decklists.
-- **Pendiente: Sources (`#sources`) tiene datos antiguos** que no cuadran con la guía: "Nightly refresh at 00:00" (ahora es la primera ejecución del día), "28 Sep 2026 snapshot" (ahora se refresca cada noche) y "Marwyn and Chomping Changeling load online from Scryfall" (ya son locales desde la tarea P). Revisarlo en un chat aparte o con la tarea O.
+- Hecho (8 Oct 2026, chat `sources`, sin subir): Sources reescrito con las fuentes actuales (MTGGoldfish, MyMTGO, búsqueda de mazos + mtgo.com, Scryfall con primera impresión local), refresco en la primera ejecución del día, las tres vistas del Sideboard map, el origen de los planes (conversión al 5 Oct, revisión de runkor, j-off) y enlaces a Deck Origins y Heuristics. Quitados 17Lands, Mana Math, "Selected printings · RC51" y las etiquetas RC39/RC51. En js/01.js, el tooltip de la matriz ya no pone "captured 2026-09-28" y las notas de mapeo ya no dicen "manual refresh". La tarea L (Testacular) puede añadir su tarjeta aquí.
 
 ### Próximo paso de diseño (propuesto, 8 Oct 2026)
 
@@ -339,11 +339,27 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 - Tamaño: media (auditoría) + lo que se apruebe.
 - Preguntas abiertas de Credits: el nombre "que gustes" del dictado; confirmar que dssit es David Schittinger.
 
+### Resultados solo de MTGGoldfish (8 Oct 2026, chat principal, sin subir)
+
+- Decisión del usuario: todas las fuentes de resultados desde MTGGoldfish, manteniendo la clasificación (All MTGO / MTGO trophies / MTGO challenges / Paper events). mtgtop8 deja de usarse.
+- `update_results.py`: los eventos de MTGO que no son liga ni Challenge (Showcase Challenge, RC Qualifier, Last Chance) cuentan con las Challenges; los que no son de MTGO, como papel. Goldfish no da puesto para ellos: salen como "Published list". Se quitan duplicados en esos eventos (Goldfish lista a veces dos veces el mismo mazo); los trofeos de liga se cuentan todos.
+- Consecuencia aceptada por el usuario: el papel baja de 48 resultados (mtgtop8, casi todos japoneses) a 2 (j-off en la DMV League y el SCG CON de Baltimore). Archivo regenerado: 59 resultados (44 trofeos, 13 de Challenge y otros eventos de MTGO, 2 en papel).
+
+### Resumen del 8 Oct 2026 (últimos despliegues)
+
+- 226a7f6: Sideboard map con Plan rows, Matrix, Presence e impresión; Maybeboard como mesa de estudio; Credits sin historia repetida.
+- f1ab0fc: bandeja del Maybeboard, arte de Savannah, Once Upon a Time nunca sale, % de categoría en todas las vistas.
+- 04cf99f: Deck Origins como timeline interactivo.
+- 25fd194: resultados en papel (mtgtop8), refresco nocturno de resultados, un solo estilo de selector.
+- d5abbdc: guía de Curran Delahanty en Deck Origins, LEGACY.md, Newton Hang en Credits.
+- c790520: Sneak & Show con el plan de j-off; su guía en LEGACY.md.
+- Pendiente de comprobar el 9 Oct: el commit nocturno del bot debe traer `js/meta-live.js` (con `mymtgo`) y `js/results-archive.js` (con resultados en papel); después, `git pull`.
+
 ### Estado (8 Oct 2026, tras el commit 83c5f2c)
 
 - **Hechas y publicadas:** A, B, E, F, H, I (commit 55ac39b); K, N parte 2, P, R y S (commit 83c5f2c); y las decisiones 1–8. A solo espera el commit del bot el 9 Oct.
 - **Matchups (chat de Matchups, publicado en 83c5f2c):** top 10 de MTGGoldfish en filas desplegables; tabla "Their sideboard" con MTGGoldfish y MyMTGO; semáforos que leen también la lista de referencia de MyMTGO; plan de Boros Energy (parte de D).
-- **Se pueden empezar ya:** C `revision-sideboard` ★, G `estudios-mulligan` ★, J `pivotes-interaccion`, O `readme-docs`, Q `rendimiento-carga`, U `repo-cleanup` (cuando decidas borrar). L `fuente-testacular` está hecha. ★ = necesita una decisión del usuario antes de empezar.
+- **Se pueden empezar ya:** C `revision-sideboard` ★, G `estudios-mulligan` ★, J `pivotes-interaccion`, Q `rendimiento-carga`, U `repo-cleanup` (cuando decidas borrar). L `fuente-testacular` está hecha. ★ = necesita una decisión del usuario antes de empezar.
 - **Bloqueadas:** D (Azorius Tempo y Rakdos Reanimator, opcionales porque ya no están en el top 10; por C), M (por C y L), N parte 1 (`revision-gameplay-1`, por J), T (todas).
 - **Decisión 9 (menú):** resuelta. Ids internos alineados, la guía abre en Start Here y el `#hash` de la URL guarda la sección (publicado en el commit que sigue a ede2026).
 - **Pregunta de H (Quirion en la ruta 1):** resuelta el 8 Oct 2026; ver la tarea N.
@@ -354,13 +370,13 @@ Publicado: K `creditos`, N parte 2, P `rendimiento-imagenes` (58 `.webp`), R y S
 
 - Comprobado en vivo (https://speaker-elves.vercel.app/): 0 errores de consola en escritorio y a 390 px; título "Speaker Elves"; Matchups con 11 filas, Boros Energy incluido; `assets/matchups/boros-energy.webp` da 200 y `ROADMAP.md` da 404.
 - La próxima ejecución del bot ya leerá MyMTGO: el 9 Oct, comprueba que `js/meta-live.js` trae la clave `mymtgo`.
-- Sigue pendiente: U `repo-cleanup` (borrar las 72 imágenes sin uso), O `readme-docs`, C, D (opcional), G, J, L, M, N parte 1, Q y T.
+- Sigue pendiente: U `repo-cleanup` (borrar las 72 imágenes sin uso), C, D (opcional), G, J, L, M, N parte 1, Q y T.
 
 **Chats en paralelo:** varias tareas tocan `index.html`. Cada chat edita solo su pane (`<section class="pane" id="…">`), con ediciones puntuales, nunca reescribiendo el archivo entero. Antes de dar la tarea por hecha, comprueba que las secciones de otros chats siguen intactas. Al terminar, cada chat marca su tarea aquí y en "Estado" y no hace push: el push lo pide el usuario desde un solo chat.
 
 ### En cualquier orden o en secuencia
 
-- **Cualquier orden** (no dependen de nada ni chocan entre sí): C `revision-sideboard`, G `estudios-mulligan`, J `pivotes-interaccion`, O `readme-docs`, Q `rendimiento-carga`.
+- **Cualquier orden** (no dependen de nada ni chocan entre sí): C `revision-sideboard`, G `estudios-mulligan`, J `pivotes-interaccion`, Q `rendimiento-carga`.
 - **En secuencia:**
   - C → D (opcional: Azorius Tempo y Rakdos Reanimator) → U (por si D cambia arte).
   - C y L → M (Construction y Origins).
@@ -379,7 +395,7 @@ Publicado: K `creditos`, N parte 2, P `rendimiento-imagenes` (58 `.webp`), R y S
 7. D `matchups-sin-plan` — opcional (Azorius Tempo y Rakdos Reanimator fuera del top 10)
 8. Q `rendimiento-carga`
 9. U `repo-cleanup` — cuando decidas borrar; mejor después de D
-10. O `readme-docs`
+10. O `readme-docs` (hecha)
 11. T `verificacion-final`
 
 Hechas: A `push-y-workflow`, B `nombre-prepare`, E `goldfish-modos`, F `mulligan-probabilidades`, H `windows-propias`, I `windows-rival` (55ac39b); K `creditos`, N parte 2 `revision-gameplay-2`, P `rendimiento-imagenes`, R `movil-auditoria`, S `movil-arreglos` (83c5f2c); decisión 9 y nombres reales en Credits y Origins (commit que sigue a ede2026).
