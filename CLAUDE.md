@@ -1,6 +1,6 @@
 # Speaker Elves Guide
 
-Legacy MTG guide for "Speaker Elves" (BG Elves). Current list: 5 Oct 2026 (runkor, MTGO). See README.md for the file structure and ROADMAP.md for pending decisions.
+Legacy MTG guide for "Speaker Elves" (BG Elves). Current list: 5 Oct 2026 (runkor, MTGO). See README.md for the file structure and ROADMAP.md for pending decisions. LEGACY.md holds the Legacy heuristics the guide follows, with their source, status and when they do not apply (internal, not published); read it before writing strategy text, and keep it in step with the Heuristics pane.
 
 ## Decisions
 
@@ -30,7 +30,7 @@ Legacy MTG guide for "Speaker Elves" (BG Elves). Current list: 5 Oct 2026 (runko
 - Live since 8 Oct 2026 (commits dbc7cc9, 1b23972 and 9d52a02): Deck Origins eras, Speaker Loop routes (turn-two kill and setup turn), matchup card v2, Goldfish icons, the nightly refresh fix and the chat plan.
 - Live since 8 Oct 2026 (commit 55ac39b): task B ("Metagame" label), task F (mulligan odds box, js/12.js), tasks H and I (Interaction Windows parts 1 and 2) and task E (Goldfish modes, "When the last piece is missing"). Verified live: 0 console errors on desktop and at 390 px.
 - Live since 8 Oct 2026 (commit 83c5f2c): Matchups rows with the MyMTGO "Their sideboard" table and the Boros Energy plan, update_meta.py reading MyMTGO, task K (Credits), N part 2, P (WebP images), R and S (phone fixes, "Speaker Elves" title) and the new menu part names. Verified live: 0 console errors on desktop and at 390 px, ROADMAP.md 404.
-- `.vercelignore` keeps ROADMAP.md, CLAUDE.md, README.md, `scripts/`, `.github/`, `.claude/` and temporary test pages (`/_*.html`) off the public site. Any new internal file must be added there. Still, never commit `_*.html` test pages.
+- `.vercelignore` keeps ROADMAP.md, CLAUDE.md, README.md, LEGACY.md, `scripts/`, `.github/`, `.claude/` and temporary test pages (`/_*.html`) off the public site. Any new internal file must be added there. Still, never commit `_*.html` test pages.
 - Live since 8 Oct 2026 (commit 5457fee): sourced results in Deck Origins (incl. Julian Knab, Reid Duke), Current 75 as its own section with Prominent decklists, Sideboard map + Maybeboard, Turn-2 Sabertooth kill with Quirion linked to play/draw, Visionary note in Game Plans.
 - Weight: index.html is ~160 KB. Images are WebP since task P (8 Oct 2026): the referenced `assets/` files total ~4 MB (cards 488×680 at q82, ~50–100 KB each). 72 unused files (the old `.jpg`/`.png` originals and 16 replaced card WebPs) stay in `assets/` until task U `repo-cleanup`.
 - README.md still describes the old "RC51 test list", css layers 02–08 and a refresh "at 00:00 Europe/Madrid"; it needs a refresh (task O).

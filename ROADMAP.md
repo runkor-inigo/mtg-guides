@@ -147,7 +147,14 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Tamaño: pequeña.
 - Decisión previa: a quién se agradece y con qué enlaces.
 
-**L. `fuente-testacular`**
+**Heurísticas en LEGACY.md (8 Oct 2026, chat principal, sin subir).** Archivo interno nuevo con las heurísticas de Legacy de la guía (fuente, estado y cuándo no aplican), enlazado desde CLAUDE.md y fuera de la web (`.vercelignore`). Idea del usuario: no son incuestionables y cada mazo juega distinto; Speaker Elves hace más maná y más rápido (intenta más el Natural Order de turno 2) y su plan midrange es peor que el de Cradle Control. Añadido también a Deck Origins ("Where they differ") y como tarjeta nueva en Heuristics ("Faster than Cradle Control"). Credits: Newton Hang como quien más ha empujado el arquetipo Cradle, del que deriva Speaker Elves; Jarvis Yu se queda.
+
+**L. `fuente-testacular`** — HECHA (8 Oct 2026, sin subir): la guía existe. El usuario pasó el documento: Curran Delahanty, "Cradle Control: An Overview" (Google Docs, de 2024 a diciembre de 2025).
+- Añadido a Deck Origins como fuente (primera de la lista) y citado en cinco eras: origen de Cradle Control (Newton Hang cuestiona Nettle Sentinel y propone Elvish Reclaimer; su propio Discord); top 8 del Eternal Weekend 2021 de Jörg Heinrich, Newton (xWhale) y Peter van der Ham (Maraxus_of_NL); el lema "cartas que no necesiten otras para ser buenas" y Fiend Artisan (Curran gana una Challenge en noviembre de 2022); Hierarchs y Endurance hasta abril de 2024; MH3 (Talon Gates, Springheart), Sylvan Safekeeper, Scythecat Cub, Keen-Eyed Curator; baneos de Troll of Khazad-dûm, Sowing Mycospawn, Entomb y Nadu; y la lista de Badgermole Cub de runkor con Quirion Ranger, que Curran destaca.
+- Corregido: "Glimpse of Nature was never part of it" (Cradle Control) pasa a "se cortó antes de que el mazo tomara el nombre; su antecesor era la lista Reclaimer Glimpse".
+- Heuristics: quitadas las dos menciones al plan de vegecookies, que ya no existe.
+- Ideas del documento para la revisión del sideboard (tarea C), sin aplicar: contra mazos con counters (Rescaminator, Delver) Curran saca los tres Natural Order, Atraxa y Craterhoof; contra Red Stompy, −4 Endurance (Broadside Bombardiers) y Dismember para Magus of the Moon; "menos copias de Leyline es mejor si hay otra disrupción" (la lista del 5 Oct lleva 3); Toxicrene contra Mono-Green Post; secuenciar exponiendo primero las amenazas menores (Reclaimer) para gastar el removal del rival.
+
 - Objetivo: buscar si existe la guía de Elves de Testacular y, si existe, añadirla a Sources y usarla para contrastar Deck Origins.
 - Archivos: el pane `#sources` en `index.html`, y quizá `#origins`.
 - Dependencias: ninguna. Cualquier orden.
@@ -334,7 +341,7 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 
 - **Hechas y publicadas:** A, B, E, F, H, I (commit 55ac39b); K, N parte 2, P, R y S (commit 83c5f2c); y las decisiones 1–8. A solo espera el commit del bot el 9 Oct.
 - **Matchups (chat de Matchups, publicado en 83c5f2c):** top 10 de MTGGoldfish en filas desplegables; tabla "Their sideboard" con MTGGoldfish y MyMTGO; semáforos que leen también la lista de referencia de MyMTGO; plan de Boros Energy (parte de D).
-- **Se pueden empezar ya:** C `revision-sideboard` ★, G `estudios-mulligan` ★, J `pivotes-interaccion`, L `fuente-testacular`, O `readme-docs`, Q `rendimiento-carga`, U `repo-cleanup` (cuando decidas borrar). ★ = necesita una decisión del usuario antes de empezar.
+- **Se pueden empezar ya:** C `revision-sideboard` ★, G `estudios-mulligan` ★, J `pivotes-interaccion`, O `readme-docs`, Q `rendimiento-carga`, U `repo-cleanup` (cuando decidas borrar). L `fuente-testacular` está hecha. ★ = necesita una decisión del usuario antes de empezar.
 - **Bloqueadas:** D (Azorius Tempo y Rakdos Reanimator, opcionales porque ya no están en el top 10; por C), M (por C y L), N parte 1 (`revision-gameplay-1`, por J), T (todas).
 - **Decisión 9 (menú):** resuelta. Ids internos alineados, la guía abre en Start Here y el `#hash` de la URL guarda la sección (publicado en el commit que sigue a ede2026).
 - **Pregunta de H (Quirion en la ruta 1):** resuelta el 8 Oct 2026; ver la tarea N.
@@ -351,7 +358,7 @@ Publicado: K `creditos`, N parte 2, P `rendimiento-imagenes` (58 `.webp`), R y S
 
 ### En cualquier orden o en secuencia
 
-- **Cualquier orden** (no dependen de nada ni chocan entre sí): C `revision-sideboard`, G `estudios-mulligan`, J `pivotes-interaccion`, L `fuente-testacular`, O `readme-docs`, Q `rendimiento-carga`.
+- **Cualquier orden** (no dependen de nada ni chocan entre sí): C `revision-sideboard`, G `estudios-mulligan`, J `pivotes-interaccion`, O `readme-docs`, Q `rendimiento-carga`.
 - **En secuencia:**
   - C → D (opcional: Azorius Tempo y Rakdos Reanimator) → U (por si D cambia arte).
   - C y L → M (Construction y Origins).
@@ -364,7 +371,7 @@ Publicado: K `creditos`, N parte 2, P `rendimiento-imagenes` (58 `.webp`), R y S
 1. C `revision-sideboard` — bloquea D y M
 2. J `pivotes-interaccion` — bloquea N parte 1
 3. G `estudios-mulligan`
-4. L `fuente-testacular`
+4. L `fuente-testacular` — hecha (documento de Curran Delahanty)
 5. M `revision-learn`
 6. N `revision-gameplay-1` (First Turns y Game Plans)
 7. D `matchups-sin-plan` — opcional (Azorius Tempo y Rakdos Reanimator fuera del top 10)
