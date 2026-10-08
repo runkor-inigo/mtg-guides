@@ -109,7 +109,7 @@
 <section class="pane" id="goldfish">
 <div class="gf-heading"><div><span class="gf-eyebrow">PRACTICE THE SEQUENCE</span><h2>Goldfish playground</h2><p>Choose a line. Follow every card, mana payment and untap.</p></div><span class="gf-pill">Guided · deterministic</span></div>
 <p class="note gf-intro">Practise the lines from <button type="button" class="goto" data-goto="first-turns">First Turns</button>, <button type="button" class="goto" data-goto="natural-order">Natural Order</button> and the <button type="button" class="goto" data-goto="loop">Speaker Loop</button> one card at a time. “Turn-2 Sabertooth” runs all the way into the loop and the Craterhoof finish. Each mode is a fixed, deterministic demonstration with no opponent: it shows what a line needs, not how often you will have it.</p>
-<div class="gf-toolbar"><div class="gf-mode" role="group" aria-label="Combo to demonstrate"><button type="button" data-mode="no" aria-pressed="true">Turn-2 Natural Order</button><button type="button" data-mode="sab" aria-pressed="false">Turn-2 Sabertooth</button><button type="button" data-mode="loop" aria-pressed="false">Visionary loop (older lists)</button></div><div class="gf-side" role="group" aria-label="Play or draw"><button type="button" data-side="play" aria-pressed="true">On the play</button><button type="button" data-side="draw" aria-pressed="false">On the draw</button></div></div>
+<div class="gf-toolbar"><div class="gf-mode" role="group" aria-label="Combo to demonstrate"><button type="button" data-mode="no" aria-pressed="true">Turn-2 Natural Order</button><button type="button" data-mode="sab" aria-pressed="false">Turn-2 Sabertooth</button><button type="button" data-mode="setup" aria-pressed="false">Setup turn · T3 kill</button><button type="button" data-mode="loop" aria-pressed="false">Speaker loop · ready board</button></div><div class="gf-side" role="group" aria-label="Play or draw"><button type="button" data-side="play" aria-pressed="true">On the play</button><button type="button" data-side="draw" aria-pressed="false">On the draw</button></div></div>
 <p id="gf-context" class="muted"></p>
 <div class="gf-layout"><div class="gf-tabletop">
 <div class="gf-zone-heading"><span>Battlefield</span><span id="gf-turn">Turn 1</span></div><div class="gf-board"><div class="gf-row" data-zone="creatures" data-label="Creatures"></div><div class="gf-row gf-lands" data-zone="lands" data-label="Lands"></div></div><p id="gf-empty">Your battlefield is empty. Start with the seven cards below.</p>
@@ -301,7 +301,25 @@
 <h3>Once Upon a Time and accepted risk</h3>
 <p>Missing Cradle and missing the first green source are <strong>not the same risk</strong>. Missing the first usable source is normally worse, because a game can still develop without Cradle.</p>
 <p>Once Upon a Time can justify a deliberately risky keep when the other six cards are strong. Ask whether it finds <em>the exact missing card</em>, how many other hits or slower lines exist, and how bad a miss is. A keep that needs a first source is more fragile than one that needs Cradle. Throwing back every such hand because the spell might miss sets a risk threshold too conservative for a deck built to use that card. The exact threshold depends on the pilot and the matchup.</p>
-<p class="muted">Hit probabilities for defined hand classes are <span class="ev unverified">being calculated</span>. Until then, the exact opening-hand figures that exist are in the Current-list metrics on <button type="button" class="goto" data-goto="construction">Deck Construction</button>, such as the chance of seeing an immediate green source in seven cards.</p>
+<aside class="odds" id="mull-odds" aria-labelledby="odds-title">
+<h4 id="odds-title">Opening-hand context <span>not a keep rule</span></h4>
+<p class="odds-basis" id="odds-basis" aria-live="polite">Current list</p>
+<div class="table-scroll"><table class="data"><thead><tr><th scope="col">Before turn one</th><th scope="col">On the play</th><th scope="col">On the draw</th></tr></thead><tbody>
+<tr data-odds="source"><th scope="row">Green source for turn one</th><td>—</td><td>—</td></tr>
+<tr data-odds="accel"><th scope="row">Green source + accelerator</th><td>—</td><td>—</td></tr>
+<tr data-odds="ouat"><th scope="row">…counting Once Upon a Time</th><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<p class="muted">How often the deck sees the pieces of the ideal first turn. A hand outside these numbers can still be a keep, and one inside them can still be a mulligan: the six questions above decide.</p>
+<details class="odds-tune"><summary>Try other counts</summary>
+<p class="muted">Move a count to see the odds change. Nothing is saved: the table always opens on the current list from <button type="button" class="goto" data-goto="construction">Current 75</button>.</p>
+<div class="odds-inputs" id="odds-inputs"></div>
+<button type="button" class="odds-reset" id="odds-reset" disabled>Reset to the current list</button>
+</details>
+<details class="m39-method"><summary>How these are calculated</summary>
+<p id="odds-method">Main deck, cards seen by turn one (seven on the play, eight on the draw), before any mulligan and with no opposing interaction.</p>
+<p>All three rows are exact (multivariate hypergeometric). For the last row, the first Once Upon a Time is cast for free and takes the one missing piece from the top five cards: a dork when the hand has a source, a source when it has an accelerator. It cannot fix a hand missing both. Other figures for the list are in the Current-list metrics on <button type="button" class="goto" data-goto="construction">Deck Construction</button>.</p>
+</details>
+</aside>
 
 <h3>Against whom?</h3>
 <p>The same hand changes value with the opponent’s likely <strong>second and third turns</strong>, not with a generic label like “fair deck”.</p>
@@ -435,6 +453,13 @@
 <article><h4>Turn-two kill</h4><p>Wins before the opponent untaps. Needs more cards: on the play, Quirion Ranger already in hand and three discards; on the draw, three Symbiotes and four discards. Every Speaker trigger must find the next piece in order.</p></article>
 <article><h4>Setup turn</h4><p>Needs only the turn-two setup and one discard, because Craterhoof is searched on turn three. The engine sits on the battlefield for one opposing turn: weigh their sweepers, removal and land destruction first. Marwyn protects Cradle from Wasteland.</p></article>
 </div>
+<h3>When the last piece is missing</h3>
+<p>Sometimes the mana or the discards run out before the last piece of the loop, for example Temur Sabertooth. The turn is not wasted: the mana and the Speaker triggers you already made still pay for spells. Turn it into a setup turn and spend what is left on one of two plans.</p>
+<div class="cards2">
+<article><h4>Protect the next turn</h4><p>Use a Speaker trigger on a piece against the opponent’s plan instead of the missing combo piece: <strong>Collector Ouphe</strong> against artifacts, <strong>Marwyn</strong> to protect Cradle from Wasteland, <strong>Allosaurus Shepherd</strong> against counters, or <strong>Vibrance</strong> to find Boseiju: evoked for {G}{G}, it puts the land into your hand. Channel <strong>Boseiju</strong> ({1}{G}, discard it) on an artifact, enchantment or nonbasic land. Breaking a Tron land or Planar Nexus on turn two this way is a very strong play. Then kill on turn three as in Route 2: once their key piece is gone, that return turn usually wins.</p></article>
+<article><h4>Do the most damage</h4><p>When no kill is possible this turn or the next, use all the mana for damage now, for example Allosaurus Shepherd’s {4}{G}{G} on a wide board of Elves (see Dinobash in <button type="button" class="goto" data-goto="game-plans">Game Plans</button>).</p></article>
+</div>
+<p class="muted">Which plan to choose depends on two things: the most mana you can reach this turn, and the deck across the table. See <button type="button" class="goto" data-goto="matchups">Matchups</button>.</p>
 <h3>Common mistakes</h3>
 <ul>
 <li>Counting Speaker for Cradle while it is in your hand after a bounce.</li>
@@ -448,7 +473,206 @@
 <section class="pane" id="matchups"><div class="article"><h2>Matchups</h2>
 <p class="lead">The decks this guide tracks: the most played Legacy archetypes on MTGO according to MTGGoldfish, each with its sideboard plan.</p>
 <div id="matchup-cards"></div></div></section>
-<section class="pane" id="windows"><div class="wip"><div class="wip-sign" aria-hidden="true"><span class="wip-lamp"></span><span class="wip-lamp"></span></div><div class="wip-copy"><span class="wip-badge">Under construction</span><h2>Interaction Windows</h2><p>For opponents and pilots: when the deck is vulnerable, what a response accomplishes and the deck’s fallback.</p></div></div></section>
+<section class="pane" id="windows"><div class="article"><p class="draft-note"><b>First draft</b> Part 1 walks through the deck’s own windows, turn by turn. Part 2 sorts them by the opponent’s type of interaction and ends with the deck’s fallback plan.</p>
+<h2>Interaction Windows</h2>
+<p class="lead">Speaker Elves is most exposed on <strong>turn two</strong>, when it commits Gaea’s Cradle, Badgermole Cub and a payoff in one turn. This page walks through each window in order: what the deck has on the line, what each response accomplishes, and what the pilot can do about it. <a class="goto" href="#windows-opponent">Part 2</a> turns it around: each type of interaction from the opponent’s side, and the deck’s fallback.</p>
+<p>Card rules below follow the current Oracle text. How much a response hurts is the guide’s reading of the lines in <button type="button" class="goto" data-goto="first-turns">First Turns</button>, <button type="button" class="goto" data-goto="natural-order">Natural Order</button> and <button type="button" class="goto" data-goto="loop">Speaker Loop</button> <span class="ev test">Under test</span>.</p>
+
+<h3>The windows at a glance</h3>
+<ol class="timeline">
+<li><span class="when">T1</span><div><h4>The mana</h4><p>One green source and one accelerator. Little is committed, but everything after depends on them.</p></div></li>
+<li><span class="when">T2</span><div><h4>Cradle and Cub</h4><p>The turn the deck commits: a legendary land, a two-mana creature and an earthbend trigger.</p></div></li>
+<li><span class="when">T2</span><div><h4>Natural Order</h4><p>One sorcery that also costs a creature. Countered, it loses a card, a body and four mana.</p></div></li>
+<li><span class="when">T2</span><div><h4>Route 1 · the loop</h4><p>A long chain of spells and abilities. The opponent gets priority at every step.</p></div></li>
+<li><span class="when">T2→T3</span><div><h4>Route 2 · setup turn</h4><p>The engine sits on the battlefield through a full opposing turn, so sorcery-speed answers count.</p></div></li>
+</ol>
+<p class="muted">How much each response costs the deck: <span class="sev stop">Stops the line</span> the planned kill is off this turn; <span class="sev slow">Slows it</span> the line survives with less mana or a turn later; <span class="sev minor">Small cost</span> the line still works.</p>
+
+<h3>Rules that run through every window</h3>
+<ul>
+<li><strong>Earthbend does not make Cradle easy to destroy.</strong> Cub’s earthbend turns Cradle into a 1/1 creature land. If it dies or is exiled, it returns to the battlefield <em>tapped</em>, as a plain land. Removal on an animated Cradle costs its mana this turn, not the card.</li>
+<li><strong>Only Speaker untaps a plain Cradle.</strong> Wirewood Symbiote and Quirion Ranger untap target <em>creature</em>. Once Cradle is no longer a creature, only Formidable Speaker’s {1}, {T} can untap it. Cradle no longer counts itself, and Cub adds no extra {G} when it taps, because Cub’s bonus is for creatures.</li>
+<li><strong>Allosaurus Shepherd stops counters, nothing else.</strong> With Shepherd on the battlefield, your green spells can’t be countered: Cub, Speaker, Natural Order, Sabertooth and Craterhoof included. It does not stop Stifle effects, removal or discard.</li>
+<li><strong>Marwyn protects every land, Cradle included.</strong> Your lands have hexproof, so an opponent can’t target them, not even an animated Cradle with creature removal. Marwyn herself can still be targeted.</li>
+<li><strong>Mana empties between steps and phases.</strong> If an untapped Cradle is about to be destroyed or removed, tap it for mana in response; that mana stays until the end of the phase.</li>
+</ul>
+
+<h3>Turn one · the mana</h3>
+<p><strong>On the line:</strong> the first land (often a fetch for Bayou or Forest) and the accelerator: a dork, Green Sun’s Zenith for Dryad Arbor, or Quirion Ranger.</p>
+<div class="table-scroll"><table class="data win-table"><thead><tr><th scope="col">Their response</th><th scope="col">What it accomplishes</th><th scope="col">What you can do</th></tr></thead><tbody>
+<tr><th scope="row">Removal on the dork</th><td><span class="sev slow">Slows it</span> Cradle sees one creature fewer and Cub has one creature fewer to tap. The turn-two Natural Order line with dork, Cub and Cradle no longer reaches four mana.</td><td>Keep hands with a second accelerator or a Quirion route. One-mana creatures make removal a one-for-one trade, not a blowout.</td></tr>
+<tr><th scope="row">Wasteland on the only green land</th><td><span class="sev slow">Slows it</span> That land’s green is gone. A dork already on the battlefield keeps working.</td><td>Basic Forests dodge it. Bayou is a Forest, so Quirion Ranger can return a targeted Bayou to your hand in response. Marwyn makes every land untargetable.</td></tr>
+<tr><th scope="row">Discard before your turn one</th><td><span class="sev stop">Stops the line</span> when it takes the one piece with no substitute: Cradle, Cub, Natural Order or Speaker.</td><td>Prefer hands with two routes. See <button type="button" class="goto" data-goto="mulligans">Mulligans</button>.</td></tr>
+<tr><th scope="row">Counter on the accelerator</th><td><span class="sev slow">Slows it</span> Daze or Force of Will costs you the turn-one tempo, at a card’s price for them.</td><td>Allosaurus Shepherd can’t be countered, and from then on protects the rest of your green spells.</td></tr>
+<tr><th scope="row">A lock already in play</th><td><span class="sev stop">Stops the line</span> Chalice of the Void on one counters the dorks, Quirion, Symbiote and Green Sun’s Zenith (X = 0 is mana value 1 on the stack). Blood Moon turns Cradle, Bayou and Boseiju into Mountains.</td><td>Shepherd can’t be countered, so Chalice does not stop it. Against Moon, only the two basic Forests and the dorks still make green.</td></tr>
+</tbody></table></div>
+
+<h3>Turn two · Cradle and Cub</h3>
+<p><strong>On the line:</strong> Gaea’s Cradle, Badgermole Cub and the earthbend trigger that animates Cradle. The order creates three windows: Cradle on the battlefield, Cub on the stack, and earthbend on the stack.</p>
+<div class="table-scroll"><table class="data win-table"><thead><tr><th scope="col">Their response</th><th scope="col">What it accomplishes</th><th scope="col">What you can do</th></tr></thead><tbody>
+<tr><th scope="row">Wasteland on Cradle before it is animated</th><td><span class="sev stop">Stops the line</span> Cradle is gone for good: it was never earthbent.</td><td>Tap Cradle for mana in response if it is untapped. Cast Marwyn first when the hand allows it.</td></tr>
+<tr><th scope="row">Counter on Cub</th><td><span class="sev slow">Slows it</span> No extra {G} per creature tap and no earthbend: Cradle stays a plain land.</td><td>Shepherd on the battlefield makes Cub uncounterable. Against Daze, leave {1} spare.</td></tr>
+<tr><th scope="row">Wasteland on Cradle in response to earthbend</th><td><span class="sev stop">Stops the line</span> The trigger loses its target and Cradle is destroyed before it becomes a creature, so it does not return.</td><td>Marwyn makes Cradle an illegal target. Without her there is no safe order: being animated is what protects Cradle.</td></tr>
+<tr><th scope="row">Stifle on the earthbend trigger</th><td><span class="sev slow">Slows it</span> Cradle stays a plain land: it counts the other creatures but not itself, and Symbiote and Quirion can’t untap it.</td><td>Speaker’s {1}, {T} can still untap it on a later turn.</td></tr>
+<tr><th scope="row">Removal on the animated Cradle</th><td><span class="sev slow">Slows it</span> Cradle returns tapped as a plain land. Its mana for this turn is gone unless you tapped it first, and only Speaker can untap it now.</td><td>Tap it in response. Marwyn’s hexproof covers an animated Cradle too, because it is still a land.</td></tr>
+<tr><th scope="row">Removal on Cub</th><td><span class="sev slow">Slows it</span> One {G} less every time a creature taps for mana. Cradle stays animated: earthbend does not depend on Cub staying.</td><td>Recount the turn before committing to a payoff.</td></tr>
+</tbody></table></div>
+
+<h3>Turn two · Natural Order</h3>
+<p><strong>On the line:</strong> the Natural Order card, a green creature sacrificed as a cost when you cast it, {2}{G}{G}, and the creature it fetches. See the <button type="button" class="goto" data-goto="natural-order">Natural Order</button> chapter for the setups.</p>
+<div class="table-scroll"><table class="data win-table"><thead><tr><th scope="col">Their response</th><th scope="col">What it accomplishes</th><th scope="col">What you can do</th></tr></thead><tbody>
+<tr><th scope="row">Discard first</th><td><span class="sev stop">Stops the line</span> The most common answer: it takes Natural Order before it can be cast.</td><td>Keep a second route in hand.</td></tr>
+<tr><th scope="row">Counter on Natural Order</th><td><span class="sev stop">Stops the line</span> The worst trade for the deck: the card, the sacrificed creature and four mana. Force of Will, Daze and Warping Wail all do it.</td><td>Have Shepherd on the battlefield. <strong>Do not sacrifice Shepherd to Natural Order</strong>: it leaves as a cost, so the spell is counterable again.</td></tr>
+<tr><th scope="row">Containment Priest with flash</th><td><span class="sev stop">Stops the line</span> The fetched creature was not cast, so it is exiled instead of entering.</td><td>Against white decks with Priest, hardcasting through Speaker is safer than Natural Order.</td></tr>
+<tr><th scope="row">Grafdigger’s Cage in play</th><td><span class="sev stop">Stops the line</span> Creatures can’t enter from the library: Natural Order and Green Sun’s Zenith find nothing.</td><td>Speaker still puts creatures into your hand to cast.</td></tr>
+<tr><th scope="row">Stifle on Craterhoof’s trigger</th><td><span class="sev stop">Stops the line</span> No +X/+X and no trample: Craterhoof is just a 5/5 with haste.</td><td>Count whether the board still wins in a later turn.</td></tr>
+<tr><th scope="row">Removal in response to the trigger</th><td><span class="sev slow">Slows it</span> X is counted when the trigger resolves, so each creature removed lowers X by one and takes its own damage away. Removing Craterhoof itself does not stop the trigger.</td><td>Check the damage with <button type="button" class="goto" data-goto="natural-order">the Craterhoof formula</button> after their response.</td></tr>
+<tr><th scope="row">Karakas on Atraxa</th><td><span class="sev minor">Small cost</span> Atraxa is legendary and returns to your hand, but her enter trigger still resolves.</td><td>Take Atraxa when cards matter more than the body.</td></tr>
+</tbody></table></div>
+
+<h3>Turn two · Route 1, the loop</h3>
+<p><strong>On the line:</strong> most of the hand. The turn-two kill needs Quirion Ranger in hand and three discards on the play, or three Symbiotes and four discards on the draw. Every cast and activation in the <button type="button" class="goto" data-goto="loop">loop</button> gives the opponent priority, and under tournament shortcut rules they can name the point where they want to act <span class="ev unverified">Unverified</span>.</p>
+<div class="table-scroll"><table class="data win-table"><thead><tr><th scope="col">Their response</th><th scope="col">What it accomplishes</th><th scope="col">What you can do</th></tr></thead><tbody>
+<tr><th scope="row">Counter on Sabertooth</th><td><span class="sev stop">Stops the line</span> No Sabertooth, no loop. It costs four mana, so it is the biggest spell to answer before the loop starts.</td><td>Every spell in the loop is green: Shepherd on the battlefield blanks counters.</td></tr>
+<tr><th scope="row">Counter on a Speaker cast</th><td><span class="sev stop">Stops the line</span> The countered Speaker goes to the graveyard, and the line needs Speaker’s last trigger to find Craterhoof. Floating mana lasts only until the end of the phase.</td><td>Shepherd, as above.</td></tr>
+<tr><th scope="row">Stifle on a Speaker trigger that searches</th><td><span class="sev stop">Stops the line</span> on the setup triggers: the line is one piece short. Inside the loop you decline the search anyway, so a Stifle there does nothing.</td><td>On the final trigger, with plenty of mana made, you can usually return and recast Speaker for another search <span class="ev test">Under test</span>.</td></tr>
+<tr><th scope="row">Removal on the animated Cradle</th><td><span class="sev stop">Stops the line</span> Cradle returns tapped as a plain land and Symbiote can no longer untap it. This is the loop’s weakest point: a 1/1 that one instant answers.</td><td>Marwyn’s hexproof. Otherwise, tap Cradle in response when it is untapped.</td></tr>
+<tr><th scope="row">Removal on Sabertooth</th><td><span class="sev stop">Stops the line</span> before its first activation of the turn. After that it is indestructible until end of turn, so only exile, bounce, −X/−X or sacrifice still works.</td><td>Activate Sabertooth once early if a destroy effect is likely.</td></tr>
+<tr><th scope="row">Removal on Cub</th><td><span class="sev stop">Stops the line</span> Each cycle drops from +2 to 0 mana: the loop no longer gains anything.</td><td>Use the mana already made, or switch to a finite line.</td></tr>
+<tr><th scope="row">Removal on another creature</th><td><span class="sev slow">Slows it</span> Each creature gone is one {G} less per cycle. One removal leaves +1 per cycle, still unbounded; a second leaves 0.</td><td>Keep looping after one removal; recount after two.</td></tr>
+</tbody></table></div>
+<p class="muted">The cycle math is the table in <button type="button" class="goto" data-goto="loop">Speaker Loop</button> with one creature fewer: Cradle taps for one less each cycle, and losing Cub also removes its extra {G}.</p>
+
+<h3>Turn two to three · Route 2, the setup turn</h3>
+<p><strong>On the line:</strong> the board you pass with (Forest, dork, animated Cradle, Cub, Speaker and Symbiote) and one card in hand to discard. You also draw on turn three. The opponent has a whole turn, so sorcery-speed answers join the instant ones.</p>
+<div class="table-scroll"><table class="data win-table"><thead><tr><th scope="col">Their response</th><th scope="col">What it accomplishes</th><th scope="col">What you can do</th></tr></thead><tbody>
+<tr><th scope="row">Sweeper on their turn</th><td><span class="sev stop">Stops the line</span> Toxic Deluge, Wrath of the Skies, Fury, Terminus or Verdict clear every creature. Cradle dies too, so it returns tapped as a plain land and untaps on your turn.</td><td>Weigh their sweepers before choosing this route over the turn-two kill. See the <button type="button" class="goto" data-goto="matchups">Matchups</button> sweeper lights.</td></tr>
+<tr><th scope="row">Removal on Speaker</th><td><span class="sev stop">Stops the line</span> No {1}, {T} untap and no recast to search for Craterhoof.</td><td>A second Speaker in hand rebuilds part of the line.</td></tr>
+<tr><th scope="row">Removal on Cradle, on their turn</th><td><span class="sev slow">Slows it</span> Cradle returns tapped as a plain land, then untaps in your untap step. It no longer counts itself and Symbiote can’t untap it; Speaker still can.</td><td>Recount turn three before you commit. Marwyn’s hexproof prevents it.</td></tr>
+<tr><th scope="row">Removal on Cradle, in your upkeep</th><td><span class="sev stop">Stops the line</span> The best timing for them: Cradle returns tapped <em>after</em> your untap step and stays tapped, so only Speaker’s single untap gets mana from it.</td><td>Marwyn. Without her, assume the kill is off and look for the slower line.</td></tr>
+<tr><th scope="row">Removal on Cub, Symbiote or the dork</th><td><span class="sev slow">Slows it</span> Less mana on turn three: Cub costs one {G} per creature tap, Symbiote the second untap, the dork one {G} per Cradle tap.</td><td>Recount; Craterhoof costs eight and may still be castable but not lethal.</td></tr>
+<tr><th scope="row">Discard on their turn</th><td><span class="sev minor">Small cost</span> It takes the card you planned to discard, but the turn-three draw usually replaces it.</td><td>Keep a land drop separate from the discard if you can.</td></tr>
+<tr><th scope="row">Counter or Stifle on turn three</th><td><span class="sev stop">Stops the line</span> on the recast Speaker or its search; Craterhoof on the stack can be countered too.</td><td>Shepherd blanks the counters, not the Stifle.</td></tr>
+<tr><th scope="row">Blood Moon on their turn</th><td><span class="sev stop">Stops the line</span> Cradle becomes a Mountain and loses its ability.</td><td>Count only basic Forests and dorks for green.</td></tr>
+</tbody></table></div>
+
+<h3>What the windows have in common</h3>
+<ul>
+<li>The deck’s single most exposed card is <strong>the animated Cradle</strong>: a 1/1 that every instant answer can hit. Removing it rarely costs the card, but it usually costs the turn.</li>
+<li><strong>Counters are the most solvable problem</strong>, because Shepherd turns them off. Discard, Stifle effects and removal need a second route instead.</li>
+<li>The turn-two kill is exposed to <strong>instant-speed</strong> answers only. The setup turn needs fewer cards but adds every <strong>sorcery-speed</strong> answer: that is the trade in <button type="button" class="goto" data-goto="loop">Which route?</button></li>
+</ul>
+
+<h3 class="part-head" id="windows-opponent">Part 2 · The opponent’s view</h3>
+<p>The same windows, sorted by the kind of interaction the opponent holds. Each type lists where it hurts the deck most, where it is mostly wasted, and the deck’s fallback. Opponents can read it as a target list; pilots can read it as the list of things to play around. The order of the targets is the guide’s reading <span class="ev test">Under test</span>.</p>
+<div class="table-scroll"><table class="data win-sum"><thead><tr><th scope="col">Their interaction</th><th scope="col">Hurts most</th><th scope="col">Main-deck fallback</th><th scope="col">Sideboard help</th></tr></thead><tbody>
+<tr><th scope="row">Counters and Stifle</th><td>Natural Order; Sabertooth or the Speaker the line needs</td><td>Allosaurus Shepherd; cheap spells over one big spell</td><td>Thoughtseize, Choke</td></tr>
+<tr><th scope="row">Spot removal</th><td>The animated Cradle mid-combo; Cub; Shepherd before a counter</td><td>Symbiote and Sabertooth save creatures; Marwyn protects Cradle</td><td>Primaris Eliminator, Assassin’s Trophy, Snuff Out</td></tr>
+<tr><th scope="row">Wasteland and land answers</th><td>Cradle before it is animated; Surgical Extraction after Wasteland</td><td>Marwyn; Vibrance finds a land; basic Forests; Boseiju</td><td>Assassin’s Trophy</td></tr>
+<tr><th scope="row">Sweepers</th><td>The board passed for the setup turn</td><td>Hold a creature back; Sabertooth; Speaker survives the small ones</td><td>Thoughtseize</td></tr>
+<tr><th scope="row">Graveyard and “enter” hate</th><td>Containment Priest on Natural Order; Grafdigger’s Cage</td><td>Speaker routes cast every creature</td><td>Assassin’s Trophy, Snuff Out, Primaris Eliminator</td></tr>
+</tbody></table></div>
+<p class="muted">Sideboard help names the role each card can play, not a plan: the counts for each opponent are in <button type="button" class="goto" data-goto="matchups">Matchups</button>. Which decks carry each answer comes from MTGGoldfish’s Legacy MTGO sideboards (14-day window, refresh of 7 Oct 2026) and changes every night; the live figures are on each matchup card.</p>
+
+<h3>Counters and Stifle</h3>
+<p><strong>Who has them:</strong> the blue decks, marked by a red Counters light on their matchup card (Dimir Tempo, Izzet Delver, Doomsday, Sneak and Show, Azorius Tempo). Force of Will and Daze are the usual ones; Stifle effects counter abilities instead of spells.</p>
+<div class="cards2">
+<article><h4>Where it hurts most</h4><ol>
+<li><span class="sev stop">Stops the line</span> <strong>Natural Order.</strong> The card, the sacrificed creature and four mana in one answer.</li>
+<li><span class="sev stop">Stops the line</span> <strong>Temur Sabertooth</strong> before the loop, or the <strong>Speaker</strong> whose search the line needs.</li>
+<li><span class="sev slow">Slows it</span> <strong>Badgermole Cub</strong> on turn two, often with Daze while the deck is tapped out.</li>
+<li><span class="sev stop">Stops the line</span> <strong>Stifle on a single trigger</strong> the turn depends on: earthbend, a Speaker search or Craterhoof.</li>
+</ol></article>
+<article><h4>The deck’s fallback</h4><ul>
+<li><strong>Allosaurus Shepherd first.</strong> It can’t be countered, and while it stays on the battlefield your green spells can’t be countered either. A counter still targets them; it just does nothing. Green Sun’s Zenith for X = 1 or a Speaker search finds it.</li>
+<li><strong>Pay for Daze.</strong> Leave {1} spare on the key turn; Cradle usually makes that cheap.</li>
+<li><strong>Many cheap spells over one big one.</strong> Without Shepherd, a Speaker line spreads the risk; Natural Order puts everything on one spell.</li>
+<li><strong>Sideboard:</strong> Thoughtseize takes Force of Will before the key turn; Choke keeps their Islands tapped (Underground Sea and Volcanic Island are Islands).</li>
+</ul></article>
+</div>
+<p><strong>Mostly wasted:</strong> a Force of Will on a one-mana dork (two of their cards for one of yours), and any counter once Shepherd has resolved. <strong>What Shepherd does not cover:</strong> spells that aren’t green (Thoughtseize, Snuff Out, Primaris Eliminator and Leyline of the Void; Assassin’s Trophy is green, so it is covered), Stifle effects, and Mindbreak Trap, which exiles spells rather than countering them. A loop turn easily casts the three spells that make Trap free, though Trap is rare in the current sideboards.</p>
+
+<h3>Spot removal</h3>
+<p><strong>Who has it:</strong> almost everyone. Fatal Push and Orcish Bowmasters appear in about half the Dimir Tempo and Doomsday sideboards; white decks bring Swords to Plowshares, and Death and Taxes adds Karakas.</p>
+<div class="cards2">
+<article><h4>Where it hurts most</h4><ol>
+<li><span class="sev stop">Stops the line</span> <strong>The animated Cradle</strong> during the loop, or in your upkeep before the setup-turn kill. It is a colorless 1/1 with mana value 0: Fatal Push, Lightning Bolt and one Bowmasters ping all kill it.</li>
+<li><span class="sev stop">Stops the line</span> <strong>Badgermole Cub</strong> in the loop: each cycle drops to no gain.</li>
+<li><span class="sev stop">Stops the line</span> <strong>Shepherd</strong>, when they also hold a counter for the next spell.</li>
+<li><span class="sev stop">Stops the line</span> <strong>Speaker</strong> on the board passed for the setup turn.</li>
+</ol></article>
+<article><h4>The deck’s fallback</h4><ul>
+<li><strong>Save the creature in response.</strong> Wirewood Symbiote returns an Elf (dorks, Quirion, Shepherd, Speaker, Marwyn) once a turn; Temur Sabertooth returns any creature for {1}{G}. A returned Speaker searches again when you recast it.</li>
+<li><strong>Marwyn protects Cradle.</strong> Your lands have hexproof, so they can’t target the animated Cradle at all.</li>
+<li><strong>Redundancy.</strong> Six dorks, two Dryad Arbor, four Cub and four Speaker: one removal spell is usually one card for one card.</li>
+<li><strong>Sideboard:</strong> Primaris Eliminator (Speaker can find it) and Assassin’s Trophy kill any creature; Snuff Out costs 4 life with Bayou out, but can’t target a black creature such as Bowmasters.</li>
+</ul></article>
+</div>
+<p><strong>Orcish Bowmasters</strong> is mostly its enter trigger here: Speaker, Once Upon a Time and Atraxa put cards into your hand without drawing them, so the deck rarely triggers it twice. That ping still kills any 1-toughness creature or the animated Cradle, and it arrives with flash. <strong>Karakas and bounce</strong> are a special case: the animated Cradle is a legendary creature, so Karakas can target it, and because it goes to your hand rather than dying it does not come back on its own. You need another land drop to replay it.</p>
+<p><strong>Mostly wasted:</strong> a dork after the mana is already made, Craterhoof once its trigger is on the stack, and a destroy effect on Sabertooth after its first activation that turn (it is indestructible).</p>
+
+<h3>Wasteland and land answers</h3>
+<p><strong>Who has them:</strong> the decks with a red Wasteland light on their matchup card. Surgical Extraction appears in roughly half or more of the Izzet Delver, Azorius Tempo, Boros Energy and Death and Taxes sideboards, and Magus of the Moon in most Sneak and Show sideboards.</p>
+<div class="cards2">
+<article><h4>Where it hurts most</h4><ol>
+<li><span class="sev stop">Stops the line</span> <strong>Wasteland on Cradle before it is animated,</strong> or in response to the earthbend trigger. Cradle is gone for good (part 1, turn two).</li>
+<li><span class="sev stop">Stops the line</span> <strong>Surgical Extraction on that Cradle</strong> in your graveyard: it exiles every other Cradle from your hand and library. The Cradle routes are off for the game.</li>
+<li><span class="sev stop">Stops the line</span> <strong>Blood Moon or Magus of the Moon.</strong> Cradle, Bayou, Boseiju and the fetchlands become Mountains; only basic Forests and the dorks make green.</li>
+<li><span class="sev slow">Slows it</span> <strong>Wasteland on the only green land</strong> on turn one.</li>
+</ol></article>
+<article><h4>The deck’s fallback</h4><ul>
+<li><strong>Marwyn, the Preserver.</strong> Hexproof stops Wasteland targeting any land. Her {2} returns a land card from your graveyard to your hand: a destroyed Cradle comes back, if they don’t exile it first.</li>
+<li><strong>Vibrance finds a land.</strong> Evoked for {G}{G}, it searches for any land card (another Cradle, or a basic Forest under Moon) and gains 2 life. Speaker can find it.</li>
+<li><strong>Basic Forests.</strong> Fetch them when Wasteland is likely. Quirion Ranger can return a targeted Forest or Bayou to your hand in response.</li>
+<li><strong>Boseiju’s channel</strong> destroys Blood Moon from your hand, even while Moon is out, for {1}{G} ({G} with Marwyn). Assassin’s Trophy needs {B}, and under Moon Bayou makes only {R}.</li>
+</ul></article>
+</div>
+<p><strong>Mostly wasted:</strong> Wasteland on an animated Cradle (it returns tapped, so it costs only this turn’s mana) and on a fetchland you can crack in response.</p>
+
+<h3>Sweepers</h3>
+<p><strong>Who has them:</strong> the decks with a red Sweepers light. In the current sideboards: Massacre in most Dimir Tempo lists, Wrath of the Skies in Death and Taxes and Azorius Tempo, Brotherhood’s End in Sneak and Show, Eldrazi Confluence in Eldrazi, and Drop of Honey in about half of the Lands lists. Massacre is not free here: the deck has no Plains.</p>
+<div class="cards2">
+<article><h4>Where it hurts most</h4><ol>
+<li><span class="sev stop">Stops the line</span> <strong>On their turn, after you pass for the setup turn.</strong> The whole engine is on the battlefield; Cradle returns tapped as a plain land.</li>
+<li><span class="sev slow">Slows it</span> <strong>After you commit a second wave</strong> of creatures to rebuild a board.</li>
+<li><span class="sev slow">Slows it</span> <strong>Drop of Honey</strong> destroys the creature with the least power in each of their upkeeps: slow, but it never stops.</li>
+</ol></article>
+<article><h4>The deck’s fallback</h4><ul>
+<li><strong>Know what survives.</strong> Massacre (−2/−2) leaves Speaker (2/4) and Sabertooth (4/3); Brotherhood’s End (3 damage) leaves Speaker; Wrath of the Skies must pay 3 energy to reach Speaker and 4 for Sabertooth. Toxic Deluge kills whatever they pay life for.</li>
+<li><strong>Hold something back.</strong> A Speaker or Symbiote in hand rebuilds faster than any card on the battlefield; Cradle refills the mana from two or three creatures.</li>
+<li><strong>Respond with Sabertooth.</strong> Its ability works on their turn: return creatures to your hand for {1}{G} each. Once activated, Sabertooth itself is indestructible, so it survives damage and destroy sweepers but not −X/−X.</li>
+<li><strong>Choose the turn-two kill</strong> over the setup turn when they show sweepers. <strong>Sideboard:</strong> Thoughtseize takes the sweeper first.</li>
+</ul></article>
+</div>
+<p><strong>Mostly wasted:</strong> a sweeper on a board of two or three creatures while you hold more, and a sorcery-speed sweeper after the turn-two kill.</p>
+
+<h3>Graveyard and “enter” hate</h3>
+<p><strong>Who has it:</strong> Containment Priest is in most Azorius Tempo, Boros Energy and Death and Taxes sideboards; Grafdigger’s Cage in some Sneak and Show lists; Leyline of the Void in Eldrazi; Endurance in Lands.</p>
+<div class="cards2">
+<article><h4>Where it hurts most</h4><ol>
+<li><span class="sev stop">Stops the line</span> <strong>Containment Priest with flash</strong> in response to Natural Order or Green Sun’s Zenith: the creature wasn’t cast, so it is exiled instead of entering. Dryad Arbor is exiled too, even when you play it as your land.</li>
+<li><span class="sev stop">Stops the line</span> <strong>Grafdigger’s Cage</strong> before your big turn: creatures can’t enter from the library, so Natural Order and Green Sun’s Zenith find nothing, Arbor included.</li>
+<li><span class="sev slow">Slows it</span> <strong>Surgical Extraction</strong> on a Cradle or a Natural Order that reached your graveyard.</li>
+</ol></article>
+<article><h4>The deck’s fallback</h4><ul>
+<li><strong>Switch to Speaker routes.</strong> Speaker puts creatures into your hand and you cast them, so neither Priest nor Cage touches the loop, the setup turn, a hard-cast Craterhoof or Dinobash.</li>
+<li><strong>Remove the hate piece.</strong> Boseiju’s channel and Assassin’s Trophy destroy Cage. Collector Ouphe does not stop it, because Cage has no activated ability. Snuff Out, Primaris Eliminator and Assassin’s Trophy kill Priest.</li>
+<li><strong>Play around flash.</strong> Against white decks with open mana, cast Speaker before risking Natural Order.</li>
+</ul></article>
+</div>
+<p><strong>Mostly wasted:</strong> Leyline of the Void, Endurance and other graveyard removal. The deck uses its graveyard only for Marwyn’s land return, so they cost it little.</p>
+
+<h3>The fallback plan</h3>
+<p>When the fast routes are answered, the deck does not need a new plan: it runs the same engine one turn slower. In order of preference <span class="ev test">Under test</span>:</p>
+<ol>
+<li><strong>The second route.</strong> Natural Order answered? Speaker lines remain. Cradle gone? Natural Order still works off lands and dorks. This is why <button type="button" class="goto" data-goto="mulligans">Mulligans</button> prefers hands with two routes.</li>
+<li><strong>Speaker as a toolbox.</strong> Each Speaker discards a spare card for the creature that solves the problem: Shepherd against counters, Marwyn or Vibrance against land answers, Collector Ouphe against artifacts with activated abilities, and Primaris Eliminator against a creature after sideboarding. Symbiote and Sabertooth return Speaker for another search.</li>
+<li><strong>Dinobash.</strong> Shepherd’s {4}{G}{G} is an ability, not a spell: counters can’t answer it, though Stifle can. With Cradle mana it turns Elves that can attack into 5/5s; see <button type="button" class="goto" data-goto="game-plans">Game Plans</button>.</li>
+<li><strong>Atraxa.</strong> When Natural Order resolves but Craterhoof is not lethal, Atraxa refills the hand for the next turn.</li>
+<li><strong>A slower board.</strong> Speaker blocks well as a 2/4, every creature makes Cradle bigger, and the deck can wait a turn for the opponent to tap out.</li>
+</ol>
+<p class="muted">Worked pivot sequences, for example after losing Cradle or a dork, are being written for <button type="button" class="goto" data-goto="game-plans">Game Plans</button>.</p>
+</div></section>
 <section class="pane" id="origins"><div class="article"><p class="draft-note"><b>First draft</b> Written from the project notes of 5–6 October 2026. Ranges, lines and examples marked below are still being confirmed.</p>
 <h2>Deck Origins</h2>
 <p class="lead">Speaker Elves sits at the end of a long line of green creature decks built around Gaea’s Cradle. This page is a short, sourced orientation. The rest of the guide does not inherit these older packages.</p>
@@ -500,4 +724,4 @@
 <script src="js/menu.js"></script>
 <script src="js/01.js"></script>
 <script src="js/02.js"></script><script src="js/03.js"></script><script src="js/04.js"></script><script src="js/05.js"></script>
-<script src="js/06.js"></script><script src="js/07.js"></script><script src="js/09.js"></script><script src="js/results-archive.js" onerror="void 0"></script><script src="js/10.js"></script><script src="js/11.js"></script></body></html>
+<script src="js/06.js"></script><script src="js/07.js"></script><script src="js/09.js"></script><script src="js/results-archive.js" onerror="void 0"></script><script src="js/10.js"></script><script src="js/11.js"></script><script src="js/12.js"></script></body></html>

@@ -28,6 +28,66 @@
 .cards2>article h4{margin:0}
 .cards2>article p{font-size:14px}
 
+/* Mulligans: opening-hand odds, framed as context rather than a rule */
+.odds{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:12px;padding:14px 16px;display:grid;gap:10px;max-width:640px}
+.odds h4{margin:0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.odds h4 span{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.odds .data th[scope=row]{font-size:14px;text-transform:none;color:#c6d2dc;font-weight:500}
+.odds .data td{font-variant-numeric:tabular-nums;font-weight:700;color:var(--text);white-space:nowrap}
+.odds p{font-size:14px}
+.odds .m39-method{margin:0}
+.odds .m39-method p{margin-top:8px;font-size:13px}
+.odds .odds-basis{font-size:12px;font-weight:700;color:var(--green);margin-top:-4px}
+.odds .odds-basis.changed{color:var(--gold)}
+.odds .data td small{font-size:11px;font-weight:700;margin-left:4px}
+.odds .data td small.up{color:var(--green)} .odds .data td small.down{color:var(--red)}
+.odds-tune{border:1px solid var(--line);border-radius:9px;padding:10px 14px;background:#111a24}
+.odds-tune summary{cursor:pointer;font-weight:700;font-size:14px;color:var(--text)}
+.odds-tune[open] summary{margin-bottom:8px}
+.odds-tune>p{font-size:13px}
+.odds-inputs{display:grid;gap:10px;margin:12px 0}
+.odds-field{display:grid;grid-template-columns:minmax(0,1fr) 2.2em 4.6em;grid-template-areas:"label out was" "range range range";align-items:center;column-gap:8px;row-gap:2px}
+.odds-field label{grid-area:label;font-size:13px;color:#c6d2dc}
+.odds-field input{grid-area:range;width:100%;margin:0;accent-color:var(--green);min-height:24px}
+.odds-field output{grid-area:out;text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
+.odds-field .odds-was{grid-area:was;text-align:right;font-size:11px;color:var(--muted)}
+.odds-field.changed output{color:var(--gold)}
+.odds-field.changed input{accent-color:var(--gold)}
+.odds-reset{border:1px solid var(--line);background:#0f161e;color:var(--text);padding:7px 12px;border-radius:8px;cursor:pointer;font:inherit;font-size:13px}
+.odds-reset:disabled{opacity:.45;cursor:default}
+.odds-reset:not(:disabled):hover{border-color:var(--green)}
+
+/* Interaction Windows: response tables and how much each response costs */
+.sev{display:inline-block;margin:0 6px 2px 0;padding:1px 8px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.02em;white-space:nowrap;vertical-align:1px;border:1px solid}
+.sev.stop{color:#ffc3c7;background:#3a1d22;border-color:#6d3a41}
+.sev.slow{color:#ffe4a0;background:#3a3016;border-color:#6b5824}
+.sev.minor{color:#bcf2ca;background:#163c25;border-color:#2c6a43}
+.win-table{min-width:640px}
+.win-table th[scope=row]{width:22%;font-size:14px;text-transform:none;color:var(--text);font-weight:700}
+.win-table td{font-size:14px}
+.win-table td:last-child{width:32%;color:var(--muted)}
+.part-head{margin-top:40px!important;padding-top:24px;border-top:1px solid var(--line);font-size:22px;scroll-margin-top:72px}
+.win-sum{min-width:640px}
+.win-sum th[scope=row]{font-size:14px;text-transform:none;color:var(--text);font-weight:700}
+.win-sum td{font-size:14px}
+.cards2>article li{font-size:14px}
+.cards2>article ol,.cards2>article ul{margin:0;padding-left:20px;display:grid;gap:8px}
+@media(max-width:600px){
+ .win-table{min-width:0}
+ .win-table thead{display:none}
+ .win-table tr{display:grid;gap:6px;padding:12px 0;border-bottom:1px solid var(--line)}
+ .win-table th[scope=row],.win-table td,.win-table td:last-child{display:block;width:auto;padding:0;border:0}
+ .win-table td:last-child::before{content:"What you can do · ";font-weight:700;color:var(--text)}
+ .win-sum{min-width:0}
+ .win-sum thead{display:none}
+ .win-sum tr{display:grid;gap:6px;padding:12px 0;border-bottom:1px solid var(--line)}
+ .win-sum th[scope=row],.win-sum td{display:block;padding:0;border:0}
+ .win-sum td::before{font-weight:700;color:var(--text)}
+ .win-sum td:nth-child(2)::before{content:"Hurts most · "}
+ .win-sum td:nth-child(3)::before{content:"Main-deck fallback · "}
+ .win-sum td:nth-child(4)::before{content:"Sideboard help · "}
+}
+
 .goto{all:unset;cursor:pointer;color:var(--mint,#a2ddc0);font-weight:600;border-bottom:1px solid #a2ddc066}
 .goto:hover{color:#d7ffeb;border-bottom-color:#d7ffeb}
 .goto:focus-visible{outline:2px solid #a2ddc0;outline-offset:2px}

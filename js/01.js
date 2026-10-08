@@ -632,10 +632,10 @@ const GUIDE_GROUPS=[
   {id:'natural-order',label:'Natural Order',panes:['natural-order']},
   {id:'loop',label:'Speaker Loop',panes:['loop']},
   {id:'goldfish',label:'Goldfish Lab',panes:['goldfish']}]},
- {id:'prepare',label:'Prepare',icon:'shield',sections:[
+ {id:'prepare',label:'Metagame',icon:'shield',sections:[
   {id:'sideboard',label:'Sideboard',panes:['map','heur']},
   {id:'matchups',label:'Matchups',panes:['matchups']},
-  {id:'windows',label:'Interaction Windows',panes:['windows'],wip:true}]},
+  {id:'windows',label:'Interaction Windows',panes:['windows']}]},
  {id:'about',label:'About',icon:'book',sections:[
   {id:'sources',label:'Sources',panes:['sources']},
   {id:'credits',label:'Credits',panes:['credits'],wip:true}]}
