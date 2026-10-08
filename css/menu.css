@@ -20,8 +20,6 @@
 }
 
 /* ---------- Layout: sidebar beside the content ---------- */
-/* The header only holds the title now; it scrolls away and the sidebar stays. */
-body > header{ position: relative; }
 #guide-nav{ display: contents; }
 @media (min-width: 761px){
   body > main.wrap{ display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 28px; row-gap: 0; align-items: start; }
@@ -117,10 +115,29 @@ body > header{ position: relative; }
 .sb-lb::after{ content: attr(data-text); font-weight: 700; height: 0; overflow: hidden; visibility: hidden; }
 .sb-sr{ position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
+/* The page has no header: the sidebar opens with the way back to the library and the guide's name. */
+.sb-top.has-back{ padding-left: 0; }
+.sb-back, .gn-back{ all: unset; box-sizing: border-box; display: flex; align-items: center; cursor: pointer;
+  transition: transform 160ms cubic-bezier(.23,1,.32,1), background-color 150ms ease, color 150ms ease; }
+.sb-back{ gap: 8px; height: 34px; padding: 0 12px 0 10px; border-radius: 8px; font-size: 12px; font-weight: 600; color: var(--gn-soft); white-space: nowrap; }
+.sb-back svg, .gn-back svg{ width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 160ms cubic-bezier(.23,1,.32,1); }
+@media (hover: hover) and (pointer: fine){
+  .sb-back:hover{ background: rgba(255,255,255,.05); color: #edf3f8; }
+  .sb-back:hover svg{ transform: translateX(-2px); }
+}
+.sb-back:active, .gn-back:active{ transform: scale(.97); }
+.sb-back:focus-visible, .gn-back:focus-visible{ outline: 2px solid var(--gn-mint); outline-offset: 2px; }
+.sb-brand{ display: grid; justify-items: start; gap: 7px; padding: 8px 12px 14px; border-bottom: 1px solid var(--gn-line-soft); }
+.sb-brand-title{ font-size: 19px; font-weight: 800; line-height: 1.15; letter-spacing: -.01em; color: #edf3f8; }
+.sb-brand-badge{ padding: 3px 8px; border-radius: 999px; border: 1px solid #38516a; background: #132031; color: #a9caff; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+
 /* Folded to icons */
 .sb.is-collapsed .sb-title, .sb.is-collapsed .sb-label, .sb.is-collapsed .sb-chev{ opacity: 0; }
 .sb.is-collapsed .sb-items{ display: none; }
 .sb.is-collapsed .sb-top{ padding-left: 0; justify-content: center; }
+.sb.is-collapsed .sb-top.has-back{ flex-direction: column; height: auto; gap: 4px; }
+.sb.is-collapsed .sb-back{ padding: 0; width: 34px; justify-content: center; }
+.sb.is-collapsed .sb-back-lb, .sb.is-collapsed .sb-brand{ display: none; }
 
 /* Panel beside a folded sidebar */
 .sb-fly{
@@ -143,8 +160,11 @@ body > header{ position: relative; }
     margin: -16px -12px 12px; padding: 10px 12px;
     background: #0b1118; border-bottom: 1px solid var(--gn-line-soft); box-shadow: 0 8px 18px rgba(0,0,0,.35);
   }
+  .gn-bar{ display: flex; align-items: center; gap: 8px; }
+  .gn-back{ justify-content: center; width: 44px; height: 44px; flex: none; border-radius: 12px; color: var(--gn-soft); background: var(--gn-panel); border: 1px solid var(--gn-line); }
+  .gn-back svg{ width: 18px; height: 18px; }
   .gn-chapter{
-    all: unset; box-sizing: border-box; width: 100%;
+    all: unset; box-sizing: border-box; width: 100%; min-width: 0;
     display: flex; align-items: center; gap: 10px;
     padding: 10px 14px; border-radius: 12px; cursor: pointer;
     color: var(--gn-ink); font-weight: 700; font-size: 14px;

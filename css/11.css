@@ -204,3 +204,8 @@
 
 .timeline .evidence{margin-top:6px!important;padding-left:10px;border-left:2px solid #2c6a43;font-size:13px;color:#a9c8b6!important;line-height:1.6}
 .timeline .pilots{margin-top:6px!important;font-size:13px;color:#c6d2dc!important}
+
+/* Credits: Elves through the years */
+.credits-line{display:grid;gap:10px;padding-left:20px!important}
+.credits-line li{line-height:1.6!important}
+.credits-line b{color:#dff3e8}

@@ -18,8 +18,11 @@
  *     groups: [{ id:'foundations', label:'Deck Foundations', icon:'cards', sections: [
  *       { id:'start', label:'Start Here', controls:'start', wip:true }, ...] }, ...],
  *     active: 'start',
+ *     brand: { title: 'Speaker Elves', badge: '5 Oct 2026 list', back: 'All guides' },
  *     onChange: function (sectionId, index, fromUser) { ... }
  *   });
+ * With `brand`, the sidebar opens with a back button and the guide's name, and the phone
+ * bar gets the same back button; both carry [data-all-guides] for the page to handle.
  */
 (function (global) {
   'use strict';
@@ -36,6 +39,7 @@
   };
   var CHEV = '<svg class="sb-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
   var FOLD = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 17-5-5 5-5M18 17l-5-5 5-5"/></svg>';
+  var BACK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>';
   var STORE = 'speakerNav.collapsed';
   var MOTION = 'speakerNav.motion';   // 'on' | 'off'; unset follows the system setting
   var root = document.documentElement;
@@ -76,9 +80,18 @@
       return '<button type="button" class="sb-item" data-i="' + i + '"' + (d.controls ? ' aria-controls="' + d.controls + '"' : '') + '>' +
         '<span class="sb-lb" data-text="' + d.label + '">' + d.label + '</span></button>';
     }
+    var brand = opts.brand;
+    function topHTML() {
+      var toggle = '<button type="button" class="sb-toggle" aria-label="Collapse sidebar" aria-expanded="true">' + FOLD + '</button>';
+      if (!brand) return '<div class="sb-top"><span class="sb-title">Contents</span>' + toggle + '</div>';
+      return '<div class="sb-top has-back"><button type="button" class="sb-back" data-all-guides title="' + brand.back + '">' + BACK +
+        '<span class="sb-back-lb">' + brand.back + '</span></button>' + toggle + '</div>' +
+        '<div class="sb-brand"><span class="sb-brand-title">' + brand.title + '</span>' +
+        (brand.badge ? '<span class="sb-brand-badge">' + brand.badge + '</span>' : '') + '</div>';
+    }
     function sidebarHTML(withTop) {
       var id = 'sb' + (++uid);
-      return (withTop ? '<div class="sb-top"><span class="sb-title">Contents</span><button type="button" class="sb-toggle" aria-label="Collapse sidebar" aria-expanded="true">' + FOLD + '</button></div>' : '') +
+      return (withTop ? topHTML() : '') +
         '<div class="sb-body"><span class="sb-pill is-hidden" aria-hidden="true"></span>' +
         groups.map(function (g, gi) {
           return '<div class="sb-group"><button type="button" class="sb-head" data-g="' + gi + '" aria-expanded="false" aria-controls="' + id + '-g' + gi + '">' +
@@ -102,7 +115,13 @@
     var sheet = el('div', { 'class': 'gn-sheet', id: 'gn-sheet' });
     var sheetNav = el('nav', { 'class': 'sb', 'aria-label': opts.label || 'Guide sections' }, sidebarHTML(false));
     sheet.appendChild(sheetNav);
-    mobile.appendChild(chapter); mobile.appendChild(sheet);
+    if (brand) {
+      var bar = el('div', { 'class': 'gn-bar' });
+      bar.appendChild(el('button', { type: 'button', 'class': 'gn-back', 'data-all-guides': '', 'aria-label': brand.back, title: brand.back }, BACK));
+      bar.appendChild(chapter);
+      mobile.appendChild(bar);
+    } else mobile.appendChild(chapter);
+    mobile.appendChild(sheet);
     host.appendChild(side); host.appendChild(mobile);
 
     /* ---------- one sidebar ---------- */
@@ -283,6 +302,10 @@
       },
       get active() { return sections[cur].def.id; },
       get group() { return groups[sections[cur].g].id; },
+      // The back button the visitor can see (sidebar or phone bar), for focus.
+      get backButton() {
+        return [].filter.call(host.querySelectorAll('[data-all-guides]'), function (b) { return b.offsetParent !== null; })[0] || null;
+      },
       tabFor: function (sectionId) {
         var i = sections.findIndex(function (s) { return s.def.id === sectionId; });
         var b = sideBar.items.filter(function (n) { return +n.dataset.i === i; })[0];

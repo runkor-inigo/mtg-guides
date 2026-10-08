@@ -554,7 +554,6 @@ function setupFloatingMatrixHeader(){
  const wrap=document.querySelector('.matrixwrap');
  const table=wrap?.querySelector(':scope > table.transposed');
  const sourceHead=table?.querySelector('thead');
- const siteHeader=document.querySelector('body > header');
  if(!wrap||!table||!sourceHead)return;
 
  const shell=document.createElement('div');
@@ -576,7 +575,7 @@ function setupFloatingMatrixHeader(){
  let ticking=false;
 
  function stickyTop(){
-  return Math.max(0,Math.round(siteHeader?.getBoundingClientRect().bottom||0));
+  return 0;
  }
 
  function positionAndToggle(){
@@ -698,7 +697,9 @@ function showSection(id,index,fromUser){
 }
 const guideNav=SpeakerNav.create(document.getElementById('guide-nav'),{
  groups:GUIDE_GROUPS.map(g=>({...g,sections:g.sections.map(s=>({...s,controls:s.panes.join(' ')}))})),
- active:guideTarget(location.hash)?.section||'start',onChange:showSection
+ active:guideTarget(location.hash)?.section||'start',onChange:showSection,
+ // The page has no header: the sidebar names the guide and holds the way back to the library.
+ brand:{title:'Speaker Elves',badge:'5 Oct 2026 list',back:'All guides'}
 });
 showSection(guideNav.active);
 GUIDE_SECTIONS.forEach(s=>s.panes.forEach(id=>{const pane=document.getElementById(id);pane.setAttribute('role','tabpanel');pane.setAttribute('aria-labelledby',guideNav.tabFor(s.id).id);}));

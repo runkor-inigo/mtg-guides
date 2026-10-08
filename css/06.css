@@ -1,11 +1,10 @@
 /* RC50: readable mobile plans, with the full matrix available on demand. */
 .mobile-map45{display:none}
 @media(max-width:760px){
- body>header{position:relative;backdrop-filter:none}.wrap{padding:16px 12px}
- header h1{font-size:23px;line-height:1.25}.sub{font-size:12px;line-height:1.6}
+ .wrap{padding:16px 12px}
  .tabs{display:flex;flex-wrap:nowrap;overflow-x:auto;padding:4px 0 10px;scrollbar-width:thin}
  .tabs .tab{flex:0 0 auto;min-height:44px;font-size:13px;padding:10px 14px}
- #all-guides{min-height:44px}.mobile-map45{display:block;margin:14px 0}
+ .mobile-map45{display:block;margin:14px 0}
  #map:not(.show-matrix45)>.matrixwrap{display:none}
  body>.floatingMatrixHead{display:none!important}
  .mobile-map-toolbar45{display:flex;gap:8px;margin-bottom:12px;align-items:center}

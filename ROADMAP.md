@@ -140,7 +140,7 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Resultado: el pane `#credits` pasa de cartel a artículo: quién encontró el deck (taka87 y ryo_sll, primero con "Unverified" y después verificados, ver abajo; pilotos de MTGO del archivo de resultados, con fecha 7 Oct 2026 y enlace a Current 75), el linaje de Cradle Control (los pilotos ya citados en Deck Origins), autores y fuentes (mismos enlaces que Origins), datos y herramientas (MTGGoldfish, mtgo.com, Scryfall, GSAP) y el aviso de la Fan Content Policy de Wizards. Quitado `wip:true` de credits en `js/01.js`. Verificación de taka87 y ryo_sll: sin resultado (ver "No verificado"). Comprobado sobre una copia limpia de HEAD con solo este cambio: 0 errores de consola; a 1280 px y a 390 px sin scroll horizontal.
 - Testing y debate: se agradece al canal #elves del Discord de runkor (sin enlace: no hay invitación en el proyecto).
 - Verificación hecha: ryo_sll = Shimoizumi Ryoichi y taka87z3 = Takagi Yuki (confirmado por el usuario). Origins y Credits citan sus resultados de Hareruya con fecha y enlace a metagame.info, cada mención lleva su perfil de X, y la nota de método de Origins explica la fuente (182 torneos japoneses revisados; cobertura desde marzo de 2026). 0 errores de consola; Origins y Credits sin scroll horizontal a 390 px.
-- Añadidos con nombre, usuario de MTGO y X (datos del usuario, 8 Oct 2026): Beñat (Benat, @Benatmtg), Newton Hang (hellonewton, 10drills, delighted halfing; @hello_newton), Jörg Heinrich (EronRelentless, @Eron_Relentless) y Curran Delahanty (Testacular, sin X: cuenta borrada). Formato en la página: "Nombre (MTGO: usuario; @X)". Autor: Iñigo Villamor (MTGO: runkor; @vllmr) en la entrada de Credits; en el resto de la página "runkor" se queda como firma. Sin datos aún: dssit, DB_ThrabenU, vegecookies, LarthPursenas, urzatheplaneswalker, INnoVationLB, o0oHyperiono0o y los pilotos japoneses salvo Shimoizumi y Takagi.
+- Añadidos con nombre, usuario de MTGO y X (datos del usuario, 8 Oct 2026): Beñat (Benat, @Benatmtg), Newton Hang (hellonewton; @hello_newton), Jörg Heinrich (EronRelentless, @Eron_Relentless) y Curran Delahanty (Testacular, sin X: cuenta borrada). Formato en la página: "Nombre (MTGO: usuario; @X)". Autor: Iñigo Villamor (MTGO: runkor; @vllmr) en la entrada de Credits; en el resto de la página "runkor" se queda como firma. Sin datos aún: DB_ThrabenU, vegecookies, LarthPursenas, urzatheplaneswalker, INnoVationLB, o0oHyperiono0o y los pilotos japoneses salvo Shimoizumi y Takagi.
 - Objetivo: escribir Credits y quitar la marca `wip`; intentar verificar a taka87 y ryo_sll (sección "No verificado").
 - Archivos: el pane `#credits` en `index.html`, `js/01.js` (quitar `wip:true`), y `#origins` si cambia la verificación.
 - Dependencias: ninguna. Cualquier orden.
@@ -246,6 +246,27 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Dependencias: P (hecha). Mejor después de D, por si D cambia arte.
 - Tamaño: pequeña.
 - Decisión previa: ninguna; solo tu visto bueno para borrar.
+
+### Diseño (8 Oct 2026, chat principal)
+
+- **Cabecera retirada.** Decisión del usuario: "All guides" y el nombre de la guía pasan a la parte de arriba del menú lateral; en el móvil, una flecha de volver a la izquierda de la barra de capítulos. La línea "19 lands · 6 fetchlands…" se quita (ya está en Deck Construction y Current 75). Archivos: `index.html` (sin `<header>`, `h1` oculto), `js/menu.js` (opción `brand`), `js/01.js`, `js/05.js`, `css/menu.css`, y limpieza de reglas de cabecera en `css/01.css`, `02.css`, `06.css` y `12.css`. Verificado en local: 0 errores de consola; escritorio, menú plegado y 390 px sin scroll horizontal; los dos botones de volver llevan a la portada y al reabrir la guía el foco va al botón de volver. Sin subir.
+- **Skills de diseño instaladas** en `.claude/skills/` (solo local): emil-design-eng, impeccable (sin hooks), design-taste-frontend y redesign-existing-projects.
+- **Pendiente del usuario: Playwright MCP.** El sistema de permisos no deja a Claude añadir un servidor MCP. Para activarlo: en una terminal, `claude mcp add playwright -- npx -y @playwright/mcp@0.0.83 --browser chrome` (o crear `.mcp.json` en la raíz y añadir `/.mcp.json` a `.vercelignore`), y reiniciar la sesión.
+- **Opcional: hooks de Impeccable.** Ejecutarían su binario (que se descarga la primera vez) tras cada edición y al final de cada turno. Desactivados hasta que el usuario decida.
+
+### Goldfish, zoom y Credits (8 Oct 2026, chat principal)
+
+- **Zoom de cartas:** la imagen ampliada mantiene las esquinas redondeadas (`border-radius: 4.75%/3.4%`, 3 mm sobre 63×88 mm) y su caja ya coincide con la carta (`css/01.css`, `.combo37-large`).
+- **Variantes del Goldfish** (petición del usuario): interruptores de carta enlazados en cada modo (`GF_VARIANTS` y `buildGoldfish(mode, side, v)` en `js/04.js`; estilos en `css/12.css`).
+  - Natural Order: 7 rutas legales para 4 de maná en turno 2 (Cub + Cradle con dork o GSZ → Dryad Arbor, con o sin Quirion; sin Cub: dork o Arbor + Quirion; sin dork: Quirion en turno 1 + Cub). Objetivo Atraxa por defecto (decisión del usuario: Craterhoof en turno 2 no es letal) o Craterhoof (7–9 de daño). Sin Cradle no hay línea: el interruptor se niega y explica la cuenta.
+  - Turn-2 Sabertooth: con o sin Quirion. Sin Quirion en el play llega a Sabertooth con 0 de maná y pasa el turno; en el draw, con Quirion, usa tres Symbiotes.
+  - Ready board: solo maná o robando con Elvish Visionary (línea antigua recuperada del historial; carta flex, no está en el main del 5 Oct).
+  - Comprobado con Node: todas las combinaciones (modo × variante × play/draw) se construyen sin maná negativo ni cartas duplicadas, y las líneas que ya existían dan los mismos pasos y el mismo maná que antes. Navegador: 0 errores de consola; los interruptores se mueven juntos y Cradle se niega con su explicación.
+  - Natural Order (`#natural-order`) ya no dice que el Goldfish solo muestra la primera ruta.
+- **Credits:** nueva sección "Elves through the years", en orden: Luis Scott-Vargas (Pro Tour Berlin 2008, Extended), Chris Andersen (era de Glimpse), Matt Nass, Andrew Cuneo y Ross Merriam (2013–14, Natural Order y Craterhoof; fuente: Ross Merriam en StarCityGames), Juan Félix Flury (top 8 GP París 2014, mtgtop8), Lukas Müller (8-0 en el día 1 del GP Birmingham 2018, cobertura de Wizards), Reid Duke y Julian Knab (Everyday Eternal), Cradle Control y Speaker Elves. Nueva sección "Long-time collaborators": Jonathan Caballero (Donostia) y Serafín Gómez (Portugal).
+  - dssit = David Schittinger (@Dsitt7), según el usuario; enlazado en Credits y Deck Origins.
+  - Quitadas las cuentas alternativas de Newton Hang (petición del usuario: no revelar cuentas).
+  - Pendiente de confirmar con el usuario: el apellido "Knab" (el usuario dijo "Knapp"; la fuente encontrada escribe Knab) y un nombre que no se entendió en el dictado ("que gustes"). No se encontraron más resultados con fuente; se pueden añadir jugadores si el usuario da nombres o resultados.
 
 ### Estado (8 Oct 2026, tras el commit 83c5f2c)
 

@@ -1,5 +1,5 @@
 /* RC50: stable demonstration controls and guide selection. */
-body.guide-home>header,body.guide-home>main,
+body.guide-home>main,
 body.guide-home>.drawer,body.guide-home>.drawerback,body.guide-home>.floatingMatrixHead{display:none!important}
 #guide-library[hidden]{display:none!important}
 #guide-library{max-width:1080px;margin:0 auto;padding:80px 28px 100px;min-height:85vh;box-sizing:border-box}
@@ -9,7 +9,7 @@ body.guide-home>.drawer,body.guide-home>.drawerback,body.guide-home>.floatingMat
 .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),420px));gap:24px}
 .guide-entry{font-family:Roboto,sans-serif;position:relative;text-align:left;overflow:hidden;padding:0;background:#14232e;border:1px solid #3b5865;border-radius:18px;color:#e7f0f4;cursor:pointer;box-shadow:0 12px 40px #0003;transition:border-color .18s,box-shadow .18s,background-color .18s}
 .guide-entry:hover{border-color:#a2ddc0;background:#182b35;box-shadow:0 12px 40px #0003,0 0 0 1px #a2ddc030}
-.guide-entry:focus-visible,#all-guides:focus-visible{outline:3px solid #a2ddc0;outline-offset:5px}
+.guide-entry:focus-visible{outline:3px solid #a2ddc0;outline-offset:5px}
 .guide-art{height:200px;position:relative;overflow:hidden;background:#203d31}
 .guide-art img{width:100%;height:auto;position:absolute;top:-70px;display:block}
 .guide-art:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#14232e,transparent 55%)}
@@ -18,7 +18,6 @@ body.guide-home>.drawer,body.guide-home>.drawerback,body.guide-home>.floatingMat
 .guide-entry h2{font-size:28px;line-height:1.2;margin:16px 0 12px;color:#f0f6f4}
 .guide-entry p{font-size:14px;line-height:1.6;color:#b9cbd6;margin:0 0 24px}
 .guide-entry-cta{display:flex;justify-content:space-between;border-top:1px solid #3b5865;padding-top:18px;font-size:13px;font-weight:700;color:#bcebd3}
-#all-guides{font:500 12px Roboto,sans-serif;min-height:40px;padding:8px 12px;margin:0 0 12px;background:#182a35;border:1px solid #3b5865;border-radius:8px;color:#bdd8ce;cursor:pointer}
 .gf-coach{display:grid;grid-template-rows:116px 188px 78px 44px 56px 74px;gap:14px}
 .gf-coach>*{min-width:0;min-height:0;box-sizing:border-box}
 .gf-coach .gf-mana-panel,.gf-coach .gf-stack,.gf-coach .gf-timeline,.gf-coach .gf-log{margin:0}
