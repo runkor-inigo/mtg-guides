@@ -340,7 +340,8 @@ function addVegecookiesControl(){
   notes:'Alternative UWx Control plan supplied by vegecookies, based on this list: board out all 4 Natural Orders, Vibrance and Atraxa; bring in 4 Thoughtseize, Grist and Choke. Preserve the creature-based grind engine, including Visionary, Symbiote, Sabertooth and all Formidable Speakers.'
  });
 }
-addVegecookiesControl();
+// Removed on 8 Oct 2026 at runkor's request: the vegecookies Control plan cut Atraxa. The function stays for reference.
+// addVegecookiesControl();
 
 /* Boros Energy (8 Oct 2026): written from MyMTGO's "Energy" data (their reference 75 and what they side in
    against Elves), IN / OUT agreed with the user. Its row sits under WBR Energy in the sideboard map. */
@@ -482,6 +483,13 @@ DETAILS['energy'].macro='Tempo / Aggro';
 DETAILS['gb-mole'].name='Cradle Control';
 DETAILS['key-ring'].name='Colorless Tron / Forge';
 DETAILS['initiative'].macro='Tempo / Aggro';
+
+/* runkor's review, 8 Oct 2026. Once Upon a Time is never a cut: the RC51 plans that cut it are fixed here.
+   Eldrazi becomes a three-card plan; Sneak & Show and Cephalid Breakfast leave the map until the full sideboard review. */
+applySideboardPlan('eldrazi',{ins:{'Snuff Out':3},outs:{'Collector Ouphe':1,'Vibrance':1,'Formidable Speaker':1},inCount:3,outCount:3,over:'Normal',
+ notes:(DETAILS.eldrazi?.notes||'')+' 8 Oct 2026 (runkor): +3 Snuff Out for Ouphe, Vibrance and one Speaker; Once Upon a Time stays.'});
+removeMatchup('sneak','Sneak & Show');
+removeMatchup('cephalid','Cephalid Breakfast');
 upgradeMatrix();
 // RC34: retain category separators, reclaim Macro column for meta trend.
 function metaTrend(entry){

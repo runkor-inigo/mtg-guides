@@ -17,6 +17,8 @@
   cur.rows.push({id,p,share:GOLDFISH_META[id]?.[14]?.label||'—',trend:metaTrend(GOLDFISH_META[id])});
  }
  const rows=groups.flatMap(g=>g.rows);
+ // Category share of the MTGO field (shared Goldfish archetypes counted once; see rankMetagame48 in js/01.js).
+ const tot=(g,d)=>'≈'+(g.totals[d]||0).toFixed(1)+'%';
  const colours=id=>manaSymbols((MATCH_COLORS[id]||'').split('').filter(Boolean));
  const waste=p=>p.wasteland==='YES'?'<span class="sbv-pill warn">Wasteland</span>':p.wasteland==='MIXED'?'<span class="sbv-pill warn">Wasteland in some lists</span>':'';
  const sweep=p=>p.sweep?.length?'<span class="sbv-pill warn" title="'+esc(p.sweep.join(', '))+'">⚠ Sweepers</span>':'';
@@ -45,7 +47,7 @@
  function drawRows(q=''){
   const hit=r=>!q||(r.p.name+' '+Object.keys(r.p.ins).join(' ')+' '+Object.keys(r.p.outs).join(' ')).toLowerCase().includes(q);
   rowsPanel.innerHTML=groups.map(g=>{const rs=g.rows.filter(hit);if(!rs.length)return '';
-   return `<h3 class="sbv-cat">${esc(g.name)}<small>14d ≈${(g.totals[14]||0).toFixed(1)}%</small></h3>`+rs.map(r=>`<div class="sbv-row">
+   return `<h3 class="sbv-cat">${esc(g.name)}<small>7d ${tot(g,7)} · <b>14d ${tot(g,14)}</b> · 30d ${tot(g,30)}</small></h3>`+rs.map(r=>`<div class="sbv-row">
     <div class="sbv-who">${nameBtn(r)}<span class="sbv-meta"><span class="sbv-share">${esc(r.share)}</span>${trendTag(r.trend)}<span class="sbv-pill">${esc(r.p.role)}</span>${waste(r.p)}${sweep(r.p)}</span></div>
     <div class="sbv-plan"><div class="sbv-line"><span class="sbv-lab">IN</span>${sorted(r.p.ins).map(([n,k])=>chip(n,k,'in')).join('')}</div>
     <div class="sbv-line"><span class="sbv-lab">OUT</span>${sorted(r.p.outs).map(([n,k])=>chip(n,k,'out')).join('')}</div></div></div>`).join('');}).join('')||'<p class="muted">No matchup or card matches that search.</p>';
@@ -59,7 +61,7 @@
  const head=(n,first)=>`<th class="sbv-card${first?' sep':''}" title="${esc(n)}">${art(n)?`<img src="${art(n)}" alt="" loading="lazy" width="34" height="47">`:''}<span>${esc(short(n))}</span></th>`;
  mx.innerHTML=`<thead><tr><th class="first grp"></th><th class="grp"></th><th class="grp gin sep" colspan="${inCols.length}">Comes in</th><th class="grp gout sep" colspan="${outCols.length}">Goes out</th></tr>
   <tr><th class="first">Matchup</th><th>14d</th>${inCols.map((n,i)=>head(n,i===0)).join('')}${outCols.map((n,i)=>head(n,i===0)).join('')}</tr></thead><tbody>`+
-  groups.map(g=>`<tr class="cat"><td class="first">${esc(g.name)}</td><td colspan="${1+inCols.length+outCols.length}"></td></tr>`+g.rows.map(r=>`<tr data-q="${esc((r.p.name+' '+Object.keys(r.p.ins).join(' ')+' '+Object.keys(r.p.outs).join(' ')).toLowerCase())}"><td class="first">${nameBtn(r)}</td><td class="sbv-share">${esc(r.share)}</td>`+
+  groups.map(g=>`<tr class="cat"><td class="first">${esc(g.name)}</td><td class="sbv-share" title="7d ${tot(g,7)} · 30d ${tot(g,30)}">${tot(g,14)}</td><td colspan="${inCols.length+outCols.length}"></td></tr>`+g.rows.map(r=>`<tr data-q="${esc((r.p.name+' '+Object.keys(r.p.ins).join(' ')+' '+Object.keys(r.p.outs).join(' ')).toLowerCase())}"><td class="first">${nameBtn(r)}</td><td class="sbv-share">${esc(r.share)}</td>`+
    inCols.map((n,i)=>`<td data-c="i${i}" class="${r.p.ins[n]?'c-in':'c-none'}${i===0?' sep':''}">${r.p.ins[n]?`<b>+${r.p.ins[n]}</b>`:'·'}</td>`).join('')+
    outCols.map((n,i)=>`<td data-c="o${i}" class="${r.p.outs[n]?'c-out':'c-none'}${i===0?' sep':''}">${r.p.outs[n]?`<b>−${r.p.outs[n]}</b>`:'·'}</td>`).join('')+'</tr>').join('')).join('')+'</tbody>';
  const clearHot=()=>mx.querySelectorAll('.hot,.hotc').forEach(x=>x.classList.remove('hot','hotc'));
@@ -89,7 +91,7 @@
  // One-page print sheet: black on white, two columns, every plan. Lives at the end of <body> and only shows in print.
  const sheet=document.createElement('section');sheet.className='sbv-sheet';sheet.setAttribute('aria-hidden','true');
  sheet.innerHTML=`<h1>Speaker Elves · Sideboard plans</h1><p class="sbv-sheet-sub"><span>${esc(document.querySelector('.sb-brand-badge')?.textContent||'Current list')} · runkor · ranked by 14-day MTGO share (${esc(GOLDFISH_META_DATE)})</span><span>+N in · −N out · W = Wasteland · ⚠ = sweepers</span></p>
-  <div class="sbv-sheet-cols">${groups.map(g=>`<h2>${esc(g.name)}</h2>`+g.rows.map(r=>`<div class="sbv-sheet-row"><b>${esc(r.p.name)}</b> <small>${esc(r.share)} · ${esc(r.p.role)}${r.p.wasteland==='YES'?' · W':''}${r.p.sweep?.length?' · ⚠':''}</small>
+  <div class="sbv-sheet-cols">${groups.map(g=>`<h2>${esc(g.name)} · 14d ${tot(g,14)}</h2>`+g.rows.map(r=>`<div class="sbv-sheet-row"><b>${esc(r.p.name)}</b> <small>${esc(r.share)} · ${esc(r.p.role)}${r.p.wasteland==='YES'?' · W':''}${r.p.sweep?.length?' · ⚠':''}</small>
    <span><i>IN</i> ${sorted(r.p.ins).map(([n,k])=>'+'+k+' '+esc(short(n))).join(', ')}</span><span><i>OUT</i> ${sorted(r.p.outs).map(([n,k])=>'−'+k+' '+esc(short(n))).join(', ')}</span></div>`).join('')).join('')}</div>
   <p class="sbv-sheet-foot"><span>speaker-elves.vercel.app/#sideboard</span><span>Plans are proposals for this exact 75: adjust to the opposing build and to play or draw.</span></p>`;
  document.body.append(sheet);
@@ -99,7 +101,8 @@
 
 // Maybeboard as a study table: our archive of every card considered for the deck. What matters most is why it was
 // chosen and where it helped, in case it comes back; why it is out now is secondary (often just space).
-// The chosen card sits on the table; the rest turn slowly on a carousel below.
+// The chosen card sits on the table; every card waits below in a tray, grouped by when it left. Picking one on a
+// phone scrolls back up to the table.
 (function maybeStudy(){
  const pane=document.getElementById('maybeboard');if(!pane)return;
  const arts=[...pane.querySelectorAll('article[data-card]')];if(!arts.length)return;
@@ -111,20 +114,23 @@
  const face=(c,cls,lazy=true)=>img(c)?`<img class="${cls}" src="${img(c)}" alt="${esc(c.name)}"${lazy?' loading="lazy"':''} width="244" height="340">`:`<span class="${cls} mbs-text">${esc(c.name)}</span>`;
  const study=document.createElement('div');study.className='mbs';
  study.innerHTML=`<div class="mbs-table" aria-live="polite"></div>
-  <div class="mbs-rail"><p class="mbs-hint">${cards.length} cards · hover to stop the carousel, click a card to put it on the table</p>
-  <div class="mbs-viewport"><div class="mbs-track">${[0,1].map(copy=>cards.map((c,i)=>`<button type="button" class="mbs-card" data-i="${i}"${copy?' aria-hidden="true" tabindex="-1"':''} title="${esc(c.name)}">${face(c,'mbs-face')}${/do not give the reason/.test(c.why)?'<span class="mbs-q">reason?</span>':''}</button>`).join('')).join('')}</div></div></div>`;
+  <div class="mbs-tray"><p class="mbs-hint">${cards.length} cards · pick one to put it on the table</p>
+  ${[...new Set(cards.map(c=>c.shelf))].map(sh=>`<div class="mbs-shelfgroup"><p class="mbs-shelfname">${esc(sh)}</p><div class="mbs-grid">${cards.map((c,i)=>c.shelf!==sh?'':`<button type="button" class="mbs-card" data-i="${i}" aria-pressed="false"><span class="mbs-cardimg">${face(c,'mbs-face')}</span><span class="mbs-cardname">${esc(c.name)}</span></button>`).join('')}</div></div>`).join('')}</div>`;
  pane.querySelector('.muted')?.after(study);
  pane.classList.add('mbs-on');
  const tableEl=study.querySelector('.mbs-table');
  function put(i){
   const c=cards[i];
-  study.querySelectorAll('.mbs-card').forEach(b=>b.classList.toggle('on',+b.dataset.i===i));
+  study.querySelectorAll('.mbs-card').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.i===i)));
   tableEl.innerHTML=`<div class="mbs-big">${face(c,'mbs-bigface',false)}</div><div class="mbs-info"><p class="mbs-shelf">${esc(c.shelf)}</p><h3>${esc(c.name)}</h3><p class="mbs-meta">${esc(c.meta)}</p>
    <dl><dt>Why it was chosen</dt><dd>${esc(c.job.charAt(0).toUpperCase()+c.job.slice(1))}</dd>
    <dt>Where it helped</dt><dd>${c.served.length?'Sideboard plans brought it in against: '+c.served.map(m=>`<span class="mbs-chip">${esc(m)}</span>`).join(' '):'A main-deck card: it was part of every game, not of a sideboard plan.'}</dd></dl>
    <p class="mbs-now"><b>Why it is not in the list now:</b> ${esc(c.why)}${c.test?' <span class="ev test">Under test</span>':''}</p></div>`;
   tableEl.classList.remove('mbs-flip');void tableEl.offsetWidth;tableEl.classList.add('mbs-flip');
  }
- study.querySelector('.mbs-track').addEventListener('click',e=>{const b=e.target.closest('.mbs-card');if(b)put(+b.dataset.i);});
+ const still=()=>{const r=document.documentElement;return r.classList.contains('motion-off')||(matchMedia('(prefers-reduced-motion: reduce)').matches&&!r.classList.contains('motion-on'));};
+ study.querySelector('.mbs-tray').addEventListener('click',e=>{const b=e.target.closest('.mbs-card');if(!b)return;put(+b.dataset.i);
+  // When the table is out of view (phones, long trays), bring it back.
+  const r=tableEl.getBoundingClientRect();if(r.top<0||r.top>innerHeight*.5)tableEl.scrollIntoView({behavior:still()?'auto':'smooth',block:'start'});});
  put(Math.max(0,cards.findIndex(c=>c.key==='Force of Vigor')));
 })();

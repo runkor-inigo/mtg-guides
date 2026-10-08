@@ -20,6 +20,7 @@ body.sbv-on>.floatingMatrixHead{display:none!important}
 .sbv-panel[hidden]{display:none}
 .sbv-cat{display:flex;align-items:baseline;gap:10px;margin:18px 0 4px!important;font-size:12px!important;letter-spacing:.1em;text-transform:uppercase;color:#a2ddc0!important}
 .sbv-cat small{font:500 11px "Roboto Mono",ui-monospace,monospace;letter-spacing:0;color:#8496a3;text-transform:none}
+.sbv-cat small b{color:#cfe6dc;font-weight:700}
 .sbv-panel>.sbv-cat:first-child,.sbv-panel>p+.sbv-cat{margin-top:4px!important}
 .sbv-name{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:#edf3f8;text-align:left}
 .sbv-name .manaSymbols img{width:14px;height:14px}
@@ -51,7 +52,8 @@ table.sbv-mx{border-collapse:separate;border-spacing:0;font-size:12px;min-width:
 .sbv-mx .first{position:sticky;left:0;z-index:1;background:#111a23;text-align:left;min-width:180px}
 .sbv-mx thead .first{z-index:2;background:#14202a}
 .sbv-mx .sep{border-left:2px solid #2d3947}
-.sbv-mx td.c-in b,.sbv-mx td.c-out b{display:inline-block;min-width:26px;padding:2px 0;border-radius:5px}
+/* Square cells, as wide as they are tall. */
+.sbv-mx td.c-in b,.sbv-mx td.c-out b{display:inline-grid;place-items:center;box-sizing:border-box;width:24px;height:24px;border-radius:5px;font-size:11px;line-height:1}
 .sbv-mx td.c-in b{background:var(--sbv-in-bg);color:var(--sbv-in);border:1px solid var(--sbv-in-line)}
 .sbv-mx td.c-out b{color:var(--sbv-out);border:1px dashed var(--sbv-out-line)}
 .sbv-mx td.c-none{color:#33424d}
@@ -113,23 +115,24 @@ table.sbv-mx{border-collapse:separate;border-spacing:0;font-size:12px;min-width:
 .mbs-flip .mbs-info{animation:mbs-in 320ms var(--sbv-ease)}
 @keyframes mbs-flip{from{transform:rotateY(-70deg) scale(.92);opacity:.2}to{transform:none;opacity:1}}
 @keyframes mbs-in{from{transform:translateY(6px);opacity:0}to{transform:none;opacity:1}}
-.mbs-hint{margin:0 0 6px!important;font-size:12px!important;color:#7d8f9c!important}
-.mbs-viewport{overflow:hidden;padding:22px 0 18px;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.mbs-track{display:flex;gap:16px;width:max-content;animation:mbs-drift 60s linear infinite;perspective:900px}
-.mbs-viewport:hover .mbs-track,.mbs-viewport:focus-within .mbs-track{animation-play-state:paused}
-@keyframes mbs-drift{to{transform:translateX(calc(-50% - 8px))}}
-.mbs-card{all:unset;box-sizing:border-box;cursor:pointer;position:relative;flex:none;width:118px;border-radius:7px;transform:rotateY(-14deg);transition:transform 200ms var(--sbv-ease),box-shadow 200ms ease;box-shadow:0 8px 18px rgba(0,0,0,.5)}
-.mbs-face{display:block;width:118px;height:auto;border-radius:7px}
-.mbs-card .mbs-text{font-size:12px}
-.mbs-card.on{box-shadow:0 0 0 2px #f0d77a,-6px 0 18px 3px rgba(120,222,153,.5),8px 0 20px 4px rgba(240,215,122,.5)}
-.mbs-q{position:absolute;left:6px;bottom:6px;font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(11,17,24,.85);color:#f0d77a}
-@media (hover:hover) and (pointer:fine){.mbs-card:hover{transform:translateY(-10px) scale(1.14) rotateY(0deg);z-index:2;box-shadow:0 18px 34px rgba(0,0,0,.6)}}
-.mbs-card:focus-visible{outline:2px solid #a2ddc0;outline-offset:3px;transform:translateY(-10px) scale(1.14)}
+.mbs-hint{margin:0 0 4px!important;font-size:12px!important;color:#7d8f9c!important}
+.mbs-tray{display:grid;gap:14px}
+.mbs-shelfname{margin:0 0 6px!important;font-size:11px!important;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a2ddc0!important}
+.mbs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:14px}
+.mbs-card{all:unset;box-sizing:border-box;cursor:pointer;display:grid;gap:6px;justify-items:center;padding:6px;border-radius:10px;transition:transform 160ms var(--sbv-ease),background-color 150ms ease}
+.mbs-cardimg{display:block;width:100%;max-width:120px;border-radius:7px;box-shadow:0 8px 18px rgba(0,0,0,.5);transition:transform 200ms var(--sbv-ease),box-shadow 200ms ease}
+.mbs-face{display:block;width:100%;height:auto;border-radius:7px}
+.mbs-card .mbs-text{font-size:11px}
+.mbs-cardname{font-size:11px;line-height:1.3;color:#b9c8d4;text-align:center}
+.mbs-card[aria-pressed="true"]{background:#11261b}
+.mbs-card[aria-pressed="true"] .mbs-cardimg{box-shadow:0 0 0 2px #f0d77a,-6px 0 18px 3px rgba(120,222,153,.5),8px 0 20px 4px rgba(240,215,122,.5)}
+.mbs-card[aria-pressed="true"] .mbs-cardname{color:#edf3f8;font-weight:700}
+@media (hover:hover) and (pointer:fine){.mbs-card:hover .mbs-cardimg{transform:translateY(-6px) scale(1.06);box-shadow:0 16px 30px rgba(0,0,0,.6)}}
+.mbs-card:focus-visible{outline:2px solid #a2ddc0;outline-offset:2px}
 .mbs-card:active{transform:scale(.97)}
-/* No motion: no drift and no 3D tilt; the cards become a plain scrollable row. */
-@media (prefers-reduced-motion:reduce){:root:not(.motion-on) .mbs-track{animation:none}:root:not(.motion-on) .mbs-viewport{overflow-x:auto}:root:not(.motion-on) .mbs-card{transform:none}:root:not(.motion-on) .mbs-card[aria-hidden="true"]{display:none}:root:not(.motion-on) .mbs-flip .mbs-big,:root:not(.motion-on) .mbs-flip .mbs-info{animation:none}}
-:root.motion-off .mbs-track{animation:none}:root.motion-off .mbs-viewport{overflow-x:auto}:root.motion-off .mbs-card{transform:none}:root.motion-off .mbs-card[aria-hidden="true"]{display:none}:root.motion-off .mbs-flip .mbs-big,:root.motion-off .mbs-flip .mbs-info{animation:none}
-@media (max-width:640px){.mbs-table{grid-template-columns:1fr}.mbs-bigface,.mbs-big .mbs-text{max-width:200px}.mbs-card,.mbs-face{width:96px}}
+@media (prefers-reduced-motion:reduce){:root:not(.motion-on) .mbs-flip .mbs-big,:root:not(.motion-on) .mbs-flip .mbs-info{animation:none}:root:not(.motion-on) .mbs-card:hover .mbs-cardimg{transform:none}}
+:root.motion-off .mbs-flip .mbs-big,:root.motion-off .mbs-flip .mbs-info{animation:none}:root.motion-off .mbs-card:hover .mbs-cardimg{transform:none}
+@media (max-width:640px){.mbs-table{grid-template-columns:1fr}.mbs-bigface,.mbs-big .mbs-text{max-width:200px}.mbs-grid{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}}
 
 /* Grid children must not grow past the pane: the matrix scrolls inside its own frame. */
-.sbv,.sbv>*,.sbv-panel,.mbs,.mbs>*,.mbs-rail{min-width:0;max-width:100%}
+.sbv,.sbv>*,.sbv-panel,.mbs,.mbs>*,.mbs-tray{min-width:0;max-width:100%}

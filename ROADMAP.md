@@ -282,7 +282,17 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 - **Julian Knab en Deck Origins y Credits:** ganó el Bazaar of Moxen 8 en París con Elves (695 jugadores, 3 Nov 2013), MKM Series Milán 2016 y Hamburgo 2018, top 8 en el Legacy European Championship 2017; doce resultados destacados con Elves de 2013 a 2018 (mtgtop8). Resuelve la duda "Knab o Knapp": es Knab.
 - **Game Plans · Slower board:** con Elvish Visionary el juego largo puede ser más grindy (Symbiote lo devuelve y cada recast roba; con Sabertooth roba toda la biblioteca); no todas las listas lo juegan.
 
-### Sideboard map y Maybeboard nuevos (8 Oct 2026, chat principal, sin subir)
+### Ajustes del Sideboard map y del Maybeboard (8 Oct 2026, chat principal, sin subir)
+
+- Maybeboard: el carrusel en movimiento no dejaba elegir carta. Lo sustituye una bandeja fija bajo la mesa, agrupada por cuándo salió cada carta; al elegir una en el móvil, la página sube a la mesa. Savannah tiene imagen: primera impresión, Limited Edition Alpha · 280 (Rob Alexander), en `assets/savannah.webp` y en `COMBO_CARD_ART` (js/02.js).
+- Once Upon a Time nunca se saca (decisión del usuario). Venía de los planes RC51 del 3 Oct (código original, commit 7602930) en Eldrazi, Sneak & Show y Cephalid Breakfast:
+  - Eldrazi: +3 Snuff Out / −1 Collector Ouphe, −1 Vibrance, −1 Formidable Speaker.
+  - Sneak & Show y Cephalid Breakfast: fuera del mapa hasta revisar todo el plan de sideboard (tarea C). Sneak and Show está en el top 10 de Matchups, que ahora la muestra sin plan.
+- Fuera el plan alternativo de vegecookies (sacaba Atraxa). La función sigue en js/01.js, sin llamarse.
+- Matriz: celdas +N / −N cuadradas (24×24). Las categorías muestran su cuota 7d / 14d / 30d en Plan rows, en Matrix (14d en su columna) y en la hoja impresa (14d); orden: categoría con más meta primero y, dentro, los mazos de más a menos.
+- Verificado en local: 26 filas, ningún plan saca OUaT, 0 errores de consola, PDF de una página.
+
+### Sideboard map y Maybeboard nuevos (8 Oct 2026, chat principal, publicado en 226a7f6)
 
 - Decisión del usuario tras la página de opciones (https://claude.ai/artifact/PDz974TvcHyS73KUXSP1jv): Plan rows y Matrix como dos vistas, más Presence (cobertura del meta) y modo de impresión. Sin Bubble matrix. Card strips y By card no entran por ahora.
 - `js/13.js` y `css/13.css` (nuevos). Vistas Plan rows (por defecto), Matrix y Presence; buscador; el nombre de un matchup abre su plan; botón "Print / Save as PDF" con una hoja A4 en blanco y negro de una cara (comprobado con un PDF real: una página, 29 matchups). La matriz antigua sigue en el DOM, oculta.
@@ -290,7 +300,7 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 - Verificado en local: 0 errores de consola; a 390 px ninguna vista desborda (la matriz hace scroll dentro de su marco).
 - Pendiente: el texto "Reading the sideboard map: Read-only transposed map…" de Sources describe la matriz antigua; actualizarlo junto con el resto de Sources.
 
-### Credits y Deck Origins sin duplicados (8 Oct 2026, chat principal, sin subir)
+### Credits y Deck Origins sin duplicados (8 Oct 2026, chat principal, publicado en 226a7f6)
 
 - Regla del usuario: la historia del mazo vive solo en Deck Origins; Credits y About no la repiten y enlazan a Deck Origins.
 - Credits: quitadas "The people who found the deck" y "Elves through the years"; queda "The players behind the deck" con enlace interno a Deck Origins. "Writers and sources" enlaza a la lista de fuentes de Deck Origins. Se mantienen autor, colaboradores, datos y herramientas, testing y Fan Content.

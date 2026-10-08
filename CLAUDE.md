@@ -37,6 +37,7 @@ Legacy MTG guide for "Speaker Elves" (BG Elves). Current list: 5 Oct 2026 (runko
 ## Rules
 
 - Never commit or push unless the user explicitly asks.
+- Once Upon a Time is never a sideboard cut (runkor, 8 Oct 2026). The vegecookies Control plan, Sneak & Show and Cephalid Breakfast are out of the map until the full sideboard review (task C); Eldrazi is +3 Snuff Out for Ouphe, Vibrance and one Speaker. These overrides sit just before `upgradeMatrix()` in js/01.js.
 - Do not change card data, the sideboard plan, decklist or list logic (matchup data, IN/OUT counts, combo lines, probabilities) without telling the user first.
 - Before calling any change done, serve the site locally (`py -m http.server 8765`), open it in a browser and confirm it loads with no console errors. Run one server only. Headless check that works on this machine: `chrome.exe --headless=new --enable-logging=stderr --v=0 --virtual-time-budget=8000 --dump-dom http://localhost:8765/` and look for `CONSOLE` lines in stderr. Headless Chrome lays out at least 500 px wide, so for phone width load the site in a 390 px `<iframe>` from a temporary page.
 - Pushing to `main` deploys production: push only when the user explicitly asks, then check the live site (https://speaker-elves.vercel.app/) loads the change with no console errors.
