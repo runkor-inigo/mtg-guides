@@ -25,9 +25,9 @@
 7. **Resuelta (8 Oct 2026): archivos internos públicos.**
    Vercel servía `ROADMAP.md`, `CLAUDE.md`, `scripts/` y `.github/` (200; `README.md` ya daba 404). Se añadió `.vercelignore` con esos archivos y `.claude/` (commit 9d52a02). Verificado en vivo: todos dan 404, incluido el propio `.vercelignore`; `/`, `js/`, `css/` y `js/meta-live.js` siguen en 200, y la consola no muestra errores. El "homepage" del repo en GitHub ya apunta a https://speaker-elves.vercel.app/ (confirmado con la API de GitHub).
 
-8. **Pendiente (8 Oct 2026): condiciones de uso de MyMTGO.** El script nocturno lee ahora las páginas públicas de arquetipo de MyMTGO (`/metagame/legacy/<arquetipo>?vs=elves`, unas 17 lecturas con 2 s de pausa). `robots.txt` solo prohíbe `/api/`, `/admin/` y `/daily/next`, y no hay comprobación anti-bots, pero la página `/terms` se carga con JavaScript y no se ha podido leer. El usuario debe revisarla antes del push, como hizo con MTGGoldfish.
+8. **Resuelta (8 Oct 2026): lectura de MyMTGO.** El usuario dio el visto bueno al push (commit 83c5f2c) sabiendo que la página `/terms` no se pudo leer de forma automática. El script nocturno lee ahora las páginas públicas de arquetipo de MyMTGO (`/metagame/legacy/<arquetipo>?vs=elves`, unas 17 lecturas con 2 s de pausa). `robots.txt` solo prohíbe `/api/`, `/admin/` y `/daily/next`, y no hay comprobación anti-bots, pero la página `/terms` se carga con JavaScript y no se ha podido leer.
 
-9. **Hecho en parte (8 Oct 2026): nombres de las partes del menú.** Ya cambiados (sin commit): Learn → "Deck Foundations" (icono `cards`), Gameplay → "Game Theory" (`tree`), Metagame → "Gameplay" (`swords`), en `js/01.js` (`GUIDE_GROUPS`) y `js/menu.js` (`ICONS`). Sustituye al nombre "Metagame" del punto 2. **Pendiente, cuando no haya otros chats abiertos** (tocan `js/01.js` e `index.html`, que comparten todos):
+9. **Hecho en parte (8 Oct 2026): nombres de las partes del menú.** Publicados en el commit 83c5f2c: Learn → "Deck Foundations" (icono `cards`), Gameplay → "Game Theory" (`tree`), Metagame → "Gameplay" (`swords`), en `js/01.js` (`GUIDE_GROUPS`) y `js/menu.js` (`ICONS`). Sustituye al nombre "Metagame" del punto 2. **Pendiente, cuando no haya otros chats abiertos** (tocan `js/01.js` e `index.html`, que comparten todos):
    - Sección de inicio: hoy se entra siempre en Sideboard (`active:'sideboard'` en `js/01.js` y `class="pane active"` en `#map` de `index.html`), un resto de cuando la guía era solo de sideboard. Pasarla a Start Here (`'start'`, y la clase `active` a `#start`). Opcional: leer y escribir el `#hash` de la URL para enlazar a una sección y volver a ella al recargar.
    - Ids internos: alinearlos con los nombres nuevos (hoy "Game Theory" es `gameplay` y "Gameplay" es `prepare`). Revisar antes cualquier uso de esos ids en `js/` y `css/`.
 
@@ -135,7 +135,7 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Tamaño: media.
 - Decisión previa: ninguna.
 
-**K. `creditos`** — hecha en local (8 Oct 2026, sin commit).
+**K. `creditos`** — hecha y publicada (8 Oct 2026, commit 83c5f2c).
 - Resultado: el pane `#credits` pasa de cartel a artículo: quién encontró el deck (taka87 y ryo_sll con "Unverified"; pilotos de MTGO del archivo de resultados, con fecha 7 Oct 2026 y enlace a Current 75), el linaje de Cradle Control (los pilotos ya citados en Deck Origins), autores y fuentes (mismos enlaces que Origins), datos y herramientas (MTGGoldfish, mtgo.com, Scryfall, GSAP) y el aviso de la Fan Content Policy de Wizards. Quitado `wip:true` de credits en `js/01.js`. Verificación de taka87 y ryo_sll: sin resultado (ver "No verificado"). Comprobado sobre una copia limpia de HEAD con solo este cambio: 0 errores de consola; a 1280 px y a 390 px sin scroll horizontal.
 - Testing y debate: se agradece al canal #elves del Discord de runkor (sin enlace: no hay invitación en el proyecto).
 - Objetivo: escribir Credits y quitar la marca `wip`; intentar verificar a taka87 y ryo_sll (sección "No verificado").
@@ -158,7 +158,7 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Tamaño: media.
 - Decisión previa: ninguna, salvo cambios de lista.
 
-**N. `revision-gameplay`** — parte 2 (`revision-gameplay-2`: Natural Order y Speaker Loop) HECHA y cerrada en local (8 Oct 2026, sin commit). Parte 1 (`revision-gameplay-1`: First Turns y Game Plans) espera a J.
+**N. `revision-gameplay`** — parte 2 (`revision-gameplay-2`: Natural Order y Speaker Loop) HECHA y publicada (8 Oct 2026, commit 83c5f2c). Parte 1 (`revision-gameplay-1`: First Turns y Game Plans) espera a J.
 - Resultado: texto Oracle de las 17 cartas clave comprobado con la API de Scryfall. Corregido: (1) Dinobash + Craterhoof funciona en cualquier orden (la base 5/5 se aplica antes del +X/+X), no solo "antes de que resuelva el trigger"; (2) Collector Ouphe añadido a los no-Elfos; (3) GSZ "for zero" pasa a "X = 0 cuesta {G}"; (4) Natural Order: el Goldfish solo muestra la primera de las tres rutas, no las tres; "Hardcast Craterhoof" pasa a "Craterhoof is not always lethal", con el ejemplo del Goldfish (8 de daño); (5) ruta 2: girar el dork para maná lo saca del ataque; (6) Boseiju cuesta solo {G} con Marwyn (legendaria) y el rival puede buscar una tierra básica; (7) quitada la etiqueta "being re-checked" de Speaker Loop. Natural Order y Speaker Loop pasan de "First draft" a "Reviewed". Verificado en local: 0 errores de consola.
 - Pendiente (`revision-gameplay-1`, tras J): First Turns y Game Plans siguen como "First draft". Ya corregido en ellas: Dinobash (orden con Craterhoof, Collector Ouphe) y GSZ X = 0. Falta revisar los pivotes que escriba J y quitar el "First draft".
 - Pregunta de Quirion, resuelta por el usuario (8 Oct 2026): Symbiote devuelve a Speaker para tener otro disparo (descartar una carta mala y buscar la siguiente pieza, sobre todo Symbiotes), y así cada vuelta hay una criatura más y Cradle da más maná. Un Quirion sin usar se activa siempre sobre Cradle, para girarla con el máximo de criaturas; la Forest o Bayou devuelta (no Boseiju) pasa a ser descarte para Speaker. Devolver un Elfo de un maná (dork o Quirion, recast {G}) en vez de Speaker solo cuando ya se tiene la forma de matar (Craterhoof en mano, o GSZ) y solo falta maná: +4 por ciclo en vez de +2. Si aún faltan piezas, se devuelve Speaker (Speaker, Symbiote, bounce… hasta Sabertooth, loop, kill). Con loops ilimitados el resultado es el mismo, pero con el Elfo barato se llega antes al maná crítico. Añadido en `#loop` ("Why Symbiote returns Speaker", "An unused Quirion Ranger" y "Build the board, or just make mana?"). Sin Cub, Cradle no es criatura y Quirion endereza el dork (nota añadida). El Goldfish no cambia: muestra una línea general por ruta, y una nota en `#loop` dice que un Quirion extra (otro untap y otra carta para descartar) facilita el proceso. Criterio del usuario: el Goldfish y la guía muestran las líneas generales con sus modificadores, no todas las líneas posibles.
@@ -175,14 +175,14 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Tamaño: pequeña.
 - Decisión previa: ninguna.
 
-**P. `rendimiento-imagenes`** — hecha en local (8 Oct 2026, sin commit); el borrado de archivos queda en U.
+**P. `rendimiento-imagenes`** — hecha y publicada (8 Oct 2026, commit 83c5f2c); el borrado de archivos queda en U.
 - Objetivo: reducir el peso de `assets/`: redimensionar al tamaño en que se muestran, convertir los JPG/PNG grandes (sobre todo el PNG de 1,1 MB) a WebP o JPG optimizado, y añadir `loading="lazy"`, `width` y `height` a las imágenes que no se ven al cargar.
 - Archivos: `assets/` y `assets/matchups/`, las rutas de imagen en `js/01.js`, `js/04.js` y `js/09.js`, y las `<img>` de `index.html`.
 - Dependencias: D y E, porque añaden o cambian imágenes.
 - Tamaño: media. Si hay que tocar muchas rutas, grande: divídela en `imagenes-convertir` (archivos) e `imagenes-lazy` (marcado).
 - Decisión previa: la herramienta de conversión. Sin build step, se haría una sola vez a mano con un script de Python (Pillow) que no se sube, o con una herramienta tuya. También, la calidad/tamaño mínimo aceptable para el arte.
-- **Hecha (8 Oct 2026, sin push).** Pillow 12.2, script de un solo uso fuera del repo. Las 56 imágenes raster pasan a WebP (`method=6`): cartas a 488×680 con calidad 82 (el diálogo de zoom las muestra grandes), arte de matchups a su tamaño con calidad 78, dorso PNG 672×938 → 244×340 (1077 KB → 12 KB, conserva la transparencia) y logo 720×720 → 174×174 (320 KB → 4 KB). Total raster 6,5 MB → 3,8 MB. Rutas cambiadas en `js/02.js`, `js/04.js`, `js/09.js` y el logo de `index.html` (con `width`, `height`, `loading="lazy"`). Las cartas de `combo37` (js/02.js) ganan `width`/`height`/`decoding`; las de `deck-art47` ya reservan hueco con `aspect-ratio` y las de matchups ya eran `lazy`. Diferencia visual nula a ojo.
-- **Arte a primera impresión (8 Oct 2026, mismo chat, sin push).** Con la regla nueva de arte (CLAUDE.md, "Card art"), se auditaron contra Scryfall las 39 cartas de `COMBO_CARD_ART` (js/02.js) y los 16 artes de matchup (js/09.js). Ninguna era borderless, pero 19 cartas y 8 matchups no salían de la primera impresión. Cambian a: Temur Sabertooth FRF, Craterhoof AVR, Llanowar Elves LEA (su enlace a 7ED ★ estaba roto), Bayou LEA, Forest LEA 294, Misty Rainforest y Verdant Catacombs ZEN, Elvish Mystic M14, Allosaurus Shepherd JMP, Thoughtseize LRW, Green Sun's Zenith MBS, Leyline of the Void GPT, Endurance MH2, Force of Vigor MH1, Grist MH2, Gaddock Teeg LRW y Assassin's Trophy GRN; matchups ub-moon, ub-legends, doomsday, ur-cutter, dnt, blue-tron, lands y jeskai-tempo. Marwyn y Chomping Changeling ya eran primera impresión, pero se enlazaban a la API de Scryfall: ahora están en local. Los archivos nuevos se llaman por la carta (`assets/<carta>.webp`); `src`, `url`, `artist` y `edition` actualizados.
+- **Hecha (8 Oct 2026, publicada en 83c5f2c).** Pillow 12.2, script de un solo uso fuera del repo. Las 56 imágenes raster pasan a WebP (`method=6`): cartas a 488×680 con calidad 82 (el diálogo de zoom las muestra grandes), arte de matchups a su tamaño con calidad 78, dorso PNG 672×938 → 244×340 (1077 KB → 12 KB, conserva la transparencia) y logo 720×720 → 174×174 (320 KB → 4 KB). Total raster 6,5 MB → 3,8 MB. Rutas cambiadas en `js/02.js`, `js/04.js`, `js/09.js` y el logo de `index.html` (con `width`, `height`, `loading="lazy"`). Las cartas de `combo37` (js/02.js) ganan `width`/`height`/`decoding`; las de `deck-art47` ya reservan hueco con `aspect-ratio` y las de matchups ya eran `lazy`. Diferencia visual nula a ojo.
+- **Arte a primera impresión (8 Oct 2026, mismo chat, publicado en 83c5f2c).** Con la regla nueva de arte (CLAUDE.md, "Card art"), se auditaron contra Scryfall las 39 cartas de `COMBO_CARD_ART` (js/02.js) y los 16 artes de matchup (js/09.js). Ninguna era borderless, pero 19 cartas y 8 matchups no salían de la primera impresión. Cambian a: Temur Sabertooth FRF, Craterhoof AVR, Llanowar Elves LEA (su enlace a 7ED ★ estaba roto), Bayou LEA, Forest LEA 294, Misty Rainforest y Verdant Catacombs ZEN, Elvish Mystic M14, Allosaurus Shepherd JMP, Thoughtseize LRW, Green Sun's Zenith MBS, Leyline of the Void GPT, Endurance MH2, Force of Vigor MH1, Grist MH2, Gaddock Teeg LRW y Assassin's Trophy GRN; matchups ub-moon, ub-legends, doomsday, ur-cutter, dnt, blue-tron, lands y jeskai-tempo. Marwyn y Chomping Changeling ya eran primera impresión, pero se enlazaban a la API de Scryfall: ahora están en local. Los archivos nuevos se llaman por la carta (`assets/<carta>.webp`); `src`, `url`, `artist` y `edition` actualizados.
 - **Pendiente:** el borrado de archivos sin uso pasa a la tarea U `repo-cleanup`. Con D: si añade arte nuevo, sigue la regla de arte de CLAUDE.md y va en `.webp` (`js/09.js` ya pide `assets/matchups/<clave>.webp`).
 
 **Q. `rendimiento-carga`**
@@ -244,26 +244,22 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Tamaño: pequeña.
 - Decisión previa: ninguna; solo tu visto bueno para borrar.
 
-### Estado (8 Oct 2026, tras el commit 55ac39b)
+### Estado (8 Oct 2026, tras el commit 83c5f2c)
 
-- **Hechas y publicadas (7):** A, B, E, F, H, I y las 7 decisiones. A solo espera el commit del bot el 9 Oct.
-- **Se pueden empezar ya (6):** C `revision-sideboard` ★, G `estudios-mulligan` ★, J `pivotes-interaccion`, K `creditos` (hecha en local), L `fuente-testacular`, O `readme-docs`. ★ = necesita una decisión del usuario antes de empezar.
-- **Hecha en local, sin push:** P `rendimiento-imagenes` (adelantada a D; incluye el arte a primera impresión). Q y U `repo-cleanup` ya se pueden empezar.
-- **Hechas en local, sin push:** R `movil-auditoria` y S `movil-arreglos` (adelantadas; repetir el recorrido si D, M o N cambian mucho).
-- **Hecha en local, sin push:** N parte 2 (`revision-gameplay-2`, Natural Order y Speaker Loop).
-- **Bloqueadas:** D (por C), M (por C, K y L), N parte 1 (`revision-gameplay-1`, por J), T (todas).
+- **Hechas y publicadas:** A, B, E, F, H, I (commit 55ac39b); K, N parte 2, P, R y S (commit 83c5f2c); y las decisiones 1–8. A solo espera el commit del bot el 9 Oct.
+- **Matchups (chat de Matchups, publicado en 83c5f2c):** top 10 de MTGGoldfish en filas desplegables; tabla "Their sideboard" con MTGGoldfish y MyMTGO; semáforos que leen también la lista de referencia de MyMTGO; plan de Boros Energy (parte de D).
+- **Se pueden empezar ya:** C `revision-sideboard` ★, G `estudios-mulligan` ★, J `pivotes-interaccion`, L `fuente-testacular`, O `readme-docs`, Q `rendimiento-carga`, U `repo-cleanup` (cuando decidas borrar). ★ = necesita una decisión del usuario antes de empezar.
+- **Bloqueadas:** D (Azorius Tempo y Rakdos Reanimator, opcionales porque ya no están en el top 10; por C), M (por C y L), N parte 1 (`revision-gameplay-1`, por J), T (todas).
+- **Decisión 9 (menú):** los nombres nuevos ya están publicados; quedan la sección de inicio y los ids internos.
 - **Pregunta de H (Quirion en la ruta 1):** resuelta el 8 Oct 2026; ver la tarea N.
 
-### Listo para deploy (8 Oct 2026, comprobado por el chat de R y S)
+### Deploy del 8 Oct 2026 (commit 83c5f2c)
 
-Entra en el próximo push: K `creditos`, N parte 2, P `rendimiento-imagenes`, R y S (móvil, título "Speaker Elves"), el "Their sideboard" de Matchups con MyMTGO (`js/09.js`, `scripts/update_meta.py`, `js/meta-live.js`) y `.vercelignore` con `/_*.html`.
+Publicado: K `creditos`, N parte 2, P `rendimiento-imagenes` (58 `.webp`), R y S (móvil, título "Speaker Elves"), nombres nuevos del menú, Matchups (filas, "Their sideboard" con MyMTGO, plan de Boros Energy), `scripts/update_meta.py` con MyMTGO y `.vercelignore` con `/_*.html`. No se subieron las 16 `.webp` sustituidas (tarea U) ni páginas `_*.html`.
 
-- Comprobado en local: 0 errores de consola en escritorio (1440 px) y a 390 px recorriendo las 14 secciones con los desplegables abiertos; 0 imágenes rotas; las 58 imágenes que citan `index.html`, `js/` y `css/` existen (ninguna `.jpg`/`.png`); sin scroll horizontal.
-- Qué subir: los archivos modificados (`git add -u`) y las 58 `.webp` nuevas que se usan (cartas en `assets/` y las 16 de `assets/matchups/`). **No** subir las 16 `.webp` sustituidas de la tarea U (punto 2) ni `_mu-test-390.html` / `_mu-test-1280.html` (páginas de prueba de otro chat; `.vercelignore` ya las excluye si se cuelan).
-- Comando: `git add -u` y luego `git add` de cada `.webp` usada; antes del commit, `git status` no debe mostrar ninguna de las 16 ni ninguna `_*.html` en "Changes to be committed".
-- Antes del push: `git pull` (el bot puede haber subido `js/meta-live.js`; si choca, quédate con la versión más nueva y vuelve a generar con `scripts/update_meta.py`).
-- Después del push: abrir https://speaker-elves.vercel.app/ en escritorio y a 390 px, confirmar 0 errores de consola, el título "Speaker Elves" y una imagen `.webp` cargando.
-- Sigue pendiente después del deploy: U `repo-cleanup` (borrar las 72 imágenes sin uso), O `readme-docs`, C, D, G, J, L, M, N parte 1, Q y T.
+- Comprobado en vivo (https://speaker-elves.vercel.app/): 0 errores de consola en escritorio y a 390 px; título "Speaker Elves"; Matchups con 11 filas, Boros Energy incluido; `assets/matchups/boros-energy.webp` da 200 y `ROADMAP.md` da 404.
+- La próxima ejecución del bot ya leerá MyMTGO: el 9 Oct, comprueba que `js/meta-live.js` trae la clave `mymtgo`.
+- Sigue pendiente: U `repo-cleanup` (borrar las 72 imágenes sin uso), O `readme-docs`, C, D (opcional), G, J, L, M, N parte 1, Q y T.
 
 **Chats en paralelo:** varias tareas tocan `index.html`. Cada chat edita solo su pane (`<section class="pane" id="…">`), con ediciones puntuales, nunca reescribiendo el archivo entero. Antes de dar la tarea por hecha, comprueba que las secciones de otros chats siguen intactas. Al terminar, cada chat marca su tarea aquí y en "Estado" y no hace push: el push lo pide el usuario desde un solo chat.
 
@@ -295,4 +291,4 @@ Entra en el próximo push: K `creditos`, N parte 2, P `rendimiento-imagenes`, R 
 14. U `repo-cleanup` — cuando decidas borrar; mejor después de D
 15. T `verificacion-final`
 
-Hechas: A `push-y-workflow`, B `nombre-prepare`, E `goldfish-modos`, F `mulligan-probabilidades`, H `windows-propias`, I `windows-rival`, P `rendimiento-imagenes` (sin push), R `movil-auditoria` y S `movil-arreglos` (sin push), N parte 2 `revision-gameplay-2` (sin push).
+Hechas: A `push-y-workflow`, B `nombre-prepare`, E `goldfish-modos`, F `mulligan-probabilidades`, H `windows-propias`, I `windows-rival`, K `creditos`, P `rendimiento-imagenes`, R `movil-auditoria`, S `movil-arreglos` y N parte 2 `revision-gameplay-2` (publicadas en 83c5f2c).
