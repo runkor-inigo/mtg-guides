@@ -19,8 +19,10 @@
 
 5. **Resuelta (8 Oct 2026): carpeta `.claude/`.** Añadida a `.gitignore`; no se sube ni la sirve Vercel.
 
-6. **Push del commit dbc7cc9 (8 Oct 2026).**
-   Deck Origins por eras, rutas del Speaker Loop, tarjeta de matchup v2 e iconos del Goldfish. Está hecho en local y verificado sin errores de consola. Un push a `main` despliega en producción, así que lo hace el usuario. Sigue pendiente.
+6. **Resuelta (8 Oct 2026): push de dbc7cc9 y 1b23972.** Publicado en https://speaker-elves.vercel.app/ (Vercel: Production, success). En vivo: HTML idéntico al local (123 773 bytes), "Route 2 · Setup turn", filas e iconos del Goldfish, 0 errores de consola a 1440 px y a 390 px, y `.claude/` da 404.
+
+7. **Resuelta (8 Oct 2026): archivos internos públicos.**
+   Vercel servía `ROADMAP.md`, `CLAUDE.md`, `scripts/` y `.github/` (200; `README.md` ya daba 404). Se añadió `.vercelignore` con esos archivos y `.claude/`. Pendiente: push y comprobar que dan 404 en vivo. El "homepage" del repo en GitHub ya apunta a https://speaker-elves.vercel.app/ (confirmado con la API de GitHub).
 
 ## No verificado
 
@@ -36,10 +38,10 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 
 ### Tareas
 
-**A. `push-y-workflow`** — HECHA en local (8 Oct 2026); falta el push del usuario.
+**A. `push-y-workflow`** — HECHA y publicada (8 Oct 2026, commits dbc7cc9 y 1b23972).
 - Resultado: decisiones 1 y 5 resueltas. El workflow ya estaba activo, pero sus ejecuciones salían en verde sin actualizar nada por la franja 00:00–02:59. Se quitó la franja; probado en local: la lectura con `--force` da 201 filas y 20 sideboards, y una segunda ejecución el mismo día se salta. Sitio verificado sin errores de consola a 1440 px y a 390 px (iframe de 390 px; sin scroll horizontal).
 - Archivos tocados: `scripts/update_meta.py` (sin franja horaria; comentarios), `.github/workflows/meta.yml` (solo el comentario del cron), `.gitignore` (`.claude/`), ROADMAP.md, CLAUDE.md.
-- Pendiente: (1) el usuario hace commit de estos cambios y push junto con dbc7cc9; (2) al día siguiente, comprobar que hay un commit "Nightly metagame refresh" del bot en `main` y hacer `git pull` antes de seguir trabajando, porque el bot hace push a `main`; (3) README.md aún dice "00:00 Europe/Madrid" (tarea O).
+- Pendiente: (1) hecho: commit 1b23972 y push, verificados en vivo; (2) el 9 Oct 2026, comprobar que hay un commit "Nightly metagame refresh" del bot en `main` y hacer `git pull` antes de seguir trabajando, porque el bot hace push a `main`; (3) README.md aún dice "00:00 Europe/Madrid" (tarea O).
 - Objetivo: subir dbc7cc9 (decisión 6), activar el workflow nocturno (decisión 1), comprobar la primera ejecución y decidir qué se hace con `.claude/` (decisión 5).
 - Archivos: `.github/workflows/meta.yml` (solo si falla), `.gitignore`; el workflow genera `js/meta-live.js` y `js/results-archive.js`.
 - Dependencias: ninguna. Va primero, porque las demás tareas parten de `main` subido.
@@ -194,7 +196,7 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 
 ### Orden recomendado
 
-1. A `push-y-workflow` — hecha en local; falta el commit y el push del usuario
+1. A `push-y-workflow` — hecha y publicada; queda comprobar el commit del bot el 9 Oct y la decisión 7
 2. C `revision-sideboard`
 3. D `matchups-sin-plan`
 4. B `nombre-prepare`

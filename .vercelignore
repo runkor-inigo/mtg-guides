@@ -1,0 +1,7 @@
+# Project files that must not be served on the public site
+/ROADMAP.md
+/CLAUDE.md
+/README.md
+/scripts
+/.github
+/.claude
