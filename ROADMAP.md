@@ -487,7 +487,7 @@ Notas del usuario sobre toda la guía. Estado de cada tarea al final de la líne
 
 ### Orden recomendado (lo que queda, 9 Oct 2026, noche)
 
-Todo publicado hasta c1fd31a (fundido cruzado de los banners de Natural Order y Speaker Loop, Llanowar Elves foil de Seventh Edition 253★ con borde negro) y el commit de documentación que le sigue; antes 95159e2 (segunda pasada de runkor a los planes, Atraxa contra Show and Tell) (comprobado en la web: 18 secciones, 31 matchups, sin desbordes ni errores a 1440 y 390 px). Al empezar la próxima sesión: `git pull`.
+Todo publicado hasta el commit que sigue a 93d40c5 (Wirewood Symbiote entero en el banner de Speaker Loop); antes c1fd31a (fundido cruzado de los banners de Natural Order y Speaker Loop, Llanowar Elves foil de Seventh Edition 253★ con borde negro); antes 95159e2 (segunda pasada de runkor a los planes, Atraxa contra Show and Tell) (comprobado en la web: 18 secciones, 31 matchups, sin desbordes ni errores a 1440 y 390 px). Al empezar la próxima sesión: `git pull`.
 
 Hecho hoy y publicado: lista del 9 Oct (Visionary por Marwyn, Alpha Deathclaw por Primaris), Sideboard Optimizer con el mejor sideboard teórico y crédito a Newton Hang, semáforo "White hate bear", revisión de planes de la tarea C con runkor (LEGACY 14.2–14.2f), heurística nueva de Vibrance (solo matchups largos), planes nuevos (Jeskai Tempo, Azorius Tempo, Omni-Tell, mirror de Elves), Matchups y Sideboard map con los mismos 31 planes por cuota, porcentajes de victoria de Elves en MyMTGO en el refresco nocturno.
 

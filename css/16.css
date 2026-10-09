@@ -3,7 +3,7 @@
    with --pos; when there are two or three, each one fades into the previous so they read as one image. */
 
 .art-head,.art-banner{position:relative;display:flex;overflow:hidden;background:#0d1a20}
-.art-head>span,.art-banner>span{flex:1 1 0;min-width:0;background:var(--img) var(--pos,50% 30%)/cover no-repeat}
+.art-head>span,.art-banner>span{flex:1 1 0;min-width:0;background:var(--over,linear-gradient(transparent,transparent)),var(--img) var(--pos,50% 30%)/var(--size,cover) no-repeat var(--fill,transparent)}
 .art-head>span+span,.art-banner>span+span{margin-left:-16%;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 38%);mask-image:linear-gradient(90deg,transparent 0%,#000 38%)}
 
 /* Card header: bleeds to the card's edges and fades into it. */
