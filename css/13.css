@@ -168,18 +168,18 @@ table.sbv-mx{border-collapse:separate;border-spacing:0;font-size:12px;min-width:
 
 /* One segmented-control style for every option group (8 Oct 2026): Compact / Visual, the results filter,
    the Goldfish modes and play/draw, and the Sideboard map views. Active = the mint-to-gold fill. */
-.deck-view47 [role=group],.res-filter,#goldfish .gf-mode,#goldfish .gf-side,.sbv-views,.mbs-seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:3px;border-radius:12px;border:1px solid #2f4452;background:#0f1a22}
-.deck-view47 [role=group] button,.res-filter button,#goldfish .gf-mode button,#goldfish .gf-side button,.sbv-views button,.mbs-seg button{
+.deck-view47 [role=group],.res-filter,#goldfish .gf-mode,#goldfish .gf-side,.sbv-views,.mbs-seg,.sbo-seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:3px;border-radius:12px;border:1px solid #2f4452;background:#0f1a22}
+.deck-view47 [role=group] button,.res-filter button,#goldfish .gf-mode button,#goldfish .gf-side button,.sbv-views button,.mbs-seg button,.sbo-seg button{
  all:unset;box-sizing:border-box;cursor:pointer;min-height:38px;display:inline-flex;align-items:center;justify-content:center;padding:8px 14px;border-radius:9px;
  font:700 13px Roboto,"Segoe UI",system-ui,sans-serif;color:#b9c8d4;background:transparent;box-shadow:none;
  transition:transform 160ms cubic-bezier(.23,1,.32,1),background-color 150ms ease,color 150ms ease}
-.deck-view47 [role=group] button[aria-pressed=true],.res-filter button[aria-pressed=true],#goldfish .gf-mode button[aria-pressed=true],#goldfish .gf-side button[aria-pressed=true],.sbv-views button[aria-selected=true],.mbs-seg button[aria-pressed=true]{
+.deck-view47 [role=group] button[aria-pressed=true],.res-filter button[aria-pressed=true],#goldfish .gf-mode button[aria-pressed=true],#goldfish .gf-side button[aria-pressed=true],.sbv-views button[aria-selected=true],.mbs-seg button[aria-pressed=true],.sbo-seg button[aria-pressed=true]{
  background:var(--gn-fill);color:#0b281c;box-shadow:-3px 0 10px rgba(120,222,153,.22),5px 0 12px rgba(240,215,122,.24)}
 @media (hover:hover) and (pointer:fine){
- .deck-view47 [role=group] button:not([aria-pressed=true]):hover,.res-filter button:not([aria-pressed=true]):hover,#goldfish .gf-mode button:not([aria-pressed=true]):hover,#goldfish .gf-side button:not([aria-pressed=true]):hover,.sbv-views button:not([aria-selected=true]):hover,.mbs-seg button:not([aria-pressed=true]):hover{color:var(--text);background:#1b2b36}}
-.deck-view47 [role=group] button:active,.res-filter button:active,#goldfish .gf-mode button:active,#goldfish .gf-side button:active,.sbv-views button:active,.mbs-seg button:active{transform:scale(.97)}
-.deck-view47 [role=group] button:focus-visible,.res-filter button:focus-visible,#goldfish .gf-mode button:focus-visible,#goldfish .gf-side button:focus-visible,.sbv-views button:focus-visible,.mbs-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-@media (max-width:600px){.deck-view47 [role=group] button,.res-filter button,#goldfish .gf-mode button,#goldfish .gf-side button,.sbv-views button,.mbs-seg button{min-height:44px;padding:8px 11px;font-size:12px}}
+ .deck-view47 [role=group] button:not([aria-pressed=true]):hover,.res-filter button:not([aria-pressed=true]):hover,#goldfish .gf-mode button:not([aria-pressed=true]):hover,#goldfish .gf-side button:not([aria-pressed=true]):hover,.sbv-views button:not([aria-selected=true]):hover,.mbs-seg button:not([aria-pressed=true]):hover,.sbo-seg button:not([aria-pressed=true]):hover{color:var(--text);background:#1b2b36}}
+.deck-view47 [role=group] button:active,.res-filter button:active,#goldfish .gf-mode button:active,#goldfish .gf-side button:active,.sbv-views button:active,.mbs-seg button:active,.sbo-seg button:active{transform:scale(.97)}
+.deck-view47 [role=group] button:focus-visible,.res-filter button:focus-visible,#goldfish .gf-mode button:focus-visible,#goldfish .gf-side button:focus-visible,.sbv-views button:focus-visible,.mbs-seg button:focus-visible,.sbo-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:600px){.deck-view47 [role=group] button,.res-filter button,#goldfish .gf-mode button,#goldfish .gf-side button,.sbv-views button,.mbs-seg button,.sbo-seg button{min-height:44px;padding:8px 11px;font-size:12px}}
 
 /* Maybeboard, compact layout (9 Oct 2026, task X6): the tool uses the pane's full width (the rest of the guide stays at
    860 px for reading), the intro folds away, the grid is denser and the panel puts "why it left" right after "why chosen". */

@@ -89,15 +89,27 @@
    :['grey','?','No data'];
   const counter=!known&&!colorsOf(planId,slug)?['grey','?','No data']:COUNTERS.test(main)?['red','Yes','Counters in their main deck: '+inMain(COUNTERS)]:blue?['red','Yes','Blue deck: expect Force of Will and other counters in the main deck']:COUNTERS.test(txt)?['amber','Side','Counters only after sideboarding']:['green','No','No counter magic recorded'];
   const sweep=p?.sweep?.length?['red','Yes','Sweepers: '+p.sweep.join(', ')]:SWEEPERS.test(main)?['red','Yes','Sweepers in their main deck: '+inMain(SWEEPERS)]:SWEEPERS.test(txt)?['amber','Side','Sweepers in their sideboard']:known?['green','No','No sweepers recorded']:['grey','?','No data'];
-  return [['Wasteland',...waste],['Counters',...counter],['Sweepers',...sweep]];
+  // White hate bears (runkor, 9 Oct 2026): either one stops the whole plan, so the light names which one they play.
+  // Clarion Conqueror: no activated abilities on artifacts or creatures (every dork, Quirion, Symbiote, Speaker's untap,
+  // Sabertooth): only lands make mana. Containment Priest: creatures that enter without being cast are exiled
+  // (Natural Order and Green Sun's Zenith find nothing).
+  const bears=[['Clarion Conqueror','Clarion'],['Containment Priest','Priest']];
+  const inM=bears.filter(([n])=>main.includes(n)),inS=bears.filter(([n])=>!main.includes(n)&&txt.includes(n));
+  const label=l=>l.length===2?'Both':l[0][1];
+  const why={Clarion:'Clarion Conqueror shuts off every dork and the loop: only lands make mana',Priest:'Containment Priest exiles what Natural Order and Green Sun’s Zenith put onto the battlefield'};
+  const tipOf=(l,where)=>l.map(([,k])=>why[k]).join('. ')+' ('+where+')';
+  const bear=inM.length?['red',label(inM.concat(inS)),tipOf(inM.concat(inS),inS.length?'main deck and sideboard':'main deck')]
+   :inS.length?['amber',label(inS),tipOf(inS,'after sideboarding')]
+   :known?['green','No','No Clarion Conqueror or Containment Priest recorded']:['grey','?','No data'];
+  return [['Wasteland',...waste],['Counters',...counter],['Sweepers',...sweep],['White hate bear',...bear]];
  }
- // Full lights inside the open row; three bare dots on the closed row.
+ // Full lights inside the open row; four bare dots on the closed row.
  const lights=a=>`<ul class="mu-alarms" aria-label="Alarms">${a.map(([name,tone,val,tip])=>`<li class="mu-alarm ${tone}" title="${esc(tip)}"><span class="mu-dot" aria-hidden="true"></span><span>${name}</span><b>${val}</b></li>`).join('')}</ul>`;
  const dots=a=>`<span class="mu-dots" role="img" aria-label="${esc(a.map(([name,,val])=>name+': '+val).join(', '))}">${a.map(([name,tone,val])=>`<i class="${tone}" title="${esc(name+': '+val)}"></i>`).join('')}</span>`;
  // y: height (%) of the art's focal point (a face, an eye), so the thin strip of each row shows it.
  const artFor=(planId,slug)=>{const key=ART[planId]?planId:shortSlug(slug);const a=ART[key];return a?{...a,src:`assets/matchups/${key}.webp`}:null;};
 
- // One row per plan: closed, it shows the deck over its art with the 14-day share and three dots;
+ // One row per plan: closed, it shows the deck over its art with the 14-day share and four dots;
  // the header button opens the full plan in place.
  // Colour identity in front of the name (official mana symbols; colourless decks show {C}); the rank stays for screen readers.
  function colors(planId,rank){
@@ -137,7 +149,7 @@
 
  const rows=[];
  top.forEach((t,i)=>{const plans=plansBySlug[t.slug]||[];if(plans.length)plans.forEach(id=>rows.push(row(i+1,t.slug,t.name,id)));else rows.push(row(i+1,t.slug,t.name,null));});
- host.innerHTML=`<p class="mu-source">MTGGoldfish · MTGO · ${live?'updated '+esc(live.updatedLabel):'snapshot '+esc(GOLDFISH_META_DATE)} · top ${TRACKED} archetypes by 14-day share${live?.mymtgo?'; sideboard use from MyMTGO':''}. Dots: Wasteland · Counters · Sweepers.</p>
+ host.innerHTML=`<p class="mu-source">MTGGoldfish · MTGO · ${live?'updated '+esc(live.updatedLabel):'snapshot '+esc(GOLDFISH_META_DATE)} · top ${TRACKED} archetypes by 14-day share${live?.mymtgo?'; sideboard use from MyMTGO':''}. Dots: Wasteland · Counters · Sweepers · White hate bear (Clarion Conqueror, Containment Priest).</p>
  <div class="mu-list">${rows.join('')}</div>`;
  host.addEventListener('click',e=>{
   const b=e.target.closest('.mu-open');if(b)return openMatch(b.dataset.id);

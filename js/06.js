@@ -3,7 +3,7 @@
  const map=document.getElementById('map'),host=document.createElement('div');host.className='mobile-map45';
  host.innerHTML='<div class="mobile-map-toolbar45"><input type="search" placeholder="Find a matchup…" aria-label="Find a matchup"><button type="button" aria-pressed="false">Show table</button></div><div class="mobile-plans45"></div><p class="mobile-empty45" hidden>No matching matchups.</p>';
  map.querySelector('.matrixwrap').before(host);const list=host.querySelector('.mobile-plans45');
- const groups=[['Mana',['Mana dork','Quirion Ranger']],['Loop engine',['Wirewood Symbiote','Temur Sabertooth','Formidable Speaker','Badgermole Cub']],['Core',['Allosaurus Shepherd','Once Upon a Time','Natural Order']],['Bullets',['Collector Ouphe','Marwyn, the Preserver','Vibrance','Atraxa, Grand Unifier']]];
+ const groups=[['Mana',['Mana dork','Quirion Ranger']],['Loop engine',['Wirewood Symbiote','Temur Sabertooth','Formidable Speaker','Badgermole Cub']],['Core',['Allosaurus Shepherd','Once Upon a Time','Natural Order']],['Bullets',['Collector Ouphe','Elvish Visionary','Vibrance','Atraxa, Grand Unifier']]];
  const rows=[];let category=null;
  const renderCards=cards=>'<ul>'+cards.map(([name,n])=>'<li><b>'+n+'</b><span class="mobile-card-name45">'+esc(name)+'</span><span>'+manaSymbols(CARD_COSTS[name]||[])+'</span></li>').join('')+'</ul>';
  map.querySelectorAll('.matrixwrap tbody tr').forEach(row=>{

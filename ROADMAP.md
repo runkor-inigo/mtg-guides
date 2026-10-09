@@ -266,6 +266,15 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Tamaño: media (lectura).
 - Decisión previa: ninguna.
 
+### Sideboard Optimizer (9 Oct 2026, chat de la lista del 9 Oct, sin subir)
+
+- Sección nueva en Gameplay (`#optimizer`, js/16.js, css/17.css): notas 0–1 por carta y matchup, ponderadas por la cuota del meta (MC, UE, campo), ranking, quince sugeridas y comparación con el sideboard actual, rejilla editable (localStorage) y exportación JSON. Método del Cradle Sideboard Optimizer de runkor; escala de Newton (LEGACY.md 14.2).
+- **Pendiente runkor:** revisar las notas iniciales (borrador de Claude a partir de los planes y LEGACY 14) y mandar el JSON exportado; entonces pasa a `DEFAULT`. Con las notas actuales sugiere −2 Leyline, +2 Force of Vigor (Primaris Eliminator ya no se puntúa: salió el 9 Oct; MC de Leyline 14: solo cubre Hogaak, Reanimator, Oops, Lands, Sewer Cam y algo de UB).
+- Ampliado (9 Oct): 25 candidatas, todas las cartas castables en BG de los sideboards de las 75 listas de mtgtop8 con Formidable Speaker (25 Ene – 4 Oct 2026; ninguna monoverde). Quince sugeridas con límite de 7 huecos por matchup.
+- Gráfico de cobertura (9 Oct): cada matchup frente a la mejor respuesta conocida; cubierto = 75 % o más. Con la sugerencia que maximiza el campo cubierto: **actual 61 % del campo cubierto → sugerido 85 %**, y el único cambio es **+1 Snuff Out / −1 Alpha Deathclaw** (el resto del sideboard ya es el óptimo con estas notas). Siguen bajo la línea: GX Lands 71 %, TES 67 %, Hogaak 73 %, WBR Energy 72 %, 8-Cast 73 %, Cradle Control 67 %, Stoneblade 69 %.
+- Primera lectura (notas de Claude, 14 días, criterio anterior de media): núcleo confirmado (Thoughtseize, Snuff Out, Trophy y Choke salen arriba). Sugiere +1 Snuff Out, +1 Trophy, +1 Dismember / −2 Leyline, −1 Alpha Deathclaw. Leyline: en este mazo una copia tardía no es muerta (Speaker la descarta para buscar una criatura, runkor 9 Oct), así que 1–2 copias son defendibles y la sugerencia de bajar a 1 es coherente. Force of Vigor (71 de 75 listas) queda fuera porque Trophy cubre lo mismo en nuestras notas; revisar su nota (es gratis contra combo rápido).
+- Decisión: si se quiere ver también cartas del main (Ouphe, Shepherd, Visionary) como "cartas que salen".
+
 ### Diseño (8 Oct 2026, chat principal)
 
 - **Cabecera retirada.** Decisión del usuario: "All guides" y el nombre de la guía pasan a la parte de arriba del menú lateral; en el móvil, una flecha de volver a la izquierda de la barra de capítulos. La línea "19 lands · 6 fetchlands…" se quita (ya está en Deck Construction y Current 75). Archivos: `index.html` (sin `<header>`, `h1` oculto), `js/menu.js` (opción `brand`), `js/01.js`, `js/05.js`, `css/menu.css`, y limpieza de reglas de cabecera en `css/01.css`, `02.css`, `06.css` y `12.css`. Verificado en local: 0 errores de consola; escritorio, menú plegado y 390 px sin scroll horizontal; los dos botones de volver llevan a la portada y al reabrir la guía el foco va al botón de volver. Publicado en cad80d3.

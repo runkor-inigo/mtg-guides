@@ -4,7 +4,7 @@
 (function sideboardViews(){
  const map=document.getElementById('map'),table=document.querySelector('.matrixwrap > .transposed');
  if(!map||!table)return;
- const SHORT={'Temur Sabertooth':'Sabertooth','Collector Ouphe':'Ouphe','Allosaurus Shepherd':'Shepherd','Marwyn, the Preserver':'Marwyn','Formidable Speaker':'Speaker','Wirewood Symbiote':'Symbiote','Quirion Ranger':'Quirion','Once Upon a Time':'OUaT','Primaris Eliminator':'Primaris',"Assassin's Trophy":'Trophy','Leyline of the Void':'Leyline'};
+ const SHORT={'Temur Sabertooth':'Sabertooth','Collector Ouphe':'Ouphe','Allosaurus Shepherd':'Shepherd','Marwyn, the Preserver':'Marwyn','Formidable Speaker':'Speaker','Wirewood Symbiote':'Symbiote','Quirion Ranger':'Quirion','Once Upon a Time':'OUaT','Primaris Eliminator':'Primaris','Alpha Deathclaw':'Deathclaw','Elvish Visionary':'Visionary',"Assassin's Trophy":'Trophy','Leyline of the Void':'Leyline'};
  const short=n=>SHORT[n]||n;
  const art=n=>COMBO_CARD_ART[n]?.src;
  const sorted=o=>Object.entries(o||{}).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));

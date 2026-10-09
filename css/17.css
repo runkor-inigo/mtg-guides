@@ -1,0 +1,74 @@
+/* Sideboard Optimizer (9 Oct 2026, js/16.js). Full pane width like the Maybeboard; text blocks stay at reading width. */
+#optimizer .article{max-width:none}
+/* The article is a grid: its children must not grow past the pane (the ratings table scrolls in its own frame). */
+.sbo,.sbo>*{min-width:0;max-width:100%}
+#optimizer .article>p,#optimizer .article>details,#optimizer .article>h2,#optimizer .sbo>p,#optimizer .sbo>h3{max-width:860px}
+.sbo-about{color:#b9c8d4;font-size:14px;margin:0 0 18px}
+.sbo-about summary{cursor:pointer;color:var(--accent);font-weight:700}
+.sbo-about p,.sbo-about ul{margin:10px 0 0;line-height:1.6}
+.sbo-about dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:10px 0 0}
+.sbo-about dt{font-weight:700;color:var(--gn-gold)}
+.sbo-bar{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 6px}
+.sbo h3{margin:24px 0 6px}
+#optimizer .sbo-rank{width:100%;list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px;max-width:980px}
+.sbo-rank li{display:grid;grid-template-columns:42px minmax(0,1fr) minmax(0,340px);gap:12px;align-items:center;padding:6px 10px 6px 6px;border-radius:10px;background:#0f1a22;border:1px solid #22343f}
+.sbo-rank img{width:42px;height:58px;object-fit:cover;border-radius:4px;display:block}
+.sbo-who{display:flex;flex-direction:column;gap:2px;min-width:0}
+.sbo-who small{color:#9fb3c1;font-size:12px}
+.sbo-ours{color:#0b281c;background:var(--gn-fill);padding:0 6px;border-radius:999px;font-weight:700}
+.sbo-rank li.is-ours{border-color:#3c6a52}
+.sbo-flag{align-self:flex-start;margin-top:3px;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;color:#2a1f05;background:var(--gn-gold)}
+.sbo-num{display:grid;grid-template-columns:repeat(3,auto);gap:4px 14px;align-items:baseline;justify-content:end;font-size:12px;color:#9fb3c1}
+.sbo-num b{font-size:16px;color:var(--text)}
+.sbo-meter{grid-column:1/-1;height:6px;border-radius:3px;background:#1b2b36;position:relative;overflow:hidden}
+.sbo-meter::before{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--gn-fill);border-radius:3px}
+.sbo-sug,.sbo-diff{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sbo-sug span{padding:4px 10px;border-radius:8px;background:#12221a;border:1px solid #2c4a3a;font-size:13px}
+.sbo-diff span{padding:2px 8px;border-radius:999px;font-size:13px;font-weight:700}
+.sbo-diff .in{background:#123224;color:#9ee6bd}
+.sbo-diff .out{background:#3a1c1c;color:#f2b0a8}
+.sbo-scroll{max-width:100%;overflow-x:auto;border:1px solid #22343f;border-radius:10px}
+.sbo-grid{border-collapse:separate;border-spacing:0;font-size:12px;min-width:max-content}
+.sbo-grid th,.sbo-grid td{padding:2px;text-align:center;border-bottom:1px solid #1b2b36}
+.sbo-grid thead th{vertical-align:bottom;padding:6px 4px;font-weight:700;color:#cfdbe4;min-width:58px;max-width:76px;line-height:1.2}
+.sbo-grid thead th span{display:block;white-space:normal;overflow-wrap:anywhere}
+.sbo-grid thead th small{display:block;color:#9fb3c1;font-weight:400}
+.sbo-grid th[scope=row],.sbo-grid thead th:first-child{position:sticky;left:0;z-index:1;background:#0d171e;text-align:left;padding:4px 10px;white-space:nowrap;min-width:0;max-width:none}
+.sbo-grid td button{all:unset;box-sizing:border-box;cursor:pointer;width:46px;height:30px;display:grid;place-items:center;border-radius:6px;font-weight:700;color:#cfdbe4;
+ background:color-mix(in srgb,#78de99 calc(var(--v)*70%),#132029);position:relative}
+.sbo-grid td button[data-v="0"]{color:#4c6270}
+.sbo-grid td button[data-v="0.75"],.sbo-grid td button[data-v="1"]{color:#0b281c}
+.sbo-grid td button.changed::after{content:"";position:absolute;top:3px;right:3px;width:5px;height:5px;border-radius:50%;background:var(--gn-gold)}
+.sbo-grid td button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+@media (hover:hover) and (pointer:fine){.sbo-grid td button:hover{box-shadow:inset 0 0 0 1px var(--gn-gold)}}
+.sbo-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0 0}
+.sbo-actions .btn{all:unset;box-sizing:border-box;cursor:pointer;min-height:38px;padding:8px 14px;border-radius:9px;font:700 13px Roboto,"Segoe UI",system-ui,sans-serif;color:var(--text);background:#16242d;border:1px solid #2f4452}
+.sbo-actions .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.sbo-actions .btn:hover{background:#1b2b36}}
+.sbo-msg{color:#9ee6bd;font-size:13px}
+.sbo-cov-sum{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0}
+.sbo-cov-sum>div{display:flex;align-items:baseline;gap:8px;padding:10px 14px;border-radius:10px;background:#0f1a22;border:1px solid #22343f}
+.sbo-cov-sum>div.sug{border-color:#6a5f2c}
+.sbo-cov-sum b{font-size:26px;line-height:1}
+.sbo-cov-sum span{color:#9fb3c1;font-size:13px}
+.sbo-cov-key{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:#cfdbe4;margin:6px 0 10px}
+.sbo-cov-key span{display:inline-flex;align-items:center;gap:5px}
+.sbo-cov-key i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.sbo-cov{display:grid;gap:4px;max-width:980px}
+.sbo-cov-row{display:grid;grid-template-columns:130px minmax(0,1fr);gap:10px;align-items:center;padding:4px 0;border-bottom:1px solid #1b2b36}
+.sbo-cov-name{font-size:13px;font-weight:700;color:#cfdbe4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sbo-cov-name small{display:block;font-weight:400;color:#9fb3c1;font-size:12px}
+.sbo-cov-bar{display:grid;grid-template-columns:70px minmax(0,1fr) 40px;gap:8px;align-items:center;font-size:12px;color:#9fb3c1}
+.sbo-cov-bar i{font-style:normal}
+.sbo-cov-bar em{font-style:normal;font-weight:700;color:#f2b0a8;text-align:right}
+.sbo-cov-bar[data-ok=true] em{color:#9ee6bd}
+.sbo-cov-track{position:relative;display:flex;height:12px;border-radius:4px;background:#132029;overflow:hidden}
+.sbo-cov-track span{height:100%;border-right:1px solid #0b1218}
+.sbo-cov-line{position:absolute;top:-2px;bottom:-2px;left:75%;width:2px;background:#e8eef2;opacity:.7}
+@media (max-width:700px){
+ .sbo-cov-row{grid-template-columns:1fr}
+ .sbo-cov-bar{grid-template-columns:62px minmax(0,1fr) 30px}
+ .sbo-rank li{grid-template-columns:42px minmax(0,1fr)}
+ .sbo-num{grid-column:1/-1;justify-content:start}
+ .sbo-actions .btn{min-height:44px}
+}

@@ -329,3 +329,63 @@ https://articles.starcitygames.com/magic-the-gathering/premium/theres-more-to-si
 - **Play y draw en el Sideboard map:** hoy cada matchup tiene un solo plan. Contra tempo azul, por ejemplo, encaja con lo decidido en 11.3: Natural Order se queda, y en el draw es donde tendría sentido sacar una copia. Una columna o nota "on the draw" en las filas donde cambie.
 - **Mulligans:** la sección de Mulligans podría distinguir game 1 (buscar la mano explosiva de turno 2) de los games 2 y 3 (aceptar manos más lentas pero sólidas contra rivales con más respuestas). Encaja en la tarea G.
 - **Sideboard contra su configuración de después:** la columna "Their sideboard" de Matchups (MyMTGO, "Sided in") ya da esa información; los planes deberían leerse junto a ella.
+
+## 14. Papel de cada carta en el sideboarding (runkor, 9 Oct 2026) y método del Sideboard Optimizer
+
+### 14.1 Lógica de runkor por carta
+
+- **Quirion Ranger:** anti-Wasteland, pro-combo (ayuda a combear) y protege de aerials. Casi nunca sale.
+- **Wirewood Symbiote:** pro-combo y protege de removal.
+- **Formidable Speaker:** con Hogaak en la lista sería carta interesante contra tempo; sin él, tres bastan cuando no vamos a combear del todo.
+- **Sabertooth:** solo habilita el combo. Sale donde no vamos a combear.
+- **Collector Ouphe:** solo anti-combo, y solo si el rival tiene artefactos (LED, Vial…). Contra Doomsday no sale porque bloquea LED.
+- **Allosaurus Shepherd:** para matchups con counters, pero a veces conviene el alpha strike: se puede dejar una.
+- **Elvish Visionary:** matchups largos y de desgaste, o para encontrar una respuesta concreta (los dos Boseiju contra Tron). No es imprescindible. Sale contra Bowmasters.
+- **Natural Order:** en la duda, sacar una.
+- **Snuff Out:** partidas rápidas en las que hay que desarrollarse y frenar al rival (Eldrazi, Welder Cam, Cephalid, Boros Energy).
+- **Leyline of the Void:** solo cuando el plan del rival depende claramente del cementerio. Una Leyline tardía no es carta muerta en este mazo: Formidable Speaker la descarta para buscar una criatura (efecto looting). Por eso no es "3 copias o ninguna" como en otros mazos, y una o dos copias son defendibles (runkor, 9 Oct 2026).
+- **Thoughtseize:** combo rápido; tres o cuatro según la velocidad del rival.
+- **Assassin's Trophy:** la carta de mayor cobertura: rompe cualquier permanente (Aluren, Lands) y sirve de removal. Contra: el rival busca una básica. Muy buena contra Eldrazi (sin básicas) y Tron incoloro (busca una vez). 2 Boseiju + 2 Trophy = cuatro "stone rain".
+- **Alpha Deathclaw:** para romper algo concreto cuando hay tiempo de llegar a seis; muy buena contra AlurenTell. Puede que descubramos que no la queremos: construir el sideboard enseña lo que nunca se usa.
+
+- **White hate bears (Clarion Conqueror, Containment Priest):** cualquiera de los dos para todo el plan (runkor, 9 Oct 2026). Clarion Conqueror ({2}{W}, 3/3 volador): las habilidades activadas de artefactos, criaturas y planeswalkers no se pueden activar, así que se apagan los dorks, Quirion, Symbiote, el enderezar de Speaker y Sabertooth; solo las tierras dan maná. "Hoy un Clarion Conqueror desactiva el mazo." Containment Priest ({1}{W}, destello): una criatura que no se ha lanzado y entra al campo se exilia, así que Natural Order y Green Sun's Zenith no encuentran nada. Matchups lo muestra como cuarto semáforo, "White hate bear", con la carta concreta (Clarion, Priest o Both). Respuestas: Snuff Out y Assassin's Trophy matan a los dos; Alpha Deathclaw también si se lanza (bajo Priest, por Natural Order o GSZ se exilia); Vibrance en modo rojo hace 3 de daño (mata a Priest y a Clarion, que es 3/3). El channel de Boseiju no puede elegir criaturas.
+
+### 14.2 Método del Sideboard Optimizer (github.com/runkor-inigo/MTG-Cradle-Sideboard-Optimizer)
+
+- Hoja de Google (pública como CSV): pestañas "CARD RATING V2" (nota 0–1 por carta y arquetipo), "SB cards Rating", "Opp SB Prevalence", "META#1 (mtgdecks)" y "SCRAPPER" (meta; el scraper falla por Cloudflare). Las notas son de Newton Hang, para Cradle Control, no de runkor.
+- Escala: 1.00 bomba gratis que gana la partida; 0.75 disrupción eficiente y flexible; 0.50 disrupción eficiente situacional o bomba lenta; 0.25 disrupción lenta y situacional.
+- **MC** (metagame coverage) = Σ(share × nota) / share total. **UE** (eficiencia de uso) = nota media ponderada solo en los matchups donde la carta entra.
+
+### 14.3 Notas de Newton sobre nuestro meta de 14 días (9 Oct 2026)
+
+Mapeo: UB Moonshadow y UB Legends → Dimir Tempo; Boros Energy → Boros Ocelot; Yorion Taxes → Death & Taxes; GX Lands → Lands.dec; Sewer Cam sin equivalente.
+
+| Carta | MC | UE | Dónde |
+|---|---|---|---|
+| Thoughtseize | 42 | 75 | Dimir, Doomsday, Sneak, Aluren, D&T |
+| Snuff Out | 39 | 86 | Boros 1.0, Eldrazi 1.0, Cutter 0.75, D&T 0.5 |
+| Force of Vigor (≈ Trophy) | 15 | 66 | Sneak, Aluren, Lands |
+| Abrupt Decay (≈ Trophy) | 20 | 31 | amplia y baja |
+| Grist (≈ Deathclaw) | 14 | 39 | Dimir, Sneak, D&T |
+| Collector Ouphe | 7 | 25 | Doomsday, Sneak, Lands |
+| Leyline of the Void | 0 | — | ningún arquetipo de nuestro top 10 |
+
+Lectura: Trophy reúne lo que Newton reparte entre Force of Vigor y Abrupt Decay, y por eso sale como la mejor carta en nuestras notas. Snuff Out coincide exactamente con la lógica de runkor. Newton usa Thoughtseize contra Dimir y D&T porque Cradle Control es más lento; nosotros no. Leyline no tiene sitio en su tabla para nuestro top 10: su valor depende de Sewer Cam y del cementerio de UB Moonshadow y Lands, que hay que confirmar.
+
+### 14.4 Planes propuestos cruzando j-off (10), Newton (11, 14.3), Karsten y Damo da Rosa (13) y 14.1 (sin aplicar)
+
+| Matchup | IN | OUT |
+|---|---|---|
+| UB Moonshadow | +3 Leyline +2 Choke | −Ouphe −Sabertooth −Visionary −1 Speaker −Atraxa |
+| UB Legends | +2 Choke +2 Snuff Out | −Ouphe −Sabertooth −Visionary −1 Speaker |
+| Boros Energy | +3 Snuff Out +1 Trophy | −2 Shepherd −Ouphe −Visionary |
+| Eldrazi | +3 Snuff Out +2 Trophy | −2 Shepherd −Ouphe −Visionary −1 Symbiote |
+| Doomsday | plan aprobado (+4 TS +2 Trophy +2 Choke) | conflicto: 14.1 hace pro-combo a Symbiote y Sabertooth, y el plan los corta |
+| UR Cutter | +2 Choke +2 Snuff Out +1 Trophy | −Ouphe −Sabertooth −1 Speaker −1 NO −Atraxa |
+| Sneak & Show | +4 TS +2 Choke +1 Trophy | −Ouphe −Visionary −Vibrance −Atraxa −1 NO −1 Speaker −1 Symbiote |
+| Aluren | +3 TS +2 Trophy +1 Deathclaw +1 Choke | las mismas siete que Sneak |
+| Yorion Taxes | +3 Snuff Out +1 Trophy +1 Deathclaw | −2 Shepherd −1 NO −Atraxa −Sabertooth (Ouphe se queda por Vial) |
+| GX Lands | +3 Leyline +2 Trophy +1 Deathclaw | −3 Shepherd −Ouphe −1 Symbiote −Atraxa |
+| Sewer Cam | +3 Leyline +3 Snuff Out +1 Trophy | −2 Shepherd −Visionary −Vibrance −Atraxa −1 NO −1 Speaker |
+
+Alpha Deathclaw entra en tres matchups (~11 % del campo): candidata a salir, como anticipó runkor.

@@ -503,6 +503,28 @@ applySideboardPlan('doomsday',{ins:{'Thoughtseize':4,"Assassin's Trophy":2,'Chok
  inCount:8,outCount:8,over:'Deliberate transformation',
  notes:'Attack Doomsday before the pile resolves: Thoughtseize takes Doomsday or its protection, Assassin’s Trophy on Underground Sea leaves them short of mana for the pile or for Thassa’s Oracle, and Choke cuts their Islands. Snuff Out stays in the sideboard: against a pile that empties the library, killing Oracle in response does not stop the win. Collector Ouphe stays because it shuts off Lion’s Eye Diamond. Natural Order stays for Craterhoof: after one or two pieces of disruption the deck needs a fast kill. The slow engine pieces leave (two Speaker, two Symbiote, Sabertooth) with Atraxa, Vibrance and Marwyn. 9 Oct 2026 (runkor), checked against j-off’s guide, a Cradle Control matrix and Newton Hang (LEGACY.md, sections 10 and 11).'});
 removeMatchup('cephalid','Cephalid Breakfast');
+/* 9 Oct 2026 list (runkor, MTGO): Elvish Visionary back in the main deck for Marwyn, the Preserver;
+   Alpha Deathclaw in the sideboard for Primaris Eliminator. Two rules, applied to every plan:
+   1. A cut Marwyn becomes a cut Elvish Visionary (the flex slot moves back).
+   2. A Primaris Eliminator in becomes an Alpha Deathclaw in (removal on a body; Deathclaw hits any permanent
+      and, being black-green, Green Sun's Zenith and Natural Order find it too). */
+delete SB_COSTS['Primaris Eliminator'];SB_COSTS['Alpha Deathclaw']=['4','B','G'];
+// CARD_COSTS copied SB_COSTS earlier in this file: give it the new card too.
+CARD_COSTS['Alpha Deathclaw']=['4','B','G'];
+(function convertPlansToNinthOctoberList(){
+ const MAR='Marwyn, the Preserver',VIS='Elvish Visionary',PRI='Primaris Eliminator',DC='Alpha Deathclaw';
+ for(const [id,p] of Object.entries(DETAILS)){
+  const ins={...(p.ins||{})},outs={...(p.outs||{})},ch=[];
+  if(outs[MAR]){outs[VIS]=(outs[VIS]||0)+outs[MAR];delete outs[MAR];ch.push('Elvish Visionary is cut where Marwyn was');}
+  if(ins[PRI]){ins[DC]=(ins[DC]||0)+ins[PRI];delete ins[PRI];ch.push('Alpha Deathclaw replaces Primaris Eliminator');}
+  const notes=(p.notes||'').replace(/Primaris Eliminator’s −2\/−2 mode clears cats, tokens and 2\/2s, and Formidable Speaker can find it\./,'Alpha Deathclaw destroys any permanent, Goblin Bombardment included, and Green Sun’s Zenith or Natural Order can find it.').replace('Karakas (bounces Marwyn and an animated Cradle)','Karakas (bounces an animated Cradle)').replace('with Atraxa, Vibrance and Marwyn','with Atraxa, Vibrance and Elvish Visionary');
+  // Marwyn and Primaris are no longer in the 75: drop every note sentence that still tells the reader to use them
+  // (including the old 5 Oct changelog), so no plan points to a card outside the list.
+  const clean=notes.split(/(?<=\.)\s+/).filter(t=>!/Marwyn|Primaris/.test(t)).join(' ').trim();
+  if(!ch.length&&clean===(p.notes||''))continue;
+  applySideboardPlan(id,{ins,outs,inCount:p.inCount,outCount:p.outCount,over:p.over,notes:clean});
+ }
+})();
 upgradeMatrix();
 // RC34: retain category separators, reclaim Macro column for meta trend.
 function metaTrend(entry){
@@ -674,6 +696,7 @@ const GUIDE_GROUPS=[
   {id:'goldfish',label:'Goldfish Lab',panes:['goldfish']}]},
  {id:'gameplay',label:'Gameplay',icon:'swords',sections:[
   {id:'sideboard',label:'Sideboard map',panes:['map','heur']},
+  {id:'optimizer',label:'Sideboard Optimizer',panes:['optimizer']},
   {id:'maybeboard',label:'Maybeboard',panes:['maybeboard']},
   {id:'matchups',label:'Matchups',panes:['matchups']},
   {id:'windows',label:'Interaction Windows',panes:['windows']},
