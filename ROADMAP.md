@@ -470,9 +470,9 @@ Notas del usuario sobre toda la guía. Estado de cada tarea al final de la líne
   - **Dónde usarla:** (1) Deck Origins, era 2013 ("Natural Order for Craterhoof"): fuente de primera mano para la victoria de Julian en el Bazaar of Moxen, junto al enlace de mtgtop8 que ya hay; añadirla a la lista de fuentes del pane (tarea M). (2) LEGACY.md y Heuristics: como antecedente histórico de Quirion Ranger como motor de maná y de priorizar el odio a combo sobre el de cementerio; marcarlo como lista de 2013, no como regla para Speaker Elves. (3) Tarea C: contraste para el plan contra Storm/combo (Mindbreak Trap y Cabal Therapy frente a las opciones actuales).
   - Parte 2 ya localizada (arriba).
 
-### Orden recomendado (lo que queda, 9 Oct 2026, fin del día)
+### Orden recomendado (lo que queda, 9 Oct 2026, cierre del chat)
 
-Publicado hasta 5eba0a8. **Sin subir:** f84fb74 (Sequencing, Natural Order, Matchups, cartas, Game Plans, Credits), 338e0e1 y f243a63 (LEGACY, secciones 12 y 13) y el commit de documentación que les sigue.
+Publicado hasta 5eba0a8. **Sin subir (7 commits más el de cierre):** f84fb74, 338e0e1, f243a63, ccd8ba6, 173e3b9 (Doomsday), 80d84d4 (J, N parte 1, Q, Sources). Al empezar la próxima sesión: `git pull` y preguntar a runkor si se suben.
 
 Doomsday decidido y aplicado (+4 Thoughtseize, +2 Assassin's Trophy, +2 Choke / −1 Atraxa, −2 Formidable Speaker, −2 Wirewood Symbiote, −1 Temur Sabertooth, −1 Vibrance, −1 Marwyn; LEGACY 11.3). Hechos además (sin subir): pane Sources al día (excepciones de impresión, revisión del 9 Oct, Newton y los autores del histórico de Natural Order); el comentario de `meta.yml` ya estaba bien. Decisiones abiertas: tierra 20 (aparcada); Endurance en el main (aparcada); las 70 "Unverified" del Maybeboard; nombre superpuesto en las cartas de marco antiguo del Current 75.
 
