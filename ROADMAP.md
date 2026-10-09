@@ -266,7 +266,10 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Tamaño: media (lectura).
 - Decisión previa: ninguna.
 
-### Sideboard Optimizer (9 Oct 2026, chat de la lista del 9 Oct, sin subir)
+### Sideboard Optimizer (9 Oct 2026, chat de la lista del 9 Oct, publicado en 5c0c615)
+
+- Semáforo nuevo en Matchups, "White hate bear" (Clarion Conqueror / Containment Priest / Both): rojo en el main, ámbar tras sideboard. Hoy: Yorion Taxes rojo (Both), Boros Energy ámbar (Both), Doomsday y GX Lands ámbar (Priest).
+- Pendiente (tarea C): algunas notas de plan aún nombran cartas fuera del 75 que no son Marwyn ni Primaris (Yorion Taxes: "Changeling hits equipment…"; UB Moonshadow: "Choke and Hogaak support a longer game"). Las de Marwyn y Primaris ya se quitan en el bloque de conversión del 9 Oct.
 
 - Sección nueva en Gameplay (`#optimizer`, js/16.js, css/17.css): notas 0–1 por carta y matchup, ponderadas por la cuota del meta (MC, UE, campo), ranking, quince sugeridas y comparación con el sideboard actual, rejilla editable (localStorage) y exportación JSON. Método del Cradle Sideboard Optimizer de runkor; escala de Newton (LEGACY.md 14.2).
 - **Pendiente runkor:** revisar las notas iniciales (borrador de Claude a partir de los planes y LEGACY 14) y mandar el JSON exportado; entonces pasa a `DEFAULT`. Con las notas actuales sugiere −2 Leyline, +2 Force of Vigor (Primaris Eliminator ya no se puntúa: salió el 9 Oct; MC de Leyline 14: solo cubre Hogaak, Reanimator, Oops, Lands, Sewer Cam y algo de UB).
