@@ -160,7 +160,7 @@ function buildGoldfish(mode,side,v={}){
  const variant={};Object.keys(GF_VARIANTS).forEach(m=>variant[m]={...GF_VARIANTS[m].start});
  const nodes=new Map();
  const cardName=id=>GF_NAMES[id]||'Unspecified card';
- function cardNode(id){if(nodes.has(id))return nodes.get(id);const n=document.createElement('button');n.type='button';n.className='gf-card';n.dataset.id=id;n.innerHTML='<img class="gf-face" alt=""><span class="gf-card-caption"></span><span class="gf-badges"></span>';n.addEventListener('click',()=>{const name=cardName(id),data=COMBO_CARD_ART[name];if(!data)return;const dlg=document.querySelector('.combo37-dialog');dlg.querySelector('img').src=data.src;dlg.querySelector('img').alt=name;dlg.querySelector('.combo37-credit').textContent=name+' · Art: '+data.artist+' · © Wizards of the Coast';dlg.querySelector('a').href=data.url;dlg.showModal();});nodes.set(id,n);return n;}
+ function cardNode(id){if(nodes.has(id))return nodes.get(id);const n=document.createElement('button');n.type='button';n.className='gf-card';n.dataset.id=id;n.innerHTML='<img class="gf-face" loading="lazy" decoding="async" alt=""><span class="gf-card-caption"></span><span class="gf-badges"></span>';n.addEventListener('click',()=>{const name=cardName(id),data=COMBO_CARD_ART[name];if(!data)return;const dlg=document.querySelector('.combo37-dialog');dlg.querySelector('img').src=data.src;dlg.querySelector('img').alt=name;dlg.querySelector('.combo37-credit').textContent=name+' · Art: '+data.artist+' · © Wizards of the Coast';dlg.querySelector('a').href=data.url;dlg.showModal();});nodes.set(id,n);return n;}
  // Keyword and state icons on a card (title text explains each one).
  const ICON_SVG={
   haste:'<svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>',

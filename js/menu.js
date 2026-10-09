@@ -1,14 +1,14 @@
-/* Speaker Elves — guide menu (collapsible sidebar).
+/* Speaker Elves — guide menu (sidebar).
  *
- * Desktop: a sidebar beside the content. Each part (Deck Foundations, Game Theory, ...)
- * unfolds its sections. The current section carries the mint pill, which
+ * Desktop: a sidebar beside the content, always full width (it does not fold), with
+ * every part (Deck Foundations, Game Theory, ...) open from the start; a part's heading
+ * still folds its own sections. The current section carries the mint pill, which
  * moves like an inchworm (the edge facing the move leads, the other follows),
  * breathes with a soft green glow that warms to gold at its right edge, sends
  * a light pulse from that edge across it, and rings once when it lands. The current
- * part lights up its own text and icon instead of getting a pill. The arrows
- * at the top fold the sidebar down to icons; an icon then opens its sections
- * in a small panel beside it.
- * Phones: a sticky mint bar names the current section and opens the same menu.
+ * part lights up its own text and icon instead of getting a pill.
+ * Phones: a sticky mint bar names the current section and opens the same menu, with
+ * only the current part open.
  *
  * Needs GSAP (window.gsap); without it, or with reduced motion, everything
  * jumps and the glow stays steady. Plain script, no build step.
@@ -38,9 +38,7 @@
     book:   '<path d="M5 4.5h10.5A2.5 2.5 0 0 1 18 7v13H7.5A2.5 2.5 0 0 1 5 17.5V4.5Z"/><path d="M5 17.5A2.5 2.5 0 0 1 7.5 15H18"/>'
   };
   var CHEV = '<svg class="sb-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
-  var FOLD = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 17-5-5 5-5M18 17l-5-5 5-5"/></svg>';
   var BACK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>';
-  var STORE = 'speakerNav.collapsed';
   var MOTION = 'speakerNav.motion';   // 'on' | 'off'; unset follows the system setting
   var root = document.documentElement;
   function readMotion() { try { return global.localStorage.getItem(MOTION); } catch (e) { return null; } }
@@ -82,10 +80,9 @@
     }
     var brand = opts.brand;
     function topHTML() {
-      var toggle = '<button type="button" class="sb-toggle" aria-label="Collapse sidebar" aria-expanded="true">' + FOLD + '</button>';
-      if (!brand) return '<div class="sb-top"><span class="sb-title">Contents</span>' + toggle + '</div>';
+      if (!brand) return '<div class="sb-top"><span class="sb-title">Contents</span></div>';
       return '<div class="sb-top has-back"><button type="button" class="sb-back" data-all-guides title="' + brand.back + '">' + BACK +
-        '<span class="sb-back-lb">' + brand.back + '</span></button>' + toggle + '</div>' +
+        '<span class="sb-back-lb">' + brand.back + '</span></button></div>' +
         '<div class="sb-brand"><span class="sb-brand-title">' + brand.title + '</span>' +
         (brand.badge ? '<span class="sb-brand-badge">' + brand.badge + '</span>' : '') + '</div>';
     }
@@ -106,8 +103,7 @@
     host.innerHTML = '';
     var side = el('div', { 'class': 'gn-side' });
     var sideNav = el('nav', { 'class': 'sb', 'aria-label': opts.label || 'Guide sections' }, sidebarHTML(true));
-    var fly = el('div', { 'class': 'sb-fly', hidden: '' }, '<p class="sb-fly-title"></p><div class="sb-fly-items"></div>');
-    side.appendChild(sideNav); side.appendChild(fly);
+    side.appendChild(sideNav);
 
     var mobile = el('div', { 'class': 'gn-mobile' });
     var chapter = el('button', { type: 'button', 'class': 'gn-chapter', 'aria-expanded': 'false', 'aria-controls': 'gn-sheet' },
@@ -125,12 +121,13 @@
     host.appendChild(side); host.appendChild(mobile);
 
     /* ---------- one sidebar ---------- */
-    function Sidebar(nav, flyout) {
-      var body = nav.querySelector('.sb-body'), pill = nav.querySelector('.sb-pill'), toggle = nav.querySelector('.sb-toggle');
+    // openAll: every part starts open (desktop); otherwise only the current one (phone sheet).
+    function Sidebar(nav, openAll) {
+      var body = nav.querySelector('.sb-body'), pill = nav.querySelector('.sb-pill');
       var heads = [].slice.call(nav.querySelectorAll('.sb-head')), wraps = [].slice.call(nav.querySelectorAll('.sb-items'));
       var items = [].slice.call(nav.querySelectorAll('.sb-item'));
-      var open = groups.map(function (g, gi) { return gi === sections[cur].g; });
-      var collapsed = false, tw = null, flyG = -1;
+      var open = groups.map(function (g, gi) { return openAll || gi === sections[cur].g; });
+      var tw = null;
       var st = { t: 0, b: 0, l: 0, r: 0 };
       wraps.forEach(function (w, g) { w.style.height = open[g] ? 'auto' : '0px'; heads[g].setAttribute('aria-expanded', String(open[g])); });
 
@@ -138,7 +135,7 @@
       // The pill sits on the current section; the current part lights its own text.
       function target() {
         var g = sections[cur].g;
-        if (collapsed || !open[g]) return null;
+        if (!open[g]) return null;
         return items.filter(function (b) { return +b.dataset.i === cur; })[0];
       }
       function rel(n) {
@@ -188,55 +185,23 @@
           onComplete: function () { if (want) w.style.height = 'auto'; follow(); }
         });
       }
-      function setCollapsed(c, instant) {
-        collapsed = c; closeFly();
-        if (toggle) { toggle.setAttribute('aria-expanded', String(!c)); toggle.setAttribute('aria-label', c ? 'Expand sidebar' : 'Collapse sidebar'); }
-        nav.classList.toggle('is-collapsed', c);
-        try { global.localStorage.setItem(STORE, c ? '1' : '0'); } catch (e) {}
-        if (instant || still()) { nav.style.width = c ? '70px' : ''; place(true); global.dispatchEvent(new Event('resize')); return; }
-        gsap.to(nav, { width: c ? 70 : 252, duration: 0.42, ease: 'power3.inOut', onUpdate: function () { place(true); },
-          onComplete: function () { if (!c) nav.style.width = ''; place(false); global.dispatchEvent(new Event('resize')); } });
-      }
-      // Folded to icons: a part's sections open in a small panel beside its icon.
-      function openFly(g) {
-        flyG = g; flyout.hidden = false;
-        flyout.querySelector('.sb-fly-title').textContent = groups[g].label;
-        flyout.querySelector('.sb-fly-items').innerHTML = sections.map(function (s, i) { return s.g === g ? itemHTML(i) : ''; }).join('');
-        [].forEach.call(flyout.querySelectorAll('.sb-item'), function (b) { b.setAttribute('aria-current', +b.dataset.i === cur ? 'page' : 'false'); });
-        var h = heads[g].getBoundingClientRect(), o = flyout.parentElement.getBoundingClientRect();
-        flyout.style.top = Math.max(0, h.top - o.top - 8) + 'px';
-        if (!still()) gsap.fromTo(flyout, { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 0.28, ease: 'power3.out', clearProps: 'opacity,transform' });
-      }
-      function closeFly() { if (flyout && !flyout.hidden) { flyout.hidden = true; flyG = -1; } }
-
       nav.addEventListener('click', function (e) {
         var head = e.target.closest('.sb-head');
-        if (head) { var g = +head.dataset.g; if (collapsed) { if (flyG === g) closeFly(); else openFly(g); } else setGroup(g, !open[g]); return; }
+        if (head) { var g = +head.dataset.g; setGroup(g, !open[g]); return; }
         var item = e.target.closest('.sb-item');
-        if (item) { select(+item.dataset.i, true); return; }
-        if (e.target.closest('.sb-toggle')) setCollapsed(!collapsed);
+        if (item) select(+item.dataset.i, true);
       });
-      if (flyout) {
-        flyout.addEventListener('click', function (e) {
-          var item = e.target.closest('.sb-item');
-          if (item) { select(+item.dataset.i, true); closeFly(); }
-        });
-        document.addEventListener('click', function (e) {
-          if (!flyout.hidden && !flyout.contains(e.target) && !nav.contains(e.target)) closeFly();
-        });
-        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeFly(); });
-      }
 
       return {
-        nav: nav, items: items, place: place, follow: follow, setCollapsed: setCollapsed,
+        nav: nav, items: items, place: place, follow: follow,
         update: function () {
           var g = sections[cur].g;
-          if (!collapsed && !open[g]) setGroup(g, true); else place(false);
+          if (!open[g]) setGroup(g, true); else place(false);
         }
       };
     }
 
-    var sideBar = Sidebar(sideNav, fly), sheetBar = Sidebar(sheetNav, null);
+    var sideBar = Sidebar(sideNav, true), sheetBar = Sidebar(sheetNav, false);
 
     /* ---------- animations switch ---------- */
     // Follows the system's reduced-motion setting until the visitor chooses; the choice is remembered.
@@ -255,7 +220,8 @@
     if (reduce && reduce.addEventListener) reduce.addEventListener('change', syncMotion);
     syncMotion();
     instances.push(sideBar, sheetBar);
-    try { if (global.localStorage.getItem(STORE) === '1') sideBar.setCollapsed(true, true); } catch (e) {}
+    // The sidebar no longer folds: drop the state an older version saved.
+    try { global.localStorage.removeItem('speakerNav.collapsed'); } catch (e) {}
 
     /* ---------- phone sheet ---------- */
     var sheetOpen = false;

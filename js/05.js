@@ -12,7 +12,8 @@
   window.dispatchEvent(new Event('resize'));
   if(open)syncGuideHash(guideNav.active);
   else history.replaceState(null,'',location.pathname+location.search);
-  if(!quiet)(open?guideNav.backButton:entry)?.focus({preventScroll:true});
+  // Opening lands on the skip link (shown only to keyboard users); the back button is the next stop.
+  if(!quiet)(open?(document.querySelector('[data-skip]')||guideNav.backButton):entry)?.focus({preventScroll:true});
  }
  // A hash naming a section or an element in one (see guideTarget in js/01.js) opens the guide there.
  function openFromHash(quiet){

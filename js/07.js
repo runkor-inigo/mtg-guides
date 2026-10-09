@@ -7,7 +7,7 @@
   for(const row of box.querySelectorAll('.deckrow')){
    const name=row.querySelector('.deck38-name')?.textContent||row.children[1].textContent.trim(),qty=Number(row.querySelector('.q').textContent),art=COMBO_CARD_ART[name];total+=qty;
    const button=document.createElement('button');button.type='button';button.className='deck-art47';button.dataset.name=name;button.dataset.quantity=qty;if(art?.edition)button.title=art.edition;button.setAttribute('aria-label',qty+' × '+name+' — zoom');
-   if(art){const img=document.createElement('img');img.src=art.src;img.alt=name;img.loading='lazy';img.decoding='async';button.append(img);}
+   if(art){const img=document.createElement('img');img.loading='lazy';img.decoding='async';img.src=art.src;img.alt=name;button.append(img);}
    const badge=document.createElement('span');badge.className='deck-qty47';badge.textContent='×'+qty;button.append(badge);
    const label=document.createElement('span');label.className='deck-name47';label.textContent=name;button.append(label);
    button.addEventListener('click',()=>{row.querySelector('.deck38-card')?.click();const modal=document.querySelector('.combo37-dialog');if(modal?.open)modal.addEventListener('close',()=>button.focus(),{once:true});});grid.append(button);

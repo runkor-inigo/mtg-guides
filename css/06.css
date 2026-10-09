@@ -8,7 +8,7 @@
  #map:not(.show-matrix45)>.matrixwrap{display:none}
  body>.floatingMatrixHead{display:none!important}
  .mobile-map-toolbar45{display:flex;gap:8px;margin-bottom:12px;align-items:center}
- .mobile-map-toolbar45 input{min-width:0;flex:1;min-height:46px;font-size:16px;padding:10px 12px;border:1px solid #405465;border-radius:8px;background:#101c26;color:#edf3f8}
+ .mobile-map-toolbar45 input{min-width:0;flex:1;min-height:46px;font-size:16px;padding:10px 12px;border:1px solid #405465;border-radius:8px;background:#101c26;color:var(--text)}
  .mobile-map-toolbar45 button,.mobile-plan45 button{min-height:44px;padding:10px 12px;font-size:13px;background:#20333f;color:#cbe7da;border:1px solid #486153;border-radius:8px}
  .mobile-category45{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#a8c9df;margin:24px 0 10px}
  .mobile-plan45{border:1px solid #364c5a;background:#14232e;border-radius:10px;margin:9px 0;overflow:hidden}
@@ -38,6 +38,6 @@
  .gf-action h3{font-size:19px}.gf-coach .gf-action p{font-size:15px;line-height:1.6}.gf-stack p{font-size:13px}
  .gf-coach .gf-controls,.gf-controls button{height:48px;min-height:48px}.gf-controls button{font-size:13px}
  .gf-log{font-size:12px}.gf-footnote{font-size:12px}.gf-zone-heading,.gf-hand-heading{font-size:13px}
- .gf-card-caption,.gf-badges{font-size:10px}.gf-card{min-height:156px}.gf-hand .gf-card{min-height:148px}
+ .gf-card-caption,.gf-badges{font-size:11px}.gf-card{min-height:156px}.gf-hand .gf-card{min-height:148px}
  summary{touch-action:manipulation}button,a{touch-action:manipulation}
 }

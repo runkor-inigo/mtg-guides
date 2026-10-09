@@ -357,7 +357,7 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 
 ### Próximo paso de diseño (propuesto, 8 Oct 2026)
 
-- **V. `pasada-impeccable`** — pendiente de confirmar por el usuario. Auditoría y crítica de toda la guía con la skill Impeccable (`audit`, `critique`): lista priorizada de problemas de tipografía, jerarquía, espaciado y contraste. Después se aplica solo lo que el usuario apruebe, respetando las reglas de CLAUDE.md (sin build step, paleta verde oscura, mint → oro). Hasta ahora solo se ha usado emil-design-eng, para detalles de interacción (botón de volver, interruptores).
+- **V. `pasada-impeccable`** — HECHA la parte 1 (9 Oct 2026, sin subir). Auditoría técnica 12/20 (accesibilidad 3, rendimiento 2, tokens 2, móvil 3, coherencia 2) y arreglos: imágenes perezosas de verdad (la portada pasa de 93 a 18 peticiones de imagen: `loading` antes de `src` en js/07.js, js/02.js; Goldfish y Maybeboard en `lazy`), enlaces y acentos menta en vez de azul (tokens `--link`, `--accent`), tokens del menú enlazados a los de base, 84 colores repetidos pasados a tokens, ningún texto de menos de 11 px fuera de la matriz antigua oculta, píldoras de rol a 4,5:1, enlace "Skip to content", áreas de 24 px, scroll suave solo con movimiento, favicon. Menú lateral (petición del usuario): en escritorio ya no se pliega a iconos y todas las partes empiezan abiertas; filas algo más compactas para caber a 900 px de alto. Comprobado con Playwright a 1440 y 390 px: 0 errores de consola, 0 fallos de contraste, sin desbordes. Parte 2 pendiente (opcional): limpiar los 426 `!important` de css/01.css. Texto original de la propuesta: Auditoría y crítica de toda la guía con la skill Impeccable (`audit`, `critique`): lista priorizada de problemas de tipografía, jerarquía, espaciado y contraste. Después se aplica solo lo que el usuario apruebe, respetando las reglas de CLAUDE.md (sin build step, paleta verde oscura, mint → oro). Hasta ahora solo se ha usado emil-design-eng, para detalles de interacción (botón de volver, interruptores).
 - Archivos: los CSS (`css/01.css`, `css/11.css`, `css/12.css`, `css/menu.css`) y, si hace falta, marcado puntual en `index.html`.
 - Tamaño: media (auditoría) + lo que se apruebe.
 - Preguntas de Credits cerradas (9 Oct 2026): "que gustes" no se identificó y se descarta; dssit = David Schittinger está confirmado.
@@ -427,7 +427,7 @@ Todo lo hecho está subido y publicado. Lo que queda:
 5. M `revision-learn` (tras C)
 6. N `revision-gameplay-1` (First Turns y Game Plans; tras J)
 7. D `matchups-sin-plan` — opcional (Azorius Tempo y Rakdos Reanimator fuera del top 10)
-8. V `pasada-impeccable` ★ — auditoría de diseño con la skill Impeccable
+8. V parte 2 — limpieza de `!important` en css/01.css (opcional; la parte 1 está hecha)
 9. Q `rendimiento-carga`
 10. U `repo-cleanup` ★ — cuando decidas borrar (72 imágenes sin uso; revisar antes, hay imágenes nuevas)
 11. T `verificacion-final`

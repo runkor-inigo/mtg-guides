@@ -30,7 +30,7 @@ COMBO_CARD_ART['Primaris Eliminator']={src:'assets/primaris-eliminator.webp',url
  let returnFocus=null;dialog.addEventListener('close',()=>returnFocus?.focus());
  function cardButton(name,mini=false){
   const data=COMBO_CARD_ART[name],btn=document.createElement('button');btn.type='button';btn.className='combo37-card'+(mini?' mini':'');btn.title='View '+name;btn.setAttribute('aria-label','View '+name);
-  const img=document.createElement('img');img.src=data.src;img.alt=name;img.width=488;img.height=680;img.loading='lazy';img.decoding='async';btn.append(img);
+  const img=document.createElement('img');img.loading='lazy';img.decoding='async';img.src=data.src;img.alt=name;img.width=488;img.height=680;btn.append(img);
   if(!mini){const label=document.createElement('span');label.textContent=name;btn.append(label);}
   btn.onclick=()=>{returnFocus=btn;dialog.querySelector('img').src=data.src;dialog.querySelector('img').alt=name;dialog.querySelector('a').href=data.url;dialog.querySelector('.combo37-credit').textContent=name+' · Art: '+data.artist+' · © Wizards of the Coast';dialog.showModal();};return btn;
  }

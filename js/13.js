@@ -144,7 +144,7 @@
   study.querySelectorAll('.mbs-card').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.i===i)));
   const tag=c.tag?` <span class="${esc(c.tag.cls)}">${esc(c.tag.label)}</span>`:'';
   const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
-  tableEl.innerHTML=`<div class="mbs-big">${face(c,'mbs-bigface',a.src,false)}</div><div class="mbs-info mbs-head"><p class="mbs-shelf">${esc(SHELVES[c.shelf]||'')}</p><h3>${esc(c.name)}</h3><p class="mbs-meta">${esc(c.meta)}</p>
+  tableEl.innerHTML=`<div class="mbs-big">${face(c,'mbs-bigface',a.src,true)}</div><div class="mbs-info mbs-head"><p class="mbs-shelf">${esc(SHELVES[c.shelf]||'')}</p><h3>${esc(c.name)}</h3><p class="mbs-meta">${esc(c.meta)}</p>
    ${a.url?`<p class="mbs-credit"><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.edition||'Scryfall')}</a>${a.artist?' · '+esc(a.artist):''}</p>`:''}</div>
    <div class="mbs-info mbs-body"><dl><dt>Why it was chosen</dt><dd>${esc(cap(c.job))}</dd>
    ${c.served.length?`<dt>Where it helped</dt><dd>Our sideboard plans brought it in against: ${c.served.map(m=>`<span class="mbs-chip">${esc(m)}</span>`).join(' ')}</dd>`:''}

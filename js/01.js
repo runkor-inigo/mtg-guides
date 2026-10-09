@@ -717,6 +717,8 @@ const guideNav=SpeakerNav.create(document.getElementById('guide-nav'),{
  brand:{title:'Speaker Elves',back:'All guides'}
 });
 showSection(guideNav.active);
+// Skip link: past the menu to the open section's heading (no hash, so the guide's URL stays as it is).
+document.querySelector('[data-skip]')?.addEventListener('click',e=>{e.preventDefault();const h=document.querySelector('.pane.active h2');if(!h)return;h.tabIndex=-1;h.focus();h.scrollIntoView({block:'start'});});
 GUIDE_SECTIONS.forEach(s=>s.panes.forEach(id=>{const pane=document.getElementById(id);pane.setAttribute('role','tabpanel');pane.setAttribute('aria-labelledby',guideNav.tabFor(s.id).id);}));
 // Takes a section id, or the id of a pane inside one (in-page links); a pane id also scrolls to that pane.
 function showGuideTab(id){

@@ -14,8 +14,8 @@
  background-size:300% 100%;background-position:25% 0;opacity:0}
 .guide-entry:hover,.guide-entry:focus-visible{border-color:#cfe6a8;background:#182b35;animation:gn-card-breathe 2.8s ease-in-out infinite}
 .guide-entry:hover::after,.guide-entry:focus-visible::after{animation:gn-sweep 2.8s ease-out infinite}
-.guide-entry:hover .guide-entry-cta,.guide-entry:focus-visible .guide-entry-cta{color:#f0d77a}
-.guide-entry:active,.guide-entry.is-pressed{border-color:#f0d77a;animation:none;
+.guide-entry:hover .guide-entry-cta,.guide-entry:focus-visible .guide-entry-cta{color:var(--gn-gold)}
+.guide-entry:active,.guide-entry.is-pressed{border-color:var(--gn-gold);animation:none;
  box-shadow:0 12px 40px #0003,-8px 0 30px 5px rgba(120,222,153,.55),12px 0 36px 7px rgba(240,215,122,.62)}
 .guide-entry.is-pressed{outline:2px solid transparent;animation:gn-card-ring .5s cubic-bezier(.2,.7,.3,1)}
 
@@ -36,7 +36,7 @@
 /* Goldfish Lab battlefield: creatures above, lands below. An earthbent Cradle moves up to the creatures. */
 #goldfish .gf-board{display:grid;gap:8px;align-content:start;padding:8px 0 10px}
 #goldfish .gf-row{position:relative;display:flex;flex-wrap:wrap;align-content:flex-start;gap:10px;min-height:150px;padding-top:18px}
-#goldfish .gf-row::before{content:attr(data-label);position:absolute;top:0;left:2px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8bad9b}
+#goldfish .gf-row::before{content:attr(data-label);position:absolute;top:0;left:2px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8bad9b}
 #goldfish .gf-lands{min-height:140px;border-top:1px dashed #2f5446;padding-top:22px}
 #goldfish .gf-lands::before{top:6px}
 
@@ -46,24 +46,24 @@
 #goldfish .gf-ico svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 #goldfish .gf-ico img{width:13px;height:13px}
 #goldfish .gf-ico-haste{color:#ffcf6a;border-color:#7a5d1f}#goldfish .gf-ico-haste svg{fill:currentColor;stroke:none}
-#goldfish .gf-ico-trample{color:#a2ddc0;border-color:#2c6a43}
+#goldfish .gf-ico-trample{color:var(--accent);border-color:#2c6a43}
 #goldfish .gf-ico-sick{color:#9fb7c9;border-color:#3b5266}
 #goldfish .gf-ico-used{position:relative;border-color:#6d3a41}
 #goldfish .gf-ico-used::after{content:"";position:absolute;width:15px;height:2px;background:#ff8f8f;transform:rotate(-45deg);border-radius:2px}
-#goldfish .gf-pump{font-size:10px;font-weight:800;color:#bcf2ca;padding:1px 5px;border-radius:999px;background:#163c25;border:1px solid #2c6a43}
+#goldfish .gf-pump{font-size:11px;font-weight:800;color:#bcf2ca;padding:1px 5px;border-radius:999px;background:#163c25;border:1px solid #2c6a43}
 /* A used Symbiote or Quirion dims so it reads as spent at a glance */
 #goldfish .gf-card.used .gf-face{filter:grayscale(.75) brightness(.65)}
 #goldfish .gf-card.used .gf-card-caption{color:#9aa9b4}
 
 /* Cards that acted in this step: menu glow, mint warming to gold */
 @keyframes gf-acted{
- 0%{box-shadow:0 0 0 2px #f0d77a,-6px 0 18px 4px rgba(120,222,153,.7),8px 0 20px 5px rgba(240,215,122,.75)}
+ 0%{box-shadow:0 0 0 2px var(--gn-gold),-6px 0 18px 4px rgba(120,222,153,.7),8px 0 20px 5px rgba(240,215,122,.75)}
  60%{box-shadow:0 0 0 2px #cfe6a8,-5px 0 14px 2px rgba(120,222,153,.45),7px 0 16px 3px rgba(240,215,122,.5)}
  100%{box-shadow:0 0 0 1px rgba(162,221,192,.5),-3px 0 8px rgba(120,222,153,.25),5px 0 10px rgba(240,215,122,.25)}
 }
 #goldfish .gf-card.gf-acted .gf-face{animation:gf-acted 1.6s ease-out forwards}
-@media (prefers-reduced-motion:reduce){:root:not(.motion-on) #goldfish .gf-card.gf-acted .gf-face{animation:none;box-shadow:0 0 0 2px #f0d77a,-4px 0 12px 2px rgba(120,222,153,.5),6px 0 12px 2px rgba(240,215,122,.55)}}
-:root.motion-off #goldfish .gf-card.gf-acted .gf-face{animation:none;box-shadow:0 0 0 2px #f0d77a,-4px 0 12px 2px rgba(120,222,153,.5),6px 0 12px 2px rgba(240,215,122,.55)}
+@media (prefers-reduced-motion:reduce){:root:not(.motion-on) #goldfish .gf-card.gf-acted .gf-face{animation:none;box-shadow:0 0 0 2px var(--gn-gold),-4px 0 12px 2px rgba(120,222,153,.5),6px 0 12px 2px rgba(240,215,122,.55)}}
+:root.motion-off #goldfish .gf-card.gf-acted .gf-face{animation:none;box-shadow:0 0 0 2px var(--gn-gold),-4px 0 12px 2px rgba(120,222,153,.5),6px 0 12px 2px rgba(240,215,122,.55)}
 @media(max-width:600px){#goldfish .gf-row{min-height:120px}#goldfish .gf-ico{width:15px;height:15px}}
 
 /* Phones (tasks R and S, 8 Oct 2026). Found by the 360 / 390 px audit in ROADMAP.md. */
@@ -108,19 +108,39 @@
 #goldfish .gf-pick-label{padding:0 6px 0 8px;font-size:11px;color:#8496a3}
 #goldfish .gf-pick button{min-height:30px;padding:4px 12px;border:0;background:transparent}
 #goldfish .gf-pick button[aria-checked="true"]{background:var(--gn-fill);color:#0b281c}
-@media (hover:hover) and (pointer:fine){#goldfish .gf-switch:hover,#goldfish .gf-pick button:not([aria-checked="true"]):hover{color:#edf3f8;border-color:#4a6576}}
+@media (hover:hover) and (pointer:fine){#goldfish .gf-switch:hover,#goldfish .gf-pick button:not([aria-checked="true"]):hover{color:var(--text);border-color:#4a6576}}
 #goldfish .gf-switch:active,#goldfish .gf-pick button:active{transform:scale(.97)}
-#goldfish .gf-switch:focus-visible,#goldfish .gf-pick button:focus-visible{outline:2px solid #a2ddc0;outline-offset:2px}
-@keyframes gf-magnet{0%{box-shadow:0 0 0 2px #f0d77a,-4px 0 14px 2px rgba(120,222,153,.6),6px 0 16px 3px rgba(240,215,122,.6)}100%{box-shadow:0 0 0 0 transparent}}
+#goldfish .gf-switch:focus-visible,#goldfish .gf-pick button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@keyframes gf-magnet{0%{box-shadow:0 0 0 2px var(--gn-gold),-4px 0 14px 2px rgba(120,222,153,.6),6px 0 16px 3px rgba(240,215,122,.6)}100%{box-shadow:0 0 0 0 transparent}}
 #goldfish .gf-switch.is-magnet{animation:gf-magnet 900ms cubic-bezier(.23,1,.32,1)}
-@media (prefers-reduced-motion:reduce){:root:not(.motion-on) #goldfish .gf-switch.is-magnet{animation:none;border-color:#f0d77a}}
-:root.motion-off #goldfish .gf-switch.is-magnet{animation:none;border-color:#f0d77a}
-#goldfish .gf-variant-note{min-height:0;margin:4px 0 0;font-size:12px;color:#f0d77a}
+@media (prefers-reduced-motion:reduce){:root:not(.motion-on) #goldfish .gf-switch.is-magnet{animation:none;border-color:var(--gn-gold)}}
+:root.motion-off #goldfish .gf-switch.is-magnet{animation:none;border-color:var(--gn-gold)}
+#goldfish .gf-variant-note{min-height:0;margin:4px 0 0;font-size:12px;color:var(--gn-gold)}
 #goldfish .gf-variant-note:empty{display:none}
 #goldfish .gf-side[hidden]{display:none}
 #goldfish .gf-side button.is-magnet{animation:gf-magnet 900ms cubic-bezier(.23,1,.32,1)}
-:root.motion-off #goldfish .gf-side button.is-magnet{animation:none;outline:2px solid #f0d77a}
-@media (prefers-reduced-motion:reduce){:root:not(.motion-on) #goldfish .gf-side button.is-magnet{animation:none;outline:2px solid #f0d77a}}
+:root.motion-off #goldfish .gf-side button.is-magnet{animation:none;outline:2px solid var(--gn-gold)}
+@media (prefers-reduced-motion:reduce){:root:not(.motion-on) #goldfish .gf-side button.is-magnet{animation:none;outline:2px solid var(--gn-gold)}}
 #goldfish .gf-variant-need{margin:6px 0 0;font-size:12px;color:#c9d6e0}
 #goldfish .gf-variant-need[hidden]{display:none}
-#goldfish .gf-need-tag{display:inline-block;margin-right:6px;padding:2px 8px;border-radius:999px;border:1px solid #7a5d1f;background:#2a2210;color:#f0d77a;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+#goldfish .gf-need-tag{display:inline-block;margin-right:6px;padding:2px 8px;border-radius:999px;border:1px solid #7a5d1f;background:#2a2210;color:var(--gn-gold);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+
+/* Design audit fixes (task V, 9 Oct 2026) */
+/* Skip link: hidden until it takes keyboard focus, then it sits over the top-left corner. */
+.skip-link{position:fixed;top:12px;left:12px;z-index:100;padding:10px 16px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:14px;transform:translateY(-200%);text-decoration:none}
+.skip-link:focus-visible{transform:none;outline:2px solid var(--text);outline-offset:2px}
+.pane h2[tabindex="-1"]:focus{outline:none}
+/* Smooth in-page scrolling only when motion is welcome. */
+@media (prefers-reduced-motion:reduce){:root:not(.motion-on){scroll-behavior:auto}}
+:root.motion-off{scroll-behavior:auto}
+/* Role pills: every label at 4.5:1 or better. */
+.rolepill.turbo{background:#b44f55}
+.rolepill.slow{color:#1d1607}
+.rolepill.control{background:#3d70a6}
+/* Hit areas: fold-out headings and the Sideboard map's matchup names reach 24 px on every screen
+   (phones already get more in the Phones block), and 44 px under touch. */
+@media (min-width:761px){details>summary{position:relative}details>summary::after{content:"";position:absolute;inset:-4px 0}}
+.sbv-name{position:relative}
+.sbv-name::after{content:"";position:absolute;inset:-4px -4px}
+@media (pointer:coarse),(max-width:760px){.sbv-name::after{inset:-12px -4px}}
+.combo35-join a{display:inline-block;padding:6px 4px}

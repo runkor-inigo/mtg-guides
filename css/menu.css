@@ -1,16 +1,17 @@
-/* Speaker Elves — guide menu (collapsible sidebar). Behaviour lives in js/menu.js. */
+/* Speaker Elves — guide menu (sidebar). Behaviour lives in js/menu.js. */
 
 :root{
-  --gn-mint: #a2ddc0;
+  /* Shared colours come from the base tokens in css/01.css; the rest are the menu's own. */
+  --gn-mint: var(--accent);
   --gn-mint-hi: #bdf0d6;
-  --gn-leaf: #78de99;
-  --gn-ink: #0b281c;          /* text on the mint pill */
+  --gn-leaf: var(--green);
+  --gn-ink: var(--accent-ink); /* text on the mint pill */
   --gn-text: #c9d6e0;
   --gn-soft: #b9c8d4;
   --gn-faint: #6f8090;
-  --gn-line: #2d3947;
+  --gn-line: var(--line);
   --gn-line-soft: #223040;
-  --gn-panel: #141b24;
+  --gn-panel: var(--panel);
   --gn-gold: #f0d77a;         /* the right edge of every mint highlight */
   /* Mint body that warms to almost-gold at its right edge. */
   --gn-fill: linear-gradient(90deg, #bdf0d6 0%, #a2ddc0 52%, #cfe6a8 82%, #f0d77a 100%);
@@ -26,6 +27,10 @@
   body > main.wrap > .pane,
   body > main.wrap > .guide-pager{ grid-column: 2; min-width: 0; }
   .gn-side{ grid-column: 1; grid-row: 1 / span 40; align-self: start; position: sticky; top: 16px; margin-top: 12px; }
+  /* Every part starts open, so the desktop rows are a little tighter to fit a laptop screen. */
+  .gn-side .sb-head{ height: 36px; }
+  .gn-side .sb-item{ padding-top: 6px; padding-bottom: 6px; }
+  .gn-side .sb-items-inner{ margin-bottom: 4px; }
   .gn-mobile{ display: none; }
 }
 
@@ -41,7 +46,7 @@
   55%{ background-position: 75% 0; opacity: 0; }
   100%{ background-position: 75% 0; opacity: 0; }
 }
-.sb-pill::before, .gn-chapter::before, .sb-fly .sb-item[aria-current="page"]::before{
+.sb-pill::before, .gn-chapter::before{
   content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
   background: linear-gradient(90deg, transparent 0%, transparent 38%, rgba(255,244,196,.85) 50%, rgba(240,215,122,0) 62%, transparent 100%);
   background-size: 300% 100%; background-position: 25% 0; opacity: 0;
@@ -58,14 +63,9 @@
   background: rgba(12,19,27,.8);
   font-family: Roboto, "Segoe UI", system-ui, -apple-system, sans-serif;
 }
-.gn-side .sb{ max-height: calc(100vh - 32px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: #2d3947 transparent; }
-.gn-side .sb.is-collapsed{ overflow: hidden; }
+.gn-side .sb{ max-height: calc(100vh - 32px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
 .sb-top{ display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 34px; padding-left: 12px; }
-.sb-title{ font-size: 12px; font-weight: 700; color: var(--gn-faint); white-space: nowrap; transition: opacity .2s; }
-.sb-toggle{ all: unset; display: grid; place-items: center; width: 34px; height: 34px; flex: none; border-radius: 8px; color: var(--gn-soft); cursor: pointer; }
-.sb-toggle:hover{ background: rgba(255,255,255,.05); color: #edf3f8; }
-.sb-toggle svg{ width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform .35s; }
-.sb.is-collapsed .sb-toggle svg{ transform: rotate(180deg); }
+.sb-title{ font-size: 12px; font-weight: 700; color: var(--gn-faint); white-space: nowrap; }
 .sb-body{ position: relative; display: grid; gap: 2px; }
 
 /* The pill: current section only. */
@@ -94,7 +94,6 @@
 .sb-head:focus-visible, .sb-item:focus-visible{ outline: 2px solid var(--gn-mint); outline-offset: -2px; }
 .sb-ic{ display: block; width: 20px; height: 20px; flex: none; }
 .sb-ic svg, .sb-chev{ display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.sb-label{ transition: opacity .2s; }
 .sb-chev{ width: 16px; height: 16px; margin-left: auto; flex: none; opacity: .7; transition: transform .35s cubic-bezier(.3,.7,.2,1), opacity .2s; }
 .sb-head[aria-expanded="true"] .sb-chev{ transform: rotate(180deg); }
 
@@ -108,7 +107,7 @@
   font-size: 14px; font-weight: 500; line-height: 1.35; color: var(--gn-soft); white-space: nowrap;
   cursor: pointer; transition: color .2s;
 }
-.sb-item:hover{ color: #edf3f8; }
+.sb-item:hover{ color: var(--text); }
 .sb-item[aria-current="page"]{ color: var(--gn-ink); font-weight: 700; }
 /* Reserve the bold width so selecting never shifts the row. */
 .sb-lb{ display: inline-flex; flex-direction: column; }
@@ -122,35 +121,14 @@
 .sb-back{ gap: 8px; height: 34px; padding: 0 12px 0 10px; border-radius: 8px; font-size: 12px; font-weight: 600; color: var(--gn-soft); white-space: nowrap; }
 .sb-back svg, .gn-back svg{ width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 160ms cubic-bezier(.23,1,.32,1); }
 @media (hover: hover) and (pointer: fine){
-  .sb-back:hover{ background: rgba(255,255,255,.05); color: #edf3f8; }
+  .sb-back:hover{ background: rgba(255,255,255,.05); color: var(--text); }
   .sb-back:hover svg{ transform: translateX(-2px); }
 }
 .sb-back:active, .gn-back:active{ transform: scale(.97); }
 .sb-back:focus-visible, .gn-back:focus-visible{ outline: 2px solid var(--gn-mint); outline-offset: 2px; }
 .sb-brand{ display: grid; justify-items: start; gap: 7px; padding: 8px 12px 14px; border-bottom: 1px solid var(--gn-line-soft); }
-.sb-brand-title{ font-size: 19px; font-weight: 800; line-height: 1.15; letter-spacing: -.01em; color: #edf3f8; }
-.sb-brand-badge{ padding: 3px 8px; border-radius: 999px; border: 1px solid #38516a; background: #132031; color: #a9caff; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-
-/* Folded to icons */
-.sb.is-collapsed .sb-title, .sb.is-collapsed .sb-label, .sb.is-collapsed .sb-chev{ opacity: 0; }
-.sb.is-collapsed .sb-items{ display: none; }
-.sb.is-collapsed .sb-top{ padding-left: 0; justify-content: center; }
-.sb.is-collapsed .sb-top.has-back{ flex-direction: column; height: auto; gap: 4px; }
-.sb.is-collapsed .sb-back{ padding: 0; width: 34px; justify-content: center; }
-.sb.is-collapsed .sb-back-lb, .sb.is-collapsed .sb-brand{ display: none; }
-
-/* Panel beside a folded sidebar */
-.sb-fly{
-  position: absolute; z-index: 60; left: calc(100% + 8px); top: 0; width: 230px;
-  display: grid; gap: 2px; padding: 8px;
-  border-radius: 12px; background: var(--gn-panel); border: 1px solid var(--gn-line);
-  box-shadow: 0 14px 34px rgba(0,0,0,.65);
-}
-.sb-fly[hidden]{ display: none; }
-.sb-fly-title{ margin: 2px 10px 6px; font-size: 12px; font-weight: 700; color: var(--gn-faint); }
-.sb-fly-items{ display: grid; gap: 2px; }
-.sb-fly .sb-item[aria-current="page"]{ background: var(--gn-fill); animation: gn-breathe 2.8s ease-in-out infinite; }
-.sb-fly .sb-item > *{ position: relative; z-index: 1; }
+.sb-brand-title{ font-size: 19px; font-weight: 800; line-height: 1.15; letter-spacing: -.01em; color: var(--text); }
+.sb-brand-badge{ padding: 3px 8px; border-radius: 999px; border: 1px solid #2c6a43; background: #12241c; color: var(--gn-mint); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 
 /* ---------- Phones: sticky chapter bar + sheet ---------- */
 @media (max-width: 760px){
@@ -176,9 +154,9 @@
   .gn-chapter small{ font-weight: 500; opacity: .7; }
   .gn-chev{ margin-left: auto; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s; }
   .gn-chapter[aria-expanded="true"] .gn-chev{ transform: rotate(180deg); }
-  .gn-chapter:focus-visible{ outline: 2px solid #edf3f8; outline-offset: 3px; }
+  .gn-chapter:focus-visible{ outline: 2px solid var(--text); outline-offset: 3px; }
   .gn-sheet{ overflow: hidden; height: 0; }
-  .gn-sheet .sb{ width: auto; border: 0; background: #0b1118; padding: 12px 0 4px; max-height: 70vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #2d3947 transparent; }
+  .gn-sheet .sb{ width: auto; border: 0; background: #0b1118; padding: 12px 0 4px; max-height: 70vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
 }
 
 /* ---------- Previous / next at the end of a section ---------- */
@@ -187,7 +165,7 @@
 .guide-pager button:hover{ border-color: var(--gn-mint); }
 .guide-pager button:focus-visible{ outline: 2px solid var(--gn-mint); outline-offset: 2px; }
 .guide-pager small{ font-size: 12px; color: var(--gn-faint); }
-.guide-pager b{ font-size: 14px; color: #edf3f8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.guide-pager b{ font-size: 14px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .guide-pager .next{ margin-left: auto; text-align: right; }
 
 /* Animations switch at the foot of the sidebar */
@@ -198,19 +176,18 @@
 .sb-motion-switch::after{ content: ""; position: absolute; top: 2px; left: 2px; width: 11px; height: 11px; border-radius: 50%; background: var(--gn-soft); transition: transform .2s; }
 .sb-motion[aria-pressed="true"] .sb-motion-switch{ background: var(--gn-mint); }
 .sb-motion[aria-pressed="true"] .sb-motion-switch::after{ transform: translateX(11px); background: var(--gn-ink); }
-.sb.is-collapsed .sb-motion-label{ opacity: 0; }
 
 /* Reduced motion (system setting, unless the visitor switched animations on, or the visitor
    switched them off): nothing moves, but every highlight keeps a steady glow. */
 @media (prefers-reduced-motion: reduce){
-  :root:not(.motion-on) .sb-pill, :root:not(.motion-on) .gn-chapter, :root:not(.motion-on) .sb-fly .sb-item[aria-current="page"]{ animation: none; box-shadow: var(--gn-glow-still); }
+  :root:not(.motion-on) .sb-pill, :root:not(.motion-on) .gn-chapter{ animation: none; box-shadow: var(--gn-glow-still); }
   :root:not(.motion-on) .sb-head.is-current{ animation: none; text-shadow: 0 0 10px rgba(120,222,153,.7); }
   :root:not(.motion-on) .sb-pill.is-ping::after{ animation: none; }
-  :root:not(.motion-on) .sb-pill::before, :root:not(.motion-on) .gn-chapter::before, :root:not(.motion-on) .sb-fly .sb-item[aria-current="page"]::before{ animation: none; opacity: 0; }
-  :root:not(.motion-on) .sb-toggle svg, :root:not(.motion-on) .sb-chev, :root:not(.motion-on) .gn-chev, :root:not(.motion-on) .sb-head, :root:not(.motion-on) .sb-item{ transition: none; }
+  :root:not(.motion-on) .sb-pill::before, :root:not(.motion-on) .gn-chapter::before{ animation: none; opacity: 0; }
+  :root:not(.motion-on) .sb-chev, :root:not(.motion-on) .gn-chev, :root:not(.motion-on) .sb-head, :root:not(.motion-on) .sb-item{ transition: none; }
 }
-:root.motion-off .sb-pill, :root.motion-off .gn-chapter, :root.motion-off .sb-fly .sb-item[aria-current="page"]{ animation: none; box-shadow: var(--gn-glow-still); }
+:root.motion-off .sb-pill, :root.motion-off .gn-chapter{ animation: none; box-shadow: var(--gn-glow-still); }
 :root.motion-off .sb-head.is-current{ animation: none; text-shadow: 0 0 10px rgba(120,222,153,.7); }
 :root.motion-off .sb-pill.is-ping::after{ animation: none; }
-:root.motion-off .sb-pill::before, :root.motion-off .gn-chapter::before, :root.motion-off .sb-fly .sb-item[aria-current="page"]::before{ animation: none; opacity: 0; }
-:root.motion-off .sb-toggle svg, :root.motion-off .sb-chev, :root.motion-off .gn-chev, :root.motion-off .sb-head, :root.motion-off .sb-item{ transition: none; }
+:root.motion-off .sb-pill::before, :root.motion-off .gn-chapter::before{ animation: none; opacity: 0; }
+:root.motion-off .sb-chev, :root.motion-off .gn-chev, :root.motion-off .sb-head, :root.motion-off .sb-item{ transition: none; }
