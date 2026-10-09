@@ -35,8 +35,6 @@ body.guide-home #guide-library.home{max-width:none;margin:0;padding:0;min-height
 /* Illustration only (Scryfall art crop), framed by its focal point; it fades into the card with a mask, no seam. */
 .home-art-clip{position:absolute;inset:0;overflow:hidden;border-radius:inherit;-webkit-mask-image:linear-gradient(180deg,#000 38%,rgba(0,0,0,.55) 68%,transparent 100%);mask-image:linear-gradient(180deg,#000 38%,rgba(0,0,0,.55) 68%,transparent 100%)}
 .home-art-img{position:absolute;inset:-7%;background:var(--img) var(--pos,50% 30%)/cover no-repeat;transform-origin:var(--focus,50% 50%);transform:perspective(700px) translate3d(var(--px,0px),var(--py,0px),0) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--s,1));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
-.home-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.home-card.is-live .home-art[data-fx~="breeze"] .home-art-img{filter:url(#home-wind)}
 .home-ic{position:absolute;z-index:1;left:16px;bottom:-14px;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#0d1a20;border:1px solid #2f4855;color:var(--accent);transition:color .35s,border-color .35s}
 .home-ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .home-txt{display:grid;align-content:start;gap:8px;padding:24px 18px 20px}
