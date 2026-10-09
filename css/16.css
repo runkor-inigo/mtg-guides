@@ -14,3 +14,7 @@
 .art-banner{height:clamp(140px,17vw,210px);margin:6px 0 20px;border-radius:14px;border:1px solid var(--line);-webkit-mask-image:linear-gradient(180deg,#000 70%,rgba(0,0,0,.35) 100%);mask-image:linear-gradient(180deg,#000 70%,rgba(0,0,0,.35) 100%)}
 .art-banner>span{filter:saturate(.95) brightness(.9)}
 @media(max-width:600px){.art-banner{height:130px}.art-banner>span+span{margin-left:-24%}}
+
+/* First Turns sequencing: four cards, always two by two (one column on phones). */
+.seq-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:600px){.seq-cards{grid-template-columns:1fr}}

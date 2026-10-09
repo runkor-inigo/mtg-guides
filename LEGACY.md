@@ -4,11 +4,11 @@ Archivo de trabajo con las heurísticas de Legacy que usamos en la guía de Spea
 
 **Nada de esto es incuestionable.** Son reglas prácticas, no leyes: cada una dice de dónde sale y cuándo no aplica. Lo que funciona en un mazo de Cradle no funciona igual en otro, porque cada uno genera maná, cartas y presión a ritmos distintos. Cuando una heurística choque con el testing o con un piloto con experiencia, gana la evidencia y se actualiza este archivo.
 
-Estados, igual que en la guía: **Settled** (asentado), **Working range** (rango de trabajo), **Under test** (en prueba), **Unverified** (sin fuente).
+Estados (solo internos desde el 9 Oct 2026: la guía publicada ya no muestra etiquetas): **Settled** (asentado), **Working range** (rango de trabajo), **Under test** (en prueba), **Unverified** (sin fuente).
 
 La versión publicada para los lectores está en la sección Heuristics de la guía (`#heur` en `index.html`). Este archivo es el detalle interno: no se publica (`.vercelignore`).
 
-Última revisión: 9 Oct 2026. Sin cambios de contenido en esa fecha: el trabajo del día (auditoría de diseño, menú, portada) no toca las heurísticas, y la propuesta de sideboard de la sección 10 sigue esperando la decisión de runkor (tarea C).
+Última revisión: 9 Oct 2026. Añadida la sección 11 (artículos de Newton Hang, carpeta `Legacy Knowledbase/`), con lo que coincide y lo que choca con nuestros planes. La propuesta de sideboard de la sección 10 y las preguntas de 11.2 siguen esperando la decisión de runkor (tarea C).
 
 ---
 
@@ -69,12 +69,12 @@ La versión publicada para los lectores está en la sección Heuristics de la gu
 
 - **Pesa el razonamiento de pilotos con experiencia** y tu propio testing. Copias repetidas de una lista no son acuerdos independientes. **Settled.**
 - **La cuota del metajuego mide popularidad, no win rate.** **Settled.**
-- **Sin fuente, se marca "Unverified"** en la guía y en ROADMAP.md.
+- **Sin fuente, se dice con palabras en la guía** ("not yet confirmed") y se anota como Unverified aquí y en ROADMAP.md. La guía ya no muestra etiquetas (runkor, 9 Oct 2026).
 
 ## 9. Ideas abiertas
 
 - Underground Mortuary: el surveil ayuda, pero entra girada y retrasa el dork de turno 1 o el Speaker de turno 2. Caller of the Claw: candidata. Elvish Visionary: carta flex para un juego más grindy; no todas las listas la juegan.
-- Las ideas de sideboard de Curran (arriba, **Under test**) se deciden en la revisión del sideboard (tarea C).
+- Las ideas de sideboard de Curran (arriba, **Under test**) y las preguntas de Newton Hang (sección 11.2) se deciden en la revisión del sideboard (tarea C).
 
 ---
 
@@ -163,3 +163,95 @@ Transcrita de la captura y comprobada con su fila "Card Count" (entra = sale): c
 - **Las piezas de valor salen contra combo:** Safekeeper, Hierarch, Mole Man, Hogaak y Talon Gates salen contra combo rápido; Wight sale contra Tron, TES y Key Ring (no hay tiempo para crecer). En nuestra lista el equivalente sería recortar la parte lenta (Sabertooth, Ouphe, Vibrance) contra combo.
 - **Contra el espejo de Elves** sale su Carnivorous Cultivator y entran Snuff Out, Damping Sphere y Tabernacle. Útil para saber qué esperar de un Cradle Control que juega contra nosotros: Snuff Out a los dorks y a Speaker, Damping Sphere contra el turno de muchos hechizos y Tabernacle contra el tablero ancho.
 - **Rol control frente a beatdown:** se ponen de control contra tempo y aggro, y de beatdown contra combo, ramp y control. Encaja con nuestra columna de rol (Slow / Control / Turbo) y con LEGACY.md, sección 1.
+
+---
+
+## 11. Base de conocimiento: artículos de Newton Hang (2021–2023)
+
+Carpeta local `Legacy Knowledbase/` (15 PDF aportados por runkor el 9 Oct 2026; fuera de git y de Vercel). Todos son de **Newton Hang** (MTGO: hellonewton; @hello_newton), el piloto que más ha empujado Reclaimer Elves / Cradle Control. **Ojo al contexto:** escribe para Elves de Glimpse of Nature y Elvish Reclaimer (2021–2022) y para Cradle Control (2023), con 21–23 tierras. Speaker Elves es otro mazo (sección 1): lo que sigue se adapta, no se copia.
+
+| Fecha | Artículo | Tema |
+|---|---|---|
+| 1 Nov 2021 | Constructing a Cohesive Sideboard | El sideboard tapa las debilidades del main, no "el metajuego" |
+| 9 Nov 2021 | Sideboarding Heuristics | Quién es el beatdown y qué sacar por arquetipo |
+| 24 Nov 2021 | Non-Gameplay Practices | Preparación, mapa de sideboard previo, descanso |
+| 6 Dec 2021 | Flipping a Matchup Profile | Cómo dio la vuelta a Doomsday (Shepherd + Trophy/Endurance) |
+| 21 Dec 2021 | Macro-Level Game-Planning | Elves contra UR Delver/Murktide |
+| 4 Jan 2022 | 2022 New Year's Resolution | Hábitos (no táctico) |
+| 1 Mar 2022 | Boseiju Priority Targets | A qué apuntar con Boseiju por matchup |
+| 26 Apr 2022 | 2022 Reclaimer Elves FAQ | 21 tierras, Snuff Out, 0 Quirion, criterio de flex |
+| 10 May 2022 | Through the Looking Glass | Entrevista: Elves contra TES |
+| 25 May 2022 | Adapting Ideas from Similar Archetypes | Sylvan Syndicate, Golgari combo, tribales |
+| 19 Jul 2022 | Elf Sequencing 101, part 1 | Turnos 0 y 1 |
+| 16 Aug 2022 | Elf Sequencing 101, part 2 | Turno 2 y orden de jugadas |
+| 28 Mar 2023 | The Art of Artisan Deckbuilding | Fiend Artisan, toolbox, removal eficiente |
+| 4 Jul 2023 | Cradle Control Mana Base | Mínimos de la base de maná (23 tierras, 14 IMS) |
+| 26 Oct 2023 | Cradle Control: Flex Mana Acceleration | Fetch frente a Gemstone Caverns, Elvish Spirit Guide y Chrome Mox |
+
+### 11.1 Heurísticas que aportan (adaptadas a Speaker Elves)
+
+**Construcción**
+- **El sideboard es parte de los 75:** se eligen 15 cartas para tapar las debilidades propias, no para "responder al metajuego" con odio genérico. Elves ya va bien contra el azul justo, así que Newton deja fuera Choke y Carpet of Flowers. *(Cohesive Sideboard.)* **Under test** para nosotros: ver 11.2.
+- **Criterio de flex slot:** *impacto* (gana partidas solo en un puñado de matchups relevantes) y *suelo* (vivo en la mayoría y nunca la causa de perder un game 1). *(FAQ 2022.)* Encaja con nuestra caja "Main-deck flex" de Deck Construction.
+- **No sobrecargar el toolbox:** con muchos tutores, solo balas que ganan la partida solas (Ouphe, Opposition Agent) o quitan un permanente problemático contra buena parte del campo. Que exista un jugador de Goblins no justifica un Tivadar. *(Artisan.)*
+- **Removal eficiente mejor que flexible** cuando el plan es de tempo y criaturas: Snuff Out o Swords antes que Trophy o Decay; demasiados hechizos no-criatura bajan el valor de Cradle y de Once Upon a Time. *(Artisan, FAQ.)*
+- **Boseiju es el sucesor de Abrupt Decay y Trophy:** con 2–3 Boseiju de main, Trophy deja de ser obligatorio y Snuff Out pasa a ser el removal negro de cabecera. *(FAQ, Boseiju.)*
+- **Seis dorks es el punto dulce** de los mazos de Cradle (rango 4–8), porque Green Sun's Zenith por Dryad Arbor suma cuatro copias virtuales. *(Artisan.)* Coincide con nuestra lista.
+- **Escala de aceleración extra**, de conservadora a agresiva: fetch extra → Gemstone Caverns → Elvish Spirit Guide → Chrome Mox. Spirit Guide es información oculta (castiga Daze) y una criatura más para Cradle y Craterhoof; Chrome Mox es siempre desventaja de cartas, choca con Collector Ouphe y dos copias suelen ser mulligan. *(Flex Mana.)*
+
+**Sideboarding por rol** *(Sideboarding Heuristics, Macro-Level)*
+- **Quién es el beatdown:** Elves es el beatdown contra combo y contra midrange/control; el tempo (UR Delver, Stifle) y la prisión (Stompy, Death & Taxes) son el beatdown contra Elves.
+- **Contra tempo azul:** sacar lo caro (el paquete de Natural Order) para no quedarse atrás con Daze y Wasteland; meter removal y bloqueadores; los 60 de después deben tener robos vivos siempre. Lo que pierde la partida es un Murktide temprano: guardar el mejor removal para el dragón y cortar el delve (Endurance, Bojuka Bog).
+- **Contra Stompy (Chalice, Trinisphere, Moon):** meter respuestas a las piezas de bloqueo; **Natural Order no es un problema ahí** y cierra la partida; sacar lo grindy (Symbiote, que además muere a Chalice en 1).
+- **Contra combo rápido:** somos el beatdown; meter disrupción (discard, Leyline, odio a hechizos) y sacar el motor grindy (Symbiote, Visionary); no "carrerear" a TES: una o dos piezas de disrupción y luego bloqueo o kill, comprometiendo criaturas. Contra TES, Bojuka Bog y Endurance no sirven y Leyline solo si faltan cartas relevantes; en Golgari, Mindbreak Trap es el mejor odio contra Storm.
+- **Contra control azul:** Elves va de favorito; cortar lo que invita a sobreextender frente a los sweepers; Thoughtseize es seguro.
+- **Densidad de discard:** con Veil of Summer en el formato, 4–6 descartes en total; aun así, se meten todos contra combo porque importa la densidad de cartas relevantes.
+- **Leyline of the Void es "el Force of Will de los mazos no azules":** gratis y difícil de responder (sus respuestas no son las del resto del mazo). Endurance permitió bajar de 4 a 2–3 Leyline, pero **no la sustituye**: Endurance es fácil de responder (Chancellor, discard).
+
+**Secuenciación** *(Elf Sequencing 101, partes 1 y 2)*
+- **Turno 0:** no pasar prioridad en automático (oculta información y deja jugar Endurance con flash); Once Upon a Time en respuesta a un discard si hace falta tierra; no lanzar Once Upon a Time "para jugar alrededor de Daze".
+- **Turno 1, tierra:** ante la duda, Forest antes que fetch y Forest antes que Bayou; fetch primero contra Lightning Bolt, contra "no puedes buscar" (Opposition Agent) y contra Moon (para tener dos básicas). Si no necesitas tierra, rompe la fetch antes de Once Upon a Time para no ver la tierra que ibas a buscar.
+- **La mayoría de partidas se pierden en el turno 2** por el orden de jugadas. Contra Daze: tierra primero si solo te quedarían dos manás; si el Elfo es irrelevante, tantea Daze o Force antes de la tierra. Abre con Allosaurus Shepherd para apagar los counters.
+- **Orden de cebos contra removal:** el Elfo de un maná redundante primero, las piezas importantes al final. Ante la duda, haz el máximo de maná.
+- **Tierras que no dan maná ese turno (Dryad Arbor):** al final, después de los hechizos, salvo que Cradle necesite la criatura.
+
+**Base de maná** *(Cradle Control Mana Base)*: 23 tierras, 14 fuentes verdes iniciales (IMS), 12 "Swamps virtuales" (Bayou y fetches), 1 Forest básico, 4 Cradle, 2 Dryad Arbor (solo si hay Natural Order), 1 Bojuka Bog, 2 flex y 3 Once Upon a Time.
+
+### 11.2 Contraste con nuestra guía y nuestros planes
+
+**Coincide (refuerza lo que tenemos):**
+- **Quirion y Boseiju no conviven bien:** Newton jugó 0 Quirion porque no puede devolver 2–3 Boseiju; nosotros quitamos el tercer Boseiju para no perder valor de Quirion. El mismo conflicto, resuelto al revés según el motor de cada mazo (sección 6).
+- **Seis dorks**, **Once Upon a Time como pilar de consistencia** y **Leyline solo contra cementerio** (nuestro plan contra TES no la mete; él tampoco).
+- **Contra combo se recorta el motor grindy:** nuestros planes de Doomsday, Sneak & Show y Reanimator sacan Symbiote, Quirion o Speaker, como Newton y j-off.
+- **"Cartas buenas por sí solas" (Curran) = diseño "FIRE" de Newton:** confirma la sección 1: es la filosofía de Cradle Control, no la nuestra.
+- **Construcción baja:** 19 tierras y 13 fuentes verdes de turno 1 frente a sus 21–23 tierras y 14 IMS. Es la diferencia de identidad de la sección 1 (más rápido, menos midrange), no una incoherencia.
+
+**Choca o abre preguntas (para la tarea C, sin aplicar):**
+1. **Choke.** Lo metemos contra UB Moonshadow, UR Cutter, Beanstalk, Jeskai, Doomsday y Sneak & Show. Newton lo deja fuera por principio (Elves ya gana al azul justo), y la tarjeta "Discard is part of the plan" de Heuristics lo da por bueno. **Pregunta:** ¿Choke tapa una debilidad nuestra o es odio genérico? Speaker Elves es más combo que su Elves, así que puede que sí lo necesite; decidirlo con testing.
+2. **Natural Order contra tempo azul.** Ahora hay **dos fuentes contra dos**: Newton y Curran lo sacan; j-off y la matriz de Cradle Control lo mantienen. Nuestros planes: UR Cutter saca uno, UB Moonshadow ninguno. La sección 1 (intentamos más el Natural Order de turno 2) apoya mantenerlo; Newton escribía para un Elves con Visionary que ganaba la partida larga. Sigue **Under test**.
+3. **Natural Order contra Stompy y Moon.** Newton lo **mantiene** (cierra la partida tras la pieza de bloqueo) y saca Symbiote. Nuestro plan contra Mono Red **saca** Natural Order y Sabertooth. Contradicción directa: revisar.
+4. **Doomsday.** Newton dio la vuelta al matchup con un "A + B": Allosaurus Shepherd o GSZ (A) más Assassin's Trophy a la Underground Sea o Endurance (B). j-off también mete Trophy. Nuestro plan mete 4 Thoughtseize y 2 Choke y **ninguna** Trophy, aunque tenemos dos. Candidato claro: +1 o +2 Trophy contra Doomsday.
+5. **Leyline sin Endurance.** Newton bajó a 2–3 Leyline **porque** tenía Endurance. Nuestra lista del 5 Oct juega 3 Leyline y 0 Endurance (salió del main). Con su lógica, o volvemos a 4 Leyline o recuperamos Endurance como flex. La idea de Curran ("menos Leyline si hay otra disrupción", sección 5) apunta a lo mismo: depende de tener esa otra disrupción.
+6. **Mindbreak Trap contra TES.** Para Newton, el mejor odio a Storm en Golgari. No está en nuestro sideboard; nuestro plan contra TES es 4 Thoughtseize y 1 Trophy. Idea para la tarea C y el Maybeboard.
+7. **Snuff Out frente a Trophy.** Newton pasó a Snuff Out como removal principal al jugar Boseiju de main. Nosotros tenemos 3 Snuff Out, 2 Trophy y 2 Boseiju: ya bastante alineado; la pregunta es si la segunda Trophy compensa frente a una cuarta Snuff Out.
+
+**Huecos de la guía que estos artículos llenarían (propuestas):**
+- **First Turns** es corto. Las reglas de secuenciación de Newton (turno 0, elección de tierra, orden contra Daze, Shepherd primero contra counters, Dryad Arbor al final) se pueden adaptar a Speaker Elves (sin Glimpse, Reclaimer ni Heritage Druid; con Cub, Cradle y Speaker). Encaja en la tarea N parte 1 y en J.
+- **Heuristics no tiene el marco de rol** (quién es el beatdown), aunque el Sideboard map ya usa Turbo, Slow y Control. Una tarjeta "Who is the beatdown" lo explicaría.
+- **El criterio de flex (impacto y suelo)** cabe en Deck Construction, en la caja de "Main-deck flex".
+- **Maybeboard:** Gemstone Caverns, Elvish Spirit Guide y Chrome Mox (con los pros y contras de Newton), Mindbreak Trap, Fatal Push, Swords to Plowshares, Progenitus, Archon of Valor's Reach y Crop Rotation tienen ya razonamiento publicado. Varios están en el Maybeboard con "Unverified": estos artículos sirven de fuente para la tarea W.
+- **Deck Origins:** Newton aparece ya; estos artículos documentan su versión 2021–2023 (Reclaimer, 21 tierras, 0 Quirion, Fiend Artisan de 2022 con Curran) y pueden citarse como fuente primaria.
+
+### 11.3 Decisiones de runkor sobre el contraste (9 Oct 2026)
+
+Los artículos son de 2021–2023 y el formato ha cambiado desde entonces: se leen como antecedente, no como regla.
+
+- **Quirion Ranger es core y se queda.** Sin Boseiju extra, Quirion vale más; que Newton jugara 0 Quirion responde a su mazo, no al nuestro. **Settled.**
+- **Tierras:** la diferencia con Cradle Control (21–23) viene de que su lista lleva buscadores de tierras y utility lands; la nuestra no. **runkor está valorando seriamente subir a 20 tierras.** Pendiente de decidir.
+- **Choke se queda contra azul.** Choke es verde: con Allosaurus Shepherd en juego no se puede contrarrestar, así que Shepherd y después Choke dejan al azul sin Islands y sin objetivo para Force of Will o Daze. Publicado en Heuristics. **Settled.**
+- **Natural Order contra tempo azul se queda.** Como mucho se saca una copia, porque varias en mano son un mal robo; el mazo depende demasiado de ellas para sacarlas todas. **Settled.**
+- **Natural Order contra Stompy / Moon: se guardan todas.** Nuestro plan actual contra Mono Red saca una: hay que cambiarlo (pendiente de elegir el recorte que la sustituye; propuesta: −1 Wirewood Symbiote, que muere a Chalice en 1, como hace Newton).
+- **Doomsday hay que revisarlo:** el matchup ha cambiado desde 2021. Propuesta de runkor: sacar todo el paquete de Natural Order y meter toda la interacción (Assassin's Trophy, Snuff Out, Thoughtseize). Pendiente (tarea C).
+- **Leyline y Endurance:** sin decidir. Opción en estudio: una Endurance en el flex del main y las tres Leyline en el sideboard.
+- **Mindbreak Trap: solo para la versión Mono-Green.** Si jugamos negro, Thoughtseize al 100 %: ahora mismo está muy bien posicionado. **Settled.**
+- **Huecos aprobados y publicados:** secuenciación en First Turns, tarjeta "Who is the beatdown?" en Heuristics y criterio de flex (impacto y suelo) en Deck Construction. Pendiente: usar los artículos como fuente para los borradores del Maybeboard (tarea W).
