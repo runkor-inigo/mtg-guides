@@ -356,6 +356,45 @@ https://articles.starcitygames.com/magic-the-gathering/premium/theres-more-to-si
 - Escala: 1.00 bomba gratis que gana la partida; 0.75 disrupción eficiente y flexible; 0.50 disrupción eficiente situacional o bomba lenta; 0.25 disrupción lenta y situacional.
 - **MC** (metagame coverage) = Σ(share × nota) / share total. **UE** (eficiencia de uso) = nota media ponderada solo en los matchups donde la carta entra.
 
+### 14.2b Huecos e interacciones (runkor, 9 Oct 2026)
+
+- **Huecos por matchup:** si el plan solo saca cuatro cartas, no tiene sentido llevar seis para ese emparejamiento. El optimizer usa como hueco el número de cartas que nuestro plan saca en cada matchup (3–8) y solo cuenta las mejores copias hasta ese número.
+- **Interacciones:** las cartas del rival cambian lo que valen las nuestras. Veil of Summer (hexproof contra negro para él y sus permanentes) deja sin efecto Thoughtseize, Duress y el removal negro; Defense Grid y Trinisphere encarecen las gratis (Snuff Out, Force of Vigor, Mindbreak Trap); Chalice en 1 contra las de una; Consign to Memory y Torpor Orb contra los disparos al entrar (Deathclaw, Changeling, Harpooner); Clarion Conqueror apaga Grist, Curator, Ooze y Fulminator; Cage y Karakas contra Hogaak. Y al revés: Omniscience, Sneak Attack, Aluren, Mystic Forge, The One Ring, Dark Depths o Urza's Saga piden cartas que los rompan (Abrupt Decay no llega: solo valor de maná 3 o menos).
+- **Primera propuesta con este modelo (14 días):** 3 Thoughtseize, 2 Leyline, 2 Choke, 1 Snuff Out, 1 Assassin's Trophy, 1 Alpha Deathclaw, 1 Force of Vigor, 1 Dismember, 1 Duress, 1 Mindbreak Trap, 1 Outland Liberator: 99 % del campo cubierto (media 85 %). Alternativa: 97 % (media 90 %) con 4 Thoughtseize, 3 Snuff Out, 2 Force of Vigor y sin Deathclaw, Dismember ni Duress.
+
+### 14.2c Bases del cálculo, segunda revisión (runkor, 9 Oct 2026)
+
+- **Los pairings peores merecen más slots:** cada matchup pesa cuota × necesidad; la necesidad sale del porcentaje de victorias de Elves en MyMTGO (ajustado hacia la media cuando hay pocas partidas). Hoy el peor es Lands (20 % en bruto, 52,5 % ajustado, 10 partidas).
+- **Tutores:** "una copia son cinco" para una criatura tutorizable (la carta y cuatro GSZ; también Speaker y Natural Order). Pero los tutores se comparten: contar cinco copias para cada criatura llenaba el quince de one-offs tutorizables. El cálculo da la copia extra una sola vez por matchup, a la mejor criatura tutorizable que entre.
+- **Probabilidad de robo:** valorar cada carta por la probabilidad de ver al menos una copia premia repartir copias sueltas (la primera copia siempre suma más), lo contrario de lo que pide runkor. Descartado; queda como pregunta abierta cómo penalizar los one-offs no tutorizables.
+- **Karakas y Atraxa (runkor):** Karakas devuelve a Atraxa, pero una Atraxa temprana que les obliga a girar Karakas en su turno 2 o 3 es tempo positivo para nosotros: ellos pierden un maná ese turno y nosotros robamos unas tres cartas. No es razón para sacar Atraxa.
+- **Fallo de datos corregido:** el "Energy" de MyMTGO es una familia (Boros, Mardu y variantes con azul) y su lista de referencia es Mardu; Boros Energy no juega Consign to Memory. Las cartas de color del rival solo cuentan si su mazo puede lanzarlas.
+- **Criaturas tutorizables que hacen de Disenchant (Scryfall):** Reclamation Sage (Elfo), Masked Vandal (changeling), Chomping Changeling, Outland Liberator, Acidic Slime (también tierras: Dark Depths, Urza's Saga), Foundation Breaker (evoke), Cankerbloom. Las que son Elfo vuelven con Wirewood Symbiote.
+
+### 14.2d Dos escuelas y la regla del 7 % (runkor, 9 Oct 2026)
+
+- **Dos corrientes al sidear:** (a) asegurar los matchups buenos y más jugados y dejar los malos como lotería (no gastar medio sideboard en subir uno del 50 al 55 %); (b) dar más slots a los pairings peores. Producen sideboards muy distintos; el optimizer muestra los dos con el selector "Priority".
+- **Regla del 7 %:** 15 cartas para el 100 % del meta son ~6,7 % por carta. Una carta que solo sirve en un matchup tiene que cubrir al menos ese porcentaje del meta; si no, no se justifica.
+- **Cartas lentas o muy enfocadas:** como mucho una (no Alpha Deathclaw y Acidic Slime a la vez). Si una carta solo vale para un pairing o es muy lenta, no se meten dos si no se justifica.
+- **Kraul Harpooner:** runkor lo jugó (top 8), pero desde entonces apenas ha visto Clarion Conqueror; los mazos blancos parecen preferir Wrath of the Skies a bloquear la mesa.
+
+- **Alpha Deathclaw frente a Acidic Slime (runkor):** Slime cuesta un maná menos, pero no rompe criaturas ni planeswalkers; Deathclaw rompe cualquier permanente, dos veces (al entrar y al hacerse monstruosa), y deja un 6/6. Notas ajustadas: Deathclaw al menos igual que Slime en todos los matchups, salvo Mono Red (Blood Moon y Magus: Slime es monoverde). Con eso el optimizer elige Deathclaw y Slime deja de entrar.
+
+### 14.2e Hogaak, Revoker, Bombardment y Flute (runkor, 9 Oct 2026)
+
+- **Hogaak** desde el sideboard: Speaker + Hogaak es muy buena tech contra tempo (notas 0,75 contra UB Moonshadow y UB Legends). Ojo con Karakas y Grafdigger's Cage.
+- **Phyrexian Revoker** (idea de runkor, nunca vista en listas): nombra Goblin Bombardment, The One Ring, Mystic Forge o Karn; no puede nombrar tierras (Dark Depths, Urza's Saga). Speaker la encuentra.
+- **Goblin Bombardment** preocupa: es permanente clave de Boros y WBR Energy (de main) y sube las cartas que lo rompen (Trophy, Abrupt Decay, Force of Vigor, Revoker…).
+- **Disruptor Flute:** buena para nombrar lo que molesta, pero es tan común que los mazos ya juegan alrededor de ella.
+- **Números (14 días, prioridad "Most played first"):** sideboard actual 88,6 (89,5 % cubierto); propuesta de runkor 4 Thoughtseize, 4 Snuff Out, 2 Leyline, 2 Choke, 2 Trophy, 1 Hogaak: 89,6 (89,8 %), gana UB Moonshadow y UB Legends (80 → 100 %), UR Cutter, Stiflenought, Beanstalk y Jeskai, pierde Aluren (64 → 44 %), TES (67 → 50 %), Colorless Tron (96 → 76 %) y Hogaak (100 → 75 %); con Revoker en lugar de un Trophy baja a 88,0 (84 %). El mejor teórico es 4 Thoughtseize, 3 Snuff Out, 2 Leyline, 1 Choke, 1 Alpha Deathclaw, 1 Force of Vigor, 1 Hogaak, 1 Mindbreak Trap, 1 Keen-Eyed Curator: 92,9 (93 %).
+
+### 14.2f Revisión de planes aplicada (runkor, 9 Oct 2026)
+
+- **Vibrance (cambio de heurística):** antes se quedaba contra los mazos con Wasteland. Ahora es para matchups largos en los que hay tiempo de montar la mesa (Lands, D&T, control, Cradle Control); contra tempo, el turno que cuesta buscar una tierra es un turno regalado. runkor la ha echado de menos en matchups largos, no en los de tempo.
+- **Aplicado en js/01.js (bloque "Sideboard review of 9 Oct 2026"):** Boros +3 Snuff Out / −2 Shepherd −Ouphe (sin Trophy: Boros casi nunca baja Bombardment con la mesa vacía); UR Cutter +2 Choke +3 Snuff; UB Moonshadow +2 Choke +2 Leyline / −Ouphe −Sabertooth −Vibrance −Visionary (Bowmasters); UB Legends +2 Choke +2 Snuff (mismos OUT); Aluren +4 TS +2 Trophy +Deathclaw; Sneak +4 TS +2 Trophy +Deathclaw / −Ouphe −Visionary −Vibrance −Atraxa −1 NO −1 Speaker −1 Symbiote (Quirion se queda); Yorion Taxes +1 Snuff +2 Trophy +Deathclaw; GX Lands +1 Leyline +2 Trophy +Deathclaw / −3 Shepherd −Ouphe (Vibrance se queda); Sewer Cam +3 Snuff +2 Leyline +Deathclaw; TES +4 TS +1 Leyline; Blue Tron y Colorless Tron con plan en el play (Trophies, combo entero) y en el draw (más Thoughtseize) en las notas. Sin cambios: Eldrazi (3 Snuff), Doomsday, Beanstalk (+2 Choke +3 TS), Mono Red (Trophy), Hogaak y los pequeños.
+
+- **Matchups nuevos (9 Oct 2026):** Jeskai Tempo (plan de UR Cutter), Azorius Tempo (plan de Stiflenought), Omni-Tell (plan de Sneak) y el mirror de Elves: +3 Snuff Out, +2 Assassin's Trophy (su Cradle y permanentes clave; runkor) / −3 Shepherd, −Ouphe, −1 Speaker. Thoughtseize solo si sobran huecos.
+
 ### 14.3 Notas de Newton sobre nuestro meta de 14 días (9 Oct 2026)
 
 Mapeo: UB Moonshadow y UB Legends → Dimir Tempo; Boros Energy → Boros Ocelot; Yorion Taxes → Death & Taxes; GX Lands → Lands.dec; Sewer Cam sin equivalente.

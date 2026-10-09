@@ -28,7 +28,7 @@ Load order matters: later scripts use globals defined in earlier ones. `index.ht
 | `js/menu.js` | Sidebar (always open on desktop; a sheet on phones), sections and URL hash (`SpeakerNav`) |
 | `js/01.js` | Core data: `DETAILS` (sideboard plans), `GOLDFISH_META`, `SB_COSTS`, `GUIDE_GROUPS`, the 5 Oct list conversion layer |
 | `js/02.js`–`js/07.js` | Card art (`COMBO_CARD_ART`) and combo tabs, source audit, Goldfish Lab (`04.js`), home cards and Home buttons (`05.js`), phone sideboard list, Current 75 view |
-| `js/09.js` | Matchups rows (top 10 MTGGoldfish archetypes) |
+| `js/09.js` | Matchups rows (top 15 MTGGoldfish archetypes: the first metagame page) |
 | `js/results-archive.js` | Generated results data (optional; see below) |
 | `js/10.js` | Published results and Prominent decklists under Current 75 |
 | `js/11.js` | Official mana symbols in text (`{G}`, `{T}`, `{Q}`) |

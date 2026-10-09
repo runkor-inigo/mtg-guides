@@ -358,6 +358,26 @@ function addVegecookiesControl(){
   notes:'Snuff Out answers almost every threat: Ocelot Pride, Guide of Souls, Thalia, Voice of Victory and their hate bears are nonblack (Orcish Bowmasters is black). Primaris Eliminator’s −2/−2 mode clears cats, tokens and 2/2s, and Formidable Speaker can find it. Allosaurus Shepherd’s protection is wasted: they play no counters. Keep Atraxa: its card advantage is worth it even with Karakas. Assassin’s Trophy stays in the sideboard: once Goblin Bombardment is in play it has usually done its job, and removing it after it resolves is rarely what you want. Need one more slot? Cut a Formidable Speaker. Watch for Gaddock Teeg (no Natural Order, no Green Sun’s Zenith), Containment Priest (exiles what Natural Order and Green Sun’s Zenith bring; Speaker’s search to hand still works), Voice of Victory (no spells during their turn, so Snuff Out only on yours), Karakas (bounces Marwyn and an animated Cradle), Bowmasters (kills a mana dork) and Price of Progress (17 of the 19 lands are nonbasic).'
  });
 })();
+// The whole MTGGoldfish top 15 has a plan (runkor, 9 Oct 2026): Jeskai Tempo, Azorius Tempo and Omni-Tell join, plus
+// the Elves mirror as a fixed matchup. Each row is cloned from the closest plan; the plans are set in the sideboard
+// review of 9 Oct 2026 (just before upgradeMatrix), after the list conversions.
+const NEW_MATCHUPS_9OCT=[
+ {id:'jeskai-tempo',name:'Jeskai Tempo',base:'ur-cutter',macro:'Tempo / Aggro',role:'Slow',wasteland:'YES',sweep:['Wrath of the Skies in some lists'],
+  opp:['Wrath of the Skies','Containment Priest','Force of Negation','Consign to Memory'],src:'https://www.mtggoldfish.com/archetype/legacy-jeskai-tempo-7f301e99-6af3-4ead-a85a-5ebb92d56c0f#online'},
+ {id:'azorius-tempo',name:'Azorius Tempo',base:'uw-stifle',macro:'Tempo / Aggro',role:'Slow',wasteland:'YES',sweep:['Wrath of the Skies'],
+  opp:['Containment Priest','Wrath of the Skies','Consign to Memory','Force of Negation','Lavinia, Azorius Renegade','Surgical Extraction'],src:'https://mymtgo.com/metagame/legacy/azorius-tempo'},
+ {id:'omni-tell',name:'Omni-Tell',base:'sneak',macro:'Spell Combo',role:'Control',wasteland:'NO',sweep:[],
+  opp:['Consign to Memory','Carpet of Flowers','Grafdigger’s Cage','Disruptor Flute','Surgical Extraction'],src:'https://www.mtggoldfish.com/archetype/legacy-omni-tell#online'},
+ {id:'mirror',name:'Elves mirror',base:'gb-mole',macro:'Midrange',role:'Slow',wasteland:'MIXED',sweep:[],
+  opp:['Snuff Out','Thoughtseize','Assassin’s Trophy','Collector Ouphe'],src:'https://www.mtggoldfish.com/archetype/legacy-elves#online'}];
+(function addNinthOctoberMatchups(){
+ for(const m of NEW_MATCHUPS_9OCT){
+  const base=document.querySelector(`.transposed .matchcol[data-id="${m.base}"]`)?.closest('tr');
+  if(base){const row=base.cloneNode(true);row.querySelectorAll('[data-id]').forEach(cell=>cell.dataset.id=m.id);row.querySelector('.matchcol').textContent=m.name;base.insertAdjacentElement('afterend',row);}
+  DETAILS[m.id]={name:m.name,role:m.role,macro:m.macro,ins:{},outs:{},inCount:0,outCount:0,over:'Normal',opp:m.opp,sweep:m.sweep,wasteland:m.wasteland,
+   caller:'LOW',src:m.src,confidence:'Proposed plan, 9 Oct 2026',notes:''};
+ }
+})();
 
 
 /* RC32: grouped sideboard matrix and dated Goldfish MTGO snapshot. */
@@ -408,6 +428,10 @@ const GOLDFISH_META={"ub-moon": {"7": {"label": "≈11.1%", "detail": "Dimir Tem
 MATCH_COLORS['boros-energy']='WR';
 GOLDFISH_META['boros-energy']=Object.fromEntries(['7','14','30'].map(w=>{const url='https://www.mtggoldfish.com/archetype/legacy-boros-energy#online';
  return [w,{label:'—',detail:'Boros Energy: not in the 28 Sep snapshot',url,sources:[{key:'boros-energy',share:0,label:'Boros Energy',published:'—',url}]}];}));
+Object.assign(MATCH_COLORS,{'jeskai-tempo':'WUR','azorius-tempo':'WU','omni-tell':'UR','mirror':'G'});
+for(const [id,slug,label] of [['jeskai-tempo','legacy-jeskai-tempo-7f301e99-6af3-4ead-a85a-5ebb92d56c0f','Jeskai Tempo'],['azorius-tempo','legacy-azorius-tempo-9bd90024-e52f-4284-821d-f037ed910a44','Azorius Tempo'],['omni-tell','legacy-omni-tell','Omni-Tell'],['mirror','legacy-elves','Elves']])
+ GOLDFISH_META[id]=Object.fromEntries(['7','14','30'].map(w=>{const url=`https://www.mtggoldfish.com/archetype/${slug}#online`;
+  return [w,{label:'—',detail:label+': not in the 28 Sep snapshot',url,sources:[{key:slug.replace(/^legacy-/,''),share:0,label,published:'—',url}]}];}));
 // Nightly refresh: js/meta-live.js (written by scripts/update_meta.py) replaces the snapshot's
 // shares with the latest MTGGoldfish windows. Without that file the dated snapshot above stays.
 // An archetype missing from a window shows "—", never 0%.
@@ -524,6 +548,49 @@ CARD_COSTS['Alpha Deathclaw']=['4','B','G'];
   if(!ch.length&&clean===(p.notes||''))continue;
   applySideboardPlan(id,{ins,outs,inCount:p.inCount,outCount:p.outCount,over:p.over,notes:clean});
  }
+})();
+/* Sideboard review of 9 Oct 2026 (runkor with the Sideboard Optimizer, js/16.js). The IN cards come from the
+   optimizer's ratings and the room of each plan; runkor adjusted them by hand (TES, Beanstalk, Boros, the Tron decks,
+   UB). Vibrance rule (runkor, 9 Oct 2026): Vibrance is for long matchups where there is time to build the board;
+   against tempo, a turn spent finding a land is a turn given away, so it leaves there and stays against Lands.
+   Plans not listed here are unchanged. Blue Tron and Colorless Tron are the on-the-play plans; their notes give the
+   on-the-draw version (more Thoughtseize). */
+(function sideboardReviewNinthOctober(){
+ const T='Thoughtseize',S='Snuff Out',L='Leyline of the Void',C='Choke',A="Assassin's Trophy",D='Alpha Deathclaw';
+ const plan=(id,ins,outs,notes)=>{if(!DETAILS[id])return;const n=o=>Object.values(o).reduce((a,b)=>a+b,0);
+  applySideboardPlan(id,{ins,outs,inCount:n(ins),outCount:n(outs),over:n(ins)>=6?'Deliberate transformation':'Normal',notes})};
+ plan('boros-energy',{[S]:3},{'Allosaurus Shepherd':2,'Collector Ouphe':1},
+  'Three Snuff Out for their creatures; one Allosaurus Shepherd stays. No Assassin’s Trophy: Boros rarely lands Goblin Bombardment on an empty board, so Snuff Out on the creatures does the work.');
+ plan('ur-cutter',{[C]:2,[S]:3},{'Collector Ouphe':1,'Temur Sabertooth':1,'Natural Order':1,'Vibrance':1,'Formidable Speaker':1},
+  'Choke is the structural card; Snuff Out wins back tempo against Cutter and Delver. Do not become a control deck.');
+ plan('ub-moon',{[C]:2,[L]:2},{'Collector Ouphe':1,'Temur Sabertooth':1,'Vibrance':1,'Elvish Visionary':1},
+  'Two Choke for their Islands and two Leyline of the Void against Barrowgoyf, delve and their graveyard. Snuff Out cannot target their black threats. Elvish Visionary leaves against Orcish Bowmasters; Vibrance leaves against tempo (a turn spent finding a land is a turn given away).');
+ plan('ub-legends',{[C]:2,[S]:2},{'Collector Ouphe':1,'Temur Sabertooth':1,'Vibrance':1,'Elvish Visionary':1},
+  'Two Choke and two Snuff Out: Tamiyo and Bilbo are not black, so Snuff Out has targets here. Elvish Visionary leaves against Orcish Bowmasters; Vibrance leaves against tempo.');
+ plan('aluren',{[T]:4,[A]:2,[D]:1},{'Temur Sabertooth':1,'Vibrance':1,'Wirewood Symbiote':2,'Formidable Speaker':2,'Elvish Visionary':1},
+  'Veil of Summer can blank Thoughtseize, so the plan also breaks their permanents: two Assassin’s Trophy and Alpha Deathclaw for Aluren or Omniscience. Choke stays out (they need few Islands).');
+ plan('sneak',{[T]:4,[A]:2,[D]:1},{'Collector Ouphe':1,'Elvish Visionary':1,'Vibrance':1,'Atraxa, Grand Unifier':1,'Natural Order':1,'Formidable Speaker':1,'Wirewood Symbiote':1},
+  'Four Thoughtseize for Show and Tell or Sneak Attack, and permanent answers for what resolves: two Assassin’s Trophy and Alpha Deathclaw for Sneak Attack or Omniscience. Quirion Ranger stays (pro-combo, anti-Wasteland; runkor: it almost never leaves).');
+ plan('dnt',{[S]:1,[A]:2,[D]:1},{'Allosaurus Shepherd':3,'Natural Order':1},
+  'Assassin’s Trophy and Alpha Deathclaw answer Chalice, Trinisphere, Clarion Conqueror or Containment Priest; one Snuff Out (Trinisphere and Chalice make the free spell worse). Vibrance stays: a long matchup with Wasteland.');
+ plan('lands',{[L]:1,[A]:2,[D]:1},{'Allosaurus Shepherd':3,'Collector Ouphe':1},
+  'Assassin’s Trophy and Alpha Deathclaw for Dark Depths, Thespian’s Stage or Urza’s Saga; one Leyline of the Void against Life from the Loam. Vibrance stays: a long matchup where it finds a lost land.');
+ plan('sewer-cam',{[S]:3,[L]:2,[D]:1},{'Allosaurus Shepherd':1,'Natural Order':1,'Vibrance':1,'Temur Sabertooth':1,'Formidable Speaker':1,'Elvish Visionary':1},
+  'Snuff Out for their creatures, two Leyline of the Void for the graveyard engine and Alpha Deathclaw for whatever artifact they rely on.');
+ plan('tes',{[T]:4,[L]:1},{'Allosaurus Shepherd':3,'Temur Sabertooth':1,'Elvish Visionary':1},
+  'Four Thoughtseize and one Leyline of the Void (Past in Flames, graveyard storm). Collector Ouphe stays against their artifact mana.');
+ plan('blue-tron',{[A]:2},{'Vibrance':1,'Elvish Visionary':1},
+  'On the play: two Assassin’s Trophy and nothing else; use the speed of the deck and keep the combo whole. On the draw: +4 Thoughtseize, +2 Assassin’s Trophy / −Vibrance, −Elvish Visionary, −Temur Sabertooth, −1 Quirion Ranger, −1 Formidable Speaker, −1 Natural Order.');
+ plan('jeskai-tempo',{[C]:2,[S]:3},{'Collector Ouphe':1,'Temur Sabertooth':1,'Natural Order':1,'Vibrance':1,'Formidable Speaker':1},
+  'Plan of UR Cutter: two Choke for their Islands and three Snuff Out for Quantum Riddler, Phelia, Delver and their other nonblack threats. Vibrance leaves against tempo. Some lists bring Wrath of the Skies: do not overcommit.');
+ plan('azorius-tempo',{[C]:2,[S]:2},{'Collector Ouphe':1,'Temur Sabertooth':1,'Natural Order':1,'Vibrance':1},
+  'Plan of UW Stiflenought: two Choke and two Snuff Out (Phelia, Quantum Riddler, Tamiyo, Containment Priest). They play Stifle, Daze, Force of Will, Karakas and Wasteland in the main deck and bring Containment Priest and Wrath of the Skies: keep Allosaurus Shepherd for the counters.');
+ plan('omni-tell',{[T]:4,[A]:2,[D]:1},{'Collector Ouphe':1,'Elvish Visionary':1,'Vibrance':1,'Atraxa, Grand Unifier':1,'Natural Order':1,'Formidable Speaker':1,'Wirewood Symbiote':1},
+  'Plan of Sneak & Show: four Thoughtseize for Show and Tell or Omniscience, two Assassin’s Trophy and Alpha Deathclaw for an Omniscience that resolves. Quirion Ranger stays.');
+ plan('mirror',{[S]:3,[A]:2},{'Allosaurus Shepherd':3,'Collector Ouphe':1,'Formidable Speaker':1},
+  'Elves mirror: three Snuff Out for their dorks and engine creatures (all nonblack) and two Assassin’s Trophy for their Gaea’s Cradle and key permanents (runkor, 9 Oct 2026). Allosaurus Shepherd has nothing to protect against; three Formidable Speaker are enough in a long game. Vibrance stays (a long matchup, and its red mode kills a dork). Thoughtseize only if more room is found.');
+ plan('key-ring',{[A]:2,[D]:1},{'Allosaurus Shepherd':1,'Vibrance':1,'Elvish Visionary':1},
+  'On the play: two Assassin’s Trophy and Alpha Deathclaw for Mystic Forge, The One Ring or Chalice; keep the combo whole (two Allosaurus Shepherd stay against Chalice). On the draw: +4 Thoughtseize, +2 Assassin’s Trophy, +1 Alpha Deathclaw / −3 Allosaurus Shepherd, −Vibrance, −Elvish Visionary, −1 Formidable Speaker, −Temur Sabertooth.');
 })();
 upgradeMatrix();
 // RC34: retain category separators, reclaim Macro column for meta trend.

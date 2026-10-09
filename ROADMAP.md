@@ -268,6 +268,9 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 
 ### Sideboard Optimizer (9 Oct 2026, chat de la lista del 9 Oct, publicado en 5c0c615)
 
+- Sideboard map y Matchups muestran los mismos 31 planes, por cuota de 14 días: todo el top 15 de MTGGoldfish (se añadieron Jeskai Tempo, Azorius Tempo y Omni-Tell, con arte) más los fijos (Cradle Control, UB Legends, el mirror de Elves, nuevo, y los pequeños). Pendiente tarea D: revisar esos cuatro planes nuevos con runkor; arte para 12 matchups sin imagen (Hogaak, Colorless Tron, Jeskai Control, Mono Red, Stiflenought, 8-Cast, los Reanimator, Oops, Cradle Control, Stoneblade, Initiative); decidir si los planes de Reanimator se enlazan también a Rakdos Reanimator de MTGGoldfish (2,1 %, hoy puesto 16), que ahora solo cuentan el arquetipo "Reanimator" (0,4 %).
+- **Preguntas abiertas para runkor (modelo del optimizer, 9 Oct noche):** (1) cómo penalizar los one-offs que no se tutorizan (mínimo de copias o un umbral); (2) si la copia extra por tutores debe ser 1 o más, sabiendo que se comparten; (3) huecos por matchup: ¿los del plan actual valen o los fija runkor?; (4) notas de las candidatas nuevas (Masked Vandal, Acidic Slime) y revisión de Force of Vigor, Dismember y Snuff Out. Sin publicar: huecos, interacciones, porcentajes de victoria de MyMTGO, crédito a Newton.
+
 - Semáforo nuevo en Matchups, "White hate bear" (Clarion Conqueror / Containment Priest / Both): rojo en el main, ámbar tras sideboard. Hoy: Yorion Taxes rojo (Both), Boros Energy ámbar (Both), Doomsday y GX Lands ámbar (Priest).
 - Pendiente (tarea C): algunas notas de plan aún nombran cartas fuera del 75 que no son Marwyn ni Primaris (Yorion Taxes: "Changeling hits equipment…"; UB Moonshadow: "Choke and Hogaak support a longer game"). Las de Marwyn y Primaris ya se quitan en el bloque de conversión del 9 Oct.
 

@@ -4,7 +4,7 @@
 // An archetype in the top list without a written plan still gets a card, marked as such.
 (function matchupCards(){
  const host=document.getElementById('matchup-cards');if(!host)return;
- const TRACKED=10;
+ const TRACKED=15; // the whole first MTGGoldfish metagame page (runkor, 9 Oct 2026)
  const live=window.GOLDFISH_LIVE;
  const slugOf=url=>url.replace(/.*archetype\//,'').replace(/#.*/,'');
  const shortSlug=slug=>slug.replace(/^legacy-/,'').replace(/-[0-9a-f]{8}-[0-9a-f-]{27,}$/,'');
@@ -25,7 +25,10 @@
   'sneak':{card:'Show and Tell',artist:'Jeff Laubenstein',y:24},
   'boros-energy':{card:'Ocelot Pride',artist:'Chris Seaman',y:42},
   'jeskai-tempo':{card:'Quantum Riddler',artist:'Izzy',y:40},
-  'the-epic-storm':{card:'Burning Wish',artist:'Scott M. Fischer',y:24}
+  'the-epic-storm':{card:'Burning Wish',artist:'Scott M. Fischer',y:24},
+  'omni-tell':{card:'Omniscience',artist:'Jason Chan',y:62},
+  'azorius-tempo':{card:'Phelia, Exuberant Shepherd',artist:'Rudy Siswanto',y:36},
+  'mirror':{card:'Heritage Druid',artist:'Larry MacDougall',y:18}
  };
 
  // Guide plans for each MTGGoldfish archetype (two plans can share one archetype).
@@ -33,16 +36,13 @@
  for(const id of Object.keys(DETAILS))for(const s of (GOLDFISH_META[id]?.['14']?.sources||[])){
   const slug=slugOf(s.url);(plansBySlug[slug]=plansBySlug[slug]||[]).includes(id)||plansBySlug[slug].push(id);}
 
- // The tracked archetypes: from the nightly refresh when present, otherwise from the dated snapshot.
- let top;
- if(live?.windows?.['14']){
-  top=Object.entries(live.windows['14']).sort((a,b)=>b[1].share-a[1].share).slice(0,TRACKED).map(([slug,row])=>({slug,name:row.name,card:row.card}));
- }else{
-  const seen=new Map();
-  for(const id of Object.keys(DETAILS))for(const s of (GOLDFISH_META[id]?.['14']?.sources||[])){
-   const slug=slugOf(s.url);if(!seen.has(slug))seen.set(slug,{slug,name:s.label,share:s.share||0});}
-  top=[...seen.values()].filter(x=>x.share>0).sort((a,b)=>b.share-a.share).slice(0,TRACKED);
- }
+ // The same matchups as the Sideboard map (runkor, 9 Oct 2026): every plan, which covers the whole MTGGoldfish top 15
+ // plus the fixed extras (Cradle Control, the mirror, UB Legends…), from the most played to the least (14-day share,
+ // nightly refresh). Two plans that share one archetype both show.
+ const shareOf=id=>{const v=parseFloat((GOLDFISH_META[id]?.['14']?.label||'').replace('≈',''));return Number.isFinite(v)?v:-1};
+ const top=Object.keys(DETAILS).filter(id=>document.querySelector(`.transposed .matchcol[data-id="${id}"]`)&&GOLDFISH_META[id]?.['14']?.sources?.length)
+  .sort((a,b)=>shareOf(b)-shareOf(a)||DETAILS[a].name.localeCompare(DETAILS[b].name))
+  .map(id=>{const src=GOLDFISH_META[id]['14'].sources[0],slug=slugOf(src.url);return {id,slug,name:live?.windows?.['14']?.[slug]?.name||src.label}});
 
  const pct=(slug,w)=>{const r=live?.windows?.[w]?.[slug];return r?r.share.toFixed(1)+'%':'—';};
  const list=obj=>Object.entries(obj||{}).sort((a,b)=>b[1]-a[1]).map(([name,n])=>`<li><b>${n}</b> ${esc(name)}</li>`).join('');
@@ -148,8 +148,8 @@
  }
 
  const rows=[];
- top.forEach((t,i)=>{const plans=plansBySlug[t.slug]||[];if(plans.length)plans.forEach(id=>rows.push(row(i+1,t.slug,t.name,id)));else rows.push(row(i+1,t.slug,t.name,null));});
- host.innerHTML=`<p class="mu-source">MTGGoldfish · MTGO · ${live?'updated '+esc(live.updatedLabel):'snapshot '+esc(GOLDFISH_META_DATE)} · top ${TRACKED} archetypes by 14-day share${live?.mymtgo?'; sideboard use from MyMTGO':''}. Dots: Wasteland · Counters · Sweepers · White hate bear (Clarion Conqueror, Containment Priest).</p>
+ top.forEach((t,i)=>rows.push(row(i+1,t.slug,t.name,t.id)));
+ host.innerHTML=`<p class="mu-source">MTGGoldfish · MTGO · ${live?'updated '+esc(live.updatedLabel):'snapshot '+esc(GOLDFISH_META_DATE)} · ${top.length} matchups, the same as the Sideboard map (the MTGGoldfish top ${TRACKED} and fixed extras), by 14-day share${live?.mymtgo?'; sideboard use from MyMTGO':''}. Dots: Wasteland · Counters · Sweepers · White hate bear (Clarion Conqueror, Containment Priest).</p>
  <div class="mu-list">${rows.join('')}</div>`;
  host.addEventListener('click',e=>{
   const b=e.target.closest('.mu-open');if(b)return openMatch(b.dataset.id);
