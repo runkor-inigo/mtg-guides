@@ -5,11 +5,11 @@
 body.guide-home #guide-library.home{max-width:none;margin:0;padding:0;min-height:0}
 
 /* ---------- Forest band ---------- */
-.home-band{position:relative;height:clamp(320px,44vw,560px);overflow:hidden;background:#090e14}
+.home-band{position:relative;height:clamp(320px,44vw,560px);overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
 .home-poster,.home-forest{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.home-band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,12,10,.05) 0%,rgba(6,12,10,.2) 45%,rgba(9,14,20,.92) 88%,#090e14 100%);pointer-events:none}
+.home-band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,12,10,.05) 0%,rgba(6,12,10,.25) 50%,rgba(6,12,10,.6) 100%);pointer-events:none}
 /* Durin's door: a black-background clip, so "screen" leaves only its lines. Secondary: small and faint. */
-.home-door,.home-door-still{position:absolute;z-index:1;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0%;transform:scale(.62);transform-origin:50% 20%;mix-blend-mode:screen;filter:contrast(1.3) brightness(1.1);opacity:.5;pointer-events:none}
+.home-door,.home-door-still{position:absolute;z-index:1;top:-2%;left:50%;height:100%;width:auto;aspect-ratio:16/9;max-width:none;object-fit:contain;transform:translateX(-50%);mix-blend-mode:screen;filter:contrast(1.3) brightness(1.1);opacity:.5;pointer-events:none}
 .home-door-still{display:none}
 .home.is-still .home-door{display:none}
 .home.is-still .home-door-still{display:block}
@@ -27,17 +27,16 @@ body.guide-home #guide-library.home{max-width:none;margin:0;padding:0;min-height
 .home-elv{margin:8px 0 clamp(22px,3vw,34px);text-align:center;font:700 clamp(24px,2.6vw,34px)/1.3 "Alcarin Tengwar",serif;letter-spacing:.03em;color:var(--gn-gold);text-shadow:0 0 18px rgba(240,215,122,.35),0 2px 10px rgba(0,0,0,.8)}
 .home-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.8vw,24px);max-width:1180px;margin:0 auto}
 
-/* Float: the wrapper bobs, the card inside takes the hover, so their transforms never clash. */
-@keyframes home-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(var(--bob,-9px))}}
-.home-float{position:relative;z-index:1;animation:home-bob var(--d,5.2s) ease-in-out var(--o,0s) infinite}
+/* The hovered card rises above its neighbours, so its 5 % zoom is never covered. */
+.home-float{position:relative;z-index:1}
 .home-float:hover,.home-float:focus-within{z-index:3}
 .home-card{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-rows:auto 1fr;width:100%;height:100%;border-radius:18px;background:#13212a;border:1px solid #2f4855;box-shadow:0 18px 40px rgba(0,0,0,.45);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease,border-color .35s ease}
 .home-art{position:relative;display:block;height:clamp(120px,11vw,160px);border-radius:18px 18px 0 0;filter:saturate(.92) brightness(.85);transition:filter .35s ease}
 /* Illustration only (Scryfall art crop), framed by its focal point; it fades into the card with a mask, no seam. */
 .home-art-clip{position:absolute;inset:0;overflow:hidden;border-radius:inherit;-webkit-mask-image:linear-gradient(180deg,#000 38%,rgba(0,0,0,.55) 68%,transparent 100%);mask-image:linear-gradient(180deg,#000 38%,rgba(0,0,0,.55) 68%,transparent 100%)}
-.home-art-img{position:absolute;inset:-6%;background:var(--img) var(--pos,50% 30%)/cover no-repeat;transform-origin:var(--focus,50% 50%);transform:translate3d(var(--px,0px),var(--py,0px),0) scale(var(--s,1));transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.home-art-img{position:absolute;inset:-7%;background:var(--img) var(--pos,50% 30%)/cover no-repeat;transform-origin:var(--focus,50% 50%);transform:perspective(700px) translate3d(var(--px,0px),var(--py,0px),0) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--s,1));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .home-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.home-card.is-live .home-art[data-fx~="wind"] .home-art-img{filter:url(#home-wind)}
+.home-card.is-live .home-art[data-fx~="breeze"] .home-art-img{filter:url(#home-wind)}
 .home-ic{position:absolute;z-index:1;left:16px;bottom:-14px;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#0d1a20;border:1px solid #2f4855;color:var(--accent);transition:color .35s,border-color .35s}
 .home-ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .home-txt{display:grid;align-content:start;gap:8px;padding:24px 18px 20px}
@@ -57,7 +56,6 @@ body.guide-home #guide-library.home{max-width:none;margin:0;padding:0;min-height
   .home-band{height:300px}
   .home-body{margin-top:-90px}
   .home-cards{grid-template-columns:1fr;gap:12px}
-  .home-float{--bob:-5px}
   .home-card{grid-template-columns:104px minmax(0,1fr);grid-template-rows:none;border-radius:16px}
   .home-art{height:auto;min-height:100%;border-radius:16px 0 0 16px}
   .home-art-img{background-position:var(--mpos,50% 50%)}
@@ -73,10 +71,8 @@ body.guide-home #guide-library.home{max-width:none;margin:0;padding:0;min-height
 
 /* ---------- Still: reduced motion (unless the visitor switched animations on) or animations off ---------- */
 @media (prefers-reduced-motion:reduce){
-  :root:not(.motion-on) .home-float{animation:none}
   :root:not(.motion-on) .home-card,:root:not(.motion-on) .home-art-img{transition:none}
   :root:not(.motion-on) .home-card:hover,:root:not(.motion-on) .home-card:focus-visible{transform:none}
 }
-:root.motion-off .home-float{animation:none}
 :root.motion-off .home-card,:root.motion-off .home-art-img{transition:none}
 :root.motion-off .home-card:hover,:root.motion-off .home-card:focus-visible{transform:none}
