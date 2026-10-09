@@ -275,3 +275,57 @@ Fuente: Tanner Bromer, "Mathed Up: Once Upon A Time", Good Grief Games, 7 Oct 20
 - Al menos una de nuestras 3 Once Upon a Time: 31,5 % en 7 cartas (en el play) y 35,4 % en 8 (en el draw).
 
 **Qué se deduce:** con 50 objetivos, Once Upon a Time casi nunca falla y casi siempre deja elegir entre tierra y criatura; por eso funciona como "la carta que encuentra la pieza que falta" (sección 2) y no se saca en el sideboard. Con 19 tierras, pedirle tierra concreta falla una de cada siete veces: contar con ella para la tierra del turno 1 es razonable, no seguro. El recuadro de probabilidades de Mulligans (`js/12.js`) ya modela la primera copia como gratis y mirando el top 5. **Settled** como contexto; no cambia ninguna regla.
+
+---
+
+## 13. Base de maná y sideboarding: artículos generales (Karsten, Damo da Rosa)
+
+Añadidos por runkor el 9 Oct 2026. No son de Elves ni de Legacy: son marcos generales que se aplican a nuestra lista con cuidado. Las páginas de TCGplayer cargan el texto con JavaScript; se leyeron en el navegador.
+
+### 13.1 Frank Karsten, "How Many Sources Do You Need to Consistently Cast Your Spells? A 2022 Update" (TCGplayer; actualizado el 13 Feb 2025)
+
+https://www.tcgplayer.com/content/article/How-Many-Sources-Do-You-Need-to-Consistently-Cast-Your-Spells-A-2022-Update/dc23a7d2-0a16-4c0b-ad36-586fcca03ad8/
+
+- **Método:** un hechizo de valor de maná M con N símbolos de un color se lanza "con consistencia" si hay al menos un (89 + M) % de probabilidad de tener N fuentes de ese color en el turno M en el play, condicionado a haber robado M tierras, con mulligan de Londres razonable. Supone 25 tierras en 60 cartas y que solo las tierras dan maná.
+- **Tabla de 60 cartas (fuentes del color necesarias):** C (un maná, p. ej. un dork) 14; 1C 13; 2C 12; CC 21; 1CC 18; 2CC 16; 3CC 15; CCC 23.
+- **Turno 1:** solo cuentan las fuentes que entran enderezadas; es la restricción más difícil de cumplir. Fetchlands que pueden buscar el color: fuente completa.
+- **Dorks:** para hechizos de valor 2 o más, un dork frágil cuenta como **media fuente**, siempre que el mazo lance el dork con consistencia (14 fuentes verdes enderezadas).
+- **Cantrips y selección barata:** cuentan como la fracción del mazo que da el color, redondeando hacia abajo (p. ej. 18 de 60 → ~0,25 de fuente).
+- **Tierras giradas:** como mucho 3 en un mazo agresivo de 60 con jugadas de un maná.
+
+**Aplicado a Speaker Elves** (19 tierras, no 25: el condicionamiento a "haber robado tierras" cambia, así que son orientaciones):
+- **Dork en el turno 1 (C):** Karsten pide 14 fuentes verdes enderezadas; tenemos 13 (sección 2). Estamos una por debajo de su umbral, y lo cubren Once Upon a Time (la primera copia gratis mira 5 cartas: tierra en el 86 % de las veces, sección 12) y Green Sun's Zenith por Dryad Arbor. Es un argumento a favor de la tierra número 20 que runkor dejó aparcada (sección 11.3).
+- **Natural Order (2GG = 2CC):** pide 16 fuentes verdes. 13 tierras verdes + 6 dorks × 0,5 = 16, sin contar Cradle ni Cub. Justo en el umbral.
+- **Hechizos negros del sideboard** (Thoughtseize B, Assassin's Trophy BG, Primaris): con 2 Bayou + 7 fetchlands tenemos 9 fuentes negras; para un hechizo de un maná negro la tabla pide 14. Nuestro negro es de sideboard y casi nunca hace falta en el turno 1, pero confirma que el negro es un splash ligero. **Ojo:** Snuff Out solo es gratis si controlas un Swamp (Bayou o lo que busque una fetch); la Verge negra no cuenta (13.3).
+
+### 13.2 Frank Karsten, "How Many Surveil Lands Should You Be Playing in Modern MTG?" (TCGplayer; actualizado el 13 Feb 2025)
+
+https://www.tcgplayer.com/content/article/How-Many-Surveil-Lands-Should-You-Be-Playing-in-Modern-MTG/34e0ac98-3ef3-4e13-8ab4-5421124c07c4/
+
+- 5 981 listas de Modern (feb–mar de 2024): más tierras de surveil, más win rate en el conjunto, pero porque los mazos que las aprovechan estaban bien posicionados, no porque sirvan a todos.
+- Por mazo: los que gastan todo el maná desde el turno 1 (Izzet Murktide) se quedan en **una**; los que no juegan nada los dos primeros turnos llegan a 3; Yawgmoth, con muchos dorks, puede permitirse 2 porque los dorks dan "aire" a la base de maná. **Un mazo monocolor sin fetchlands no las quiere.**
+- La ventaja principal: buscarla con una fetch cuando no necesitas maná enderezado ese turno (filtro gratis).
+
+**Aplicado a nosotros:** es la pregunta de **Underground Mortuary** (sección 9). Es Swamp Forest: se busca con nuestras fetchlands, cuenta como Forest para Quirion y como Swamp para Snuff Out, pero entra girada y retrasa el dork del turno 1 o el Speaker del turno 2. Con el criterio de Karsten, como mucho **una** copia, buscada con una fetch en un turno en que no haga falta el maná. Sigue como idea abierta.
+
+### 13.3 Frank Karsten, "Building Mana Bases with Duskmourn's New Verge Lands" (TCGplayer; actualizado el 13 Feb 2025)
+
+https://www.tcgplayer.com/content/article/Building-Mana-Bases-with-Duskmourn-s-New-Verge-Lands/02256252-047e-458a-92b3-bed999bd3364/
+
+- Las Verge dan un color siempre y el segundo solo si controlas una tierra con cierto tipo básico. Con 8 tierras de ese tipo (fetchlands incluidas), la Verge da el segundo color el 76,7 % de las veces en el turno 3; con 12, el 90,5 %.
+- **Nuestra Verge sería Wastewood Verge:** {G} siempre; {B} si controlas un Swamp **o un Forest** (Oracle comprobado en Scryfall). En nuestra lista casi todas las tierras cuentan, así que sería una Bayou que no pierde vida… pero **no es Forest** (Quirion no la devuelve), **no se busca con fetchlands** y **no es Swamp** (no activa Snuff Out). Para nosotros, peor que Bayou. Sin cambio.
+
+### 13.4 Paulo Vitor Damo da Rosa, "There's More To Sideboarding Than You Think" (StarCityGames, 19 Dec 2019)
+
+https://articles.starcitygames.com/magic-the-gathering/premium/theres-more-to-sideboarding-than-you-think/
+
+- **Sideboard distinto en el play y en el draw:** proactivo en el play (se toca menos; el plan A llega primero), reactivo en el draw (más respuestas, alargar la partida). Las cartas que mejoran yendo primero (planeswalkers, dorks contra barridas pequeñas) se quedan en el play y salen en el draw.
+- **En el draw hacen falta menos tierras:** para lanzar una carta de cuatro en el turno 4 con un ~70 %, 26 tierras en el play equivalen a 24 en el draw. A veces se puede sacar una tierra en el draw.
+- **Sideboard contra el mazo del rival después de su sideboard**, no contra su game 1.
+- **Mulligan distinto en las partidas con sideboard:** son más largas y van más de cantidad de cartas que de velocidad; buscar con mulligans una mano explosiva castiga más cuando el rival ha metido respuestas.
+- **Adaptar el plan al rival concreto:** su lista y su forma de jugar (si ya juega alrededor de una carta, esa carta vale menos).
+
+**Aplicado a nosotros (ideas para la tarea C, sin aplicar):**
+- **Play y draw en el Sideboard map:** hoy cada matchup tiene un solo plan. Contra tempo azul, por ejemplo, encaja con lo decidido en 11.3: Natural Order se queda, y en el draw es donde tendría sentido sacar una copia. Una columna o nota "on the draw" en las filas donde cambie.
+- **Mulligans:** la sección de Mulligans podría distinguir game 1 (buscar la mano explosiva de turno 2) de los games 2 y 3 (aceptar manos más lentas pero sólidas contra rivales con más respuestas). Encaja en la tarea G.
+- **Sideboard contra su configuración de después:** la columna "Their sideboard" de Matchups (MyMTGO, "Sided in") ya da esa información; los planes deberían leerse junto a ella.
