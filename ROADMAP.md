@@ -368,7 +368,7 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 - `update_results.py`: los eventos de MTGO que no son liga ni Challenge (Showcase Challenge, RC Qualifier, Last Chance) cuentan con las Challenges; los que no son de MTGO, como papel. Goldfish no da puesto para ellos: salen como "Published list". Se quitan duplicados en esos eventos (Goldfish lista a veces dos veces el mismo mazo); los trofeos de liga se cuentan todos.
 - Consecuencia aceptada por el usuario: el papel baja de 48 resultados (mtgtop8, casi todos japoneses) a 2 (j-off en la DMV League y el SCG CON de Baltimore). Archivo regenerado: 59 resultados (44 trofeos, 13 de Challenge y otros eventos de MTGO, 2 en papel).
 
-### Arreglos del 9 Oct 2026 (chat principal, publicados en el commit que sigue a 5482abb)
+### Arreglos del 9 Oct 2026 (chat principal, publicados en 0f9a815)
 
 - **Goldfish, Turn-2 Sabertooth kill (aviso de runkor):** en el paso 14 Quirion enderezaba el dork; ahora endereza Cradle, que ya es criatura (la regla de `#loop`: un Quirion sin usar va siempre sobre Cradle). Cradle da 6 en lugar de 2 del dork. En el play el motor queda listo con 7 de maná, no con 3; el Ready board arranca también con 7. Actualizados el panel de referencia (paso 2 "Quirion → untap Cradle", maná 6 / 8 / 11 / 7), la línea "Both routes" y el estado de entrada del loop en `#combo-loop` y `#loop` ("at least three green: seven on the play, three on the draw"). Comprobado en Node: las 37 variantes sin errores.
 - **Goldfish, textos:** los recuentos pequeños se leen en palabras ("Eight creatures are present", "with two more green mana"); maná y fuerza siguen en cifras.
@@ -416,19 +416,22 @@ Publicado: K `creditos`, N parte 2, P `rendimiento-imagenes` (58 `.webp`), R y S
   - Si D, M o N añaden tablas o tarjetas, repetir el recorrido móvil de R.
   - Todo → T (verificación final).
 
-### Orden recomendado (lo que queda)
+### Orden recomendado (lo que queda, 9 Oct 2026 tras 0f9a815)
 
-1. C `revision-sideboard` — bloquea D y M
-2. J `pivotes-interaccion` — bloquea N parte 1
-2b. W `revision-maybeboard` — revisión de los borradores del Maybeboard; mejor junto a C
-3. G `estudios-mulligan`
-4. L `fuente-testacular` — hecha (documento de Curran Delahanty)
-5. M `revision-learn`
-6. N `revision-gameplay-1` (First Turns y Game Plans)
+Todo lo hecho está subido y publicado. Lo que queda:
+
+1. C `revision-sideboard` ★ — la propuesta está en la tarea C y espera tu decisión (qué cambios entran). Mejor junto a W. Bloquea D y M.
+2. W `revision-maybeboard` — revisar los 70 motivos "Why it is not in this list" marcados Unverified.
+3. J `pivotes-interaccion` — bloquea N parte 1.
+4. G `estudios-mulligan` ★
+5. M `revision-learn` (tras C)
+6. N `revision-gameplay-1` (First Turns y Game Plans; tras J)
 7. D `matchups-sin-plan` — opcional (Azorius Tempo y Rakdos Reanimator fuera del top 10)
-8. Q `rendimiento-carga`
-9. U `repo-cleanup` — cuando decidas borrar; mejor después de D
-10. O `readme-docs` (hecha)
+8. V `pasada-impeccable` ★ — auditoría de diseño con la skill Impeccable
+9. Q `rendimiento-carga`
+10. U `repo-cleanup` ★ — cuando decidas borrar (72 imágenes sin uso; revisar antes, hay imágenes nuevas)
 11. T `verificacion-final`
 
-Hechas: A `push-y-workflow`, B `nombre-prepare`, E `goldfish-modos`, F `mulligan-probabilidades`, H `windows-propias`, I `windows-rival` (55ac39b); K `creditos`, N parte 2 `revision-gameplay-2`, P `rendimiento-imagenes`, R `movil-auditoria`, S `movil-arreglos` (83c5f2c); decisión 9 y nombres reales en Credits y Origins (commit que sigue a ede2026).
+Comprobación al empezar la próxima sesión: `git pull` y revisar el commit nocturno del 10 Oct, el primero con resultados solo de MTGGoldfish. Playwright MCP ya se carga en las sesiones nuevas.
+
+Hechas y publicadas: A, B, E, F, H, I, K, L, N parte 2, O, P, R, S, más el Sideboard map (vistas e impresión), el timeline de Deck Origins, el Maybeboard de 80 cartas, los resultados de MTGGoldfish y LEGACY.md.

@@ -65,17 +65,14 @@ Applies to card images (`COMBO_CARD_ART` in js/02.js) and matchup art (`ART` in 
 
 ## Next steps
 
-The work is split into independent chats in ROADMAP.md, section "Plan de chats" (task names, files, dependencies, recommended order, and a "Estado" summary). Start each chat with `/rename <task>` and "Lee CLAUDE.md y ROADMAP.md; haz la tarea <task>".
+State on 9 Oct 2026, after commit 0f9a815 (everything is pushed and live; the working tree is clean apart from the 16 old WebPs for task U). The work is split into chats in ROADMAP.md, "Plan de chats" (task names, files, dependencies, order). Start each chat with `/rename <task>` and "Lee CLAUDE.md y ROADMAP.md; haz la tarea <task>".
 
-- Done locally on 9 Oct 2026, not pushed yet: Maybeboard rebuilt with 80 cards (mtgtop8, task W reviews the drafts), second Windswept Heath back, menu badge removed, "Last updated" footer, all open questions of the Maybeboard and Credits closed ("que gustes" not identified, dropped).
-- Done and live: A, B, E, F, H, I (commit 55ac39b); K, N part 2 (`revision-gameplay-2`), P, R, S, the Matchups rows with MyMTGO and the Boros Energy plan (commit 83c5f2c); menu ids, Start Here as the opening section, the URL hash and real names in Credits and Origins (the deploy after ede2026). N part 1 (`revision-gameplay-1`, First Turns and Game Plans) waits for J.
-- When committing, never add the 16 replaced WebPs (task U) or `_*.html` test pages: `git add -u` plus only new files that are in use.
-- Ready now (recommended order in ROADMAP.md): C `revision-sideboard` (blocks D, M), G `estudios-mulligan`, J `pivotes-interaccion`, L `fuente-testacular`, Q `rendimiento-carga`, W `revision-maybeboard` (runkor reviews the 70 Unverified Maybeboard drafts), U `repo-cleanup` (when the user decides). D is optional now: Azorius Tempo and Rakdos Reanimator left the top 10.
+- Start of every session: `git pull` (the nightly bot pushes `js/meta-live.js` and `js/results-archive.js` to `main`). 10 Oct 2026 is the first night with results from MTGGoldfish only: check its commit.
+- Playwright MCP is connected in the user's Claude Code and loads in new sessions: use it for browser checks (headless Chrome, as in Rules, still works).
+- Waiting for the user: the sideboard proposal of task C (ROADMAP.md, task C: 12 matchups compared with j-off, a Cradle Control matrix and Curran; LEGACY.md, section 10). Apply nothing until the user picks which changes go in.
+- Done and live: tasks A, B, E, F, H, I, K, L, N part 2, O, P, R, S; Sideboard map views and print sheet; Deck Origins timeline; Maybeboard of 80 cards; paper results; LEGACY.md.
+- Pending, recommended order: C `revision-sideboard` with W `revision-maybeboard` (70 Unverified drafts) → J `pivotes-interaccion` → G `estudios-mulligan` → M `revision-learn` → N part 1 `revision-gameplay-1` → D `matchups-sin-plan` (optional) → V `pasada-impeccable` (design audit, user to confirm) → Q `rendimiento-carga` → U `repo-cleanup` (user approves deletions) → T `verificacion-final`.
+- When committing, never add the 16 replaced WebPs (task U) or `_*.html` test pages: `git add -u` plus only new files that are in use. Pull before committing; if `js/results-archive.js` conflicts with the bot, regenerate it with the script instead of merging.
 - A chat reads CLAUDE.md only when it starts: after changing a rule here, chats already open will not see it unless they re-read this file.
-- Playwright MCP is connected in the user's Claude Code; a session loads MCP tools only when it starts, so use it from the next session for browser checks (until then, headless Chrome as above).
-- Sideboard review (task C): a proposal comparing our plans with j-off's guide, a Cradle Control matrix and Curran (LEGACY.md, section 10) waits for the user's decision in ROADMAP.md; apply nothing until the user picks.
-- Proposed next design step (user to confirm): an Impeccable pass over the whole guide, `audit` and `critique` first for a prioritised list (type, hierarchy, spacing), then apply only what the user approves. So far only emil-design-eng has been used (interaction details).
-- On 9 Oct 2026, confirm a "Nightly metagame refresh" bot commit on `main`: `js/meta-live.js` should include `mymtgo` and `js/results-archive.js` should be refreshed with paper results; then `git pull`.
-- Task P is live. For task D: any new matchup or card art follows "Card art" above and goes in as `.webp`; `js/09.js` already builds `assets/matchups/<key>.webp`, so a new matchup key needs that file.
-- Task U `repo-cleanup` holds every pending deletion; run it only when the user decides.
 - Parallel chats share `index.html`: edit only your own pane with targeted edits, never rewrite the file, check other panes are intact, and do not push (the user asks for the push from one chat).
+- For task D: new matchup or card art follows "Card art" above and goes in as `.webp`; `js/09.js` builds `assets/matchups/<key>.webp`.
