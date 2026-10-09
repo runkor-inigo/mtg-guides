@@ -113,3 +113,51 @@ Material de consulta para hacer y revisar el mapa del sideboard (tarea C). No so
 - **Traducción a nuestra lista del 5 Oct:** no tenemos Eladamri, Endurance, Elvish Visionary, Grist ni Force of Vigor. Donde la guía saca Eladamri, Endurance o Visionary hay que elegir otro recorte; donde mete Grist o Force of Vigor, nuestro equivalente es Assassin's Trophy, Primaris Eliminator o Snuff Out según el objetivo. Se decide en la tarea C, igual que la capa de conversión de `js/01.js`.
 - **Ya aplicado:** Sneak & Show usa la fila AlurenTell traducida (+4 Thoughtseize, +2 Choke, +1 Assassin's Trophy / −3 Quirion Ranger, −2 Wirewood Symbiote, −1 Collector Ouphe, −1 Badgermole Cub).
 - **Matchups que la guía cubre y nuestro mapa no:** UW Phelia, AlurenTell (nuestro mapa tiene Aluren), Tron (genérico), UR Delver (nuestro UR Cutter / Izzet Tempo).
+
+### Matriz de sideboard de una lista de Cradle Control (captura aportada por runkor, 9 Oct 2026)
+
+**Otro mazo, ideas para el nuestro.** Es una lista de la familia Cradle Control (autor no indicado en la captura): 8 Hierarch / Birds of Paradise, 2 Sylvan Safekeeper, 4 Wight of the Reliquary, 4 Carnivorous Cultivator, 3 Elvish Spirit Guide, 1 "Mole Man" (probablemente Badgermole Cub), 1 Hogaak ("Gaak"), 4 Thoughtseize de main, 3 Natural Order, 1 Atraxa, 1 Wasteland, 1 Bojuka Bog, 1 Talon Gates, 21 tierras. Sideboard (15): 1 Gaddock Teeg, 1 Terastodon, 1 Assassin's Trophy, 3 Damping Sphere, 3 Leyline of the Void, 1 Duress, 1 The Tabernacle at Pendrell Vale, 4 Snuff Out.
+
+Transcrita de la captura y comprobada con su fila "Card Count" (entra = sale): cuadran 27 de 28 matchups; en Necrodominance falta una carta de entrada que no se lee bien (**dudoso**). Rol: C = control, B = beatdown, según la hoja.
+
+| Matchup | Rol | Entra | Sale |
+|---|---|---|---|
+| UB Moonshadow | C | +3 Leyline, +1 Trophy | −4 Thoughtseize |
+| UB Legends | C | +4 Snuff Out, +1 Trophy | −4 Thoughtseize, −1 Bog |
+| UR Cutter | C | +4 Snuff Out, +1 Tabernacle | −4 Thoughtseize, −1 Bog |
+| BG Gaak | C | +3 Leyline, +1 Tabernacle | −4 Thoughtseize |
+| UW Stiflenought | C | +4 Snuff Out, +1 Trophy | −4 Thoughtseize, −1 Bog |
+| Yorion WB Taxes | B | +2 Snuff Out | −1 Hogaak, −1 Bog |
+| 5C Beanstalk | B | +1 Duress | −1 Bog |
+| UWr Stoneblade | B | +1 Duress | −1 Bog |
+| Blue Tron | B | +3 Damping Sphere, +1 Teeg, +1 Terastodon, +1 Trophy, +1 Duress | −3 Wight, −1 Hogaak, −1 Atraxa, −1 Bog, −1 Talon Gates |
+| Gx Lands | C | +3 Leyline, +1 Trophy | −4 Thoughtseize |
+| 8 Moon | C | +4 Snuff Out, +1 Trophy | −4 Thoughtseize, −1 Bog |
+| Eldrazi | C | +4 Snuff Out, +1 Trophy | −4 Thoughtseize, −1 Bog |
+| WR Initiative | C | +4 Snuff Out, +1 Trophy | −4 Thoughtseize, −1 Bog |
+| Affinity | C | +4 Snuff Out, +1 Trophy, +1 Tabernacle | −4 Thoughtseize, −1 Bog, −1 Talon Gates |
+| Mono-B Reanimator | C | +3 Leyline, +1 Trophy, +1 Duress | −3 Natural Order, −1 Atraxa, −1 Hogaak |
+| UB Reanimator | C | +3 Leyline, +1 Trophy | −3 Natural Order, −1 Atraxa |
+| Oops All Spells | C | +3 Leyline, +3 Damping Sphere, +1 Teeg, +1 Trophy, +1 Duress | −3 Natural Order, −2 Safekeeper, −1 Atraxa, −1 Mole Man, −1 Hogaak, −1 Talon Gates |
+| Cephalid Breakfast | C | +4 Snuff Out | −3 Natural Order, −1 Atraxa |
+| Sneak & Show | B | +1 Teeg, +1 Terastodon, +1 Duress | −2 Safekeeper, −1 Bog |
+| OmniTell | B | +3 Damping Sphere, +1 Terastodon, +1 Trophy, +1 Duress | −2 Safekeeper, −1 Hierarch, −1 Mole Man, −1 Hogaak, −1 Bog |
+| Aluren Tell | B | +3 Damping Sphere, +1 Teeg, +1 Terastodon, +1 Trophy, +1 Duress | −2 Hierarch, −2 Safekeeper, −1 Mole Man, −1 Hogaak, −1 Bog |
+| Necrodominance | B | +3 Damping Sphere, +1 Teeg, +1 Trophy, +1 Duress (+1 sin leer) | −2 Wight, −1 Mole Man, −1 Hogaak, −1 Atraxa, −1 Bog, −1 Talon Gates |
+| Doomsday | B | +1 Damping Sphere, +1 Trophy, +1 Duress | −1 Mole Man, −1 Atraxa, −1 Bog |
+| TES | B | +3 Leyline, +3 Damping Sphere, +1 Teeg, +1 Terastodon, +1 Duress, +1 Tabernacle | −4 Wight, −1 Hierarch, −1 Mole Man, −1 Hogaak, −1 Atraxa, −1 Bog, −1 Talon Gates |
+| WRx Energy | C | +4 Snuff Out, +1 Trophy, +1 Tabernacle | −4 Thoughtseize, −1 Hogaak, −1 Bog |
+| Elves | — | +4 Snuff Out, +3 Damping Sphere, +1 Tabernacle | −4 Carnivorous Cultivator, −1 Mole Man, −1 Hogaak, −1 Bog, −1 Talon Gates |
+| Key Ring | B | +3 Damping Sphere, +1 Teeg, +1 Terastodon, +1 Trophy, +1 Duress, +1 Tabernacle | −4 Wight, −1 Hogaak, −1 Atraxa, −1 Bog, −1 Talon Gates |
+| Welder Cam | B | +3 Leyline, +4 Snuff Out | −4 Thoughtseize, −1 Mole Man, −1 Hogaak, −1 Talon Gates |
+
+**Lo que se aprende, razonado** (todo **Under test** para nuestra lista; se decide en la tarea C):
+
+- **Cuándo entra Leyline of the Void (la pregunta de runkor).** Siempre las tres copias, y solo contra mazos cuyo plan vive en el cementerio: Reanimator (los dos), Oops All Spells, TES, Welder Cam, Gx Lands (Life from the Loam), BG Gaak y UB Moonshadow (sus amenazas crecen o se pagan con el cementerio). **No** entra contra Doomsday, Cephalid Breakfast, Sneak & Show, OmniTell ni Aluren: ahí el problema no es el cementerio, y prefieren discard, Damping Sphere o removal. La guía de j-off coincide en UB Tempo (Moonshadow), Welder-Cam, Lands y Reanimator. **Dos fuentes de acuerdo en UB Moonshadow con Leyline**: nuestro plan actual mete Choke y Primaris; candidata clara para la revisión.
+- **Thoughtseize de main sale contra todo lo justo** (tempo, Moon, Eldrazi, Initiative, Energy, Lands, Affinity) y se queda contra combo y control. Nosotros lo tenemos en el sideboard: es el mismo criterio visto al revés (entra contra combo, no contra justos).
+- **Natural Order y Atraxa salen contra Reanimator, Oops y Cephalid**, es decir, contra combo rápido o mazos que castigan el plan lento o que pueden usar nuestras criaturas grandes. Contra counters (Moonshadow, Legends, Cutter, Stiflenought) **Natural Order se queda**: coincide con j-off y contradice a Curran. Dos de tres fuentes lo mantienen.
+- **Hate de combo por ejes:** Damping Sphere contra los mazos de muchos hechizos por turno o de maná rápido (Tron, Oops, OmniTell, Aluren Tell, Necrodominance, TES, Key Ring y el espejo de Elves); Teeg y Terastodon contra combo de permanentes y Tron; Duress como discard barato contra combo y control. Nuestro sideboard no tiene ninguno de los tres ejes salvo Thoughtseize: ideas para el Maybeboard y la tarea C.
+- **Snuff Out siempre en bloque de 4** contra tempo, aggro y Moon; **Assassin's Trophy como comodín** (una copia casi en todo). Coincide con j-off (Trophy en casi todos los matchups).
+- **Las piezas de valor salen contra combo:** Safekeeper, Hierarch, Mole Man, Hogaak y Talon Gates salen contra combo rápido; Wight sale contra Tron, TES y Key Ring (no hay tiempo para crecer). En nuestra lista el equivalente sería recortar la parte lenta (Sabertooth, Ouphe, Vibrance) contra combo.
+- **Contra el espejo de Elves** sale su Carnivorous Cultivator y entran Snuff Out, Damping Sphere y Tabernacle. Útil para saber qué esperar de un Cradle Control que juega contra nosotros: Snuff Out a los dorks y a Speaker, Damping Sphere contra el turno de muchos hechizos y Tabernacle contra el tablero ancho.
+- **Rol control frente a beatdown:** se ponen de control contra tempo y aggro, y de beatdown contra combo, ramp y control. Encaja con nuestra columna de rol (Slow / Control / Turbo) y con LEGACY.md, sección 1.

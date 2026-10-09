@@ -40,28 +40,31 @@ function buildGoldfish(mode,side,v={}){
  const speaker=()=>cast('speaker',3,'Speaker ETB on the stack: you may discard to search.');
  const decline=()=>step('Decline the discard','Resolve Speaker’s ETB without discarding or searching. No extra card is needed to keep looping.',()=>st.pending='','resolve');
  const pump=n=>st.board.filter(c=>!GF_LANDS.includes(c.id)).forEach(c=>c.pump=(c.pump||0)+n);
+ // Small counts read as words in the step text ("eight creatures"); mana and P/T stay as numbers.
+ const NUM=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
+ const nw=n=>NUM[n]??String(n),Nw=n=>{const w=nw(n);return w.charAt(0).toUpperCase()+w.slice(1);};
  // Route 1 tail: Sabertooth loop, then the Craterhoof finish. Every number is counted from the board.
  function loopAndFinish(){
   let gain=0;
-  for(let cycle=1;cycle<=2;cycle++){const m0=st.mana;saberBounce('s1');cast('s1',1);sym('s1','speaker');tapCradle();speaker();decline();gain=st.mana-m0;step('Cycle '+cycle+' complete','Same board and hand as before the cycle, with '+gain+' more green mana. No discards were consumed.');}
+  for(let cycle=1;cycle<=2;cycle++){const m0=st.mana;saberBounce('s1');cast('s1',1);sym('s1','speaker');tapCradle();speaker();decline();gain=st.mana-m0;step('Cycle '+cycle+' complete','Same board and hand as before the cycle, with '+nw(gain)+' more green mana. No discards were consumed.');}
   step('Repeat 50 more cycles','Shortcut 50 identical legal cycles: 50 × '+gain+' = '+50*gain+' additional green. This is a finite demonstration of arbitrarily large mana.',()=>{st.mana+=50*gain;st.cycles=52;},'repeat');
   saberBounce('speaker');speaker();saberBounce('speaker');tutor('speaker','hoof');
   cast('hoof',8,'Hoof ETB: count creatures for +X/+X and trample.');
   const x1=creatures();
-  step('Resolve Hoof’s boost',x1+' creatures are present. Each gets +'+x1+'/+'+x1+' and trample. Cradle is still tapped; Cub, Sabertooth and the small creatures played this turn are summoning sick.',()=>{pump(x1);card('hoof').sick=false;st.pending='';},'pump');
+  step('Resolve Hoof’s boost',Nw(x1)+' creatures are present. Each gets +'+x1+'/+'+x1+' and trample. Cradle is still tapped; Cub, Sabertooth and the small creatures played this turn are summoning sick.',()=>{pump(x1);card('hoof').sick=false;st.pending='';},'pump');
   saberBounce('hoof');cast('hoof',8,'Hoof ETB: apply another boost.');
   const x2=creatures(),hoof=5+x2,cradle=1+x1+x2;
-  step('Resolve a second Hoof ETB','The '+(x2-1)+' other creatures keep their first +'+x1+'/+'+x1+' and gain another +'+x2+'/+'+x2+'. Recast Hoof is a new object: it gets only this boost, so it is '+hoof+'/'+hoof+', not '+(hoof+x1)+'/'+(hoof+x1)+'.',()=>{pump(x2);card('hoof').sick=false;st.pending='';},'pump');
+  step('Resolve a second Hoof ETB','The '+nw(x2-1)+' other creatures keep their first +'+x1+'/+'+x1+' and gain another +'+x2+'/+'+x2+'. Recast Hoof is a new object: it gets only this boost, so it is '+hoof+'/'+hoof+', not '+(hoof+x1)+'/'+(hoof+x1)+'.',()=>{pump(x2);card('hoof').sick=false;st.pending='';},'pump');
   saberBounce('s1');cast('s1',1);sym('s1','dork');
   step('Attack with Cradle + Hoof','Cradle has haste from earthbend, is untapped and has both Hoof boosts: '+cradle+'/'+cradle+'. Hoof has haste and is '+hoof+'/'+hoof+'. Attack for '+(cradle+hoof)+' trampling power on an unobstructed board. The returned dork stays in hand.',()=>{card('cradle').tapped=true;card('hoof').tapped=true;st.board.forEach(c=>c.attacking=['cradle','hoof'].includes(c.id));},'attack');return states;
  }
  if(mode==='loop'){
   // The board where the "Turn-2 Sabertooth kill" on the play ends (entry state in #loop and #combo-loop).
-  st.turn='Loop';st.deck=49;st.mana=3;
+  st.turn='Loop';st.deck=49;st.mana=7;
   const ids=['land','dork','cradle','cub','q','s1','s2','speaker','saber'];if(v.vision)ids.push('vision');
   st.board=ids.map(newcard);
   st.board.forEach(c=>{c.tapped=['land','dork','cradle'].includes(c.id);c.sick=!['land','dork'].includes(c.id);c.used=['q','s1','s2'].includes(c.id);});card('cradle').animated=true;
-  step(v.vision?'Ready board + Elvish Visionary':'Ready board · three green floating','The end state of the Turn-2 Sabertooth kill on the play: '+creatures()+' creatures including earthbent Cradle'+(v.vision?', Speaker and Elvish Visionary. Visionary is a flex card, not in the 5 Oct main deck.':' and Speaker.')+' Cradle is tapped, Quirion and both Symbiotes are used, and three green are floating. This is scenario setup, not a free casting action.');
+  step(v.vision?'Ready board + Elvish Visionary':'Ready board · seven green floating','The end state of the Turn-2 Sabertooth kill on the play: '+nw(creatures())+' creatures including earthbent Cradle'+(v.vision?', Speaker and Elvish Visionary. Visionary is a flex card, not in the 5 Oct main deck.':' and Speaker.')+' Cradle is tapped, Quirion and both Symbiotes are used, and seven green are floating (Quirion untapped Cradle on turn two). This is scenario setup, not a free casting action.');
   if(v.vision){
    let gain=0;
    for(let i=1;i<=2;i++){const m0=st.mana;saberBounce('s1');cast('s1',1);sym('s1','vision');tapCradle();cast('vision',2,'Visionary ETB: draw a card.');
@@ -105,7 +108,7 @@ function buildGoldfish(mode,side,v={}){
   if(v.target==='hoof'){
    step('Natural Order → Craterhoof','Put Craterhoof Behemoth onto the battlefield and shuffle. Hoof’s ETB is on the stack.',()=>{st.board.push(newcard('hoof'));card('hoof').sick=false;st.deck--;st.grave.push('no');st.pending='Hoof ETB: creatures get +X/+X and trample.';},'tutor');
    const x=creatures(),dmg=5+x,others=st.board.filter(c=>!GF_LANDS.includes(c.id)&&c.id!=='hoof'&&(c.id!=='cradle'||c.animated)).map(c=>c.id==='cradle'?'Cradle is tapped':name(c.id)+(c.sick?' is summoning sick':' is tapped'));
-   step('Hoof resolves · '+dmg+' damage, not lethal',x+' creature'+(x===1?'':'s')+': each gets +'+x+'/+'+x+' and trample. Only the hasty Hoof can attack ('+dmg+'/'+dmg+')'+(others.length?': '+others.join(', '):'')+'. On turn two Craterhoof is not a kill; Atraxa refills the hand instead.'+leftText,()=>{st.pending='';pump(x);},'finish');
+   step('Hoof resolves · '+dmg+' damage, not lethal',Nw(x)+' creature'+(x===1?'':'s')+': each gets +'+x+'/+'+x+' and trample. Only the hasty Hoof can attack ('+dmg+'/'+dmg+')'+(others.length?': '+others.join(', '):'')+'. On turn two Craterhoof is not a kill; Atraxa refills the hand instead.'+leftText,()=>{st.pending='';pump(x);},'finish');
   }else{
    step('Natural Order → Atraxa','Put Atraxa, Grand Unifier onto the battlefield and shuffle. Its ETB is on the stack.',()=>{st.board.push(newcard('atraxa'));st.deck--;st.grave.push('no');st.pending='Atraxa ETB: reveal the top ten cards.';},'tutor');
    step('Atraxa resolves · refill the hand','Reveal the top ten cards. For each card type among them, you may put one card of that type into your hand; the rest go to the bottom. Example: four card types, four cards. Atraxa is a 7/7 with flying, vigilance, deathtouch and lifelink but no haste: it attacks next turn.'+leftText,()=>{for(let i=0;i<4;i++)st.hand.push(filler());st.deck-=4;st.pending='';},'draw');
@@ -135,7 +138,8 @@ function buildGoldfish(mode,side,v={}){
  }
  speaker();tutor(spare()[0],'s1');
  if(v.q){
-  cast('q',1);step('Quirion → return Forest','Return the tapped Forest to hand and untap the dork. Forest becomes a discard later. Quirion is now used.',()=>{bounce('land');card('q').used=true;card('dork').tapped=false;},'untap');tapDork();
+  // An unused Quirion always goes on Cradle once Cub has made it a creature (#loop): five creatures plus Cub beat the dork's two.
+  cast('q',1);step('Quirion → return Forest, untap Cradle','Return the tapped Forest to hand and untap Cradle: it is a creature now, so Quirion can target it. The Forest becomes a discard later. Quirion is now used.',()=>{bounce('land');card('q').used=true;card('cradle').tapped=false;},'untap');tapCradle();
  }
  // Every Speaker search needs a discard: the spare cards, then the Forest that Quirion returned.
  const discards=[...spare(),...(v.q?['land']:[])],count=Math.min(3,discards.length);
@@ -148,7 +152,7 @@ function buildGoldfish(mode,side,v={}){
   step('Engine ready · '+st.mana+' green: one step short','Sabertooth is on the battlefield, but the loop needs {1}{G} to return a Symbiote and {G} to recast it. '+(v.q?'':'Without Quirion Ranger there is one discard and one dork untap fewer. ')+'Pass the turn with the engine in play: the opponent gets one turn, and next turn Speaker can untap Cradle (see the Setup turn mode).',()=>{st.pending='';},'pass');
   return states;
  }
- step('Engine ready · '+st.mana+' green left',creatures()+' creatures are in play. Cradle is tapped. Spend 3 to reset one Symbiote and start the loop.');
+ step('Engine ready · '+st.mana+' green left',Nw(creatures())+' creatures are in play. Cradle is tapped. Spend 3 to reset one Symbiote and start the loop.');
  return loopAndFinish();
 }
 (function goldfishUI(){

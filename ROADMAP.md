@@ -65,7 +65,9 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Decisión previa: el nombre nuevo.
 
 **C. `revision-sideboard`**
+- Propuesta del 9 Oct 2026 (pendiente de decisión del usuario, sin aplicar): comparación de los 12 matchups con más meta frente a j-off, la matriz de Cradle Control y Curran. Cambios propuestos: UB Moonshadow con +3 Leyline +1 Choke +1 Trophy; separar UB Legends con +3 Snuff Out +2 Choke; Eldrazi +1 Trophy / −1 Quirion; Doomsday y Aluren cortan Quirion y Symbiote en vez de Speaker; UR Cutter y Welder Cam conservan Natural Order; Cephalid Breakfast vuelve con +3 Snuff Out +1 Trophy / −3 Natural Order −1 Atraxa. Boros Energy, Sneak & Show, Yorion Taxes y Lands se mantienen.
 - Sneak & Show vuelve al mapa (8 Oct 2026, petición del usuario) con la fila AlurenTell de la guía de j-off traducida a la lista del 5 Oct: +4 Thoughtseize, +2 Choke, +1 Assassin's Trophy / −3 Quirion Ranger, −2 Wirewood Symbiote, −1 Collector Ouphe, −1 Badgermole Cub. Matchups vuelve a tener plan para Sneak and Show. Publicado en c790520.
+- Más material (9 Oct 2026): LEGACY.md, sección 10, añade la matriz de sideboard de una lista de Cradle Control (28 matchups) con lo que se deduce: Leyline solo contra mazos de cementerio (Reanimator, Oops, TES, Welder, Lands, BG Gaak, UB Moonshadow); dos fuentes (j-off y esta) meten Leyline contra UB Moonshadow y mantienen Natural Order contra counters.
 - Material de referencia (8 Oct 2026): LEGACY.md, sección 10, transcribe la guía "Sabertooth Elves aka Badger Ball Z" (2 Oct 2026 probablemente, 13 matchups) con lo que se deduce para mapear; LEGACY.md, secciones 4 y 5, recoge las ideas de sideboard de Curran Delahanty. Revisar ambos antes de cambiar planes.
 - Objetivo: revisar contigo los planes de sideboard convertidos a la lista del 5 Oct (capa de conversión "5 Oct 2026 list") y corregir lo que digas.
 - Archivos: `js/01.js` (capa de conversión, DETAILS, SB_COSTS), `js/09.js`, y la tabla de `#map` / `#heur` en `index.html`.
@@ -180,7 +182,7 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Tamaño: media. Si hay muchos cambios, sepárala en `revision-gameplay-1` (First Turns y Game Plans) y `revision-gameplay-2` (Natural Order y Speaker Loop).
 - Decisión previa: ninguna, salvo líneas de combo.
 
-**O. `readme-docs`** — hecha (8 Oct 2026, sin commit): README.md reescrito con la estructura actual. Quedan fuera el panel Sources (`#sources`, ver más abajo) y el comentario de `.github/workflows/meta.yml` que aún dice que el papel viene de mtgtop8.
+**O. `readme-docs`** — hecha y publicada (8 Oct 2026, commit c2641ff): README.md reescrito con la estructura actual. Quedan fuera el panel Sources (`#sources`, ver más abajo) y el comentario de `.github/workflows/meta.yml` que aún dice que el papel viene de mtgtop8.
 - Objetivo: actualizar README.md, que aún habla de la "RC51 test list" y de las capas css 02–08, para que coincida con la estructura actual.
 - Archivos: `README.md`.
 - Dependencias: ninguna. Cualquier orden. Si se hace al final, recoge también los cambios de P y Q.
@@ -365,6 +367,15 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 - Decisión del usuario: todas las fuentes de resultados desde MTGGoldfish, manteniendo la clasificación (All MTGO / MTGO trophies / MTGO challenges / Paper events). mtgtop8 deja de usarse.
 - `update_results.py`: los eventos de MTGO que no son liga ni Challenge (Showcase Challenge, RC Qualifier, Last Chance) cuentan con las Challenges; los que no son de MTGO, como papel. Goldfish no da puesto para ellos: salen como "Published list". Se quitan duplicados en esos eventos (Goldfish lista a veces dos veces el mismo mazo); los trofeos de liga se cuentan todos.
 - Consecuencia aceptada por el usuario: el papel baja de 48 resultados (mtgtop8, casi todos japoneses) a 2 (j-off en la DMV League y el SCG CON de Baltimore). Archivo regenerado: 59 resultados (44 trofeos, 13 de Challenge y otros eventos de MTGO, 2 en papel).
+
+### Arreglos del 9 Oct 2026 (chat principal, publicados en el commit que sigue a 5482abb)
+
+- **Goldfish, Turn-2 Sabertooth kill (aviso de runkor):** en el paso 14 Quirion enderezaba el dork; ahora endereza Cradle, que ya es criatura (la regla de `#loop`: un Quirion sin usar va siempre sobre Cradle). Cradle da 6 en lugar de 2 del dork. En el play el motor queda listo con 7 de maná, no con 3; el Ready board arranca también con 7. Actualizados el panel de referencia (paso 2 "Quirion → untap Cradle", maná 6 / 8 / 11 / 7), la línea "Both routes" y el estado de entrada del loop en `#combo-loop` y `#loop` ("at least three green: seven on the play, three on the draw"). Comprobado en Node: las 37 variantes sin errores.
+- **Goldfish, textos:** los recuentos pequeños se leen en palabras ("Eight creatures are present", "with two more green mana"); maná y fuerza siguen en cifras.
+- **Arreglos pequeños de la lista de depuración:** Sources ya estaba al día (lo rehízo el chat `sources`); la tarea O figura como publicada (c2641ff); textos del Goldfish en palabras.
+- **Conocimiento:** LEGACY.md, sección 10, suma la matriz de sideboard de una lista de Cradle Control (cuándo entra Leyline, Natural Order contra counters, cortes contra combo). La propuesta de sideboard que sale de ahí está en la tarea C, pendiente de decisión.
+- **Playwright MCP:** conectado en Claude Code (usuario), pero una sesión solo carga las herramientas MCP al empezar; se podrá usar en la próxima sesión.
+- **Maybeboard:** quitado el filtro por origen (All / Our lists / Speaker Elves / Cradle Control / Combo Elves); quedan el filtro por función, la búsqueda y las estanterías por origen.
 
 ### Resumen del 8 Oct 2026 (últimos despliegues)
 

@@ -102,7 +102,7 @@
 // Maybeboard: our archive of every card considered for the deck, from our own lists and from the lists of other
 // Speaker Elves pilots, Cradle Control and combo Elves. What matters most is why a card was chosen and where it was
 // played, in case it comes back; why it is out now is secondary (often just space).
-// An index (filters by origin and role, search) on the left; the chosen card sits in a sticky panel on the right
+// An index (role filter and search; the shelves already group cards by origin) on the left; the chosen card sits in a sticky panel on the right
 // (on top on phones). The articles in index.html stay the single source of the text and the no-JS version.
 (function maybeStudy(){
  const pane=document.getElementById('maybeboard');if(!pane)return;
@@ -124,7 +124,7 @@
  const badge=c=>c.shelf==='ours'||!c.st?'':`<span class="mbs-n" title="Published lists that played it">${c.st.l}</span>`;
  const study=document.createElement('div');study.className='mbs';
  const seg=(cls,label,list)=>`<div class="mbs-seg ${cls}" role="group" aria-label="${label}">${list.map(([k,l],i)=>`<button type="button" data-k="${k}" aria-pressed="${i===0}">${l}<span class="mbs-segn"></span></button>`).join('')}</div>`;
- study.innerHTML=`<div class="mbs-bar">${seg('mbs-origin','Where the card was played',ORIGINS)}${seg('mbs-role','Card role',ROLES)}
+ study.innerHTML=`<div class="mbs-bar">${seg('mbs-role','Card role',ROLES)}
    <div class="mbs-find"><input type="search" class="sbv-search mbs-search" placeholder="Find a card…" aria-label="Find a card"><p class="mbs-count" aria-live="polite"></p></div></div>
   <div class="mbs-layout"><div class="mbs-tray">${Object.entries(SHELVES).map(([sh,name])=>`<section class="mbs-shelfgroup" data-shelf="${sh}"><h3 class="mbs-shelfname">${name}</h3><div class="mbs-grid">${cards.map((c,i)=>c.shelf!==sh?'':`<button type="button" class="mbs-card" data-i="${i}" aria-pressed="false"><span class="mbs-cardimg">${face(c,'mbs-face',thumb(c),true)}${badge(c)}</span><span class="mbs-cardname">${esc(c.name)}</span></button>`).join('')}</div></section>`).join('')}
    <p class="mbs-empty" hidden>No card matches. Clear the search or pick another filter.</p></div>
@@ -161,7 +161,6 @@
   study.querySelector('.mbs-empty').hidden=!!shown;
   study.querySelector('.mbs-count').textContent=`${shown} of ${cards.length} cards`;
   // The count on each option is what picking it would leave, given the other filter and the search.
-  study.querySelectorAll('.mbs-origin button').forEach(b=>b.querySelector('.mbs-segn').textContent=cards.filter(c=>match(c,b.dataset.k,state.role)).length);
   study.querySelectorAll('.mbs-role button').forEach(b=>b.querySelector('.mbs-segn').textContent=cards.filter(c=>match(c,state.origin,b.dataset.k)).length);
  }
  const still=()=>{const r=document.documentElement;return r.classList.contains('motion-off')||(matchMedia('(prefers-reduced-motion: reduce)').matches&&!r.classList.contains('motion-on'));};
