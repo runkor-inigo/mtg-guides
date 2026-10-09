@@ -18,7 +18,7 @@
  *     groups: [{ id:'foundations', label:'Deck Foundations', icon:'cards', sections: [
  *       { id:'start', label:'Start Here', controls:'start', wip:true }, ...] }, ...],
  *     active: 'start',
- *     brand: { title: 'Speaker Elves', badge: '5 Oct 2026 list', back: 'All guides' },
+ *     brand: { title: 'Speaker Elves', badge: '5 Oct 2026 list', back: 'Home' },
  *     onChange: function (sectionId, index, fromUser) { ... }
  *   });
  * With `brand`, the sidebar opens with a back button and the guide's name, and the phone

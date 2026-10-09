@@ -416,6 +416,10 @@ Publicado: K `creditos`, N parte 2, P `rendimiento-imagenes` (58 `.webp`), R y S
   - Si D, M o N añaden tablas o tarjetas, repetir el recorrido móvil de R.
   - Todo → T (verificación final).
 
+### Portada nueva (9 Oct 2026, chat de diseño)
+
+Hecha y publicada. La biblioteca "Choose your guide." pasa a ser la portada de la guía: franja con el vídeo del bosque en bucle, la puerta de Durin detrás del título (modo screen, sincronizada con el bosque), la pregunta "What do you want to learn today?" con su versión en quenya, y cuatro tarjetas flotantes, una por parte del menú, con arte sin marco, halo dorado, zoom del 5 %, parallax y un efecto propio por carta. "All guides" pasa a "Home". Archivos: `index.html` (`#guide-library`), `css/15.css`, `js/15.js`, `js/05.js`, `assets/home/`. Prototipo y análisis del vídeo: https://claude.ai/artifact/AU1agLjWrB18cDcAVCxynf. Pendiente para U: los estilos de la antigua tarjeta `.guide-entry` (css/02.css, css/03.css, css/12.css) ya no se usan.
+
 ### Orden recomendado (lo que queda, 9 Oct 2026 tras 0f9a815)
 
 Todo lo hecho está subido y publicado. Lo que queda:

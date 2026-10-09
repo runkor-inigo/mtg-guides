@@ -714,7 +714,7 @@ const guideNav=SpeakerNav.create(document.getElementById('guide-nav'),{
  groups:GUIDE_GROUPS.map(g=>({...g,sections:g.sections.map(s=>({...s,controls:s.panes.join(' ')}))})),
  active:guideTarget(location.hash)?.section||'start',onChange:showSection,
  // The page has no header: the sidebar names the guide and holds the way back to the library.
- brand:{title:'Speaker Elves',back:'All guides'}
+ brand:{title:'Speaker Elves',back:'Home'}
 });
 showSection(guideNav.active);
 // Skip link: past the menu to the open section's heading (no hash, so the guide's URL stays as it is).
