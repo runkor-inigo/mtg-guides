@@ -494,6 +494,10 @@ applySideboardPlan('eldrazi',{ins:{'Snuff Out':3},outs:{'Collector Ouphe':1,'Vib
 applySideboardPlan('sneak',{ins:{'Thoughtseize':4,'Choke':2,"Assassin's Trophy":1},outs:{'Quirion Ranger':3,'Wirewood Symbiote':2,'Collector Ouphe':1,'Badgermole Cub':1},
  inCount:7,outCount:7,over:'Deliberate transformation',
  notes:'Plan from j-off’s sideboard guide (AlurenTell row, 2 October 2026), translated to the 5 Oct list: four Thoughtseize, and two Choke plus one Assassin’s Trophy (Sneak Attack is an enchantment) in place of Force of Vigor and Grist, which this sideboard does not play. Quirion Ranger and Wirewood Symbiote go first: the loop matters less against a deck that does not interact with creatures. Once Upon a Time and Natural Order stay.'});
+// Mono Red / Stompy (9 Oct 2026, runkor): every Natural Order stays; one Wirewood Symbiote leaves instead (it dies to Chalice on 1).
+applySideboardPlan('8moon',{ins:{'Snuff Out':3,"Assassin's Trophy":1},outs:{'Temur Sabertooth':1,'Vibrance':1,'Wirewood Symbiote':1,'Marwyn, the Preserver':1},
+ inCount:4,outCount:4,over:'Normal',
+ notes:'Plan for the Mono Red family (Chalice, Trinisphere, Blood Moon, Magus). Snuff Out answers Magus, Bombardiers and other creature threats; Assassin’s Trophy covers Chalice, Trinisphere and The One Ring. 9 Oct 2026 (runkor): keep all three Natural Order, which close the game once the lock piece is answered; one Wirewood Symbiote leaves instead, since it is the slow part of the engine and dies to Chalice on 1. Two basic Forests still cast Natural Order under Blood Moon.'});
 removeMatchup('cephalid','Cephalid Breakfast');
 upgradeMatrix();
 // RC34: retain category separators, reclaim Macro column for meta trend.

@@ -247,11 +247,11 @@ Carpeta local `Legacy Knowledbase/` (15 PDF aportados por runkor el 9 Oct 2026; 
 Los artículos son de 2021–2023 y el formato ha cambiado desde entonces: se leen como antecedente, no como regla.
 
 - **Quirion Ranger es core y se queda.** Sin Boseiju extra, Quirion vale más; que Newton jugara 0 Quirion responde a su mazo, no al nuestro. **Settled.**
-- **Tierras:** la diferencia con Cradle Control (21–23) viene de que su lista lleva buscadores de tierras y utility lands; la nuestra no. **runkor está valorando seriamente subir a 20 tierras.** Pendiente de decidir.
+- **Tierras:** la diferencia con Cradle Control (21–23) viene de que su lista lleva buscadores de tierras y utility lands; la nuestra no. runkor valoró subir a 20 tierras; **decidido el 9 Oct 2026: se queda en 19 por ahora.**
 - **Choke se queda contra azul.** Choke es verde: con Allosaurus Shepherd en juego no se puede contrarrestar, así que Shepherd y después Choke dejan al azul sin Islands y sin objetivo para Force of Will o Daze. Publicado en Heuristics. **Settled.**
 - **Natural Order contra tempo azul se queda.** Como mucho se saca una copia, porque varias en mano son un mal robo; el mazo depende demasiado de ellas para sacarlas todas. **Settled.**
-- **Natural Order contra Stompy / Moon: se guardan todas.** Nuestro plan actual contra Mono Red saca una: hay que cambiarlo (pendiente de elegir el recorte que la sustituye; propuesta: −1 Wirewood Symbiote, que muere a Chalice en 1, como hace Newton).
-- **Doomsday hay que revisarlo:** el matchup ha cambiado desde 2021. Propuesta de runkor: sacar todo el paquete de Natural Order y meter toda la interacción (Assassin's Trophy, Snuff Out, Thoughtseize). Pendiente (tarea C).
-- **Leyline y Endurance:** sin decidir. Opción en estudio: una Endurance en el flex del main y las tres Leyline en el sideboard.
+- **Natural Order contra Stompy / Moon: se guardan todas.** Aplicado el 9 Oct 2026: el plan de Mono Red pasa a +3 Snuff Out, +1 Assassin's Trophy / −1 Temur Sabertooth, −1 Vibrance, −1 Wirewood Symbiote, −1 Marwyn (sale un Symbiote en vez de un Natural Order). **Settled.**
+- **Doomsday hay que revisarlo:** el matchup ha cambiado desde 2021. Propuesta de runkor: sacar el paquete de Natural Order y meter toda la interacción (Assassin's Trophy, Snuff Out, Thoughtseize), **dejando al menos Craterhoof**, con entradas y salidas cuadradas. Pendiente de aprobar el plan concreto (tarea C).
+- **Leyline y Endurance:** aparcado (9 Oct 2026): no hay hueco en el main para Endurance ahora mismo. Se quedan las tres Leyline en el sideboard.
 - **Mindbreak Trap: solo para la versión Mono-Green.** Si jugamos negro, Thoughtseize al 100 %: ahora mismo está muy bien posicionado. **Settled.**
 - **Huecos aprobados y publicados:** secuenciación en First Turns, tarjeta "Who is the beatdown?" en Heuristics y criterio de flex (impacto y suelo) en Deck Construction. Pendiente: usar los artículos como fuente para los borradores del Maybeboard (tarea W).

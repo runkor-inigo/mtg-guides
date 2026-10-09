@@ -444,7 +444,8 @@ Notas del usuario sobre toda la guía. Estado de cada tarea al final de la líne
 ### Decisiones del 9 Oct 2026 tras leer a Newton Hang (LEGACY.md, sección 11.3)
 
 - **Decidido:** Quirion se queda (core); Choke se queda contra azul (lock con Shepherd); Natural Order se queda contra tempo (como mucho −1); Mindbreak Trap solo en Mono-Green, con negro Thoughtseize. Publicado en la guía: secuenciación en First Turns, tarjeta "Who is the beatdown?" y Choke con Shepherd en Heuristics, criterio de flex en Deck Construction.
-- **Pendiente de decidir (runkor):** (1) subir a 20 tierras; (2) Mono Red / Stompy guarda los tres Natural Order: elegir qué sale en su lugar (propuesta: −1 Wirewood Symbiote); (3) Doomsday: sacar el paquete de Natural Order y meter toda la interacción (Trophy, Snuff Out, Thoughtseize); (4) una Endurance en el flex del main con las tres Leyline en el sideboard.
+- **Decidido después (9 Oct 2026):** 19 tierras por ahora (no se sube a 20); Mono Red guarda los tres Natural Order y saca un Wirewood Symbiote (aplicado en `js/01.js`, bloque de runkor antes de `upgradeMatrix()`); Endurance en el main, aparcado por falta de hueco.
+- **Pendiente de aprobar:** plan de Doomsday sin el paquete de Natural Order pero con Craterhoof, con toda la interacción y entradas y salidas cuadradas (propuesta en el chat del 9 Oct; ver tarea C).
 
 ### Fuentes por incorporar
 
