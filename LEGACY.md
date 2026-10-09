@@ -8,6 +8,8 @@ Estados, igual que en la guía: **Settled** (asentado), **Working range** (rango
 
 La versión publicada para los lectores está en la sección Heuristics de la guía (`#heur` en `index.html`). Este archivo es el detalle interno: no se publica (`.vercelignore`).
 
+Última revisión: 9 Oct 2026. Sin cambios de contenido en esa fecha: el trabajo del día (auditoría de diseño, menú, portada) no toca las heurísticas, y la propuesta de sideboard de la sección 10 sigue esperando la decisión de runkor (tarea C).
+
 ---
 
 ## 1. Identidad: Speaker Elves no es Cradle Control

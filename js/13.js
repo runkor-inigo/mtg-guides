@@ -147,9 +147,9 @@
   tableEl.innerHTML=`<div class="mbs-big">${face(c,'mbs-bigface',a.src,true)}</div><div class="mbs-info mbs-head"><p class="mbs-shelf">${esc(SHELVES[c.shelf]||'')}</p><h3>${esc(c.name)}</h3><p class="mbs-meta">${esc(c.meta)}</p>
    ${a.url?`<p class="mbs-credit"><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.edition||'Scryfall')}</a>${a.artist?' · '+esc(a.artist):''}</p>`:''}</div>
    <div class="mbs-info mbs-body"><dl><dt>Why it was chosen</dt><dd>${esc(cap(c.job))}</dd>
+   <dt class="mbs-why">${c.left?'Why it left our list':'Why it is not in this list'}</dt><dd class="mbs-why">${esc(cap(c.why))}${tag}</dd>
    ${c.served.length?`<dt>Where it helped</dt><dd>Our sideboard plans brought it in against: ${c.served.map(m=>`<span class="mbs-chip">${esc(m)}</span>`).join(' ')}</dd>`:''}
-   ${c.played?`<dt>Where it was played</dt><dd>${esc(c.played)}${years(c)}</dd>`:''}</dl>
-   <p class="mbs-now"><b>${c.left?'Why it left our list':'Why it is not in this list'}:</b> ${esc(cap(c.why))}${tag}</p></div>`;
+   ${c.played?`<dt>Where it was played</dt><dd>${esc(c.played)}${years(c)}</dd>`:''}</dl></div>`;
   tableEl.classList.remove('mbs-flip');void tableEl.offsetWidth;tableEl.classList.add('mbs-flip');
  }
  const state={origin:'all',role:'all',q:''};

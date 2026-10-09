@@ -402,7 +402,7 @@ Publicado: K `creditos`, N parte 2, P `rendimiento-imagenes` (58 `.webp`), R y S
 
 - Comprobado en vivo (https://speaker-elves.vercel.app/): 0 errores de consola en escritorio y a 390 px; título "Speaker Elves"; Matchups con 11 filas, Boros Energy incluido; `assets/matchups/boros-energy.webp` da 200 y `ROADMAP.md` da 404.
 - La próxima ejecución del bot ya leerá MyMTGO: el 9 Oct, comprueba que `js/meta-live.js` trae la clave `mymtgo`.
-- Sigue pendiente: U `repo-cleanup` (borrar las 72 imágenes sin uso), C, D (opcional), G, J, L, M, N parte 1, Q y T.
+- Sigue pendiente: U `repo-cleanup` (borrar las 72 imágenes sin uso), C, D (opcional), G, J, M, N parte 1, Q y T. (L está hecha desde el 8 Oct 2026; corregido el 9 Oct.)
 
 **Chats en paralelo:** varias tareas tocan `index.html`. Cada chat edita solo su pane (`<section class="pane" id="…">`), con ediciones puntuales, nunca reescribiendo el archivo entero. Antes de dar la tarea por hecha, comprueba que las secciones de otros chats siguen intactas. Al terminar, cada chat marca su tarea aquí y en "Estado" y no hace push: el push lo pide el usuario desde un solo chat.
 
@@ -420,7 +420,34 @@ Publicado: K `creditos`, N parte 2, P `rendimiento-imagenes` (58 `.webp`), R y S
 
 Hecha y publicada. La biblioteca "Choose your guide." pasa a ser la portada de la guía: franja con el vídeo del bosque en bucle, la puerta de Durin detrás del título (modo screen, sincronizada con el bosque), la pregunta "What do you want to learn today?" con su versión en quenya, y cuatro tarjetas flotantes, una por parte del menú, con arte sin marco, halo dorado, zoom del 5 %, parallax y un efecto propio por carta. "All guides" pasa a "Home". Archivos: `index.html` (`#guide-library`), `css/15.css`, `js/15.js`, `js/05.js`, `assets/home/`. Prototipo y análisis del vídeo: https://claude.ai/artifact/AU1agLjWrB18cDcAVCxynf. Pendiente para U: los estilos de la antigua tarjeta `.guide-entry` (css/02.css, css/03.css, css/12.css) ya no se usan.
 
-### Orden recomendado (lo que queda, 9 Oct 2026 tras 0f9a815)
+Cambios posteriores, todos publicados (commits 44a7fef, 1be2c90, cf11d83, 5164ccf):
+- La frase en quenya se escribe en tengwar con Alcarin Tengwar (OFL, en `assets/fonts/` con su licencia). Esa fuente usa el mapa de Free Tengwar, no la tabla CSUR de Evertype (los códigos están en CLAUDE.md).
+- La puerta pasa a un clip de 8 s con sólo lo que se mueve (se dibuja 0,8–7 s y se desvanece 16,2–18 s); se repite dos veces por vuelta del bosque. El original tenía 10 s quieta y parecía una imagen.
+- La franja se funde a transparente con una máscara (sin línea con el degradado de la página) y el fotograma de la puerta cabe entero en su alto.
+- Fuera, a petición del usuario: el vaivén de las tarjetas, el blanco y negro de las demás al pasar el cursor y los efectos de partículas y viento sobre el arte. Se quedan el zoom del 5 %, el halo, el parallax con inclinación y el acercamiento a los ojos en Natural Order.
+- El título "Speaker Elves" va dentro de la puerta, entre la estrella y la letra del tercio inferior; en móvil la pregunta baja para no tocar la línea "runkor · …".
+
+### Ronda de revisión del 9 Oct 2026 (runkor, segunda sesión)
+
+Notas del usuario sobre toda la guía. Estado de cada tarea al final de la línea.
+
+- **X1 `portada-puerta`** — HECHA (sin subir). El salto venía del vídeo original: dos fotogramas del dibujado (2,8 y 3,1 s) cambiaban de golpe. Clip nuevo de 12,7 s: dibujado suavizado (mezcla de 1 s entre fotogramas), 1,6 s más encendida, desvanecido 1,6 veces más lento, fundido de 0,8 s entre el dibujado y el desvanecido, y unos 2,5 s de negro antes de volver. Ahora se repite sola, sin reiniciarse con el bosque. Revisado el resto de la portada: el bosque no tiene costura en el bucle ni se para (19 s medidos), 0 errores.
+- **X2 `quitar-etiquetas`** — HECHA (sin subir), salvo la excepción. Quitar los carteles "First draft" (Start Here, Deck Origins, Deck Construction, Mulligans, First Turns, Game Plans, Interaction Windows) y todas las etiquetas de evidencia (Settled, Working range, Under test, In progress, Unverified…) de toda la guía; quitar la leyenda "How sure is each statement?" de Start Here. Excepción provisional: las 70 "Unverified" de los borradores del Maybeboard se quedan hasta la tarea W, salvo que el usuario diga lo contrario. Sustituye a la regla de CLAUDE.md que pedía marcar "Unverified" en la página.
+- **X3 `construction`** — HECHA (sin subir): Speaker "Core" en la tabla y en la nota, cajas por paquete (`.pkg-cards`), Vibrance y Endurance como flex (texto Oracle comprobado en Scryfall), "Gruul" en vez de "Red-Green", nota de las listas japonesas con dos o tres Vibrance. Pedido: Formidable Speaker es core, 3–4 copias; debajo de la tabla de paquetes, una caja por paquete que lo explique mejor; añadir Endurance como flex slot; nombrar las variantes por su gremio (si una es "Golgari", la roja-verde es "Gruul", no "RG"); comentar que las listas japonesas juegan dos o tres Vibrance de base.
+- **X4 `current-75-moxfield`** — HECHA (sin subir): columnas apiladas (`.mox-cols`, js/07.js y css/07.css), sólo CSS para el desplegado. Pendiente de decidir: en las cartas de marco antiguo (Bayou, Forest, Llanowar de Alpha) el nombre de la franja casi no se lee; se podría superponer el nombre en texto. Pedido: vista del Current 75 tipo Moxfield: columnas por tipo con las cartas apiladas mostrando su nombre, algo más grandes; al pasar el ratón, la columna se abre por debajo y enseña la carta entera.
+- **X5 `cabeceras-arte`** — HECHA (sin subir): `css/16.css` (`.art-head`, `.art-banner`), arte nuevo en `assets/art/` (recortes de Scryfall de la misma impresión). Rutas de Game Plans: Cradle + Cub, Natural Order, Speaker, Sabertooth + Symbiote, Speaker + Cradle, Atraxa, Allosaurus Shepherd (Dinobash), Elvish Visionary. Banner de Natural Order: Craterhoof · Natural Order · Atraxa; de Speaker Loop: Speaker + Symbiote. Pedido: cabecera con el arte de las cartas de referencia en cada tarjeta de Game Plans (Cradle and Cub, Natural Order…), una cabecera de Natural Order en su sección y una de Speaker Loop que funda Formidable Speaker y Wirewood Symbiote. Arte según "Card art" de CLAUDE.md (sólo la ilustración, encuadrada por su centro de interés).
+- **X6 `maybeboard-compacto`** — HECHA (sin subir): entradilla de una línea con el resto en un desplegable "About this archive", ancho completo sólo para el Maybeboard, rejilla de siete cartas por fila, panel más ancho con "Why it left / Why it is not in this list" justo después de "Why it was chosen". Pedido: vista más condensada: hoy la explicación va primero y el panel de la carta elegida aprovecha mal el espacio. Hacerlo más visual.
+- **X7 `matchups-arte`** — HECHA (sin subir): el arte va a la derecha, como mucho al 46 % de la fila (62 % en móvil), y se funde hacia el nombre. Pedido: el arte de cada fila no debe ocupar toda la banda, sólo un lado, porque al ampliarlo pierde resolución.
+- Sideboard map: "hay que acabarlo" = tarea C (espera la decisión del usuario).
+- Sin cambios pedidos: Deck Origins ("gusta mucho"), Flex slots (salvo Endurance), Mana math, Metrics, probabilidades, Mulligans, First Turns y Game Plans en contenido, Goldfish Lab.
+
+### Fuentes por incorporar
+
+- **Julian Knab, "28-1-2 With Elves: Winning The Bazaar Of Moxen! Part 1"** (StarCityGames, 21 Nov 2013): https://articles.starcitygames.com/articles/28-1-2-with-elves-winning-the-bazaar-of-moxen-part-1/ . Añadida por el usuario el 9 Oct 2026; leída ese día (página pública, sin protección anti-bots). Su propio relato del Bazaar of Moxen de París 2013: 7-0 en el trial de tres byes del día 0 (diez tierras duales y tres byes) y el récord 28-1-2 del título. Lista: Elves de Glimpse of Nature, Natural Order a Craterhoof, Gaea's Cradle, Green Sun's Zenith, Quirion Ranger, Wirewood Symbiote, Elvish Visionary y Deathrite Shaman. Ideas: matar en los turnos 2–3 con maná de criaturas; Quirion Ranger como fuente de "hasta cinco manás más"; Ruric Thar en el main contra Storm; en el sideboard, el odio a Storm antes que el de cementerio (Cabal Therapy, Thoughtseize, Mindbreak Trap) y Progenitus por Natural Order contra mazos de removal. Matchups: favorable contra Shardless BUG, Jund y Merfolk; difícil contra Miracles y RUG Delver; el espejo se decide por velocidad y por la consistencia de la muerte en turno 3. Termina con "Next week: how I won the tournament!": hay una parte 2 por localizar.
+  - **Dónde usarla:** (1) Deck Origins, era 2013 ("Natural Order for Craterhoof"): fuente de primera mano para la victoria de Julian en el Bazaar of Moxen, junto al enlace de mtgtop8 que ya hay; añadirla a la lista de fuentes del pane (tarea M). (2) LEGACY.md y Heuristics: como antecedente histórico de Quirion Ranger como motor de maná y de priorizar el odio a combo sobre el de cementerio; marcarlo como lista de 2013, no como regla para Speaker Elves. (3) Tarea C: contraste para el plan contra Storm/combo (Mindbreak Trap y Cabal Therapy frente a las opciones actuales).
+  - **Pendiente:** buscar la parte 2 (cómo ganó el torneo) en StarCityGames antes de citar el resultado final con detalle.
+
+### Orden recomendado (lo que queda, 9 Oct 2026 tras 5164ccf)
 
 Todo lo hecho está subido y publicado. Lo que queda:
 
@@ -433,9 +460,9 @@ Todo lo hecho está subido y publicado. Lo que queda:
 7. D `matchups-sin-plan` — opcional (Azorius Tempo y Rakdos Reanimator fuera del top 10)
 8. V parte 2 — limpieza de `!important` en css/01.css (opcional; la parte 1 está hecha)
 9. Q `rendimiento-carga`
-10. U `repo-cleanup` ★ — cuando decidas borrar (72 imágenes sin uso; revisar antes, hay imágenes nuevas)
+10. U `repo-cleanup` ★ — cuando decidas borrar (72 imágenes sin uso; los estilos de `.guide-entry`; las capturas de `.playwright-mcp/`; decidir si los dos MP4 originales de la raíz se guardan fuera del proyecto)
 11. T `verificacion-final`
 
 Comprobación al empezar la próxima sesión: `git pull` y revisar el commit nocturno del 10 Oct, el primero con resultados solo de MTGGoldfish. Playwright MCP ya se carga en las sesiones nuevas.
 
-Hechas y publicadas: A, B, E, F, H, I, K, L, N parte 2, O, P, R, S, más el Sideboard map (vistas e impresión), el timeline de Deck Origins, el Maybeboard de 80 cartas, los resultados de MTGGoldfish y LEGACY.md.
+Hechas y publicadas: A, B, E, F, H, I, K, L, N parte 2, O, P, R, S, V parte 1, la portada nueva, más el Sideboard map (vistas e impresión), el timeline de Deck Origins, el Maybeboard de 80 cartas, los resultados de MTGGoldfish y LEGACY.md.

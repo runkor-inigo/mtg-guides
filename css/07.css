@@ -17,3 +17,24 @@
 .deck-gallery47 .gallery-note47{font-size:12px;color:#a6bdc9;line-height:1.6}
 @media(max-width:760px){.deck-gallery-grid47{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 9px}.deck-art47 .deck-qty47{top:5px;right:5px;min-width:28px;height:27px;font-size:14px}.deck-art47 .deck-name47{font-size:11px}.deck-view47 h2{font-size:22px}}
 @media(max-width:360px){.deck-gallery-grid47{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Current 75, Visual view (9 Oct 2026, task X4): Moxfield-style columns. Each card overlaps the one above and
+   shows only its name strip; pointing at a card (or focusing it) slides the cards below it down, so it shows whole.
+   A card is 680/488 = 1.393 times as tall as it is wide; the strip is 0.155 of its width.
+   margin-top in % is a share of the column width (= card width); translateY in % is a share of the card's height. */
+.mox-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,230px));gap:26px 22px;align-items:start;margin-top:14px}
+.mox-col{margin:0!important;min-width:0}
+.mox-col h3{display:flex;align-items:baseline;gap:8px;margin:0 0 12px!important;font-size:15px!important}
+.mox-col h3 small{font-size:12px!important}
+.mox-stack{display:flex;flex-direction:column;transition:padding-bottom .3s cubic-bezier(.2,.8,.2,1)}
+.mox-card{position:relative;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.mox-card+.mox-card{margin-top:-123.8%}
+.mox-card>img{width:100%;border-radius:4.5%/3.3%!important;box-shadow:0 -2px 8px #0006,0 6px 14px #0005!important}
+.mox-card .deck-name47{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0;min-height:0}
+.mox-card .deck-qty47{top:4%!important;right:5%!important;min-width:30px!important;height:26px!important;font-size:13px!important}
+.mox-card:hover>img{outline:2px solid var(--gn-gold)!important;outline-offset:1px!important}
+.mox-card:hover~.mox-card,.mox-card:focus-visible~.mox-card{transform:translateY(88.9%)}
+.mox-stack:has(.mox-card:not(:last-child):hover),.mox-stack:has(.mox-card:not(:last-child):focus-visible){padding-bottom:123.8%}
+@media (max-width:600px){.mox-cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}}
+@media (prefers-reduced-motion:reduce){:root:not(.motion-on) .mox-card,:root:not(.motion-on) .mox-stack{transition:none}}
+:root.motion-off .mox-card,:root.motion-off .mox-stack{transition:none}

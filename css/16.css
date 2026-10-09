@@ -1,0 +1,16 @@
+/* Art headers (task X5, 9 Oct 2026): card art over the Game Plans routes and banners at the top of
+   Natural Order and Speaker Loop. Illustration only (Scryfall art crops), each framed by its focal point
+   with --pos; when there are two or three, each one fades into the previous so they read as one image. */
+
+.art-head,.art-banner{position:relative;display:flex;overflow:hidden;background:#0d1a20}
+.art-head>span,.art-banner>span{flex:1 1 0;min-width:0;background:var(--img) var(--pos,50% 30%)/cover no-repeat}
+.art-head>span+span,.art-banner>span+span{margin-left:-16%;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 38%);mask-image:linear-gradient(90deg,transparent 0%,#000 38%)}
+
+/* Card header: bleeds to the card's edges and fades into it. */
+.cards2>article>.art-head{margin:-14px -16px 2px;height:96px;border-radius:12px 12px 0 0;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
+.cards2>article>.art-head>span{filter:saturate(.95) brightness(.88)}
+
+/* Section banner: wide, a little taller, rounded, with a soft fade at the bottom. */
+.art-banner{height:clamp(140px,17vw,210px);margin:6px 0 20px;border-radius:14px;border:1px solid var(--line);-webkit-mask-image:linear-gradient(180deg,#000 70%,rgba(0,0,0,.35) 100%);mask-image:linear-gradient(180deg,#000 70%,rgba(0,0,0,.35) 100%)}
+.art-banner>span{filter:saturate(.95) brightness(.9)}
+@media(max-width:600px){.art-banner{height:130px}.art-banner>span+span{margin-left:-24%}}

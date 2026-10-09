@@ -1,4 +1,4 @@
-// Home (css/15.css): forest video, Durin's door and the card effects. Runs after js/05.js.
+// Home (css/15.css): forest video, Durin's door and the cards' cursor parallax. Runs after js/05.js.
 (function home(){
  const root=document.getElementById('guide-library');
  if(!root)return;
@@ -11,9 +11,8 @@
 
  /* ---- Videos: loaded only while the home is on screen and motion is welcome; a deep link (/#matchups) never fetches them ---- */
  const forest=root.querySelector('.home-forest'),door=root.querySelector('.home-door');
- // The door clip is 8 s (drawing in, then fading out; the still stretch of the original was cut),
- // half a forest loop, so it plays twice per loop and restarts with it.
- const DOOR=8;
+ // The door clip (12.7 s) loops on its own: it draws in, stays lit, fades out and rests in black
+ // for about 2.5 s. Its two abrupt frames in the original reveal were smoothed when it was cut.
  function load(v){if(!v.src&&v.dataset.src){v.src=v.dataset.src;v.load();}}
  function sync(){
   const still=!moving()||saveData;
@@ -22,14 +21,6 @@
   load(forest);load(door);
   forest.play().catch(()=>{});door.play().catch(()=>{});
  }
- // The door restarts with every forest loop, so the two stay in step.
- let last=0;
- forest.addEventListener('timeupdate',()=>{
-  const t=forest.currentTime;
-  if(t<last-1)door.currentTime=0;
-  last=t;
- });
- forest.addEventListener('playing',()=>{door.currentTime=forest.currentTime%DOOR;});
  document.addEventListener('guide:home',sync);
  document.addEventListener('visibilitychange',sync);
  if(reduce.addEventListener)reduce.addEventListener('change',sync);
