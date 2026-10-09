@@ -137,10 +137,7 @@
 .rolepill.turbo{background:#b44f55}
 .rolepill.slow{color:#1d1607}
 .rolepill.control{background:#3d70a6}
-/* Hit areas: fold-out headings and the Sideboard map's matchup names reach 24 px on every screen
-   (phones already get more in the Phones block), and 44 px under touch. */
+/* Hit areas: fold-out headings reach 24 px on wide screens (phones get more in the Phones block).
+   The Sideboard map's matchup names get theirs in css/13.css, after its all:unset reset. */
 @media (min-width:761px){details>summary{position:relative}details>summary::after{content:"";position:absolute;inset:-4px 0}}
-.sbv-name{position:relative}
-.sbv-name::after{content:"";position:absolute;inset:-4px -4px}
-@media (pointer:coarse),(max-width:760px){.sbv-name::after{inset:-12px -4px}}
 .combo35-join a{display:inline-block;padding:6px 4px}

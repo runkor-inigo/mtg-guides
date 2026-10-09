@@ -23,6 +23,11 @@ body.sbv-on>.floatingMatrixHead{display:none!important}
 .sbv-cat small b{color:#cfe6dc;font-weight:700}
 .sbv-panel>.sbv-cat:first-child,.sbv-panel>p+.sbv-cat{margin-top:4px!important}
 .sbv-name{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--text);text-align:left}
+/* Larger hit area (24 px, 44 px under touch). The position must come after the all:unset above,
+   or the ::after attaches to the whole panel and blocks every click on it. */
+.sbv-name{position:relative}
+.sbv-name::after{content:"";position:absolute;inset:-4px -4px}
+@media (pointer:coarse),(max-width:760px){.sbv-name::after{inset:-12px -4px}}
 .sbv-name .manaSymbols img{width:14px;height:14px}
 .sbv-row{display:grid;grid-template-columns:minmax(200px,1.1fr) minmax(0,3fr);gap:6px 18px;padding:10px 0;border-top:1px solid #1b2732}
 .sbv-who{display:grid;gap:5px;align-content:start}
