@@ -99,38 +99,78 @@
  addEventListener('afterprint',()=>document.body.classList.remove('sbv-printing'));
 })();
 
-// Maybeboard as a study table: our archive of every card considered for the deck. What matters most is why it was
-// chosen and where it helped, in case it comes back; why it is out now is secondary (often just space).
-// The chosen card sits on the table; every card waits below in a tray, grouped by when it left. Picking one on a
-// phone scrolls back up to the table.
+// Maybeboard: our archive of every card considered for the deck, from our own lists and from the lists of other
+// Speaker Elves pilots, Cradle Control and combo Elves. What matters most is why a card was chosen and where it was
+// played, in case it comes back; why it is out now is secondary (often just space).
+// An index (filters by origin and role, search) on the left; the chosen card sits in a sticky panel on the right
+// (on top on phones). The articles in index.html stay the single source of the text and the no-JS version.
 (function maybeStudy(){
  const pane=document.getElementById('maybeboard');if(!pane)return;
  const arts=[...pane.querySelectorAll('article[data-card]')];if(!arts.length)return;
- const text=(a,label)=>{const p=[...a.querySelectorAll('p')].find(x=>x.querySelector('b')?.textContent.trim()===label);if(!p)return '';const c=p.cloneNode(true);c.querySelector('b').remove();c.querySelector('.ev')?.remove();return c.textContent.trim();};
- const cards=arts.map(a=>({name:a.querySelector('h4').textContent.trim(),key:a.dataset.card,meta:a.querySelector('.maybe-meta')?.textContent.trim()||'',
-  shelf:a.closest('.maybe-cards')?.previousElementSibling?.textContent.trim()||'',job:text(a,'Job:'),why:text(a,'Why it left:'),
-  test:!!a.querySelector('.ev'),served:JSON.parse(a.dataset.served||'[]')}));
- const img=c=>COMBO_CARD_ART[c.key]?.src;
- const face=(c,cls,lazy=true)=>img(c)?`<img class="${cls}" src="${img(c)}" alt="${esc(c.name)}"${lazy?' loading="lazy"':''} width="244" height="340">`:`<span class="${cls} mbs-text">${esc(c.name)}</span>`;
+ const text=(a,label)=>{const p=[...a.querySelectorAll('p')].find(x=>x.querySelector('b')?.textContent.trim().startsWith(label));if(!p)return '';const c=p.cloneNode(true);c.querySelector('b').remove();c.querySelector('.ev')?.remove();return c.textContent.trim();};
+ const json=(s,d)=>{try{return JSON.parse(s||'');}catch(e){return d;}};
+ const totals=json(pane.querySelector('.maybe-source')?.dataset.totals,{});
+ const SHELVES={ours:'From our own lists',speaker:'From other Speaker Elves lists',cc:'From Cradle Control',elves:'From combo Elves'};
+ const cards=arts.map(a=>{const ev=a.querySelector('p:last-of-type .ev');return{name:a.querySelector('h4').textContent.trim(),key:a.dataset.card,meta:a.querySelector('.maybe-meta')?.textContent.trim()||'',
+  shelf:a.dataset.shelf||'ours',role:a.dataset.role||'',job:text(a,'Job:'),played:text(a,'Where it was played:'),
+  why:text(a,'Why it left:')||text(a,'Why it is not in this list:'),left:!!text(a,'Why it left:'),
+  tag:ev?{cls:ev.className,label:ev.textContent.trim()}:null,served:json(a.dataset.served,[]),st:json(a.dataset.stats,null)};});
+ const ORIGINS=[['all','All',()=>true],['ours','Our lists',c=>c.shelf==='ours'],['speaker','Speaker Elves',c=>c.shelf==='speaker'||(c.st?.sp||0)>=2],
+  ['cc','Cradle Control',c=>(c.st?.cc||0)>=10],['elves','Combo Elves',c=>c.shelf==='elves'||(c.st?.el||0)>=5]];
+ const ROLES=[['all','Any role'],['mana','Mana'],['lands','Lands'],['engine','Engine'],['threat','Threats'],['removal','Removal'],['hate','Hate']];
+ const art=c=>COMBO_CARD_ART[c.key]||{};
+ const thumb=c=>art(c).src?art(c).src.replace(/^assets\//,'assets/thumbs/'):'';
+ const face=(c,cls,src,lazy)=>src?`<img class="${cls}" src="${src}" alt="${esc(c.name)}"${lazy?' loading="lazy" decoding="async"':''} width="244" height="340">`:`<span class="${cls} mbs-text">${esc(c.name)}</span>`;
+ const badge=c=>c.shelf==='ours'||!c.st?'':`<span class="mbs-n" title="Published lists that played it">${c.st.l}</span>`;
  const study=document.createElement('div');study.className='mbs';
- study.innerHTML=`<div class="mbs-table" aria-live="polite"></div>
-  <div class="mbs-tray"><p class="mbs-hint">${cards.length} cards · pick one to put it on the table</p>
-  ${[...new Set(cards.map(c=>c.shelf))].map(sh=>`<div class="mbs-shelfgroup"><p class="mbs-shelfname">${esc(sh)}</p><div class="mbs-grid">${cards.map((c,i)=>c.shelf!==sh?'':`<button type="button" class="mbs-card" data-i="${i}" aria-pressed="false"><span class="mbs-cardimg">${face(c,'mbs-face')}</span><span class="mbs-cardname">${esc(c.name)}</span></button>`).join('')}</div></div>`).join('')}</div>`;
- pane.querySelector('.muted')?.after(study);
+ const seg=(cls,label,list)=>`<div class="mbs-seg ${cls}" role="group" aria-label="${label}">${list.map(([k,l],i)=>`<button type="button" data-k="${k}" aria-pressed="${i===0}">${l}<span class="mbs-segn"></span></button>`).join('')}</div>`;
+ study.innerHTML=`<div class="mbs-bar">${seg('mbs-origin','Where the card was played',ORIGINS)}${seg('mbs-role','Card role',ROLES)}
+   <div class="mbs-find"><input type="search" class="sbv-search mbs-search" placeholder="Find a card…" aria-label="Find a card"><p class="mbs-count" aria-live="polite"></p></div></div>
+  <div class="mbs-layout"><div class="mbs-tray">${Object.entries(SHELVES).map(([sh,name])=>`<section class="mbs-shelfgroup" data-shelf="${sh}"><h3 class="mbs-shelfname">${name}</h3><div class="mbs-grid">${cards.map((c,i)=>c.shelf!==sh?'':`<button type="button" class="mbs-card" data-i="${i}" aria-pressed="false"><span class="mbs-cardimg">${face(c,'mbs-face',thumb(c),true)}${badge(c)}</span><span class="mbs-cardname">${esc(c.name)}</span></button>`).join('')}</div></section>`).join('')}
+   <p class="mbs-empty" hidden>No card matches. Clear the search or pick another filter.</p></div>
+  <aside class="mbs-table" aria-live="polite"></aside></div>`;
+ pane.querySelector('.article>.muted')?.after(study);
  pane.classList.add('mbs-on');
  const tableEl=study.querySelector('.mbs-table');
+ const pct=(n,d)=>d?Math.round(100*n/d):0;
+ function years(c){
+  const ys=Object.keys(totals.years||{});if(!c.st||!ys.length)return '';
+  const rows=ys.map(y=>{const n=c.st.y?.[y]||0,d=totals.years[y],p=pct(n,d);return `<div class="mbs-yr"><span>${y}</span><span class="mbs-yrbar"><i style="width:${p}%"></i></span><b>${p}%</b><small>${n} of ${d}</small></div>`;}).join('');
+  const g=[['Cradle Control',c.st.cc,totals.cc],['Speaker Elves',c.st.sp,totals.sp],['Combo Elves',c.st.el,totals.el]].map(([n,v,d])=>`<span class="mbs-chip">${n} <b>${pct(v,d)}%</b></span>`).join(' ');
+  return `<div class="mbs-years" role="img" aria-label="Share of each year’s published lists that played it">${rows}</div><p class="mbs-groups">Share of each deck’s lists: ${g}</p>`;
+ }
  function put(i){
-  const c=cards[i];
+  const c=cards[i],a=art(c);
   study.querySelectorAll('.mbs-card').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.i===i)));
-  tableEl.innerHTML=`<div class="mbs-big">${face(c,'mbs-bigface',false)}</div><div class="mbs-info"><p class="mbs-shelf">${esc(c.shelf)}</p><h3>${esc(c.name)}</h3><p class="mbs-meta">${esc(c.meta)}</p>
-   <dl><dt>Why it was chosen</dt><dd>${esc(c.job.charAt(0).toUpperCase()+c.job.slice(1))}</dd>
-   <dt>Where it helped</dt><dd>${c.served.length?'Sideboard plans brought it in against: '+c.served.map(m=>`<span class="mbs-chip">${esc(m)}</span>`).join(' '):'A main-deck card: it was part of every game, not of a sideboard plan.'}</dd></dl>
-   <p class="mbs-now"><b>Why it is not in the list now:</b> ${esc(c.why)}${c.test?' <span class="ev test">Under test</span>':''}</p></div>`;
+  const tag=c.tag?` <span class="${esc(c.tag.cls)}">${esc(c.tag.label)}</span>`:'';
+  const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+  tableEl.innerHTML=`<div class="mbs-big">${face(c,'mbs-bigface',a.src,false)}</div><div class="mbs-info mbs-head"><p class="mbs-shelf">${esc(SHELVES[c.shelf]||'')}</p><h3>${esc(c.name)}</h3><p class="mbs-meta">${esc(c.meta)}</p>
+   ${a.url?`<p class="mbs-credit"><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.edition||'Scryfall')}</a>${a.artist?' · '+esc(a.artist):''}</p>`:''}</div>
+   <div class="mbs-info mbs-body"><dl><dt>Why it was chosen</dt><dd>${esc(cap(c.job))}</dd>
+   ${c.served.length?`<dt>Where it helped</dt><dd>Our sideboard plans brought it in against: ${c.served.map(m=>`<span class="mbs-chip">${esc(m)}</span>`).join(' ')}</dd>`:''}
+   ${c.played?`<dt>Where it was played</dt><dd>${esc(c.played)}${years(c)}</dd>`:''}</dl>
+   <p class="mbs-now"><b>${c.left?'Why it left our list':'Why it is not in this list'}:</b> ${esc(cap(c.why))}${tag}</p></div>`;
   tableEl.classList.remove('mbs-flip');void tableEl.offsetWidth;tableEl.classList.add('mbs-flip');
  }
+ const state={origin:'all',role:'all',q:''};
+ const match=(c,o=state.origin,r=state.role)=>ORIGINS.find(x=>x[0]===o)[2](c)&&(r==='all'||c.role===r)&&(!state.q||(c.name+' '+c.job).toLowerCase().includes(state.q));
+ function filter(){
+  let shown=0;
+  study.querySelectorAll('.mbs-card').forEach(b=>{const ok=match(cards[+b.dataset.i]);b.hidden=!ok;shown+=ok;});
+  study.querySelectorAll('.mbs-shelfgroup').forEach(g=>g.hidden=!g.querySelector('.mbs-card:not([hidden])'));
+  study.querySelector('.mbs-empty').hidden=!!shown;
+  study.querySelector('.mbs-count').textContent=`${shown} of ${cards.length} cards`;
+  // The count on each option is what picking it would leave, given the other filter and the search.
+  study.querySelectorAll('.mbs-origin button').forEach(b=>b.querySelector('.mbs-segn').textContent=cards.filter(c=>match(c,b.dataset.k,state.role)).length);
+  study.querySelectorAll('.mbs-role button').forEach(b=>b.querySelector('.mbs-segn').textContent=cards.filter(c=>match(c,state.origin,b.dataset.k)).length);
+ }
  const still=()=>{const r=document.documentElement;return r.classList.contains('motion-off')||(matchMedia('(prefers-reduced-motion: reduce)').matches&&!r.classList.contains('motion-on'));};
+ study.querySelector('.mbs-bar').addEventListener('click',e=>{const b=e.target.closest('.mbs-seg button');if(!b)return;const g=b.closest('.mbs-seg');
+  g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));state[g.classList.contains('mbs-origin')?'origin':'role']=b.dataset.k;filter();});
+ study.querySelector('.mbs-search').addEventListener('input',e=>{state.q=e.target.value.trim().toLowerCase();filter();});
  study.querySelector('.mbs-tray').addEventListener('click',e=>{const b=e.target.closest('.mbs-card');if(!b)return;put(+b.dataset.i);
-  // When the table is out of view (phones, long trays), bring it back.
-  const r=tableEl.getBoundingClientRect();if(r.top<0||r.top>innerHeight*.5)tableEl.scrollIntoView({behavior:still()?'auto':'smooth',block:'start'});});
+  // On phones the panel sits above the index: bring it back into view.
+  const r=tableEl.getBoundingClientRect();if(r.top<0||r.top>innerHeight*.6)tableEl.scrollIntoView({behavior:still()?'auto':'smooth',block:'start'});});
+ filter();
  put(Math.max(0,cards.findIndex(c=>c.key==='Force of Vigor')));
 })();

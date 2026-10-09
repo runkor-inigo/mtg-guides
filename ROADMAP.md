@@ -256,6 +256,14 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Tamaño: pequeña.
 - Decisión previa: ninguna; solo tu visto bueno para borrar.
 
+**W. `revision-maybeboard`**
+- Objetivo: que runkor revise los 70 borradores "Why it is not in this list" del Maybeboard (cartas de otras listas de Speaker, Cradle Control y combo Elves que nunca estuvieron en las nuestras). Los escribió Claude el 9 Oct 2026 y van marcados "Unverified".
+- Cómo: repasar carta por carta (filtro por origen o por función en `#maybeboard`); corregir el texto en el artículo de `index.html` y quitar la etiqueta `ev unverified` de los que se den por buenos. Revisar también la función ("Job") si algo no encaja con cómo se jugaba la carta.
+- Archivos: `index.html` (pane `#maybeboard`), solo texto.
+- Dependencias: ninguna. Encaja bien junto a C `revision-sideboard` (cartas como Dismember, Toxicrene o Alpha Deathclaw son candidatas al sideboard).
+- Tamaño: media (lectura).
+- Decisión previa: ninguna.
+
 ### Diseño (8 Oct 2026, chat principal)
 
 - **Cabecera retirada.** Decisión del usuario: "All guides" y el nombre de la guía pasan a la parte de arriba del menú lateral; en el móvil, una flecha de volver a la izquierda de la barra de capítulos. La línea "19 lands · 6 fetchlands…" se quita (ya está en Deck Construction y Current 75). Archivos: `index.html` (sin `<header>`, `h1` oculto), `js/menu.js` (opción `brand`), `js/01.js`, `js/05.js`, `css/menu.css`, y limpieza de reglas de cabecera en `css/01.css`, `02.css`, `06.css` y `12.css`. Verificado en local: 0 errores de consola; escritorio, menú plegado y 390 px sin scroll horizontal; los dos botones de volver llevan a la portada y al reabrir la guía el foco va al botón de volver. Publicado en cad80d3.
@@ -277,19 +285,32 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 - **Credits:** nueva sección "Elves through the years", en orden: Luis Scott-Vargas (Pro Tour Berlin 2008, Extended), Chris Andersen (era de Glimpse), Matt Nass, Andrew Cuneo y Ross Merriam (2013–14, Natural Order y Craterhoof; fuente: Ross Merriam en StarCityGames), Juan Félix Flury (top 8 GP París 2014, mtgtop8), Lukas Müller (8-0 en el día 1 del GP Birmingham 2018, cobertura de Wizards), Reid Duke y Julian Knab (Everyday Eternal), Cradle Control y Speaker Elves. Nueva sección "Long-time collaborators": Jonathan Caballero (Donostia) y Serafín Gómez (Portugal).
   - dssit = David Schittinger (@Dsitt7), según el usuario; enlazado en Credits y Deck Origins.
   - Quitadas las cuentas alternativas de Newton Hang (petición del usuario: no revelar cuentas).
-  - Pendiente de confirmar con el usuario: un nombre que no se entendió en el dictado ("que gustes"). No se encontraron más resultados con fuente; se pueden añadir jugadores si el usuario da nombres o resultados.
+  - **Cerrado (9 Oct 2026):** el nombre "que gustes" del dictado no se identificó; el usuario lo da por cerrado y no se añade a nadie.
 
 ### Deck Origins, Current 75 y Maybeboard (8 Oct 2026, chat principal, publicado en 5457fee)
 
 - **Deck Origins con resultados y nombres** (petición del usuario): cada era antigua gana un párrafo "Results and people" con fuentes: Brad Herwy (Aggro Elves, top 4 GenCon 2008 Legacy Championship, mtgtop8); Chris Andersen (Ross Merriam, SCG); Reid Duke gana el SCG Legacy Open Philadelphia 2013 (SCG); Andrew Cuneo y Ross Merriam; Juan Félix Flury (top 8 GP París 2014, mtgtop8); Lukas Müller (8-0 día 1 GP Birmingham 2018, Wizards); 2020: Elves 4.º mejor mazo del año, Challenge del 5 Dic 2020 (Comeback 1.º, EronRelentless 2.º) y Newton Hang y Julian Knab citados como pilotos (Joe Dyer, MTGGoldfish); 2022: Testacular 2.º y EronRelentless 3.º en Challengers de julio (TCDecks), JHK 3.º y Testacular 6.º en la Challenge del 30 Oct (MTGGoldfish), final de Reid Duke en diciembre (Ultimate Guard). Credits enlaza la cita de 2020.
 - **Current 75 es su propia sección** (`current-75`, pane `#deck`); Deck Construction queda con `#construction` y `#mana`. Los enlaces "Current 75" apuntan a la sección nueva.
 - **Sideboard pasa a "Sideboard map"** (id `sideboard` sin cambiar) y **nueva sección Maybeboard** (`#maybeboard`) con 10 cartas que salieron de la lista: Elvish Visionary, Windswept Heath (una), Hogaak y Chomping Changeling (5 Oct); Force of Vigor, Gaddock Teeg, Grist, Endurance y Eladamri (3 Oct); Savannah (21 Sep). Para cada una: su papel y por qué salió, según las notas de las listas en el historial de git.
-  - **Pregunta para el usuario:** las notas no dan el motivo de la salida de Windswept Heath (por el tercer Boseiju), Gaddock Teeg, Grist, Endurance y Eladamri. La página lo dice; cuando el usuario lo explique, se completa.
+  - **Resuelto (9 Oct 2026):** runkor dio los motivos de Windswept Heath (tercer Boseiju), Grist, Gaddock Teeg, Endurance y Eladamri; ver "Maybeboard ampliado" abajo.
 - Verificado en local: 16 secciones, `#current-75` y `#maybeboard` abren su sección, 0 errores de consola, 390 px sin scroll horizontal.
 - **Prominent decklists** (arriba de Current 75, `js/10.js`, estilos en `css/11.css`): tarjeta con la lista de runkor (la 75 de la página) y tarjeta "Best performing now", recalculada en cada carga desde `js/results-archive.js` (lo actualiza el bot cada noche). Criterio del usuario: más resultados publicados en los 14 días hasta la última actualización; desempate: mejor puesto en Challenge, después el resultado más reciente. Las listas se enlazan, no se copian (las páginas de mazos de MTGGoldfish están protegidas). A 7 Oct: urzatheplaneswalker y Beñat empatan a tres 5-0 y gana urzatheplaneswalker por fecha; el desempate se puede cambiar.
 - **Goldfish (petición del usuario):** "Turn-2 Sabertooth" pasa a "Turn-2 Sabertooth kill". En ese modo Quirion y play/draw están enlazados: sin Quirion la línea solo sale en el draw (necesita una carta más), así que apagar Quirion cambia a "On the draw" con destello y aviso "Only on the draw", y elegir el play enciende Quirion. La línea del play sin Quirion (que se quedaba corta) ya no se puede elegir. El selector play/draw se oculta en Natural Order (sale en los dos; se muestra en el play) y en Ready board.
 - **Julian Knab en Deck Origins y Credits:** ganó el Bazaar of Moxen 8 en París con Elves (695 jugadores, 3 Nov 2013), MKM Series Milán 2016 y Hamburgo 2018, top 8 en el Legacy European Championship 2017; doce resultados destacados con Elves de 2013 a 2018 (mtgtop8). Resuelve la duda "Knab o Knapp": es Knab.
 - **Game Plans · Slower board:** con Elvish Visionary el juego largo puede ser más grindy (Symbiote lo devuelve y cada recast roba; con Sabertooth roba toda la biblioteca); no todas las listas lo juegan.
+
+### Maybeboard ampliado y vuelta a 2 Windswept Heath (9 Oct 2026, chat de preguntas abiertas, sin subir)
+
+- **Motivos de salida (runkor):** Windswept Heath se quitó para probar un tercer Boseiju y sacar más valor de Marwyn desde el principio; no compensa, porque con menos Forests en juego Quirion Ranger pierde valor. Grist es algo lenta para el mazo, pero vuelve si el metajuego es muy grindy o con muchas Containment Priest (GSZ la encuentra porque fuera del campo es criatura; entra como planeswalker, así que Priest no la exilia). Gaddock Teeg: sin Eladamri (que la ponía en juego desde la mano) es imposible de lanzar, aunque es top contra Tron y similares. Endurance: falta de sitio y el mazo ya tiene sus líneas; sigue siendo una bomba de cementerio.
+- **Cambio de lista (aprobado por el usuario):** vuelve la segunda Windswept Heath y sale el tercer Boseiju. 19 tierras: 7 fetches (2 Misty, 2 Verdant, 2 Windswept, 1 Wooded), 2 Boseiju, 2 Bayou, 2 Forest, 4 Cradle, 2 Arbor. Actualizados la decklist y la nota de Current 75, el perfil de maná (11 Forests o fetches para Quirion; 13 fuentes verdes, 83,72 % sin cambio), la tarjeta MANA de Heuristics, LEGACY.md (sección 6) y el comentario de la capa de conversión en `js/01.js` (ningún plan mueve tierras). El recuadro de mulligan lee la lista sola. El badge "5 Oct 2026 list" del menú se quita (decisión del usuario) y el pie de página muestra "Last updated 9 October 2026".
+- **Maybeboard ampliado (petición del usuario):** de 10 a 80 cartas. Fuente: 914 listas de Legacy publicadas en mtgtop8 (Cradle Control 2022–2026 y Elves 2025–2026, leídas el 8 Oct 2026; lectura puntual, no automática; el archivo de resultados sigue solo con MTGGoldfish). 52 son Speaker Elves (Speaker + Sabertooth + Symbiote en el main), 813 Cradle Control, 49 combo Elves. Entran las cartas fuera de nuestra 75 con 25 listas o más, o al menos dos listas de Speaker (elección del usuario), sin básicas. Cuatro estanterías: nuestras listas (10, incluido el tercer Boseiju), otras listas de Speaker (17), Cradle Control (47) y combo Elves (6).
+  - Cada carta: función (comprobada con el Oracle de Scryfall), dónde se jugó (listas, main/side, copias, primera y última fecha, % por año y por mazo) y por qué no está. En las 70 cartas que no salieron de nuestras listas, ese motivo es un **borrador de Claude marcado "Unverified"**: el usuario debe revisarlo.
+  - Diseño (elección del usuario: índice + ficha fija): filtros por origen y por función (control segmentado común), búsqueda, rejilla por estanterías con el número de listas en cada carta, y la ficha a la derecha, fija al desplazar (encima en pantallas estrechas) con mini gráfica por año. Los artículos de `index.html` siguen siendo la fuente del texto y la versión sin JS; los datos van en `data-stats`/`data-role`/`data-shelf`. Generados con un script puntual, no se regeneran solos.
+  - Arte: 71 imágenes nuevas, primera impresión según "Card art" (`assets/<nombre>.webp`, entradas en `COMBO_CARD_ART` al final de `js/02.js`). Excepción: Legolas's Quick Reflexes solo existe sin borde (Tales of Middle-earth Commander 493). Miniaturas de 208×290 para la rejilla en `assets/thumbs/` (~12 KB cada una, ~1 MB en total).
+  - Verificado en local: 0 errores de consola, filtros, búsqueda, estado vacío y ficha de Wight; a 390 px la ficha va arriba.
+- **Eladamri (runkor):** el plan salía poco y a coste 3 podía ser pesado; no salió por mala, sino para liberar un hueco flex y probar otras cosas, porque no es parte del núcleo.
+- **Cerrado:** el nombre "que gustes" de Credits no se identificó y queda descartado (decisión del usuario, 9 Oct 2026).
+- **Pendiente:** la revisión de los borradores "Unverified" es la tarea W `revision-maybeboard`.
 
 ### Resultados en papel, refresco nocturno y selectores (8 Oct 2026, chat principal, publicado en 25fd194)
 
@@ -337,7 +358,7 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 - **V. `pasada-impeccable`** — pendiente de confirmar por el usuario. Auditoría y crítica de toda la guía con la skill Impeccable (`audit`, `critique`): lista priorizada de problemas de tipografía, jerarquía, espaciado y contraste. Después se aplica solo lo que el usuario apruebe, respetando las reglas de CLAUDE.md (sin build step, paleta verde oscura, mint → oro). Hasta ahora solo se ha usado emil-design-eng, para detalles de interacción (botón de volver, interruptores).
 - Archivos: los CSS (`css/01.css`, `css/11.css`, `css/12.css`, `css/menu.css`) y, si hace falta, marcado puntual en `index.html`.
 - Tamaño: media (auditoría) + lo que se apruebe.
-- Preguntas abiertas de Credits: el nombre "que gustes" del dictado; confirmar que dssit es David Schittinger.
+- Preguntas de Credits cerradas (9 Oct 2026): "que gustes" no se identificó y se descarta; dssit = David Schittinger está confirmado.
 
 ### Resultados solo de MTGGoldfish (8 Oct 2026, chat principal, sin subir)
 
@@ -359,7 +380,7 @@ Publicado en el commit cad80d3 (8 Oct 2026). En vivo: HTML idéntico al local, s
 
 - **Hechas y publicadas:** A, B, E, F, H, I (commit 55ac39b); K, N parte 2, P, R y S (commit 83c5f2c); y las decisiones 1–8. A solo espera el commit del bot el 9 Oct.
 - **Matchups (chat de Matchups, publicado en 83c5f2c):** top 10 de MTGGoldfish en filas desplegables; tabla "Their sideboard" con MTGGoldfish y MyMTGO; semáforos que leen también la lista de referencia de MyMTGO; plan de Boros Energy (parte de D).
-- **Se pueden empezar ya:** C `revision-sideboard` ★, G `estudios-mulligan` ★, J `pivotes-interaccion`, Q `rendimiento-carga`, U `repo-cleanup` (cuando decidas borrar). L `fuente-testacular` está hecha. ★ = necesita una decisión del usuario antes de empezar.
+- **Se pueden empezar ya:** C `revision-sideboard` ★, G `estudios-mulligan` ★, J `pivotes-interaccion`, Q `rendimiento-carga`, U `repo-cleanup` (cuando decidas borrar), W `revision-maybeboard` (lectura tuya). L `fuente-testacular` está hecha. ★ = necesita una decisión del usuario antes de empezar.
 - **Bloqueadas:** D (Azorius Tempo y Rakdos Reanimator, opcionales porque ya no están en el top 10; por C), M (por C y L), N parte 1 (`revision-gameplay-1`, por J), T (todas).
 - **Decisión 9 (menú):** resuelta. Ids internos alineados, la guía abre en Start Here y el `#hash` de la URL guarda la sección (publicado en el commit que sigue a ede2026).
 - **Pregunta de H (Quirion en la ruta 1):** resuelta el 8 Oct 2026; ver la tarea N.
@@ -388,6 +409,7 @@ Publicado: K `creditos`, N parte 2, P `rendimiento-imagenes` (58 `.webp`), R y S
 
 1. C `revision-sideboard` — bloquea D y M
 2. J `pivotes-interaccion` — bloquea N parte 1
+2b. W `revision-maybeboard` — revisión de los borradores del Maybeboard; mejor junto a C
 3. G `estudios-mulligan`
 4. L `fuente-testacular` — hecha (documento de Curran Delahanty)
 5. M `revision-learn`

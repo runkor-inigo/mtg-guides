@@ -30,8 +30,8 @@ jobs:
       - name: Read MTGGoldfish
         run: python scripts/update_meta.py ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
       - name: Refresh the published results archive
-        # Every night, even when the metagame did not change: MTGO trophies and challenges plus paper
-        # events from mtgtop8. The script itself runs once per Madrid day.
+        # Every night, even when the metagame did not change: MTGO trophies, challenges and other MTGO events,
+        # plus paper events, all from MTGGoldfish. The script itself runs once per Madrid day.
         run: python scripts/update_results.py ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
       - name: Commit if anything changed
         run: |

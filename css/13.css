@@ -92,36 +92,58 @@ table.sbv-mx{border-collapse:separate;border-spacing:0;font-size:12px;min-width:
  .sbv-sheet-row i{font-style:normal;font-weight:700;display:inline-block;width:20pt}
 }
 
-/* Maybeboard study table */
-/* The text cards stay in the HTML (no-JS fallback); with the study table on, the shelves are hidden. */
-#maybeboard.mbs-on .article>h3,#maybeboard.mbs-on .article>.maybe-cards{display:none}
-.mbs{display:grid;gap:18px;margin:14px 0 6px}
-.mbs-table{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:22px;padding:18px;border-radius:16px;border:1px solid #2c6a43;
- background:radial-gradient(600px 260px at 15% 0%,#173322 0%,transparent 70%),linear-gradient(180deg,#11261b,#0f1720);perspective:1200px}
+/* Maybeboard archive: filters, an index of cards and a sticky panel for the chosen card */
+/* The text cards stay in the HTML (no-JS fallback); with the archive on, the shelves are hidden. */
+#maybeboard.mbs-on .article>h3,#maybeboard.mbs-on .article>.maybe-cards,#maybeboard.mbs-on .article>.maybe-note{display:none}
+.maybe-source{margin-top:18px!important;font-size:12px!important;line-height:1.6}
+.mbs{display:grid;gap:16px;margin:14px 0 6px}
+.mbs-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.mbs-find{display:flex;flex:1 1 260px;gap:12px;align-items:center;min-width:0}
+.mbs-count{margin:0!important;font-size:12px!important;color:#8fa3b1!important;white-space:nowrap;font-variant-numeric:tabular-nums}
+.mbs-segn{margin-left:6px;font-size:11px;font-weight:700;opacity:.62;font-variant-numeric:tabular-nums}
+.mbs-segn:empty{display:none}
+.mbs-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,380px);gap:22px;align-items:start}
+.mbs-table{position:sticky;top:14px;max-height:calc(100vh - 28px);overflow:auto;overscroll-behavior:contain;display:grid;grid-template-columns:132px minmax(0,1fr);gap:14px 16px;align-items:start;padding:18px;border-radius:16px;border:1px solid #2c6a43;
+ background:radial-gradient(600px 260px at 15% 0%,#173322 0%,transparent 70%),linear-gradient(180deg,#11261b,#0f1720);perspective:1200px;scrollbar-width:thin}
 .mbs-big{display:grid;place-items:start center}
-.mbs-bigface{width:100%;max-width:260px;height:auto;border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.mbs-body{grid-column:1/-1}
+.mbs-head{align-self:center}
+.mbs-bigface{width:100%;max-width:132px;height:auto;border-radius:8px;box-shadow:0 14px 30px rgba(0,0,0,.6)}
 .mbs-text{display:grid;place-items:center;aspect-ratio:244/340;text-align:center;padding:12px;border-radius:10px;background:linear-gradient(160deg,#3b4a2e,#1d2617);border:2px solid #5c6b45;color:#e8f0d8;font-weight:700}
 .mbs-info{min-width:0;display:grid;align-content:start;gap:6px}
 .mbs-shelf{margin:0!important;font-size:11px!important;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a2ddc0!important}
-.mbs-info h3{margin:0!important;font-size:24px!important}
-.mbs-meta{margin:0 0 6px!important;font-size:12px!important;color:#8fb3a2!important}
+.mbs-info h3{margin:0!important;font-size:20px!important;line-height:1.2}
+.mbs-meta{margin:0!important;font-size:12px!important;color:#8fb3a2!important}
 .mbs-info dl{display:grid;gap:12px;margin:0}
 .mbs-info dt{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f0d77a}
-.mbs-info dd{margin:3px 0 0;color:#d3dee7;max-width:65ch;line-height:1.6}
+.mbs-info dd{margin:3px 0 0;color:#d3dee7;max-width:65ch;line-height:1.6;font-size:14px}
 .mbs-chip{display:inline-block;margin:3px 3px 0 0;padding:2px 8px;border-radius:7px;background:#16222c;color:#c9d6e0;font-size:12px}
-.mbs-now{margin:6px 0 0!important;padding-top:10px;border-top:1px solid #23392d;font-size:13px!important;color:#9fb0bc!important}
+.mbs-chip b{color:#edf3f8;font-variant-numeric:tabular-nums}
+.mbs-years{display:grid;gap:4px;margin:10px 0 4px}
+.mbs-yr{display:grid;grid-template-columns:36px minmax(0,1fr) 38px 64px;gap:8px;align-items:center;font-size:12px;color:#9fb0bc;font-variant-numeric:tabular-nums}
+.mbs-yr b{color:#edf3f8;text-align:right}
+.mbs-yr small{font-size:11px;color:#7d8f9c}
+.mbs-yrbar{height:8px;border-radius:999px;background:#16222c;overflow:hidden}
+.mbs-yrbar i{display:block;height:100%;min-width:2px;border-radius:inherit;background:var(--gn-fill)}
+.mbs-groups{margin:6px 0 0!important;font-size:12px!important;color:#9fb0bc!important}
+.mbs-now{margin:4px 0 0!important;padding-top:10px;border-top:1px solid #23392d;font-size:13px!important;color:#9fb0bc!important}
 .mbs-now b{color:#b9c8d4}
+.mbs-credit{margin:0!important;font-size:11px!important;color:#7d8f9c!important}
+.mbs-credit a{color:#a2ddc0}
 .mbs-flip .mbs-big{animation:mbs-flip 420ms var(--sbv-ease)}
 .mbs-flip .mbs-info{animation:mbs-in 320ms var(--sbv-ease)}
 @keyframes mbs-flip{from{transform:rotateY(-70deg) scale(.92);opacity:.2}to{transform:none;opacity:1}}
 @keyframes mbs-in{from{transform:translateY(6px);opacity:0}to{transform:none;opacity:1}}
-.mbs-hint{margin:0 0 4px!important;font-size:12px!important;color:#7d8f9c!important}
-.mbs-tray{display:grid;gap:14px}
-.mbs-shelfname{margin:0 0 6px!important;font-size:11px!important;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a2ddc0!important}
-.mbs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:14px}
-.mbs-card{all:unset;box-sizing:border-box;cursor:pointer;display:grid;gap:6px;justify-items:center;padding:6px;border-radius:10px;transition:transform 160ms var(--sbv-ease),background-color 150ms ease}
-.mbs-cardimg{display:block;width:100%;max-width:120px;border-radius:7px;box-shadow:0 8px 18px rgba(0,0,0,.5);transition:transform 200ms var(--sbv-ease),box-shadow 200ms ease}
+.mbs-tray{display:grid;gap:18px}
+.mbs-shelfgroup[hidden]{display:none}
+.mbs-shelfname{margin:0 0 8px!important;font-size:11px!important;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a2ddc0!important}
+.mbs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:12px}
+.mbs-empty{margin:0!important;color:#9fb0bc!important}
+.mbs-card{all:unset;box-sizing:border-box;cursor:pointer;display:grid;gap:6px;justify-items:center;align-content:start;padding:6px;border-radius:10px;transition:transform 160ms var(--sbv-ease),background-color 150ms ease}
+.mbs-card[hidden]{display:none}
+.mbs-cardimg{position:relative;display:block;width:100%;max-width:112px;border-radius:7px;box-shadow:0 8px 18px rgba(0,0,0,.5);transition:transform 200ms var(--sbv-ease),box-shadow 200ms ease}
 .mbs-face{display:block;width:100%;height:auto;border-radius:7px}
+.mbs-n{position:absolute;right:4px;bottom:4px;padding:1px 6px;border-radius:999px;background:rgba(9,16,21,.86);border:1px solid #2f4452;color:#edf3f8;font-size:10px;font-weight:700;font-variant-numeric:tabular-nums}
 .mbs-card .mbs-text{font-size:11px}
 .mbs-cardname{font-size:11px;line-height:1.3;color:#b9c8d4;text-align:center}
 .mbs-card[aria-pressed="true"]{background:#11261b}
@@ -132,22 +154,24 @@ table.sbv-mx{border-collapse:separate;border-spacing:0;font-size:12px;min-width:
 .mbs-card:active{transform:scale(.97)}
 @media (prefers-reduced-motion:reduce){:root:not(.motion-on) .mbs-flip .mbs-big,:root:not(.motion-on) .mbs-flip .mbs-info{animation:none}:root:not(.motion-on) .mbs-card:hover .mbs-cardimg{transform:none}}
 :root.motion-off .mbs-flip .mbs-big,:root.motion-off .mbs-flip .mbs-info{animation:none}:root.motion-off .mbs-card:hover .mbs-cardimg{transform:none}
-@media (max-width:640px){.mbs-table{grid-template-columns:1fr}.mbs-bigface,.mbs-big .mbs-text{max-width:200px}.mbs-grid{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}}
+/* Narrow screens: the panel moves above the index and stops being sticky. */
+@media (max-width:1000px){.mbs-layout{grid-template-columns:1fr}.mbs-table{order:-1;position:static;max-height:none;overflow:visible;grid-template-columns:160px minmax(0,1fr)}.mbs-bigface{max-width:160px}}
+@media (max-width:640px){.mbs-table{grid-template-columns:112px minmax(0,1fr);padding:14px}.mbs-bigface,.mbs-big .mbs-text{max-width:112px}.mbs-grid{grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px}.mbs-find{flex-basis:100%}}
 
 /* Grid children must not grow past the pane: the matrix scrolls inside its own frame. */
-.sbv,.sbv>*,.sbv-panel,.mbs,.mbs>*,.mbs-tray{min-width:0;max-width:100%}
+.sbv,.sbv>*,.sbv-panel,.mbs,.mbs>*,.mbs-tray,.mbs-layout>*{min-width:0;max-width:100%}
 
 /* One segmented-control style for every option group (8 Oct 2026): Compact / Visual, the results filter,
    the Goldfish modes and play/draw, and the Sideboard map views. Active = the mint-to-gold fill. */
-.deck-view47 [role=group],.res-filter,#goldfish .gf-mode,#goldfish .gf-side,.sbv-views{display:inline-flex;flex-wrap:wrap;gap:4px;padding:3px;border-radius:12px;border:1px solid #2f4452;background:#0f1a22}
-.deck-view47 [role=group] button,.res-filter button,#goldfish .gf-mode button,#goldfish .gf-side button,.sbv-views button{
+.deck-view47 [role=group],.res-filter,#goldfish .gf-mode,#goldfish .gf-side,.sbv-views,.mbs-seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:3px;border-radius:12px;border:1px solid #2f4452;background:#0f1a22}
+.deck-view47 [role=group] button,.res-filter button,#goldfish .gf-mode button,#goldfish .gf-side button,.sbv-views button,.mbs-seg button{
  all:unset;box-sizing:border-box;cursor:pointer;min-height:38px;display:inline-flex;align-items:center;justify-content:center;padding:8px 14px;border-radius:9px;
  font:700 13px Roboto,"Segoe UI",system-ui,sans-serif;color:#b9c8d4;background:transparent;box-shadow:none;
  transition:transform 160ms cubic-bezier(.23,1,.32,1),background-color 150ms ease,color 150ms ease}
-.deck-view47 [role=group] button[aria-pressed=true],.res-filter button[aria-pressed=true],#goldfish .gf-mode button[aria-pressed=true],#goldfish .gf-side button[aria-pressed=true],.sbv-views button[aria-selected=true]{
+.deck-view47 [role=group] button[aria-pressed=true],.res-filter button[aria-pressed=true],#goldfish .gf-mode button[aria-pressed=true],#goldfish .gf-side button[aria-pressed=true],.sbv-views button[aria-selected=true],.mbs-seg button[aria-pressed=true]{
  background:var(--gn-fill);color:#0b281c;box-shadow:-3px 0 10px rgba(120,222,153,.22),5px 0 12px rgba(240,215,122,.24)}
 @media (hover:hover) and (pointer:fine){
- .deck-view47 [role=group] button:not([aria-pressed=true]):hover,.res-filter button:not([aria-pressed=true]):hover,#goldfish .gf-mode button:not([aria-pressed=true]):hover,#goldfish .gf-side button:not([aria-pressed=true]):hover,.sbv-views button:not([aria-selected=true]):hover{color:#edf3f8;background:#1b2b36}}
-.deck-view47 [role=group] button:active,.res-filter button:active,#goldfish .gf-mode button:active,#goldfish .gf-side button:active,.sbv-views button:active{transform:scale(.97)}
-.deck-view47 [role=group] button:focus-visible,.res-filter button:focus-visible,#goldfish .gf-mode button:focus-visible,#goldfish .gf-side button:focus-visible,.sbv-views button:focus-visible{outline:2px solid #a2ddc0;outline-offset:2px}
-@media (max-width:600px){.deck-view47 [role=group] button,.res-filter button,#goldfish .gf-mode button,#goldfish .gf-side button,.sbv-views button{min-height:44px;padding:8px 11px;font-size:12px}}
+ .deck-view47 [role=group] button:not([aria-pressed=true]):hover,.res-filter button:not([aria-pressed=true]):hover,#goldfish .gf-mode button:not([aria-pressed=true]):hover,#goldfish .gf-side button:not([aria-pressed=true]):hover,.sbv-views button:not([aria-selected=true]):hover,.mbs-seg button:not([aria-pressed=true]):hover{color:#edf3f8;background:#1b2b36}}
+.deck-view47 [role=group] button:active,.res-filter button:active,#goldfish .gf-mode button:active,#goldfish .gf-side button:active,.sbv-views button:active,.mbs-seg button:active{transform:scale(.97)}
+.deck-view47 [role=group] button:focus-visible,.res-filter button:focus-visible,#goldfish .gf-mode button:focus-visible,#goldfish .gf-side button:focus-visible,.sbv-views button:focus-visible,.mbs-seg button:focus-visible{outline:2px solid #a2ddc0;outline-offset:2px}
+@media (max-width:600px){.deck-view47 [role=group] button,.res-filter button,#goldfish .gf-mode button,#goldfish .gf-side button,.sbv-views button,.mbs-seg button{min-height:44px;padding:8px 11px;font-size:12px}}

@@ -377,7 +377,9 @@ for(const [id,plan] of Object.entries(RC51_PLANS)) applySideboardPlan(id,plan);
    1. Marwyn takes Visionary's slot. A cut Visionary becomes a cut Marwyn; a plan that brought Marwyn
       in no longer needs to. If it did not cut Visionary either, it keeps one card it used to cut.
    2. Hogaak in -> Primaris Eliminator in: removal on a body that Formidable Speaker can find.
-   3. Chomping Changeling in -> Assassin's Trophy in: wider instant-speed permanent removal. */
+   3. Chomping Changeling in -> Assassin's Trophy in: wider instant-speed permanent removal.
+   8 Oct 2026 (runkor): the second Windswept Heath is back in place of the third Boseiju (fewer Forests in
+   play cost Quirion Ranger value). No plan moves a land, so the conversion is unchanged. */
 for(const key of Object.keys(SB_COSTS)) delete SB_COSTS[key];
 Object.assign(SB_COSTS,{"Assassin's Trophy": ["B", "G"], "Choke": ["2", "G"], "Leyline of the Void": ["2", "B", "B"], "Primaris Eliminator": ["4", "B"], "Snuff Out": ["3", "B"], "Thoughtseize": ["B"]});
 (function convertPlansToOctoberList(){
@@ -465,7 +467,7 @@ function upgradeMatrix(){
   metadata.forEach((cell,i)=>{row.appendChild(cell);if(i!==1)return;
    for(const days of [7,14,30]){const td=document.createElement('td');td.className='metaPercent';
     const entry=GOLDFISH_META[id]?.[days];
-    if(entry){const a=document.createElement('a');a.textContent=entry.label;a.href=entry.url;a.target='_blank';a.rel='noopener';a.title=days+' days · '+entry.detail+' · captured 2026-09-28';td.appendChild(a);}
+    if(entry){const a=document.createElement('a');a.textContent=entry.label;a.href=entry.url;a.target='_blank';a.rel='noopener';a.title=days+' days · '+entry.detail+' · '+(window.GOLDFISH_LIVE?'updated ':'snapshot ')+GOLDFISH_META_DATE;td.appendChild(a);}
     else{td.textContent=id==='control-vegecookies'?'alt.':'—';td.title=id==='control-vegecookies'?'Alternative UWx sideboard plan; not a separate metagame archetype.':['blue-tron','key-ring'].includes(id)?'Goldfish groups Tron variants; no verified separate share for this row.':'No separately matched entry in the captured window; not a claim of 0%.';}
     row.appendChild(td);
    }
@@ -556,7 +558,7 @@ addMetaTrend();
  const note=document.createElement('p');note.className='meta-order48';
  note.textContent='MTGO · Updated '+GOLDFISH_META_DATE+' · Categories and matchups ranked by 14-day share. Category totals count each shared Goldfish archetype once; only matchups covered by this guide are included.';
  table.closest('.matrixwrap').before(note);
- const method=document.createElement('p');method.textContent='Mapping notes: UB Moonshadow and UB Legends share Dimir Tempo; Blue Tron uses Tron and Colorless Tron / Forge uses the separate Mystic Forge Combo bucket; both Reanimator plans share Reanimator. BG Hogaak uses Hogaak Moonshadow, Cradle Control uses Cradle Control, and WBR Energy uses Mardu Energy only. 8-Cast uses Affinity Stompy by guide convention, not the separate 8-Cast entry. Izzet and Stoneblade families combine their named variants; Jeskai Control combines both same-name Goldfish entries. Alternative control plans add no extra share. Category totals sum rounded published percentages, so they are approximate and do not describe the entire format. This is a manual refresh; automatic daily publishing remains pending.';
+ const method=document.createElement('p');method.textContent='Mapping notes: UB Moonshadow and UB Legends share Dimir Tempo; Blue Tron uses Tron and Colorless Tron / Forge uses the separate Mystic Forge Combo bucket; both Reanimator plans share Reanimator. BG Hogaak uses Hogaak Moonshadow, Cradle Control uses Cradle Control, and WBR Energy uses Mardu Energy only. 8-Cast uses Affinity Stompy by guide convention, not the separate 8-Cast entry. Izzet and Stoneblade families combine their named variants; Jeskai Control combines both same-name Goldfish entries. Alternative control plans add no extra share. Category totals sum rounded published percentages, so they are approximate and do not describe the entire format. Refreshed every night (see Nightly refresh below).';
  document.querySelector('.metaSource').append(method);
 })();
 
@@ -712,7 +714,7 @@ const guideNav=SpeakerNav.create(document.getElementById('guide-nav'),{
  groups:GUIDE_GROUPS.map(g=>({...g,sections:g.sections.map(s=>({...s,controls:s.panes.join(' ')}))})),
  active:guideTarget(location.hash)?.section||'start',onChange:showSection,
  // The page has no header: the sidebar names the guide and holds the way back to the library.
- brand:{title:'Speaker Elves',badge:'5 Oct 2026 list',back:'All guides'}
+ brand:{title:'Speaker Elves',back:'All guides'}
 });
 showSection(guideNav.active);
 GUIDE_SECTIONS.forEach(s=>s.panes.forEach(id=>{const pane=document.getElementById(id);pane.setAttribute('role','tabpanel');pane.setAttribute('aria-labelledby',guideNav.tabFor(s.id).id);}));

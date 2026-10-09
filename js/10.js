@@ -1,6 +1,6 @@
 // Current 75: published Speaker Elves results (js/results-archive.js, written every night by
 // scripts/update_results.py). MTGO: league lists are 5-0 trophies; challenges show their final place.
-// Paper: events from mtgtop8 (Hareruya and other Japanese events included), with their top-N bracket.
+// Paper and other MTGO events (Showcase Challenge, Qualifiers): the same MTGGoldfish search, which gives no placings.
 (function resultsArchive(){
  const data=window.SPEAKER_RESULTS;const deck=document.getElementById('deck');
  if(!data||!deck||!data.results?.length)return;
@@ -9,25 +9,25 @@
  const fmtDate=d=>new Date(d+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
  const paper=r=>r.kind==='Paper';
  // Paper ranks come as "1", "2", "3-4", "5-8", "9-16": a bracket reads as "Top 4", "Top 8"...
- const paperFinish=f=>{const m=String(f||'').match(/^(\d+)(?:-(\d+))?$/);if(!m)return f||'—';return m[2]?'Top '+m[2]:ord(+m[1]);};
+ const paperFinish=f=>{const m=String(f||'').match(/^(\d+)(?:-(\d+))?$/);if(!m)return f||'Published list';return m[2]?'Top '+m[2]:ord(+m[1]);};
  const paperTop=f=>{const m=String(f||'').match(/^(\d+)(?:-(\d+))?$/);return m?+(m[2]||m[1]):99;};
  const finish=r=>r.kind==='Trophy'
   ?'<span class="res-finish trophy">5-0 trophy</span>'
   :paper(r)?`<span class="res-finish ${paperTop(r.finish)<=8?'top8':''}">${esc(paperFinish(r.finish))}</span>`
-  :`<span class="res-finish ${r.finish&&r.finish<=8?'top8':''}">${r.finish?ord(r.finish):'—'}${r.players?` <small>of ${r.players}</small>`:''}</span>`;
+  :`<span class="res-finish ${r.finish&&r.finish<=8?'top8':''}">${r.finish?ord(r.finish):'Published list'}${r.players?` <small>of ${r.players}</small>`:''}</span>`;
  const mtgo=data.results.filter(r=>!paper(r)),trophies=mtgo.filter(r=>r.kind==='Trophy').length,challenges=mtgo.length-trophies,papers=data.results.length-mtgo.length;
  const best=mtgo.filter(r=>r.kind!=='Trophy'&&r.finish).sort((a,b)=>a.finish-b.finish)[0];
  const FILTERS={mtgo:r=>!paper(r),trophy:r=>r.kind==='Trophy',challenge:r=>!paper(r)&&r.kind!=='Trophy',paper};
  const box=document.createElement('section');box.className='res-archive';box.setAttribute('aria-labelledby','res-title');
  box.innerHTML=`<div class="res-head"><div><h2 id="res-title">Published results</h2>
-  <p>Since ${fmtDate(data.since)}: on MTGO, ${trophies} league 5-0 trophies and ${challenges} challenge finishes${best?` (best ${ord(best.finish)} of ${best.players||'?'})`:''}; on paper, ${papers} top finishes. Updated ${fmtDate(data.updated)}.</p></div>
+  <p>Since ${fmtDate(data.since)}: on MTGO, ${trophies} league 5-0 trophies and ${challenges} challenge finishes${best?` (best ${ord(best.finish)} of ${best.players||'?'})`:''}; on paper, ${papers} published list${papers===1?'':'s'}. Updated ${fmtDate(data.updated)}.</p></div>
   <div class="res-filter seg" role="group" aria-label="Show results"><button type="button" data-f="mtgo" aria-pressed="true">All MTGO</button><button type="button" data-f="trophy" aria-pressed="false">MTGO trophies</button><button type="button" data-f="challenge" aria-pressed="false">MTGO challenges</button><button type="button" data-f="paper" aria-pressed="false">Paper events</button></div></div>
   <div class="table-scroll"><table class="data res-table"><thead><tr><th>Date</th><th>Finish</th><th>Event</th><th>Pilot</th><th>List</th></tr></thead><tbody></tbody></table></div>
   <button type="button" class="res-more" hidden></button>
-  <p class="res-note">MTGO: the MTGGoldfish deck search (Legacy, Formidable Speaker in the main deck, leagues and challenges; other archetypes that play Speaker are left out), with challenge places from the official mtgo.com standings. Paper: mtgtop8 (Legacy, Speaker in the main deck, Elves and Cradle Control lists at non-MTGO events), which also lists the Hareruya and other Japanese events. Refreshed every night.</p>`;
+  <p class="res-note">All results come from the MTGGoldfish deck search (Legacy, Formidable Speaker in the main deck, decks named Elves; other archetypes that play Speaker are left out). MTGO challenge places come from the official mtgo.com standings; Showcase Challenges, Qualifiers and paper events have no published place on MTGGoldfish, so they show as published lists. Refreshed every night.</p>`;
  const tbody=box.querySelector('tbody'),more=box.querySelector('.res-more');
  let filter='mtgo',expanded=false;
- const eventCell=r=>paper(r)?`${esc(r.event)} <a href="${esc(r.source)}" target="_blank" rel="noopener" title="Event on mtgtop8">top 8</a>`
+ const eventCell=r=>paper(r)||r.kind==='MTGO event'?`${esc(r.event)}${r.source?` <a href="${esc(r.source)}" target="_blank" rel="noopener">event</a>`:''}`
   :`${esc(r.kind==='Trophy'?'Legacy League':r.kind.replace('Challenge','Legacy Challenge'))}${r.source?` <a href="${esc(r.source)}" target="_blank" rel="noopener" title="Official standings">standings</a>`:''}`;
  function render(){
   const rows=data.results.filter(FILTERS[filter]);

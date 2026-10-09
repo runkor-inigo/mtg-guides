@@ -55,7 +55,7 @@ La versión publicada para los lectores está en la sección Heuristics de la gu
 
 ## 6. Maná
 
-- **19 tierras, 6 fetchlands, 3 Boseiju.** Boseiju es maná verde inmediato pero no es Forest para Quirion; las copias extra valen más para el channel. **Settled.**
+- **19 tierras, 7 fetchlands, 2 Boseiju.** Boseiju es maná verde inmediato pero no es Forest para Quirion; las copias extra valen más para el channel. La lista del 5 Oct probó un tercer Boseiju por la segunda Windswept Heath (más valor de Marwyn desde el principio); la conclusión fue que no compensa: con menos Forests en juego Quirion Ranger pierde valor. El 8 Oct vuelve la segunda Heath. *Fuente:* runkor (8 Oct 2026). **Settled.**
 - **Sin Savannah ni tipo Plains**, para no regalar un Massacre gratis a los mazos UB. **Settled.**
 
 ## 7. Interacción del rival
