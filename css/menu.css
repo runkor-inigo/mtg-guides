@@ -29,7 +29,7 @@
   .gn-side{ grid-column: 1; grid-row: 1 / span 40; align-self: start; position: sticky; top: 16px; margin-top: 12px; }
   /* Every part starts open, so the desktop rows are a little tighter to fit a laptop screen. */
   .gn-side .sb-head{ height: 36px; }
-  .gn-side .sb-item{ padding-top: 6px; padding-bottom: 6px; }
+  .gn-side .sb-item{ padding-top: 5px; padding-bottom: 5px; }
   .gn-side .sb-items-inner{ margin-bottom: 4px; }
   .gn-mobile{ display: none; }
 }

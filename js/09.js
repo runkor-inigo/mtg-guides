@@ -10,22 +10,22 @@
  const shortSlug=slug=>slug.replace(/^legacy-/,'').replace(/-[0-9a-f]{8}-[0-9a-f-]{27,}$/,'');
  // Key card art (Scryfall art crops, credited on each card): by guide plan, or by archetype.
  const ART={
-  'ub-moon':{card:'Moonshadow',artist:'Olivier Bernard'},
-  'ub-legends':{card:'Tamiyo, Inquisitive Student',artist:'Jana Schirmer & Johannes Voss'},
-  'eldrazi':{card:'Thought-Knot Seer',artist:'Svetlin Velinov'},
-  'sewer-cam':{card:'Goblin Welder',artist:'Scott M. Fischer'},
-  'doomsday':{card:'Doomsday',artist:'Adrian Smith'},
-  'ur-cutter':{card:'Cori-Steel Cutter',artist:'Xabi Gaztelua'},
-  'dnt':{card:'Thalia, Guardian of Thraben',artist:'Magali Villeneuve'},
-  'beanstalk':{card:'Up the Beanstalk',artist:'Lucas Graciano'},
-  'aluren':{card:'Aluren',artist:'April Lee'},
-  'blue-tron':{card:"Urza's Tower",artist:'Mark Poole'},
-  'energy':{card:'Guide of Souls',artist:'Ryan Valle'},
-  'lands':{card:'Dark Depths',artist:'Stephan Martiniere'},
-  'sneak':{card:'Show and Tell',artist:'Jeff Laubenstein'},
-  'boros-energy':{card:'Ocelot Pride',artist:'Chris Seaman'},
-  'jeskai-tempo':{card:'Quantum Riddler',artist:'Izzy'},
-  'the-epic-storm':{card:'Burning Wish',artist:'Scott M. Fischer'}
+  'ub-moon':{card:'Moonshadow',artist:'Olivier Bernard',y:35},
+  'ub-legends':{card:'Tamiyo, Inquisitive Student',artist:'Jana Schirmer & Johannes Voss',y:24},
+  'eldrazi':{card:'Thought-Knot Seer',artist:'Svetlin Velinov',y:42},
+  'sewer-cam':{card:'Goblin Welder',artist:'Scott M. Fischer',y:45},
+  'doomsday':{card:'Doomsday',artist:'Adrian Smith',y:45},
+  'ur-cutter':{card:'Cori-Steel Cutter',artist:'Xabi Gaztelua',y:40},
+  'dnt':{card:'Thalia, Guardian of Thraben',artist:'Magali Villeneuve',y:17},
+  'beanstalk':{card:'Up the Beanstalk',artist:'Lucas Graciano',y:40},
+  'aluren':{card:'Aluren',artist:'April Lee',y:40},
+  'blue-tron':{card:"Urza's Tower",artist:'Mark Poole',y:35},
+  'energy':{card:'Guide of Souls',artist:'Ryan Valle',y:28},
+  'lands':{card:'Dark Depths',artist:'Stephan Martiniere',y:50},
+  'sneak':{card:'Show and Tell',artist:'Jeff Laubenstein',y:24},
+  'boros-energy':{card:'Ocelot Pride',artist:'Chris Seaman',y:42},
+  'jeskai-tempo':{card:'Quantum Riddler',artist:'Izzy',y:40},
+  'the-epic-storm':{card:'Burning Wish',artist:'Scott M. Fischer',y:24}
  };
 
  // Guide plans for each MTGGoldfish archetype (two plans can share one archetype).
@@ -94,10 +94,18 @@
  // Full lights inside the open row; three bare dots on the closed row.
  const lights=a=>`<ul class="mu-alarms" aria-label="Alarms">${a.map(([name,tone,val,tip])=>`<li class="mu-alarm ${tone}" title="${esc(tip)}"><span class="mu-dot" aria-hidden="true"></span><span>${name}</span><b>${val}</b></li>`).join('')}</ul>`;
  const dots=a=>`<span class="mu-dots" role="img" aria-label="${esc(a.map(([name,,val])=>name+': '+val).join(', '))}">${a.map(([name,tone,val])=>`<i class="${tone}" title="${esc(name+': '+val)}"></i>`).join('')}</span>`;
+ // y: height (%) of the art's focal point (a face, an eye), so the thin strip of each row shows it.
  const artFor=(planId,slug)=>{const key=ART[planId]?planId:shortSlug(slug);const a=ART[key];return a?{...a,src:`assets/matchups/${key}.webp`}:null;};
 
  // One row per plan: closed, it shows the deck over its art with the 14-day share and three dots;
  // the header button opens the full plan in place.
+ // Colour identity in front of the name (official mana symbols; colourless decks show {C}); the rank stays for screen readers.
+ function colors(planId,rank){
+  const id=planId&&typeof MATCH_COLORS!=='undefined'?(MATCH_COLORS[planId]||''):'';
+  const syms=id==='C'?['C']:[...id].filter(c=>'WUBRG'.includes(c));
+  const names={W:'white',U:'blue',B:'black',R:'red',G:'green',C:'colourless'};
+  return `<span class="mu-colors" title="${syms.map(c=>names[c]).join(', ')||'colours not set'}"><span class="sb-sr">#${rank} </span>${syms.map(c=>`<img src="${MANA_ICONS[c]}" alt="" width="16" height="16">`).join('')}</span>`;
+ }
  function row(rank,slug,archName,planId){
   const p=planId?DETAILS[planId]:null,art=artFor(planId,slug),id='mu-'+(planId||shortSlug(slug));
   const meta=planId?GOLDFISH_META[planId]:null;
@@ -106,8 +114,8 @@
   const a=alarms(planId,slug);
   return `<article class="mu-row${p?'':' mu-unplanned'}" id="${esc(id)}">
    <h3 class="mu-h"><button type="button" class="mu-bar" aria-expanded="false" aria-controls="${esc(id)}-panel">
-    ${art?`<img class="mu-bg" src="${art.src}" alt="" loading="lazy" decoding="async">`:''}
-    <span class="mu-rank">#${rank}</span>
+    ${art?`<img class="mu-bg" src="${art.src}" alt="" loading="lazy" decoding="async" style="object-position:50% ${art.y??30}%">`:''}
+    ${colors(planId,rank)}
     <span class="mu-title"><span class="mu-name">${esc(p?p.name:archName)}</span><span class="mu-sub">${p?esc(archName):'Plan not written yet'}</span></span>
     <span class="mu-share" title="14-day share">${val('14')}</span>
     ${dots(a)}

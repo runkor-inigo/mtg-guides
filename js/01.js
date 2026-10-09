@@ -672,7 +672,8 @@ const GUIDE_GROUPS=[
   {id:'sideboard',label:'Sideboard map',panes:['map','heur']},
   {id:'maybeboard',label:'Maybeboard',panes:['maybeboard']},
   {id:'matchups',label:'Matchups',panes:['matchups']},
-  {id:'windows',label:'Interaction Windows',panes:['windows']}]},
+  {id:'windows',label:'Interaction Windows',panes:['windows']},
+  {id:'sequencing',label:'Sequencing',panes:['sequencing']}]},
  {id:'about',label:'About',icon:'book',sections:[
   {id:'sources',label:'Sources',panes:['sources']},
   {id:'credits',label:'Credits',panes:['credits']}]}

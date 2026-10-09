@@ -447,6 +447,16 @@ Notas del usuario sobre toda la guía. Estado de cada tarea al final de la líne
 - **Decidido después (9 Oct 2026):** 19 tierras por ahora (no se sube a 20); Mono Red guarda los tres Natural Order y saca un Wirewood Symbiote (aplicado en `js/01.js`, bloque de runkor antes de `upgradeMatrix()`); Endurance en el main, aparcado por falta de hueco.
 - **Pendiente de aprobar:** plan de Doomsday sin el paquete de Natural Order pero con Craterhoof, con toda la interacción y entradas y salidas cuadradas (propuesta en el chat del 9 Oct; ver tarea C).
 
+### Ronda del 9 Oct 2026, tarde (runkor)
+
+- **Cartas del Current 75:** Forest pasa a Unglued #88, Llanowar Elves a Seventh Edition #253 y Bayou a Beta #279, por decisión de runkor (las de Alpha dejaban ver esquinas blancas). Excepción a "primera impresión", anotada en CLAUDE.md.
+- **Game Plans:** las cabeceras de "Cradle and Cub" y "Sabertooth loop" pasan a una sola carta (Cub, Sabertooth); los pares chocaban de tono. "Setup turn" (Speaker + Cradle) se queda doble.
+- **Natural Order:** "often referred to as Green Tinker"; histórico de objetivos con fuentes (Verdant Force, Regal Force, Craterhoof, Progenitus, Worldspine Wurm, Archon of Valor's Reach, Apex Altisaur, Atraxa); el banner queda en Natural Order → Atraxa.
+- **Matchups:** identidad de color con símbolos oficiales en lugar del número de puesto; arte al 75 % de la fila; altura de encuadre por arte (caras de Thalia, Tamiyo, etc.).
+- **Sequencing:** capítulo nuevo en Gameplay, adaptado de "Elf Sequencing 101" de Newton Hang; First Turns enlaza a él. Interaction Windows abre con la importancia de los turnos 1 y 2.
+- **Credits:** fuentes de estrategia (artículos de Newton Hang para su comunidad, j-off, Curran, Chapin, Duke, Merriam).
+- Mono Red ya aplicado (5eba0a8). Doomsday sigue pendiente de aprobar (propuesta en el chat).
+
 ### Fuentes por incorporar
 
 - **Artículos de Newton Hang (15 PDF, 2021–2023)**, carpeta local `Legacy Knowledbase/` (aportada por runkor el 9 Oct 2026; en `.gitignore` y `.vercelignore`). Leídos y resumidos en LEGACY.md, sección 11, con el contraste. Coinciden en Quirion frente a Boseiju, seis dorks, Leyline solo contra cementerio y recortar el motor grindy contra combo. Chocan o abren preguntas en Choke, Natural Order contra tempo y contra Stompy, Trophy contra Doomsday, Leyline sin Endurance y Mindbreak Trap contra TES (todo para la tarea C). Propuestas: secuenciación para First Turns (tareas J y N parte 1), tarjeta "Who is the beatdown" en Heuristics, criterio de flex en Deck Construction y fuentes para los borradores del Maybeboard (tarea W).
