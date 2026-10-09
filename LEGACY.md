@@ -8,7 +8,7 @@ Estados (solo internos desde el 9 Oct 2026: la guía publicada ya no muestra eti
 
 La versión publicada para los lectores está en la sección Heuristics de la guía (`#heur` en `index.html`). Este archivo es el detalle interno: no se publica (`.vercelignore`).
 
-Última revisión: 9 Oct 2026. Añadida la sección 11 (artículos de Newton Hang, carpeta `Legacy Knowledbase/`), con lo que coincide y lo que choca con nuestros planes. La propuesta de sideboard de la sección 10 y las preguntas de 11.2 siguen esperando la decisión de runkor (tarea C).
+Última revisión: 9 Oct 2026. Añadida la sección 11 (artículos de Newton Hang, leídos de una carpeta local que después se borró), con lo que coincide y lo que choca con nuestros planes. La propuesta de sideboard de la sección 10 y las preguntas de 11.2 siguen esperando la decisión de runkor (tarea C).
 
 ---
 
@@ -168,7 +168,7 @@ Transcrita de la captura y comprobada con su fila "Card Count" (entra = sale): c
 
 ## 11. Base de conocimiento: artículos de Newton Hang (2021–2023)
 
-Carpeta local `Legacy Knowledbase/` (15 PDF aportados por runkor el 9 Oct 2026; fuera de git y de Vercel). Todos son de **Newton Hang** (MTGO: hellonewton; @hello_newton), el piloto que más ha empujado Reclaimer Elves / Cradle Control. **Ojo al contexto:** escribe para Elves de Glimpse of Nature y Elvish Reclaimer (2021–2022) y para Cradle Control (2023), con 21–23 tierras. Speaker Elves es otro mazo (sección 1): lo que sigue se adapta, no se copia.
+15 PDF aportados por runkor el 9 Oct 2026 en la carpeta local `Legacy Knowledbase/`, leídos ese día; la carpeta se borró después, así que este resumen es la única copia en el proyecto (los originales están en el Patreon y el Discord de Newton). Todos son de **Newton Hang** (MTGO: hellonewton; @hello_newton), el piloto que más ha empujado Reclaimer Elves / Cradle Control. **Ojo al contexto:** escribe para Elves de Glimpse of Nature y Elvish Reclaimer (2021–2022) y para Cradle Control (2023), con 21–23 tierras. Speaker Elves es otro mazo (sección 1): lo que sigue se adapta, no se copia.
 
 | Fecha | Artículo | Tema |
 |---|---|---|
