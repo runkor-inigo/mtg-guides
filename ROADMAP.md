@@ -472,19 +472,19 @@ Notas del usuario sobre toda la guía. Estado de cada tarea al final de la líne
 
 ### Orden recomendado (lo que queda, 9 Oct 2026, cierre del chat)
 
-Publicado hasta 5eba0a8. **Sin subir (7 commits más el de cierre):** f84fb74, 338e0e1, f243a63, ccd8ba6, 173e3b9 (Doomsday), 80d84d4 (J, N parte 1, Q, Sources). Al empezar la próxima sesión: `git pull` y preguntar a runkor si se suben.
+Todo publicado hasta d5e2655 (comprobado en la web: 17 secciones, sin desbordes ni errores a 1440 y 390 px). Al empezar la próxima sesión: `git pull`.
 
 Doomsday decidido y aplicado (+4 Thoughtseize, +2 Assassin's Trophy, +2 Choke / −1 Atraxa, −2 Formidable Speaker, −2 Wirewood Symbiote, −1 Temur Sabertooth, −1 Vibrance, −1 Marwyn; LEGACY 11.3). Hechos además (sin subir): pane Sources al día (excepciones de impresión, revisión del 9 Oct, Newton y los autores del histórico de Natural Order); el comentario de `meta.yml` ya estaba bien. Decisiones abiertas: tierra 20 (aparcada); Endurance en el main (aparcada); las 70 "Unverified" del Maybeboard; nombre superpuesto en las cartas de marco antiguo del Current 75.
 
 1. C `revision-sideboard` ★ — Doomsday y Mono Red ya hechos; aprobar el resto de la propuesta del 9 Oct; añadir notas "on the draw" donde el plan cambie (Damo da Rosa, LEGACY 13.4) y leer los planes junto a "Their sideboard". Contrastar con LEGACY 10, 11 y 13. Bloquea D y M.
 2. W `revision-maybeboard` ★ — los 70 borradores; ya hay fuentes en LEGACY 11 y 13 (Mindbreak Trap, Chrome Mox, Spirit Guide, Gemstone Caverns, Progenitus, Underground Mortuary, Wastewood Verge…).
-3. J `pivotes-interaccion` — HECHA (sin subir): ocho pivotes en Game Plans ("Pivoting after interaction"): dork muerto, Cradle destruida, Cradle con earthbend muerta (vuelve girada y sin ser criatura; solo Speaker la endereza), Natural Order contrarrestado, removal sobre Speaker (Symbiote lo devuelve en respuesta), barrida, Blood Moon / Magus (channel de Boseiju, Vibrance evocada con {R}{R}) y Chalice en 1 (Shepherd no se puede contrarrestar). Reglas comprobadas con Scryfall.
+3. J `pivotes-interaccion` — HECHA y publicada (d5e2655): ocho pivotes en Game Plans ("Pivoting after interaction"): dork muerto, Cradle destruida, Cradle con earthbend muerta (vuelve girada y sin ser criatura; solo Speaker la endereza), Natural Order contrarrestado, removal sobre Speaker (Symbiote lo devuelve en respuesta), barrida, Blood Moon / Magus (channel de Boseiju, Vibrance evocada con {R}{R}) y Chalice en 1 (Shepherd no se puede contrarrestar). Reglas comprobadas con Scryfall.
 4. G `estudios-mulligan` ★ — manos de ejemplo; distinguir game 1 de games 2 y 3 (LEGACY 13.4) y usar las cifras de Once Upon a Time (LEGACY 12).
 5. M `revision-learn` (tras C) — texto final de Start Here, Deck Origins y Deck Construction; Julian Knab (Bazaar of Moxen 2013) en Origins; posible línea sobre Once Upon a Time.
-6. N parte 1 `revision-gameplay-1` — HECHA (sin subir): First Turns y Game Plans revisados; reglas correctas (earthbend, Cub, Elfos de Dinobash); quitados el "this exception is being worked through" (ahora: Thoughtseize de turno 1 contra combo rápido después del sideboard) y el párrafo sobre las notas internas del piloto.
+6. N parte 1 `revision-gameplay-1` — HECHA y publicada (d5e2655): First Turns y Game Plans revisados; reglas correctas (earthbend, Cub, Elfos de Dinobash); quitados el "this exception is being worked through" (ahora: Thoughtseize de turno 1 contra combo rápido después del sideboard) y el párrafo sobre las notas internas del piloto.
 7. D `matchups-sin-plan` — opcional.
 8. V parte 2 — `!important` de css/01.css, opcional.
-9. Q `rendimiento-carga` — HECHA (sin subir): `preconnect` a Google Fonts y `defer` en los 18 scripts (mismo orden). Medido con red limitada, 3 cargas sin caché: carga completa ~1730 → ~1660 ms, primera pintura igual (~530 ms); en local la mejora es pequeña porque los scripts ya iban al final; el preconnect ayuda sobre todo en la red real. Más mejora pediría fusionar CSS/JS o autoalojar la fuente (fuera de alcance sin build step).
+9. Q `rendimiento-carga` — HECHA y publicada (d5e2655): `preconnect` a Google Fonts y `defer` en los 18 scripts (mismo orden). Medido con red limitada, 3 cargas sin caché: carga completa ~1730 → ~1660 ms, primera pintura igual (~530 ms); en local la mejora es pequeña porque los scripts ya iban al final; el preconnect ayuda sobre todo en la red real. Más mejora pediría fusionar CSS/JS o autoalojar la fuente (fuera de alcance sin build step).
 10. U `repo-cleanup` ★ — 72 imágenes sin uso, estilos de `.guide-entry`, capturas de `.playwright-mcp/`, MP4 originales.
 11. T `verificacion-final`.
 
