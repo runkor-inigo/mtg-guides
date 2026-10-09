@@ -18,3 +18,7 @@
 /* First Turns sequencing: four cards, always two by two (one column on phones). */
 .seq-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:600px){.seq-cards{grid-template-columns:1fr}}
+
+/* Game Plans pivots: two by two (one column on phones). */
+.pivot-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:600px){.pivot-cards{grid-template-columns:1fr}}
