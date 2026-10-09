@@ -11,24 +11,25 @@
 
  /* ---- Videos: loaded only while the home is on screen and motion is welcome; a deep link (/#matchups) never fetches them ---- */
  const forest=root.querySelector('.home-forest'),door=root.querySelector('.home-door');
- const RATE=18/16;   // the door clip lasts 18 s; at this rate it lasts 16 s, one forest loop
+ // The door clip is 8 s (drawing in, then fading out; the still stretch of the original was cut),
+ // half a forest loop, so it plays twice per loop and restarts with it.
+ const DOOR=8;
  function load(v){if(!v.src&&v.dataset.src){v.src=v.dataset.src;v.load();}}
  function sync(){
   const still=!moving()||saveData;
   root.classList.toggle('is-still',still);
   if(still||!visible()){forest.pause();door.pause();return;}
   load(forest);load(door);
-  door.playbackRate=RATE;
   forest.play().catch(()=>{});door.play().catch(()=>{});
  }
  // The door restarts with every forest loop, so the two stay in step.
  let last=0;
  forest.addEventListener('timeupdate',()=>{
   const t=forest.currentTime;
-  if(t<last-1){door.currentTime=0;door.playbackRate=RATE;}
+  if(t<last-1)door.currentTime=0;
   last=t;
  });
- forest.addEventListener('playing',()=>{door.currentTime=forest.currentTime*RATE;});
+ forest.addEventListener('playing',()=>{door.currentTime=forest.currentTime%DOOR;});
  document.addEventListener('guide:home',sync);
  document.addEventListener('visibilitychange',sync);
  if(reduce.addEventListener)reduce.addEventListener('change',sync);
