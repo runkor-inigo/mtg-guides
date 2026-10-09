@@ -13,8 +13,10 @@ body.guide-home #guide-library.home{max-width:none;margin:0;padding:0;min-height
 .home-door-still{display:none}
 .home.is-still .home-door{display:none}
 .home.is-still .home-door-still{display:block}
-.home-head{position:absolute;z-index:2;left:16px;right:16px;top:clamp(60px,9vw,130px);display:grid;gap:14px;justify-items:center;text-align:center}
-#guide-library .home-head h1{margin:0;font-size:clamp(44px,7vw,84px);font-weight:900;letter-spacing:-.03em;line-height:.95;color:var(--text);text-shadow:0 4px 30px rgba(0,0,0,.65)}
+/* The title sits inside the door, between its star (~49 % of the frame) and the letter on its lower third (~62 %):
+   the frame starts at -2 % of the band, so their midpoint is ~53.5 % of the band height. --h1 is the title size. */
+.home-head{--h1:clamp(44px,7vw,84px);position:absolute;z-index:2;left:16px;right:16px;top:calc(53.5% - var(--h1)*.48);display:grid;gap:12px;justify-items:center;text-align:center}
+#guide-library .home-head h1{margin:0;font-size:var(--h1);font-weight:900;letter-spacing:-.03em;line-height:.95;color:var(--text);text-shadow:0 4px 30px rgba(0,0,0,.65)}
 .home-eyebrow{margin:0;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);text-shadow:0 1px 3px #000,0 0 14px rgba(0,0,0,.95)}
 .home-eyebrow b{color:var(--text);letter-spacing:0;text-transform:none}
 
@@ -52,7 +54,7 @@ body.guide-home #guide-library.home{max-width:none;margin:0;padding:0;min-height
 /* ---------- Phones: horizontal cards, the art in a strip on the left ---------- */
 @media (max-width:600px){
   .home-band{height:300px}
-  .home-body{margin-top:-90px}
+  .home-body{margin-top:-62px}
   .home-cards{grid-template-columns:1fr;gap:12px}
   .home-card{grid-template-columns:104px minmax(0,1fr);grid-template-rows:none;border-radius:16px}
   .home-art{height:auto;min-height:100%;border-radius:16px 0 0 16px}
