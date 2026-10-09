@@ -13,7 +13,11 @@
 /* Section banner: wide, a little taller, rounded, with a soft fade at the bottom. */
 .art-banner{height:clamp(140px,17vw,210px);margin:6px 0 20px;border-radius:14px;border:1px solid var(--line);-webkit-mask-image:linear-gradient(180deg,#000 70%,rgba(0,0,0,.35) 100%);mask-image:linear-gradient(180deg,#000 70%,rgba(0,0,0,.35) 100%)}
 .art-banner>span{filter:saturate(.95) brightness(.9)}
-@media(max-width:600px){.art-banner{height:130px}.art-banner>span+span{margin-left:-24%}}
+/* Banners cross-fade (runkor, 9 Oct 2026): the first image fades to 0 % exactly at its right edge while the second fades in
+   over the same band, so no edge of the first image shows. Each span is 65 % wide; they overlap from 35 % to 65 %. */
+.art-banner>span:first-child{-webkit-mask-image:linear-gradient(90deg,#000 54%,transparent 100%);mask-image:linear-gradient(90deg,#000 54%,transparent 100%)}
+.art-banner>span+span{margin-left:-30%;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 46%);mask-image:linear-gradient(90deg,transparent 0%,#000 46%)}
+@media(max-width:600px){.art-banner{height:130px}}
 
 /* First Turns sequencing: four cards, always two by two (one column on phones). */
 .seq-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
