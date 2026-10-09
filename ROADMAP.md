@@ -473,9 +473,9 @@ Notas del usuario sobre toda la guía. Estado de cada tarea al final de la líne
 
 Publicado hasta 5eba0a8. **Sin subir:** f84fb74 (Sequencing, Natural Order, Matchups, cartas, Game Plans, Credits), 338e0e1 y f243a63 (LEGACY, secciones 12 y 13) y el commit de documentación que les sigue.
 
-Decisiones abiertas: plan de Doomsday (propuesta en CLAUDE.md, "Open decisions"); tierra 20 (aparcada); Endurance en el main (aparcada); las 70 "Unverified" del Maybeboard; nombre superpuesto en las cartas de marco antiguo del Current 75.
+Doomsday decidido y aplicado (+4 Thoughtseize, +2 Assassin's Trophy, +2 Choke / −1 Atraxa, −2 Formidable Speaker, −2 Wirewood Symbiote, −1 Temur Sabertooth, −1 Vibrance, −1 Marwyn; LEGACY 11.3). Decisiones abiertas: tierra 20 (aparcada); Endurance en el main (aparcada); las 70 "Unverified" del Maybeboard; nombre superpuesto en las cartas de marco antiguo del Current 75.
 
-1. C `revision-sideboard` ★ — aprobar Doomsday y el resto de la propuesta del 9 Oct; añadir notas "on the draw" donde el plan cambie (Damo da Rosa, LEGACY 13.4) y leer los planes junto a "Their sideboard". Contrastar con LEGACY 10, 11 y 13. Bloquea D y M.
+1. C `revision-sideboard` ★ — Doomsday y Mono Red ya hechos; aprobar el resto de la propuesta del 9 Oct; añadir notas "on the draw" donde el plan cambie (Damo da Rosa, LEGACY 13.4) y leer los planes junto a "Their sideboard". Contrastar con LEGACY 10, 11 y 13. Bloquea D y M.
 2. W `revision-maybeboard` ★ — los 70 borradores; ya hay fuentes en LEGACY 11 y 13 (Mindbreak Trap, Chrome Mox, Spirit Guide, Gemstone Caverns, Progenitus, Underground Mortuary, Wastewood Verge…).
 3. J `pivotes-interaccion` — secuencias tras perder Cradle o un dork; parte de Sequencing e Interaction Windows. Bloquea N parte 1.
 4. G `estudios-mulligan` ★ — manos de ejemplo; distinguir game 1 de games 2 y 3 (LEGACY 13.4) y usar las cifras de Once Upon a Time (LEGACY 12).

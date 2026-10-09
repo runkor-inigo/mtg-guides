@@ -498,6 +498,10 @@ applySideboardPlan('sneak',{ins:{'Thoughtseize':4,'Choke':2,"Assassin's Trophy":
 applySideboardPlan('8moon',{ins:{'Snuff Out':3,"Assassin's Trophy":1},outs:{'Temur Sabertooth':1,'Vibrance':1,'Wirewood Symbiote':1,'Marwyn, the Preserver':1},
  inCount:4,outCount:4,over:'Normal',
  notes:'Plan for the Mono Red family (Chalice, Trinisphere, Blood Moon, Magus). Snuff Out answers Magus, Bombardiers and other creature threats; Assassin’s Trophy covers Chalice, Trinisphere and The One Ring. 9 Oct 2026 (runkor): keep all three Natural Order, which close the game once the lock piece is answered; one Wirewood Symbiote leaves instead, since it is the slow part of the engine and dies to Chalice on 1. Two basic Forests still cast Natural Order under Blood Moon.'});
+// Doomsday (9 Oct 2026, runkor): attack the pile before it resolves; Natural Order and Collector Ouphe stay.
+applySideboardPlan('doomsday',{ins:{'Thoughtseize':4,"Assassin's Trophy":2,'Choke':2},outs:{'Atraxa, Grand Unifier':1,'Formidable Speaker':2,'Wirewood Symbiote':2,'Temur Sabertooth':1,'Vibrance':1,'Marwyn, the Preserver':1},
+ inCount:8,outCount:8,over:'Deliberate transformation',
+ notes:'Attack Doomsday before the pile resolves: Thoughtseize takes Doomsday or its protection, Assassin’s Trophy on Underground Sea leaves them short of mana for the pile or for Thassa’s Oracle, and Choke cuts their Islands. Snuff Out stays in the sideboard: against a pile that empties the library, killing Oracle in response does not stop the win. Collector Ouphe stays because it shuts off Lion’s Eye Diamond. Natural Order stays for Craterhoof: after one or two pieces of disruption the deck needs a fast kill. The slow engine pieces leave (two Speaker, two Symbiote, Sabertooth) with Atraxa, Vibrance and Marwyn. 9 Oct 2026 (runkor), checked against j-off’s guide, a Cradle Control matrix and Newton Hang (LEGACY.md, sections 10 and 11).'});
 removeMatchup('cephalid','Cephalid Breakfast');
 upgradeMatrix();
 // RC34: retain category separators, reclaim Macro column for meta trend.
