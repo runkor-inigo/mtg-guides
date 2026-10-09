@@ -255,3 +255,23 @@ Los artículos son de 2021–2023 y el formato ha cambiado desde entonces: se le
 - **Leyline y Endurance:** aparcado (9 Oct 2026): no hay hueco en el main para Endurance ahora mismo. Se quedan las tres Leyline en el sideboard.
 - **Mindbreak Trap: solo para la versión Mono-Green.** Si jugamos negro, Thoughtseize al 100 %: ahora mismo está muy bien posicionado. **Settled.**
 - **Huecos aprobados y publicados:** secuenciación (desde el 9 Oct por la tarde, sección propia "Sequencing" en Gameplay; First Turns enlaza a ella), tarjeta "Who is the beatdown?" en Heuristics, criterio de flex (impacto y suelo) en Deck Construction y la importancia de los turnos 1 y 2 al principio de Interaction Windows. Los artículos se citan en Credits. Pendiente: usar los artículos como fuente para los borradores del Maybeboard (tarea W).
+
+---
+
+## 12. Once Upon a Time en números
+
+Fuente: Tanner Bromer, "Mathed Up: Once Upon A Time", Good Grief Games, 7 Oct 2019 (https://goodgriefgames.wordpress.com/2019/10/07/mathed-up-once-upon-a-time/). Añadida por runkor el 9 Oct 2026. Es un análisis genérico para mazos de 60 cartas (Standard y Modern), no de Elves: biblioteca completa de 60, sin contar la mano.
+
+**Sus cifras:**
+- Al menos una Once Upon a Time en la mano inicial de 7: 4 copias 39,95 %, **3 copias 31,54 %**, 2 copias 22,15 %, 1 copia 11,67 %.
+- Aciertos medios por lanzamiento (tierras + criaturas en las 5 cartas): 30 → 2,50; 40 → 3,33; 50 → 4,13.
+- Encontrar tierra: 18 tierras, 84,4 % (1,58 de media); 24 tierras, 93,1 %.
+- Encontrar criatura: 10 criaturas, 61,7 %; 20 criaturas, 88,0 %.
+- Conclusión: la mayoría de mazos que la juegan ven 3–4 opciones por lanzamiento; incluso los de pocas tierras encuentran tierra en torno al 85 % de las veces.
+
+**Las mismas cuentas con nuestra lista del 5 Oct** (19 tierras y 31 criaturas del Current 75, con el mismo supuesto de biblioteca de 60; las 2 Dryad Arbor cuentan como tierra):
+- 50 de 60 cartas son tierra o criatura: **4,17 opciones de media** por lanzamiento; fallar del todo pasa un 0,005 % de las veces.
+- Tierra en las 5 cartas: **86,3 %** (1,58 de media). Criatura: **97,8 %** (2,58 de media).
+- Al menos una de nuestras 3 Once Upon a Time: 31,5 % en 7 cartas (en el play) y 35,4 % en 8 (en el draw).
+
+**Qué se deduce:** con 50 objetivos, Once Upon a Time casi nunca falla y casi siempre deja elegir entre tierra y criatura; por eso funciona como "la carta que encuentra la pieza que falta" (sección 2) y no se saca en el sideboard. Con 19 tierras, pedirle tierra concreta falla una de cada siete veces: contar con ella para la tierra del turno 1 es razonable, no seguro. El recuadro de probabilidades de Mulligans (`js/12.js`) ya modela la primera copia como gratis y mirando el top 5. **Settled** como contexto; no cambia ninguna regla.
