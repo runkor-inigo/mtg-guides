@@ -469,24 +469,23 @@ Notas del usuario sobre toda la guía. Estado de cada tarea al final de la líne
   - **Dónde usarla:** (1) Deck Origins, era 2013 ("Natural Order for Craterhoof"): fuente de primera mano para la victoria de Julian en el Bazaar of Moxen, junto al enlace de mtgtop8 que ya hay; añadirla a la lista de fuentes del pane (tarea M). (2) LEGACY.md y Heuristics: como antecedente histórico de Quirion Ranger como motor de maná y de priorizar el odio a combo sobre el de cementerio; marcarlo como lista de 2013, no como regla para Speaker Elves. (3) Tarea C: contraste para el plan contra Storm/combo (Mindbreak Trap y Cabal Therapy frente a las opciones actuales).
   - **Pendiente:** buscar la parte 2 (cómo ganó el torneo) en StarCityGames antes de citar el resultado final con detalle.
 
-### Orden recomendado (lo que queda, 9 Oct 2026 tras 1154d2f)
+### Orden recomendado (lo que queda, 9 Oct 2026, fin del día)
 
-Decisiones abiertas de la ronda X: (1) quitar o no las 70 "Unverified" de los borradores del Maybeboard; (2) superponer o no el nombre en texto en las cartas de marco antiguo del Current 75 (Bayou, Forest, Llanowar Elves), cuyo nombre casi no se lee en la franja.
+Publicado hasta 5eba0a8. **Sin subir:** f84fb74 (Sequencing, Natural Order, Matchups, cartas, Game Plans, Credits), 338e0e1 y f243a63 (LEGACY, secciones 12 y 13) y el commit de documentación que les sigue.
 
+Decisiones abiertas: plan de Doomsday (propuesta en CLAUDE.md, "Open decisions"); tierra 20 (aparcada); Endurance en el main (aparcada); las 70 "Unverified" del Maybeboard; nombre superpuesto en las cartas de marco antiguo del Current 75.
 
-Todo lo hecho está subido y publicado. Lo que queda:
-
-1. C `revision-sideboard` ★ — la propuesta está en la tarea C y espera tu decisión (qué cambios entran). Mejor junto a W. Bloquea D y M.
-2. W `revision-maybeboard` — revisar los 70 motivos "Why it is not in this list" marcados Unverified.
-3. J `pivotes-interaccion` — bloquea N parte 1.
-4. G `estudios-mulligan` ★
-5. M `revision-learn` (tras C)
-6. N `revision-gameplay-1` (First Turns y Game Plans; tras J)
-7. D `matchups-sin-plan` — opcional (Azorius Tempo y Rakdos Reanimator fuera del top 10)
-8. V parte 2 — limpieza de `!important` en css/01.css (opcional; la parte 1 está hecha)
-9. Q `rendimiento-carga`
-10. U `repo-cleanup` ★ — cuando decidas borrar (72 imágenes sin uso; los estilos de `.guide-entry`; las capturas de `.playwright-mcp/`; decidir si los dos MP4 originales de la raíz se guardan fuera del proyecto)
-11. T `verificacion-final`
+1. C `revision-sideboard` ★ — aprobar Doomsday y el resto de la propuesta del 9 Oct; añadir notas "on the draw" donde el plan cambie (Damo da Rosa, LEGACY 13.4) y leer los planes junto a "Their sideboard". Contrastar con LEGACY 10, 11 y 13. Bloquea D y M.
+2. W `revision-maybeboard` ★ — los 70 borradores; ya hay fuentes en LEGACY 11 y 13 (Mindbreak Trap, Chrome Mox, Spirit Guide, Gemstone Caverns, Progenitus, Underground Mortuary, Wastewood Verge…).
+3. J `pivotes-interaccion` — secuencias tras perder Cradle o un dork; parte de Sequencing e Interaction Windows. Bloquea N parte 1.
+4. G `estudios-mulligan` ★ — manos de ejemplo; distinguir game 1 de games 2 y 3 (LEGACY 13.4) y usar las cifras de Once Upon a Time (LEGACY 12).
+5. M `revision-learn` (tras C) — texto final de Start Here, Deck Origins y Deck Construction; Julian Knab (Bazaar of Moxen 2013) en Origins; posible línea sobre Once Upon a Time.
+6. N parte 1 `revision-gameplay-1` (tras J) — First Turns y Game Plans, ya enlazados a Sequencing.
+7. D `matchups-sin-plan` — opcional.
+8. V parte 2 — `!important` de css/01.css, opcional.
+9. Q `rendimiento-carga`.
+10. U `repo-cleanup` ★ — 72 imágenes sin uso, estilos de `.guide-entry`, capturas de `.playwright-mcp/`, MP4 originales.
+11. T `verificacion-final`.
 
 Comprobación al empezar la próxima sesión: `git pull` y revisar el commit nocturno del 10 Oct, el primero con resultados solo de MTGGoldfish. Playwright MCP ya se carga en las sesiones nuevas.
 

@@ -37,7 +37,7 @@ Load order matters: later scripts use globals defined in earlier ones. `index.ht
 | `js/14.js` | Deck Origins timeline (built from the `<ol class="timeline">` in the HTML) |
 | `js/15.js` | Home: forest video and Durin's door (loaded only on the home, with motion allowed) and the cards' cursor parallax |
 
-Each numbered script has a matching stylesheet where it needs one (`css/11.css` to `css/15.css`); `css/12.css` ends with the phone fixes; `css/16.css` styles the art headers of Game Plans, Natural Order and Speaker Loop (no script).
+Each numbered script has a matching stylesheet where it needs one (`css/11.css` to `css/15.css`); `css/12.css` ends with the phone fixes; `css/16.css` styles the art headers of Game Plans, Natural Order and Speaker Loop and the two-by-two cards of Sequencing (no script). Internal notes: LEGACY.md (Legacy heuristics and the knowledge base, sections 11–13), ROADMAP.md (tasks), CLAUDE.md (project rules); none of them is published.
 
 ## Generated data
 
