@@ -342,6 +342,7 @@ https://articles.starcitygames.com/magic-the-gathering/premium/theres-more-to-si
 - **Allosaurus Shepherd:** para matchups con counters, pero a veces conviene el alpha strike: se puede dejar una.
 - **Elvish Visionary:** matchups largos y de desgaste, o para encontrar una respuesta concreta (los dos Boseiju contra Tron). No es imprescindible. Sale contra Bowmasters.
 - **Natural Order:** en la duda, sacar una.
+- **Atraxa contra Show and Tell:** nunca sale contra Sneak & Show ni Omni-Tell. Cuando lanzan Show and Tell, cada jugador pone un permanente de su mano: metemos Atraxa en respuesta a su jugada (runkor, 9 Oct 2026).
 - **Snuff Out:** partidas rápidas en las que hay que desarrollarse y frenar al rival (Eldrazi, Welder Cam, Cephalid, Boros Energy).
 - **Leyline of the Void:** solo cuando el plan del rival depende claramente del cementerio. Una Leyline tardía no es carta muerta en este mazo: Formidable Speaker la descarta para buscar una criatura (efecto looting). Por eso no es "3 copias o ninguna" como en otros mazos, y una o dos copias son defendibles (runkor, 9 Oct 2026).
 - **Thoughtseize:** combo rápido; tres o cuatro según la velocidad del rival.
@@ -391,9 +392,21 @@ https://articles.starcitygames.com/magic-the-gathering/premium/theres-more-to-si
 ### 14.2f Revisión de planes aplicada (runkor, 9 Oct 2026)
 
 - **Vibrance (cambio de heurística):** antes se quedaba contra los mazos con Wasteland. Ahora es para matchups largos en los que hay tiempo de montar la mesa (Lands, D&T, control, Cradle Control); contra tempo, el turno que cuesta buscar una tierra es un turno regalado. runkor la ha echado de menos en matchups largos, no en los de tempo.
-- **Aplicado en js/01.js (bloque "Sideboard review of 9 Oct 2026"):** Boros +3 Snuff Out / −2 Shepherd −Ouphe (sin Trophy: Boros casi nunca baja Bombardment con la mesa vacía); UR Cutter +2 Choke +3 Snuff; UB Moonshadow +2 Choke +2 Leyline / −Ouphe −Sabertooth −Vibrance −Visionary (Bowmasters); UB Legends +2 Choke +2 Snuff (mismos OUT); Aluren +4 TS +2 Trophy +Deathclaw; Sneak +4 TS +2 Trophy +Deathclaw / −Ouphe −Visionary −Vibrance −Atraxa −1 NO −1 Speaker −1 Symbiote (Quirion se queda); Yorion Taxes +1 Snuff +2 Trophy +Deathclaw; GX Lands +1 Leyline +2 Trophy +Deathclaw / −3 Shepherd −Ouphe (Vibrance se queda); Sewer Cam +3 Snuff +2 Leyline +Deathclaw; TES +4 TS +1 Leyline; Blue Tron y Colorless Tron con plan en el play (Trophies, combo entero) y en el draw (más Thoughtseize) en las notas. Sin cambios: Eldrazi (3 Snuff), Doomsday, Beanstalk (+2 Choke +3 TS), Mono Red (Trophy), Hogaak y los pequeños.
+- **Aplicado en js/01.js (bloque "Sideboard review of 9 Oct 2026"):** Boros +3 Snuff Out / −2 Shepherd −Ouphe (sin Trophy: Boros casi nunca baja Bombardment con la mesa vacía); UR Cutter +2 Choke +3 Snuff; UB Moonshadow +2 Choke +2 Leyline / −Ouphe −Sabertooth −Vibrance −Visionary (Bowmasters); UB Legends +2 Choke +2 Snuff (mismos OUT); Aluren +4 TS +2 Trophy +Deathclaw; Sneak +4 TS +2 Trophy +Deathclaw / −Ouphe −Visionary −Vibrance −1 NO −1 Speaker −2 Symbiote (Quirion y Atraxa se quedan); Yorion Taxes +1 Snuff +2 Trophy +Deathclaw; GX Lands +1 Leyline +2 Trophy +Deathclaw / −3 Shepherd −Ouphe (Vibrance se queda); Sewer Cam +3 Snuff +2 Leyline +Deathclaw; TES +4 TS +1 Leyline; Blue Tron en el play +2 Trophy / −1 Speaker −1 Quirion; Colorless Tron en el play +2 Trophy +Deathclaw / −3 Shepherd; contra los dos Tron no salen Vibrance ni Visionary (runkor); el plan en el draw (más Thoughtseize) va en las notas. Sin cambios: Eldrazi (3 Snuff), Doomsday, Beanstalk (+2 Choke +3 TS), Mono Red (Trophy), Hogaak y los pequeños.
 
 - **Matchups nuevos (9 Oct 2026):** Jeskai Tempo (plan de UR Cutter), Azorius Tempo (plan de Stiflenought), Omni-Tell (plan de Sneak) y el mirror de Elves: +3 Snuff Out, +2 Assassin's Trophy (su Cradle y permanentes clave; runkor) / −3 Shepherd, −Ouphe, −1 Speaker. Thoughtseize solo si sobran huecos.
+
+### 14.2g Segunda pasada de runkor (9 Oct 2026, noche)
+
+- **Boros Energy** +3 Snuff / −2 Shepherd −Ouphe. **WBR (Mardu) Energy** +3 Snuff / −Visionary −1 Shepherd −Ouphe.
+- **UW Stiflenought** +2 Choke +3 Snuff / −Ouphe −Sabertooth −1 NO −Vibrance −1 Speaker. Snuff Out es muy importante: juegan white hate bears, y esos hate bears también habilitan su combo (bloquean disparos al entrar). Vibrance no rompe Torpor Orb: el Orb anula su propio disparo al entrar (Scryfall). Contra el Orb: channel de Boseiju o Assassin's Trophy.
+- **WR Initiative** +3 Snuff / −1 Shepherd −Vibrance −Visionary (Sabertooth se queda; white hate bears).
+- **GX Lands** +3 Leyline +2 Trophy / −3 Shepherd −1 Symbiote −1 Speaker. Parar el motor de Life from the Loam es lo más relevante; Deathclaw es demasiado lento aquí.
+- **Blue Tron** +2 Trophy / −1 Speaker −1 Symbiote: mantener la velocidad crítica del combo.
+- **Colorless Tron** +2 Trophy +2 Thoughtseize / −3 Shepherd −1 Quirion: mismo criterio, pero es más rápido, de ahí los Thoughtseize; en el draw, más Thoughtseize.
+- **Mono Red** +3 Snuff +2 Trophy / −Sabertooth −Visionary −1 Speaker −2 Symbiote. Quirion se queda: devuelve un Forest para tener {G}{G} bajo Moon.
+- **8-Cast** +3 Snuff / −Visionary −Vibrance −1 Speaker.
+- **TES** +4 Thoughtseize +2 Leyline / −3 Shepherd −Sabertooth −Visionary −Vibrance.
 
 ### 14.3 Notas de Newton sobre nuestro meta de 14 días (9 Oct 2026)
 

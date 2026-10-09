@@ -559,8 +559,6 @@ CARD_COSTS['Alpha Deathclaw']=['4','B','G'];
  const T='Thoughtseize',S='Snuff Out',L='Leyline of the Void',C='Choke',A="Assassin's Trophy",D='Alpha Deathclaw';
  const plan=(id,ins,outs,notes)=>{if(!DETAILS[id])return;const n=o=>Object.values(o).reduce((a,b)=>a+b,0);
   applySideboardPlan(id,{ins,outs,inCount:n(ins),outCount:n(outs),over:n(ins)>=6?'Deliberate transformation':'Normal',notes})};
- plan('boros-energy',{[S]:3},{'Allosaurus Shepherd':2,'Collector Ouphe':1},
-  'Three Snuff Out for their creatures; one Allosaurus Shepherd stays. No Assassin’s Trophy: Boros rarely lands Goblin Bombardment on an empty board, so Snuff Out on the creatures does the work.');
  plan('ur-cutter',{[C]:2,[S]:3},{'Collector Ouphe':1,'Temur Sabertooth':1,'Natural Order':1,'Vibrance':1,'Formidable Speaker':1},
   'Choke is the structural card; Snuff Out wins back tempo against Cutter and Delver. Do not become a control deck.');
  plan('ub-moon',{[C]:2,[L]:2},{'Collector Ouphe':1,'Temur Sabertooth':1,'Vibrance':1,'Elvish Visionary':1},
@@ -569,28 +567,41 @@ CARD_COSTS['Alpha Deathclaw']=['4','B','G'];
   'Two Choke and two Snuff Out: Tamiyo and Bilbo are not black, so Snuff Out has targets here. Elvish Visionary leaves against Orcish Bowmasters; Vibrance leaves against tempo.');
  plan('aluren',{[T]:4,[A]:2,[D]:1},{'Temur Sabertooth':1,'Vibrance':1,'Wirewood Symbiote':2,'Formidable Speaker':2,'Elvish Visionary':1},
   'Veil of Summer can blank Thoughtseize, so the plan also breaks their permanents: two Assassin’s Trophy and Alpha Deathclaw for Aluren or Omniscience. Choke stays out (they need few Islands).');
- plan('sneak',{[T]:4,[A]:2,[D]:1},{'Collector Ouphe':1,'Elvish Visionary':1,'Vibrance':1,'Atraxa, Grand Unifier':1,'Natural Order':1,'Formidable Speaker':1,'Wirewood Symbiote':1},
-  'Four Thoughtseize for Show and Tell or Sneak Attack, and permanent answers for what resolves: two Assassin’s Trophy and Alpha Deathclaw for Sneak Attack or Omniscience. Quirion Ranger stays (pro-combo, anti-Wasteland; runkor: it almost never leaves).');
+ plan('sneak',{[T]:4,[A]:2,[D]:1},{'Collector Ouphe':1,'Elvish Visionary':1,'Vibrance':1,'Natural Order':1,'Formidable Speaker':1,'Wirewood Symbiote':2},
+  'Four Thoughtseize for Show and Tell or Sneak Attack, and permanent answers for what resolves: two Assassin’s Trophy and Alpha Deathclaw for Sneak Attack or Omniscience. Quirion Ranger stays (pro-combo, anti-Wasteland; runkor: it almost never leaves). Atraxa never leaves against Show and Tell: when they cast it, we put Atraxa onto the battlefield too (runkor, 9 Oct 2026).');
  plan('dnt',{[S]:1,[A]:2,[D]:1},{'Allosaurus Shepherd':3,'Natural Order':1},
   'Assassin’s Trophy and Alpha Deathclaw answer Chalice, Trinisphere, Clarion Conqueror or Containment Priest; one Snuff Out (Trinisphere and Chalice make the free spell worse). Vibrance stays: a long matchup with Wasteland.');
- plan('lands',{[L]:1,[A]:2,[D]:1},{'Allosaurus Shepherd':3,'Collector Ouphe':1},
-  'Assassin’s Trophy and Alpha Deathclaw for Dark Depths, Thespian’s Stage or Urza’s Saga; one Leyline of the Void against Life from the Loam. Vibrance stays: a long matchup where it finds a lost land.');
  plan('sewer-cam',{[S]:3,[L]:2,[D]:1},{'Allosaurus Shepherd':1,'Natural Order':1,'Vibrance':1,'Temur Sabertooth':1,'Formidable Speaker':1,'Elvish Visionary':1},
   'Snuff Out for their creatures, two Leyline of the Void for the graveyard engine and Alpha Deathclaw for whatever artifact they rely on.');
- plan('tes',{[T]:4,[L]:1},{'Allosaurus Shepherd':3,'Temur Sabertooth':1,'Elvish Visionary':1},
-  'Four Thoughtseize and one Leyline of the Void (Past in Flames, graveyard storm). Collector Ouphe stays against their artifact mana.');
- plan('blue-tron',{[A]:2},{'Vibrance':1,'Elvish Visionary':1},
-  'On the play: two Assassin’s Trophy and nothing else; use the speed of the deck and keep the combo whole. On the draw: +4 Thoughtseize, +2 Assassin’s Trophy / −Vibrance, −Elvish Visionary, −Temur Sabertooth, −1 Quirion Ranger, −1 Formidable Speaker, −1 Natural Order.');
  plan('jeskai-tempo',{[C]:2,[S]:3},{'Collector Ouphe':1,'Temur Sabertooth':1,'Natural Order':1,'Vibrance':1,'Formidable Speaker':1},
   'Plan of UR Cutter: two Choke for their Islands and three Snuff Out for Quantum Riddler, Phelia, Delver and their other nonblack threats. Vibrance leaves against tempo. Some lists bring Wrath of the Skies: do not overcommit.');
  plan('azorius-tempo',{[C]:2,[S]:2},{'Collector Ouphe':1,'Temur Sabertooth':1,'Natural Order':1,'Vibrance':1},
   'Plan of UW Stiflenought: two Choke and two Snuff Out (Phelia, Quantum Riddler, Tamiyo, Containment Priest). They play Stifle, Daze, Force of Will, Karakas and Wasteland in the main deck and bring Containment Priest and Wrath of the Skies: keep Allosaurus Shepherd for the counters.');
- plan('omni-tell',{[T]:4,[A]:2,[D]:1},{'Collector Ouphe':1,'Elvish Visionary':1,'Vibrance':1,'Atraxa, Grand Unifier':1,'Natural Order':1,'Formidable Speaker':1,'Wirewood Symbiote':1},
-  'Plan of Sneak & Show: four Thoughtseize for Show and Tell or Omniscience, two Assassin’s Trophy and Alpha Deathclaw for an Omniscience that resolves. Quirion Ranger stays.');
+ plan('omni-tell',{[T]:4,[A]:2,[D]:1},{'Collector Ouphe':1,'Elvish Visionary':1,'Vibrance':1,'Natural Order':1,'Formidable Speaker':1,'Wirewood Symbiote':2},
+  'Plan of Sneak & Show: four Thoughtseize for Show and Tell or Omniscience, two Assassin’s Trophy and Alpha Deathclaw for an Omniscience that resolves. Quirion Ranger stays, and Atraxa never leaves: when they cast Show and Tell, we put Atraxa onto the battlefield too.');
  plan('mirror',{[S]:3,[A]:2},{'Allosaurus Shepherd':3,'Collector Ouphe':1,'Formidable Speaker':1},
   'Elves mirror: three Snuff Out for their dorks and engine creatures (all nonblack) and two Assassin’s Trophy for their Gaea’s Cradle and key permanents (runkor, 9 Oct 2026). Allosaurus Shepherd has nothing to protect against; three Formidable Speaker are enough in a long game. Vibrance stays (a long matchup, and its red mode kills a dork). Thoughtseize only if more room is found.');
- plan('key-ring',{[A]:2,[D]:1},{'Allosaurus Shepherd':1,'Vibrance':1,'Elvish Visionary':1},
-  'On the play: two Assassin’s Trophy and Alpha Deathclaw for Mystic Forge, The One Ring or Chalice; keep the combo whole (two Allosaurus Shepherd stay against Chalice). On the draw: +4 Thoughtseize, +2 Assassin’s Trophy, +1 Alpha Deathclaw / −3 Allosaurus Shepherd, −Vibrance, −Elvish Visionary, −1 Formidable Speaker, −Temur Sabertooth.');
+ // Second pass of runkor's review (9 Oct 2026, night).
+ plan('boros-energy',{[S]:3},{'Allosaurus Shepherd':2,'Collector Ouphe':1},
+  'Three Snuff Out for their creatures; one Allosaurus Shepherd stays. No Assassin’s Trophy: Boros rarely lands Goblin Bombardment on an empty board, so Snuff Out on the creatures does the work.');
+ plan('energy',{[S]:3},{'Elvish Visionary':1,'Allosaurus Shepherd':1,'Collector Ouphe':1},
+  'Mardu version of Energy: three Snuff Out for their nonblack creatures. Elvish Visionary leaves against Orcish Bowmasters; two Allosaurus Shepherd stay.');
+ plan('uw-stifle',{[C]:2,[S]:3},{'Collector Ouphe':1,'Temur Sabertooth':1,'Natural Order':1,'Vibrance':1,'Formidable Speaker':1},
+  'Two Choke and three Snuff Out. Snuff Out matters a lot here: they play white hate bears, and those hate bears are also enablers of the Stiflenought combo (they block enter triggers). Vibrance cannot answer Torpor Orb: the Orb stops its own enter trigger, so use Boseiju’s channel or Assassin’s Trophy on it.');
+ plan('initiative',{[S]:3},{'Allosaurus Shepherd':1,'Vibrance':1,'Elvish Visionary':1},
+  'Three Snuff Out: very important, they play white hate bears. Temur Sabertooth stays.');
+ plan('lands',{[L]:3,[A]:2},{'Allosaurus Shepherd':3,'Wirewood Symbiote':1,'Formidable Speaker':1},
+  'Three Leyline of the Void: stopping the Life from the Loam engine matters most. Two Assassin’s Trophy for Dark Depths, Thespian’s Stage or Urza’s Saga. No Alpha Deathclaw: too slow here. Vibrance stays (a long matchup where it finds a lost land).');
+ plan('blue-tron',{[A]:2},{'Formidable Speaker':1,'Wirewood Symbiote':1},
+  'Two Assassin’s Trophy; keep critical combo speed. Vibrance, Elvish Visionary and Quirion Ranger stay. On the draw, Thoughtseize can come in for more of the slow pieces.');
+ plan('key-ring',{[A]:2,[T]:2},{'Allosaurus Shepherd':3,'Quirion Ranger':1},
+  'Two Assassin’s Trophy and two Thoughtseize: keep critical combo speed, but this deck is faster than Blue Tron, hence the Thoughtseize. On the draw, more Thoughtseize can come in.');
+ plan('8moon',{[S]:3,[A]:2},{'Temur Sabertooth':1,'Elvish Visionary':1,'Formidable Speaker':1,'Wirewood Symbiote':2},
+  'Three Snuff Out for Magus, Bombardiers and their creatures, two Assassin’s Trophy for Chalice, Trinisphere, Blood Moon or The One Ring. Quirion Ranger stays: it bounces a Forest to make {G}{G} under Moon. Every Natural Order stays.');
+ plan('8cast',{[S]:3},{'Elvish Visionary':1,'Vibrance':1,'Formidable Speaker':1},
+  'Three Snuff Out for their threats. Collector Ouphe and every Allosaurus Shepherd stay (Ouphe is the lock piece; Shepherd beats their Force effects).');
+ plan('tes',{[T]:4,[L]:2},{'Allosaurus Shepherd':3,'Temur Sabertooth':1,'Elvish Visionary':1,'Vibrance':1},
+  'Four Thoughtseize and two Leyline of the Void (Past in Flames, graveyard storm). Collector Ouphe stays against their artifact mana; Vibrance leaves.');
 })();
 upgradeMatrix();
 // RC34: retain category separators, reclaim Macro column for meta trend.

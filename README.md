@@ -38,13 +38,13 @@ Load order matters: later scripts use globals defined in earlier ones. `index.ht
 | `js/15.js` | Home: forest video and Durin's door (loaded only on the home, with motion allowed) and the cards' cursor parallax |
 | `js/16.js` | Sideboard Optimizer: 0–1 rating per card and matchup (`DEFAULT`), weighted by the field share in `GOLDFISH_META` (MC, UE, field), ranking, suggested fifteen, editable grid saved in localStorage with JSON export (styles in `css/17.css`) |
 
-Each numbered script has a matching stylesheet where it needs one (`css/11.css` to `css/15.css`); `css/12.css` ends with the phone fixes; `css/16.css` styles the art headers of Game Plans, Natural Order and Speaker Loop and the two-by-two cards of Sequencing (no script). Internal notes: LEGACY.md (Legacy heuristics and the knowledge base, sections 11–13), ROADMAP.md (tasks), CLAUDE.md (project rules); none of them is published.
+Each numbered script has a matching stylesheet where it needs one (`css/11.css` to `css/15.css`, and `css/17.css` for the Sideboard Optimizer); `css/12.css` ends with the phone fixes; `css/16.css` styles the art headers of Game Plans, Natural Order and Speaker Loop and the two-by-two cards of Sequencing (no script). Internal notes: LEGACY.md (Legacy heuristics and the knowledge base, sections 11–13), ROADMAP.md (tasks), CLAUDE.md (project rules); none of them is published.
 
 ## Generated data
 
 Never edit these by hand.
 
-- `js/meta-live.js`, written by `scripts/update_meta.py`: 7/14/30-day shares and the most common sideboard cards per archetype from MTGGoldfish, plus MyMTGO's public archetype pages (cards sided in after game 1, the reference 75, cards sided in against Elves). A MyMTGO failure keeps the MTGGoldfish refresh. Delete the file to fall back to the dated snapshot inside `js/01.js`.
+- `js/meta-live.js`, written by `scripts/update_meta.py`: 7/14/30-day shares and the most common sideboard cards per archetype from MTGGoldfish, plus MyMTGO's public archetype pages (cards sided in after game 1, the reference 75, cards sided in against Elves) and Elves' own MyMTGO page (match win rate against each archetype, used by the Sideboard Optimizer to weigh the worst matchups). A MyMTGO failure keeps the MTGGoldfish refresh. Delete the file to fall back to the dated snapshot inside `js/01.js`.
 - `js/results-archive.js`, written by `scripts/update_results.py`: every published Speaker Elves result from the MTGGoldfish deck search (Legacy, Formidable Speaker in the main deck). MTGO league lists are 5-0 trophies; challenge places come from the official mtgo.com standings; other MTGO events (Showcase Challenge, Qualifiers, Last Chance) count with the challenges; non-MTGO events are paper. MTGGoldfish gives no place for those last two, so they show as published lists. Lists are linked, never copied.
 
 The GitHub Actions workflow runs both scripts every night (cron at 22:05 and 23:05 UTC). GitHub usually starts scheduled runs hours late, so each script refreshes on the first run of each Madrid day, whenever it arrives. The bot commits and pushes to `main`, which redeploys the site: run `git pull` before starting work.

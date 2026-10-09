@@ -266,10 +266,10 @@ Cada tarea cabe en un chat. Para empezar uno: `/rename <nombre>` y "Lee CLAUDE.m
 - Tamaño: media (lectura).
 - Decisión previa: ninguna.
 
-### Sideboard Optimizer (9 Oct 2026, chat de la lista del 9 Oct, publicado en 5c0c615)
+### Sideboard Optimizer (9 Oct 2026, chat de la lista del 9 Oct, publicado en 5c0c615 y 8c59002)
 
 - Sideboard map y Matchups muestran los mismos 31 planes, por cuota de 14 días: todo el top 15 de MTGGoldfish (se añadieron Jeskai Tempo, Azorius Tempo y Omni-Tell, con arte) más los fijos (Cradle Control, UB Legends, el mirror de Elves, nuevo, y los pequeños). Pendiente tarea D: revisar esos cuatro planes nuevos con runkor; arte para 12 matchups sin imagen (Hogaak, Colorless Tron, Jeskai Control, Mono Red, Stiflenought, 8-Cast, los Reanimator, Oops, Cradle Control, Stoneblade, Initiative); decidir si los planes de Reanimator se enlazan también a Rakdos Reanimator de MTGGoldfish (2,1 %, hoy puesto 16), que ahora solo cuentan el arquetipo "Reanimator" (0,4 %).
-- **Preguntas abiertas para runkor (modelo del optimizer, 9 Oct noche):** (1) cómo penalizar los one-offs que no se tutorizan (mínimo de copias o un umbral); (2) si la copia extra por tutores debe ser 1 o más, sabiendo que se comparten; (3) huecos por matchup: ¿los del plan actual valen o los fija runkor?; (4) notas de las candidatas nuevas (Masked Vandal, Acidic Slime) y revisión de Force of Vigor, Dismember y Snuff Out. Sin publicar: huecos, interacciones, porcentajes de victoria de MyMTGO, crédito a Newton.
+- **Preguntas abiertas para runkor (modelo del optimizer, 9 Oct noche):** (1) cómo penalizar los one-offs que no se tutorizan (mínimo de copias o un umbral); (2) si la copia extra por tutores debe ser 1 o más, sabiendo que se comparten; (3) huecos por matchup: ¿los del plan actual valen o los fija runkor?; (4) notas de las candidatas nuevas (Masked Vandal, Acidic Slime) y revisión de Force of Vigor, Dismember y Snuff Out. Publicado en 8c59002: huecos, interacciones, porcentajes de victoria de MyMTGO, crédito a Newton, mejor sideboard teórico.
 
 - Semáforo nuevo en Matchups, "White hate bear" (Clarion Conqueror / Containment Priest / Both): rojo en el main, ámbar tras sideboard. Hoy: Yorion Taxes rojo (Both), Boros Energy ámbar (Both), Doomsday y GX Lands ámbar (Priest).
 - Pendiente (tarea C): algunas notas de plan aún nombran cartas fuera del 75 que no son Marwyn ni Primaris (Yorion Taxes: "Changeling hits equipment…"; UB Moonshadow: "Choke and Hogaak support a longer game"). Las de Marwyn y Primaris ya se quitan en el bloque de conversión del 9 Oct.
@@ -485,24 +485,21 @@ Notas del usuario sobre toda la guía. Estado de cada tarea al final de la líne
   - **Dónde usarla:** (1) Deck Origins, era 2013 ("Natural Order for Craterhoof"): fuente de primera mano para la victoria de Julian en el Bazaar of Moxen, junto al enlace de mtgtop8 que ya hay; añadirla a la lista de fuentes del pane (tarea M). (2) LEGACY.md y Heuristics: como antecedente histórico de Quirion Ranger como motor de maná y de priorizar el odio a combo sobre el de cementerio; marcarlo como lista de 2013, no como regla para Speaker Elves. (3) Tarea C: contraste para el plan contra Storm/combo (Mindbreak Trap y Cabal Therapy frente a las opciones actuales).
   - Parte 2 ya localizada (arriba).
 
-### Orden recomendado (lo que queda, 9 Oct 2026, cierre del chat)
+### Orden recomendado (lo que queda, 9 Oct 2026, noche)
 
-Todo publicado hasta d5e2655 (comprobado en la web: 17 secciones, sin desbordes ni errores a 1440 y 390 px). Al empezar la próxima sesión: `git pull`.
+Todo publicado hasta 8c59002 y el commit de documentación que le sigue (comprobado en la web: 18 secciones, 31 matchups, sin desbordes ni errores a 1440 y 390 px). Al empezar la próxima sesión: `git pull`.
 
-Doomsday decidido y aplicado (+4 Thoughtseize, +2 Assassin's Trophy, +2 Choke / −1 Atraxa, −2 Formidable Speaker, −2 Wirewood Symbiote, −1 Temur Sabertooth, −1 Vibrance, −1 Marwyn; LEGACY 11.3). Hechos además (sin subir): pane Sources al día (excepciones de impresión, revisión del 9 Oct, Newton y los autores del histórico de Natural Order); el comentario de `meta.yml` ya estaba bien. Decisiones abiertas: tierra 20 (aparcada); Endurance en el main (aparcada); las 70 "Unverified" del Maybeboard; nombre superpuesto en las cartas de marco antiguo del Current 75.
+Hecho hoy y publicado: lista del 9 Oct (Visionary por Marwyn, Alpha Deathclaw por Primaris), Sideboard Optimizer con el mejor sideboard teórico y crédito a Newton Hang, semáforo "White hate bear", revisión de planes de la tarea C con runkor (LEGACY 14.2–14.2f), heurística nueva de Vibrance (solo matchups largos), planes nuevos (Jeskai Tempo, Azorius Tempo, Omni-Tell, mirror de Elves), Matchups y Sideboard map con los mismos 31 planes por cuota, porcentajes de victoria de Elves en MyMTGO en el refresco nocturno.
 
-1. C `revision-sideboard` ★ — Doomsday y Mono Red ya hechos; aprobar el resto de la propuesta del 9 Oct; añadir notas "on the draw" donde el plan cambie (Damo da Rosa, LEGACY 13.4) y leer los planes junto a "Their sideboard". Contrastar con LEGACY 10, 11 y 13. Bloquea D y M.
-2. W `revision-maybeboard` ★ — los 70 borradores; ya hay fuentes en LEGACY 11 y 13 (Mindbreak Trap, Chrome Mox, Spirit Guide, Gemstone Caverns, Progenitus, Underground Mortuary, Wastewood Verge…).
-3. J `pivotes-interaccion` — HECHA y publicada (d5e2655): ocho pivotes en Game Plans ("Pivoting after interaction"): dork muerto, Cradle destruida, Cradle con earthbend muerta (vuelve girada y sin ser criatura; solo Speaker la endereza), Natural Order contrarrestado, removal sobre Speaker (Symbiote lo devuelve en respuesta), barrida, Blood Moon / Magus (channel de Boseiju, Vibrance evocada con {R}{R}) y Chalice en 1 (Shepherd no se puede contrarrestar). Reglas comprobadas con Scryfall.
-4. G `estudios-mulligan` ★ — manos de ejemplo; distinguir game 1 de games 2 y 3 (LEGACY 13.4) y usar las cifras de Once Upon a Time (LEGACY 12).
-5. M `revision-learn` (tras C) — texto final de Start Here, Deck Origins y Deck Construction; Julian Knab (Bazaar of Moxen 2013) en Origins; posible línea sobre Once Upon a Time.
-6. N parte 1 `revision-gameplay-1` — HECHA y publicada (d5e2655): First Turns y Game Plans revisados; reglas correctas (earthbend, Cub, Elfos de Dinobash); quitados el "this exception is being worked through" (ahora: Thoughtseize de turno 1 contra combo rápido después del sideboard) y el párrafo sobre las notas internas del piloto.
-7. D `matchups-sin-plan` — opcional.
-8. V parte 2 — `!important` de css/01.css, opcional.
-9. Q `rendimiento-carga` — HECHA y publicada (d5e2655): `preconnect` a Google Fonts y `defer` en los 18 scripts (mismo orden). Medido con red limitada, 3 cargas sin caché: carga completa ~1730 → ~1660 ms, primera pintura igual (~530 ms); en local la mejora es pequeña porque los scripts ya iban al final; el preconnect ayuda sobre todo en la red real. Más mejora pediría fusionar CSS/JS o autoalojar la fuente (fuera de alcance sin build step).
-10. U `repo-cleanup` ★ — 72 imágenes sin uso, estilos de `.guide-entry`, capturas de `.playwright-mcp/`, MP4 originales.
-11. T `verificacion-final`.
+1. W `revision-maybeboard` ★ — los 70 borradores; ya hay fuentes en LEGACY 11 y 13.
+2. Optimizer, preguntas abiertas: mínimo de copias para one-offs que no se tutorizan; enlazar los planes de Reanimator a Rakdos Reanimator (MTGGoldfish, 2,1 %); un "campo esperado" manual para mazos que MTGO publica poco (Lands, Tron); revisar notas de Force of Vigor, Dismember, Masked Vandal, Acidic Slime y Phyrexian Revoker.
+3. D `matchups-sin-plan` — revisar con runkor los cuatro planes nuevos; arte para 12 matchups pequeños sin imagen.
+4. G `estudios-mulligan` ★ — manos de ejemplo; game 1 frente a games 2 y 3 (LEGACY 13.4); cifras de Once Upon a Time (LEGACY 12).
+5. M `revision-learn` — texto final de Start Here, Deck Origins y Deck Construction; Julian Knab (Bazaar of Moxen 2013) en Origins.
+6. V parte 2 — `!important` de css/01.css, opcional.
+7. U `repo-cleanup` ★ — 72 imágenes sin uso más 16 WebP sustituidas, estilos de `.guide-entry`, capturas de `.playwright-mcp/`, MP4 originales; miniaturas sin uso de Elvish Visionary y Alpha Deathclaw en `assets/thumbs/`.
+8. T `verificacion-final`.
 
 Comprobación al empezar la próxima sesión: `git pull` y revisar el commit nocturno del 10 Oct, el primero con resultados solo de MTGGoldfish. Playwright MCP ya se carga en las sesiones nuevas.
 
-Hechas y publicadas: A, B, E, F, H, I, K, L, N parte 2, O, P, R, S, V parte 1, la portada nueva, X1–X7 (ronda de revisión del 9 Oct), más el Sideboard map (vistas e impresión), el timeline de Deck Origins, el Maybeboard de 80 cartas, los resultados de MTGGoldfish y LEGACY.md.
+Hechas y publicadas: A, B, C, E, F, H, I, J, K, L, N partes 1 y 2, O, P, Q, R, S, V parte 1, la portada nueva, X1–X7 (ronda de revisión del 9 Oct), la lista del 9 Oct, el Sideboard Optimizer, más el Sideboard map (vistas e impresión), el timeline de Deck Origins, el Maybeboard de 80 cartas, los resultados de MTGGoldfish y LEGACY.md.
