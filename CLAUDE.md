@@ -85,7 +85,7 @@ Applies to card images (`COMBO_CARD_ART` in js/02.js) and matchup art (`ART` in 
 
 ## Next steps
 
-State on 9 Oct 2026, night: everything is pushed and live up to commit 8c59002 and the docs commit after it (verified live at 1440 and 390 px: 18 sections, 31 matchups in Matchups and the Sideboard map, no overflow, no console errors). First thing next session: `git pull`. The tree is clean apart from the 16 old WebPs for task U; `.playwright-mcp/` and the two original MP4s in the root are gitignored. The work is split into chats in ROADMAP.md, "Plan de chats".
+State on 9 Oct 2026, night: everything is pushed and live up to commit 95159e2 (runkor's second pass on the plans, Atraxa against Show and Tell) and the docs commit after it (verified live at 1440 and 390 px: 18 sections, 31 matchups in Matchups and the Sideboard map, no overflow, no console errors). First thing next session: `git pull`. The tree is clean apart from the 16 old WebPs for task U; `.playwright-mcp/` and the two original MP4s in the root are gitignored. The work is split into chats in ROADMAP.md, "Plan de chats".
 
 - Start of every session: `git pull` (the nightly bot pushes `js/meta-live.js` and `js/results-archive.js` to `main`). 10 Oct 2026 is the first night with results from MTGGoldfish only: check its commit.
 - Playwright MCP is connected in the user's Claude Code and loads in new sessions: use it for browser checks (headless Chrome, as in Rules, still works).
